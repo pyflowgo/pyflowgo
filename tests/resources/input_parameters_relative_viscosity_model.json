@@ -1,0 +1,8 @@
+{
+    "relative_viscosity_parameters":{
+      "r_inverse_max_packing":1.51,
+      "max_packing": 0.641,
+    "einstein_coef":3.27,
+    "strain_rate" : 1.0
+  }
+}

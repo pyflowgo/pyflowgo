@@ -1,0 +1,21 @@
+{  "terrain_conditions":{
+  "width": 4.5,
+  "depth": 1.4,
+  "gravity": 9.81,
+  "max_channel_length": 4000.0
+  },
+  "eruption_condition":{
+  "eruption_temperature" : 1387.15
+  },
+    "lava_state":{
+    "liquidus_temperature" : 1400.0,
+    "vesicle_fraction" : 0.64,
+      "density_dre" : 2970.0
+  },
+  "thermal_parameters":{
+    "buffer" : 140.0
+  },
+  "crystals_parameters":{
+    "latent_heat_of_crystallization": 350000.0
+  }
+}

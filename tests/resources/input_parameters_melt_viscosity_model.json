@@ -1,0 +1,11 @@
+{  "eruption_condition":{
+  "eruption_temperature" : 1273.15,
+  "viscosity_eruption" : 100.0
+  },
+  "melt_viscosity_parameters":{
+    "shaw_slope" :2.36,
+    "a_vft" : -4.7,
+    "b_vft": 5429.7,
+    "c_vft" : 595.5
+  }
+}

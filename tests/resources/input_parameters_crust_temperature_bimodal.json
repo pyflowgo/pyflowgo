@@ -1,0 +1,15 @@
+{
+  "lava_state":{
+  "position" : 0.0,
+  "time" : 1.0,
+    "critical_distance" : 25
+  },
+
+  "thermal_parameters":{
+    "buffer" : 140.0,
+    "crust_cover_fraction": 1.0,
+    "alpha" : -0.00756,
+    "crust_temperature_1": 773.15,
+    "crust_temperature_2": 500.0
+  }
+}

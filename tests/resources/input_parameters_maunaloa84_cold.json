@@ -1,0 +1,59 @@
+{
+  "terrain_conditions":{
+  "width": 55,
+  "depth": 55,
+  "gravity": 981
+  },
+
+  "eruption_condition":{
+  "channel_shape": 2,
+  "eruption_temperature" : 1100,
+  "viscosity_eruption" : 1000
+  },
+
+  "lava_state":{
+  "position" : 0.0,
+  "crystal_fraction": 0.15,
+  "density_dre" : 2600,
+  "vesicle_fraction" : 0.1
+  },
+
+  "radiation_parameters":{
+    "stefan-boltzmann_sigma" : 0.00000006,
+    "emissivity_epsilon" : 1
+  },
+  "conduction_parameters":{
+    "basal_temperature" : 5,
+    "core_base_distance" : 1
+  },
+    "rain_parameters":{
+    "rainfall_rate" : 8e-8,
+    "density_water" : 1000,
+    "latent_heat_vaporization" : 3e6
+  },
+  "convection_parameters":{
+    "wind_speed" : 1000,
+    "ch_air" : 50,
+    "air_temperature" : 2000,
+    "air_density" : 10,
+    "air_specific_heat_capacity":100
+  },
+
+  "crust_temperature_model" : {
+    "initial_crust_temperature": 698.15
+  },
+
+  "thermal_parameters":{
+    "buffer" : 0,
+    "crust_cover_fraction": 0.9,
+    "crust_to_velocity_relationship" : -0.16,
+    "alpha" : -7.80e-3
+    },
+  "crystals_parameters":{
+    "crystals_grown_during_cooling": 0.60,
+    "solid_temperature": 1000.0,
+    "dphi_dtemp": 0.449101796,
+    "latent_heat_of_crystallization": 35,
+    "inverse_max_packing": 1.51
+  }
+}

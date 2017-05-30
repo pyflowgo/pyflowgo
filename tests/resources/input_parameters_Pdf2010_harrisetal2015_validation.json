@@ -1,0 +1,82 @@
+{
+  "lava_name": "Piton de la Fournaise 2010  lidar",
+  "slope_file" : "LaReunion2010/validation_harrisetal2015/DEM_pdf2010_lidar.txt",
+
+  "terrain_conditions":{
+  "width": 4.5,
+  "depth": 1.4,
+  "gravity": 9.81,
+  "max_channel_length": 4000.0
+  },
+  "eruption_condition":{
+  "eruption_temperature" : 1387.15,
+  "viscosity_eruption" : 1000.0
+  },
+  "lava_state":{
+  "position" : 0.0,
+  "time" : 1.0,
+  "crystal_fraction": 0.104,
+  "density_dre" : 2970.0,
+  "vesicle_fraction" : 0.64,
+  "liquidus_temperature": 1393.15
+  },
+  "radiation_parameters":{
+    "stefan-boltzmann_sigma" : 5.67e-8,
+    "emissivity_epsilon" : 0.95
+  },
+  "conduction_parameters":{
+    "basal_temperature" : 773.15,
+    "core_base_distance" : 19.0
+  },
+    "rain_parameters":{
+    "rainfall_rate" : 7.98e-8,
+    "density_water" : 958.0,
+    "latent_heat_vaporization" : 2.8e6
+  },
+  "convection_parameters":{
+    "wind_speed" : 5.0,
+    "ch_air" : 0.0036,
+    "air_temperature" : 293.15,
+    "air_density" : 0.4412,
+    "air_specific_heat_capacity":1099.0
+  },
+  "thermal_parameters":{
+    "buffer" : 140.0,
+    "crust_cover_fraction": 1.0,
+    "alpha" : -0.00756,
+    "crust_temperature": 773.15
+  },
+  "melt_viscosity_parameters":{
+    "shaw_slope" :2.36,
+    "a_vft" : -4.52,
+    "b_vft": 5558,
+    "c_vft" : 582.9
+  },
+  "crystals_parameters":{
+    "crystals_grown_during_cooling": 0.896,
+    "solid_temperature": 1237.15,
+    "latent_heat_of_crystallization": 350000.0
+  },
+    "relative_viscosity_parameters":{
+    "max_packing": 0.641,
+    "einstein_coef":3.27,
+    "strain_rate" : 1.0
+  },
+
+  "models":{
+  "crystallization_rate_model":"basic",
+  "melt_viscosity_model":"vft",
+  "relative_viscosity_model":"er",
+  "yield_strength_model":"basic",
+  "crust_temperature_model":"constant",
+  "effective_cover_crust_model": "basic",
+  "vesicle_fraction_model":"constant"
+  },
+  "heat_budget_models":{
+   "radiation" : "yes",
+   "conduction" : "yes",
+   "convection" : "yes",
+   "rain" : "no",
+   "viscous_heating" : "no"
+  }
+}

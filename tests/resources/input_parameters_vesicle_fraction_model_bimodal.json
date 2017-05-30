@@ -1,0 +1,7 @@
+{
+  "lava_state": {
+    "vesicle_fraction_1" : 0.6,
+    "vesicle_fraction_2" : 0.2,
+    "critical_distance": 10000
+  }
+}

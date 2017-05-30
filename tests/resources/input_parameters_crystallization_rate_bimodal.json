@@ -1,0 +1,29 @@
+{
+  "lava_name": "Piton de la Fournaise 2010  lidar",
+  "slope_file" : "LaReunion2010/validation_harrisetal2015/DEM_pdf2010_lidar.txt",
+
+  "terrain_conditions":{
+  "width": 4.5,
+  "depth": 1.4,
+  "gravity": 9.81,
+  "max_channel_length": 4000.0
+  },
+  "eruption_condition":{
+  "eruption_temperature" : 1387.15,
+  "viscosity_eruption" : 1000.0
+  },
+  "lava_state":{
+  "position" : 0.0,
+  "critical_distance":30.0,
+  "time" : 1.0,
+  "crystal_fraction": 0.104,
+  "liquidus_temperature": 1393.15
+  },
+  "crystals_parameters":{
+    "crystals_grown_during_cooling": 0.896,
+    "crystallization_rate_1":0.00597333333,
+    "crystallization_rate_2":0.02,
+    "solid_temperature": 1237.15,
+    "latent_heat_of_crystallization": 350000.0
+  }
+}
