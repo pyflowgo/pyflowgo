@@ -5,7 +5,7 @@ Lava flow advance may be modeled through tracking the evolution of the lava's th
 PyFlowGo is an updated version of FLOWGO written in Python, that is open-source and compatible with any operating system. 
 
 # Authors / developers
-Oryalle Magdalena Chevrel - Université Clermont Auvergne, CNRS, IRD, OPGC, Laboratoire Magmas et Volcans
+Oryaëlle Magdalena Chevrel - Université Clermont Auvergne, CNRS, IRD, OPGC, Laboratoire Magmas et Volcans
 Jérémie Labroquère - https://www.linkedin.com/in/jlabroquere/
 
 # License
