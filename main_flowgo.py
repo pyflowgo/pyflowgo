@@ -39,12 +39,18 @@ if __name__ == "__main__":
     # read json parameters file
     with open(configuration_file) as data_file:
         data = json.load(data_file)
+
+        if 'lava_name' not in data:
+            raise ValueError("Missing ['lava_name'] entry in json")
         lava_name = data['lava_name']
+
+        if 'slope_file' not in data:
+            raise ValueError("Missing ['slope_file'] entry in json")
         slope_file = data['slope_file']
 
-    # ------------------------------------------------- DEFINE THE STEP ------------------------------------------------
-    # TODO:choose your step in meter
-    step_size = 10 # in meters
+        if 'step_size' not in data:
+            raise ValueError("Missing ['step_size'] entry in json")
+        step_size = data['step_size']
 
 # --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY ----------------------------------
 

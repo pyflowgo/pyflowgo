@@ -1,6 +1,7 @@
 {
   "lava_name": "template",
-  "slope_file" : "resource/example_slope_profile.txt",
+  "slope_file": "resource/example_slope_profile.txt",
+  "step_size": 10.0,
 
   "heat_budget_models":{
    "radiation" : "yes",
