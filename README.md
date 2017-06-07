@@ -6,6 +6,7 @@ PyFlowGo is an updated version of FLOWGO written in Python 3, that is open-sourc
 
 # Authors / developers
 Oryaëlle Magdalena Chevrel - Université Clermont Auvergne, CNRS, IRD, OPGC, Laboratoire Magmas et Volcans
+
 Jérémie Labroquère - https://www.linkedin.com/in/jlabroquere/
 
 # License
