@@ -10,6 +10,29 @@ PyFLOWGO is an updated version of FLOWGO written in Python 3, that is open-sourc
 
 This article contains an overview of the technical details in PyFLOWGO. You can also cite additional references for specific features and algorithms.
 
+# Installation
+This package needs a Python version >= 3.3.
+Furthermore it uses numpy, scipy and matplotlib.
+
+We recommend to use anaconda from Continuum with python 3 which is availlable at: https://www.continuum.io/downloads
+
+With anaconda, to install the environment named py3k containing Python 3 and the necessary packages, run in a shell:
+```sh
+$ conda create -n py3k python=3 anaconda
+$ conda source py3k
+```
+That will activate the environment.
+
+If you don't want to use anaconda, you can still use pip to install the necessary packages under Python 3:
+```sh
+$ pip install -r requirements.txt
+```
+You can then run the software using:
+```sh
+$ python3 main_flowgo.py ./resource/template.json
+```
+For further information, please read the flowgo_for_dummies.pdf file.
+
 # Authors / developers
 
 The PyFlowgo main developers are:
