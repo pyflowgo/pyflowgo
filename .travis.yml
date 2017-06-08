@@ -10,6 +10,7 @@ python:
 # command to install dependencies
 install:  
   - pip install --upgrade pip setuptools wheel
+  - pip install -U pytest
   - pip install --only-binary=numpy,scipy,matplotlib numpy scipy matplotlib
   - pip install -r requirements.txt
   
