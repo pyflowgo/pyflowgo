@@ -11,11 +11,11 @@ python:
   - "nightly" # currently points to 3.7-dev
   
 before_install:
-  - sudo apt-get build-dep python-scipy
-  - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
+  - sudo apt-get build-dep
   
 # command to install dependencies
 install:
-  - pip install -r requirements.txt
+  - pip3 install --upgrade pip
+  - pip3 install -r requirements.txt
 # command to run tests
 script: python tests.py 
