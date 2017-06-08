@@ -5,15 +5,22 @@ python:
   - "3.4"
   - "3.5"
   - "3.6"
+
+addons:
+  apt:
+    packages:
+    - libblas-dev
+    - liblapack-dev
+    - gfortran
+    - graphviz
   
 before_install:
-  - sudo apt-get build-dep python-numpy, python-scipy, python-matplotlib
+  - pip install --upgrade pip setuptools wheel
 
 # command to install dependencies
 install:  
-  - pip install --upgrade pip setuptools wheel
   - pip install -U pytest
-  - pip install --only-binary=numpy,scipy,matplotlib numpy scipy matplotlib
+
   - pip install -r requirements.txt
   
 # command to run tests
