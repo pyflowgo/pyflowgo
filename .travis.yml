@@ -11,7 +11,7 @@ python:
   - "nightly" # currently points to 3.7-dev
   
 before_install:
-  - sudo apt-get build-dep
+  - sudo apt-get build-dep python3-numpy python3-scipy python-matplotlib
   
 # command to install dependencies
 install:
