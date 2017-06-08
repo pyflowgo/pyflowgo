@@ -1,4 +1,5 @@
 language: python
+
 python:
   - "3.3"
   - "3.4"
@@ -8,7 +9,14 @@ python:
   - "3.6-dev" # 3.6 development branch
   - "3.7-dev" # 3.7 development branch
   - "nightly" # currently points to 3.7-dev
+  
+before_install:
+  - sudo apt-get build-dep python-scipy
+  - sudo apt-get install -qq python-numpy python-scipy python-matplotlib
+  
 # command to install dependencies
-install: "pip install -r requirements.txt"
+install:
+  - pip install -r requirements.txt
+  - pip install nosetests
 # command to run tests
-script: nose
+script: python tests.py 
