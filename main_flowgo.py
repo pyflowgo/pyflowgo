@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
         if 'step_size' not in data:
             raise ValueError("Missing ['step_size'] entry in json")
-        step_size = data['step_size']
+        step_size = float(data['step_size'])
 
 # --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY ----------------------------------
 
