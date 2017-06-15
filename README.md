@@ -6,7 +6,7 @@ PyFLOWGO is an updated version of FLOWGO written in Python 3, that is open-sourc
 
 **If you use PyFLOWGO please cite the following reference in your work** (books, articles, reports, etc.):
 
-"Chevrel M.O., Labroquère J., Harris A. and Rowland S. (2017). PyFLOWGO: an open-source platform for simulation of channelized lava thermo-rheological properties. In prep"
+"Chevrel M.O., Labroquère J., Harris A. and Rowland S. (2017). PyFLOWGO: an open-source platform for simulation of channelized lava thermo-rheological properties. Submitted to Computers and Geosciences, June 2017"
 
 This article contains an overview of the technical details in PyFLOWGO. You can also cite additional references for specific features and algorithms.
 
