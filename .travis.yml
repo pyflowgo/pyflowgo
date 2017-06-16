@@ -6,13 +6,13 @@ python:
   - "3.5"
   - "3.6"
 
-addons:
-  apt:
-    packages:
-    - libblas-dev
-    - liblapack-dev
-    - gfortran
-    - graphviz
+#addons:
+#  apt:
+#    packages:
+#    - libblas-dev
+#    - liblapack-dev
+#    - gfortran
+#    - graphviz
 
 # Setup anaconda
 before_install:
