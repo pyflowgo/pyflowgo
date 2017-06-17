@@ -24,7 +24,7 @@ before_install:
 
 # Install packages
 install:
-  - conda create --yes --n py3k python=$TRAVIS_PYTHON_VERSION
+  - conda create --yes -n py3k python=$TRAVIS_PYTHON_VERSION
   - source activate py3k
   - conda install --yes atlas
   - conda install --yes numpy 
