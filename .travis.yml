@@ -21,12 +21,17 @@ before_install:
   - ./miniconda.sh -b
   - export PATH=/home/travis/miniconda3/bin:$PATH
   - conda update --yes conda
-  # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
-  #- sudo rm -rf /dev/shm
-  #- sudo ln -s /run/shm /dev/shm
+
 # Install packages
 install:
-  - conda install --yes python=$TRAVIS_PYTHON_VERSION atlas numpy scipy matplotlib pytest
+  - conda install --yes -n py3k python=$TRAVIS_PYTHON_VERSION
+  - source activate py3k
+  - conda install --yes atlas
+  - conda install --yes numpy 
+  - conda install --yes scipy
+  - conda install --yes matplotlib
+  - conda install --yes pytest
+
   #- python setup.py install
   - pip install -r requirements.txt
 
