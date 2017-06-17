@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pyflowgo/pyflowgo.svg?branch=master)](https://travis-ci.org/pyflowgo/pyflowgo)
+
 # Welcome to PyFLOWGO
 
 Lava flow advance may be modeled through tracking the evolution of the lava's thermo-rheological properties, which are defined by viscosity and yield strength. These rheological properties evolve, in turn, with cooling and crystallization. Such model was conceived by Harris and Rowland (2001) who developed a 1-D model, FLOWGO, in which velocity of a control volume flowing down a channel depends on rheological properties computed following the lava cooling and crystallization path estimated via a heat balance box model. 
