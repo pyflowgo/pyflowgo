@@ -54,7 +54,7 @@ class FlowGoTerrainCondition:
             slope.append(math.radians(float(split_line[1])))
         f_slope.close()
 
-        #slope = self.running_mean(slope, 50)
+        #slope = self.running_mean(slope, 15)
 
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
         self._slope_spline = interpolate.InterpolatedUnivariateSpline(distance, slope, k=1.)
@@ -76,17 +76,17 @@ class FlowGoTerrainCondition:
 
     def get_max_channel_length(self):
         return self._max_channel_length
-    #
-    # def running_mean(self, l, N):
-    #     sum = 0
-    #     result = list( 0 for x in l)
-    #
-    #     for i in range (0, N):
-    #         sum = sum+l[i]
-    #         result[i] =sum/ (i+1)
-    #
-    #     for i in range (0, len(l)):
-    #         sum = sum - l[i-N]+ l[i]
-    #         result[i] =sum/N
-    #
-    #     return result
+
+    def running_mean(self, l, n):
+        result = list(0. for x in l)
+        for i in range(0, len(l)):
+
+            start_index = max(0, i-int(n/2))
+            last_index = min(len(l), int(i+n/2))
+
+            current_list = l[start_index:last_index]
+
+            current_average = sum(current_list)
+            result[i] = current_average / len(current_list)
+
+        return result
