@@ -1,0 +1,30 @@
+language: python
+
+python:
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+# Setup anaconda
+before_install:
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  - chmod +x miniconda.sh
+  - ./miniconda.sh -b
+  - export PATH=/home/travis/miniconda3/bin:$PATH
+  - conda update --yes conda
+
+# Install packages
+install:
+  - conda create --yes -n py3k python=$TRAVIS_PYTHON_VERSION
+  - source activate py3k
+  - conda install --yes numpy 
+  - conda install --yes scipy
+  - conda install --yes matplotlib
+  - conda install --yes pytest
+
+  #- python setup.py install
+  - pip install -r requirements.txt
+
+# command to run tests
+script: cd tests && python3 -m pytest 
