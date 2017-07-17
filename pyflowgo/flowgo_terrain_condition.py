@@ -82,9 +82,9 @@ class FlowGoTerrainCondition:
         for i in range(0, len(l)):
 
             start_index = max(0, i-int(n/2))
-            last_index = min(len(l), int(i+n/2))
+            last_index = min(len(l)-1, int(i+n/2))
 
-            current_list = l[start_index:last_index]
+            current_list = l[start_index:last_index+1]
 
             current_average = sum(current_list)
             result[i] = current_average / len(current_list)
