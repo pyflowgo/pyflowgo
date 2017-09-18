@@ -64,6 +64,7 @@ class FlowGoIntegrator:
         # Here we start the loop
         # Base on mass conservation, the effusion rate and the depth channel are kept fixed, so the width can
         # be calculated at each step :
+        print('distance from vent (m) =', current_state.get_current_position())
         channel_width = self.effusion_rate / (v_mean * channel_depth)
 
         #TODO: Here I add the slope:ASK MIMI TO MOVE IT FROM HERE
