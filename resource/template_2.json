@@ -1,12 +1,12 @@
 {
-  "lava_name": "template_2",
+  "lava_name": "template_2-modif",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
 
   "heat_budget_models":{
    "radiation" : "yes",
    "conduction" : "yes",
-   "convection" : "yes",
+   "convection" : "no",
    "rain" : "no",
    "viscous_heating" : "no"
   },

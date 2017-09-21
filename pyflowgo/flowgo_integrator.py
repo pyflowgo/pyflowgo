@@ -25,7 +25,7 @@ class FlowGoIntegrator:
     and here where the limits are fixed"""
 
     def __init__(self, dx, material_lava, material_air, terrain_condition, heat_budget,
-                 crystallization_rate_model):
+                 crystallization_rate_model, crust_temperature_model, effective_cover_crust_model):
         """ this function allows to set the initial parameters"""
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
         self.dx = dx  # in m
@@ -33,6 +33,8 @@ class FlowGoIntegrator:
         self.effusion_rate = 0.
         self.iteration = 0.
         self.crystallization_rate_model = crystallization_rate_model
+        self.crust_temperature_model = crust_temperature_model
+        self.effective_cover_crust_model = effective_cover_crust_model
         self.material_lava = material_lava
         self.material_air = material_air
         self.terrain_condition = terrain_condition
@@ -120,6 +122,14 @@ class FlowGoIntegrator:
         self.logger.add_variable("mean_velocity", current_state.get_current_position(), v_mean)
         self.logger.add_variable("core_temperature", current_state.get_current_position(),
                                  current_state.get_core_temperature())
+        self.logger.add_variable("core_temperature", current_state.get_current_position(),
+                                 current_state.get_core_temperature())
+
+        self.logger.add_variable("crust_temperature", current_state.get_current_position(),
+                                 self.crust_temperature_model.compute_crust_temperature(current_state))
+        self.logger.add_variable("effective_cover_fraction", current_state.get_current_position(),
+                                 self.effective_cover_crust_model.compute_effective_cover_fraction(current_state))
+
         self.logger.add_variable("dphi_dx", current_state.get_current_position(), dphi_dx)
         self.logger.add_variable("dtemp_dx", current_state.get_current_position(), dtemp_dx)
         #self.logger.add_variable("latent_heat_of_crystallization", current_state.get_current_position(),

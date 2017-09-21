@@ -76,7 +76,9 @@ if __name__ == "__main__":
                                                              material_air=material_air,
                                                              terrain_condition=terrain_condition,
                                                              heat_budget=heat_budget,
-                                                             crystallization_rate_model=crystallization_rate_model)
+                                                             crystallization_rate_model=crystallization_rate_model,
+                                                             crust_temperature_model=crust_temperature_model,
+                                                             effective_cover_crust_model=effective_cover_crust_model)
     integrator.read_initial_condition_from_json_file(configuration_file)
 
     # ------------------------------------------------- LOG THE DATA --------------------------------------------------

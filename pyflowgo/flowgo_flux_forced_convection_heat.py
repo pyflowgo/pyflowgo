@@ -47,10 +47,8 @@ class FlowGoFluxForcedConvectionHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFl
         self.logger.add_variable("characteristic_surface_temperature", state.get_current_position(),
                                  characteristic_surface_temperature)
 
-        # TODO attention ici je rajoute le log de T crust et effective cover fraction
-        self.logger.add_variable("crust_temperature", state.get_current_position(),
-                                 crust_temperature)
-        self.logger.add_variable("effective_cover_fraction", state.get_current_position(),effective_cover_fraction)
+        # TODO I remove the log de Tcrust and f crust 21sept17
+
         #print("effective_cover_fraction =", effective_cover_fraction)
         #print("Tconv =", characteristic_surface_temperature)
 
