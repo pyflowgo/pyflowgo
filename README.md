@@ -6,9 +6,9 @@ Lava flow advance may be modeled through tracking the evolution of the lava's th
 
 PyFLOWGO is an updated version of FLOWGO written in Python 3, that is open-source and compatible with any operating system.
 
-**If you use PyFLOWGO please cite the following reference in your work** (books, articles, reports, etc.):
+**If you use PyFLOWGO please cite the following reference **:
 
-"Chevrel M.O., Labroquère J., Harris A. and Rowland S. (2017). PyFLOWGO: an open-source platform for simulation of channelized lava thermo-rheological properties. Submitted to Computers and Geosciences, June 2017"
+"Chevrel M.O., Labroquère J., Harris A. and Rowland S. (2018). PyFLOWGO: an open-source platform for simulation of channelized lava thermo-rheological properties. Computers and Geosciences Vol. 111. p.167–180. https://doi.org/10.1016/j.cageo.2017.11.009"
 
 This article contains an overview of the technical details in PyFLOWGO. You can also cite additional references for specific features and algorithms.
 
