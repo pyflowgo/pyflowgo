@@ -50,8 +50,9 @@ class FlowGoRelativeViscosityModelPhanThienPham2(pyflowgo.base.flowgo_base_relat
         # here the vesicle model is directly called
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
 
-        relative_viscosity = math.pow((1. - phi - vesicle_fraction),-((5. * phi + 2. * vesicle_fraction) / (2. * (phi + vesicle_fraction))))
-        return relative_viscosity
-
-
-#### NEED TO WRITE THE LIMITING CONDITION HERE: stop when when phi = 0.52
+        if phi < (1-vesicle_fraction):
+            relative_viscosity = math.pow((1. - phi - vesicle_fraction),-((5. * phi + 2. * vesicle_fraction) / (2. * (phi + vesicle_fraction))))
+            return relative_viscosity
+        else:
+            relative_viscosity = 10 ^ 5
+            return relative_viscosity
