@@ -1,5 +1,5 @@
 {
-  "lava_name": "template_2-modif",
+  "lava_name": "template_2_ptp2",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
 
@@ -14,7 +14,8 @@
   "models":{
   "crystallization_rate_model":"bimodal",
   "melt_viscosity_model":"vft",
-  "relative_viscosity_model":"er",
+  "relative_viscosity_model":"ptp2",
+  "relative_viscosity_bubbles_model":"no",
   "yield_strength_model":"basic",
   "crust_temperature_model":"constant",
   "effective_cover_crust_model": "basic",
@@ -37,7 +38,7 @@
   "density_dre" : 2970.0,
   "vesicle_fraction" : 0.64,
   "liquidus_temperature": 0.0,
-    "critical_distance":500.0
+  "critical_distance":500.0
   },
   "radiation_parameters":{
     "stefan-boltzmann_sigma" : 5.67e-8,

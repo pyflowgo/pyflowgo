@@ -15,6 +15,7 @@
   "crystallization_rate_model":"basic",
   "melt_viscosity_model":"vft",
   "relative_viscosity_model":"er",
+  "relative_viscosity_bubbles_model":"no",
   "yield_strength_model":"basic",
   "crust_temperature_model":"constant",
   "effective_cover_crust_model": "basic",

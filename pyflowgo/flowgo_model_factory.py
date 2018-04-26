@@ -34,6 +34,9 @@ import pyflowgo.flowgo_relative_viscosity_model_costa2
 import pyflowgo.flowgo_relative_viscosity_model_ptp1
 import pyflowgo.flowgo_relative_viscosity_model_ptp2
 import pyflowgo.flowgo_relative_viscosity_model_ptp3
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_rigid
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_defo
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_no
 import pyflowgo.flowgo_material_lava
 import pyflowgo.flowgo_material_air
 import pyflowgo.flowgo_crystallization_rate_model_basic
@@ -59,6 +62,7 @@ import json
 import pyflowgo.base.flowgo_base_crystallization_rate_model
 import pyflowgo.base.flowgo_base_melt_viscosity_model
 import pyflowgo.base.flowgo_base_relative_viscosity_model
+import pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model
 import pyflowgo.base.flowgo_base_vesicle_fraction_model
 import pyflowgo.base.flowgo_base_yield_strength_model
 import pyflowgo.base.flowgo_base_effective_cover_crust_model
@@ -194,6 +198,27 @@ class FlowgoModelFactory:
 
         self._relative_viscosity_model_object.read_initial_condition_from_json_file(configuration_file)
 
+
+        # -------------------------
+        # Relative viscosity bubbles models
+        # -------------------------
+        if self._relative_viscosity_bubbles_model == "rigid":
+            self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_rigid. \
+                FlowGoRelativeViscosityBubblesModelRigid(vesicle_fraction_model=self._vesicle_fraction_model_object)
+        elif self._relative_viscosity_bubbles_model == "deformable":
+            self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_defo. \
+                FlowGoRelativeViscosityBubblesModelDefo(vesicle_fraction_model=self._vesicle_fraction_model_object)
+        elif self._relative_viscosity_bubbles_model == "no":
+            self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_no. \
+                FlowGoRelativeViscosityBubblesModelNo(vesicle_fraction_model=self._vesicle_fraction_model_object)
+        else:
+            raise NameError('Relative viscosity bubbles model must be "rigid" or "deformable" or "no"...')
+
+        assert isinstance(self._relative_viscosity_bubbles_model_object,
+                          pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model.FlowGoBaseRelativeViscosityBubblesModel)
+
+        self._relative_viscosity_bubbles_model_object.read_initial_condition_from_json_file(configuration_file)
+
         # -------------------------
         # Yield strength model
         # -------------------------
@@ -215,6 +240,7 @@ class FlowgoModelFactory:
         self._material_lava = pyflowgo.flowgo_material_lava.FlowGoMaterialLava(
             melt_viscosity_model=self._melt_viscosity_model_object,
             relative_viscosity_model=self._relative_viscosity_model_object,
+            relative_viscosity_bubbles_model=self._relative_viscosity_bubbles_model_object,
             yield_strength_model=self._yield_strength_model_object,
             vesicle_fraction_model=self._vesicle_fraction_model_object)
 
@@ -340,6 +366,7 @@ class FlowgoModelFactory:
             self._crystallization_rate_model = data['models']['crystallization_rate_model']
             self._melt_viscosity_model = data['models']['melt_viscosity_model']
             self._relative_viscosity_model = data['models']['relative_viscosity_model']
+            self._relative_viscosity_bubbles_model = data['models']['relative_viscosity_bubbles_model']
             self._yield_strength_model = data['models']['yield_strength_model']
             self._crust_temperature_model = data['models']['crust_temperature_model']
             self._effective_cover_crust_model = data['models']['effective_cover_crust_model']

@@ -19,6 +19,7 @@ import math
 
 import pyflowgo.flowgo_melt_viscosity_model_shaw
 import pyflowgo.flowgo_relative_viscosity_model_kd
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_no
 import pyflowgo.flowgo_yield_strength_model_basic
 import pyflowgo.flowgo_vesicle_fraction_model_constant
 import json
@@ -30,7 +31,7 @@ class FlowGoMaterialLava:
     _latent_heat_of_crystallization = 350000.  # L [K.Kg-1]
     _density_dre = 2600.
 
-    def __init__(self, melt_viscosity_model=None, relative_viscosity_model=None, yield_strength_model=None, vesicle_fraction_model=None):
+    def __init__(self, melt_viscosity_model=None, relative_viscosity_model=None, relative_viscosity_bubbles_model=None, yield_strength_model=None, vesicle_fraction_model=None):
         super().__init__()
 
         # TODO: Raise a warning here that the default model is used if no model has been passed
@@ -45,6 +46,11 @@ class FlowGoMaterialLava:
             self._relative_viscosity_model = pyflowgo.flowgo_relative_viscosity_model_kd.FlowGoRelativeViscosityModelKD()
         else:
             self._relative_viscosity_model = relative_viscosity_model
+
+        if relative_viscosity_bubbles_model == None:
+            self._relative_viscosity_bubbles_model = pyflowgo.flowgo_relative_viscosity_bubbles_model_no.FlowGoRelativeViscosityBubblesModelNo()
+        else:
+            self._relative_viscosity_bubbles_model = relative_viscosity_bubbles_model
 
         if yield_strength_model == None:
             self._yield_strength_model = pyflowgo.flowgo_yield_strength_model_basic.FlowGoYieldStrengthModelBasic()
@@ -75,7 +81,8 @@ class FlowGoMaterialLava:
 
     def computes_bulk_viscosity(self, state):
         bulk_viscosity = self._melt_viscosity_model.compute_melt_viscosity(state) * \
-                         self._relative_viscosity_model.compute_relative_viscosity(state)
+                         self._relative_viscosity_model.compute_relative_viscosity(state) * \
+                         self._relative_viscosity_bubbles_model.compute_relative_viscosity_bubbles(state)
         return bulk_viscosity  # [Pa/s]
 
     def compute_mean_velocity(self, state, terrain_condition):
