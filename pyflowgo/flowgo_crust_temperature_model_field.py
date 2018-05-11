@@ -62,7 +62,8 @@ class FlowGoCrustTemperatureModelField(pyflowgo.base.flowgo_base_crust_temperatu
     def read_crust_temperature_from_file(self, f_crust_temperature=None):
         if f_crust_temperature == None:
             #f_crust_temperature = 'resources/crust_temperature_profile.txt'
-            f_crust_temperature = '/Users/chevrel/GoogleDrive/Eruption_PdF/280418/crust_temperature_profile.txt'
+        #TODO here enter the path to the look up table
+            f_crust_temperature = 'resources/crust_temperature_profile.txt'
         distance = []
         crust_temperature = []
         # here read the T_crust file (.txt) where each line represent the distance from the vent (first column) and
