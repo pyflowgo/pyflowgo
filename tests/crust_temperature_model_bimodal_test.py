@@ -36,7 +36,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(crust_temperature_model_bimodal._crust_temperature_1, 773.15)
         self.assertEqual(crust_temperature_model_bimodal._crust_temperature_2, 500.0)
 
-    def test_compute_effective_cover_fraction(self):
+    def test_compute_crust_temperature(self):
         filename = './resources/input_parameters_crust_temperature_bimodal.json'
         state = pyflowgo.flowgo_state.FlowGoState()
         crust_temperature_model_bimodal = pyflowgo.flowgo_crust_temperature_model_bimodal.FlowGoCrustTemperatureModelHonBimodal()

@@ -33,7 +33,7 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(crust_temperature_model_constant._crust_temperature, 773.15)
 
-    def test_compute_effective_cover_fraction(self):
+    def test_compute_crust_temperature(self):
         filename = './resources/input_parameters_crust_temperature.json'
         state = pyflowgo.flowgo_state.FlowGoState()
         state.set_current_position(100)

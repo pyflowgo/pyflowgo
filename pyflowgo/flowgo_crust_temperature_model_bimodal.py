@@ -21,7 +21,6 @@ import pyflowgo.flowgo_state
 
 import pyflowgo.base.flowgo_base_crust_temperature_model
 
-
 class FlowGoCrustTemperatureModelHonBimodal(pyflowgo.base.flowgo_base_crust_temperature_model.
                                             FlowGoBaseCrustTemperatureModel):
 

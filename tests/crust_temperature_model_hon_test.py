@@ -32,7 +32,7 @@ class MyTestCase(unittest.TestCase):
         crust_temperature_model_hon = pyflowgo.flowgo_crust_temperature_model_hon.FlowGoCrustTemperatureModelHon()
         crust_temperature_model_hon.read_initial_condition_from_json_file(filename)
 
-    def test_compute_effective_cover_fraction(self):
+    def test_compute_crust_temperature(self):
         filename = './resources/input_parameters_crust_temperature.json'
         state = pyflowgo.flowgo_state.FlowGoState()
 
