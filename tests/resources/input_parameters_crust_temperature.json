@@ -8,6 +8,7 @@
     "buffer" : 140.0,
     "crust_cover_fraction": 1.0,
     "alpha" : -0.00756,
-    "crust_temperature": 773.15
+    "crust_temperature": 10,
+    "crust_temperature_file": "./resources/crust_temperature_profile.txt"
   }
 }

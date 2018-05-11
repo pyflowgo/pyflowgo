@@ -52,6 +52,7 @@ import pyflowgo.flowgo_flux_conduction_heat
 import pyflowgo.flowgo_crust_temperature_model_hon
 import pyflowgo.flowgo_crust_temperature_model_constant
 import pyflowgo.flowgo_crust_temperature_model_bimodal
+import pyflowgo.flowgo_crust_temperature_model_field
 #import pyflowgo.flowgo_crust_temperature_model_hr2001
 import pyflowgo.flowgo_effective_cover_crust_model_basic
 import pyflowgo.flowgo_effective_cover_crust_model_bimodal
@@ -83,6 +84,7 @@ class FlowgoModelFactory:
         self._activate_heat_budget_convection = ""
         self._activate_heat_budget_rain = ""
         self._activate_heat_budget_viscous_heating = ""
+        self._crust_temperature_file = ""
 
         self._read_initial_condition_from_json_file(configuration_file)
 
@@ -198,7 +200,6 @@ class FlowgoModelFactory:
 
         self._relative_viscosity_model_object.read_initial_condition_from_json_file(configuration_file)
 
-
         # -------------------------
         # Relative viscosity bubbles models
         # -------------------------
@@ -278,8 +279,12 @@ class FlowgoModelFactory:
         #elif self._crust_temperature_model == "hr2001":
            # self._crust_temperature_model_object = pyflowgo.flowgo_crust_temperature_model_hr2001.\
                 #FlowGoCrustTemperatureModelHR2001()
+        elif self._crust_temperature_model == "field":
+            self._crust_temperature_model_object = pyflowgo.flowgo_crust_temperature_model_field.\
+                FlowGoCrustTemperatureModelField()
+            self._crust_temperature_model_object.read_crust_temperature_from_file()
         else:
-            raise NameError('Crust temperature model must be "constant" or "hon" or "binodal" .. ')
+            raise NameError('Crust temperature model must be "constant" or "hon" or "binodal" or "field".. ')
 
         assert isinstance(self._crust_temperature_model_object,
                           pyflowgo.base.flowgo_base_crust_temperature_model.FlowGoBaseCrustTemperatureModel)

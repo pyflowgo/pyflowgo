@@ -1,12 +1,12 @@
 {
-  "lava_name": "template_2_ptp2",
+  "lava_name": "template_2_kd_defo",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
 
   "heat_budget_models":{
    "radiation" : "yes",
    "conduction" : "yes",
-   "convection" : "no",
+   "convection" : "yes",
    "rain" : "no",
    "viscous_heating" : "no"
   },
@@ -14,8 +14,8 @@
   "models":{
   "crystallization_rate_model":"bimodal",
   "melt_viscosity_model":"vft",
-  "relative_viscosity_model":"ptp2",
-  "relative_viscosity_bubbles_model":"no",
+  "relative_viscosity_model":"kd",
+  "relative_viscosity_bubbles_model":"deformable",
   "yield_strength_model":"basic",
   "crust_temperature_model":"constant",
   "effective_cover_crust_model": "basic",
@@ -65,6 +65,7 @@
     "crust_cover_fraction": 1.0,
     "alpha" : -0.00756,
     "crust_temperature": 773.15
+
   },
   "melt_viscosity_parameters":{
     "shaw_slope" :2.36,
