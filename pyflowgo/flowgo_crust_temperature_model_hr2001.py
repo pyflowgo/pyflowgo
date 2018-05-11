@@ -25,7 +25,7 @@ import pyflowgo.base.flowgo_base_crust_temperature_model
 class FlowGoCrustTemperatureModelHR2001(pyflowgo.base.flowgo_base_crust_temperature_model.
                                      FlowGoBaseCrustTemperatureModel):
     """
-    This method  "HR2001" allows the crust temperature to decrease downflow ain the same way as the core temperature is
+    This method  "HR2001" allows the crust temperature to decrease down flow in the same way as the core temperature is
     decreasing as applied by Harris and Rowland (2001):
 
     crust_temperature = core_temperature - 712

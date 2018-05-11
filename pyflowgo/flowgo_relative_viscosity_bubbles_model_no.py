@@ -26,14 +26,8 @@ import pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model
 
 class FlowGoRelativeViscosityBubblesModelNo(pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model.
                                      FlowGoBaseRelativeViscosityBubblesModel):
-    """This methods permits to calculate the effect of bubbles on viscosity according to Llewelin and Manga (2005).
-    This relationship only adjustable parameter.
 
-     if Capillary > 1 : bubbles are deformable and hence can be elongated and lower viscosity
-    while
-     if Capillary < 1 : bubbles are undeformable and hence act as rigid spheres and increase bulk viscosity
-
-    The input parameter is the variable vesicle fraction """
+    """This methods permits to NOT consider the effect of bubbles on viscosity """
 
 
     def __init__(self, vesicle_fraction_model=None):

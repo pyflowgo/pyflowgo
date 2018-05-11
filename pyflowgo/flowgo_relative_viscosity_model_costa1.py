@@ -38,8 +38,11 @@ class FlowGoRelativeViscosityModelCosta1(pyflowgo.base.flowgo_base_relative_visc
 
     References:
     ---------
+    Cimarelli, C., A. Costa, S. Mueller, and H. M. Mader (2011), Rheology of magmas with bimodal crystal size and shape
+    distributions: Insights from analog experiments, Geochem. Geophys. Geosyst., 12, Q07024, doi:10.1029/2011GC003606.
 
-
+    Costa, A., L. Caricchi, and N. Bagdassarov (2009), A model for the rheology of particle‐bearing suspensions
+    and partially molten rocks, Geochem. Geophys. Geosyst., 10, Q03010, doi:10.1029/2008GC002138.
     """
 
 

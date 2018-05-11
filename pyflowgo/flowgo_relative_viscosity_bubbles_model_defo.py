@@ -29,7 +29,23 @@ class FlowGoRelativeViscosityBubblesModelDefo(pyflowgo.base.flowgo_base_relative
     """This methods permits to calculate the effect of bubbles on viscosity according to Llewelin and Manga (2005).
         In this model bubbles are deformable and hence can be elongated and lower viscosity
 
-    The input parameter is the variable vesicle fraction """
+    Input data
+    -----------
+    The vesicle fraction in the json file containing
+
+    Variables
+    -----------
+    The vesicle fraction
+
+    Returns
+    ------------
+    The effect of elongated bubbles on viscosity
+
+    References
+    ---------
+    Llewellin, E.W., Manga, M., 2005. Bubble suspension rheology and implications for conduit flow.
+    Journal of Volcanology and Geothermal Research 143, 205–217. http:// dx.doi.org/10.1016/j.jvolgeores.2004.09.018.
+    """
 
     def __init__(self, vesicle_fraction_model=None):
         super().__init__()
