@@ -1,5 +1,5 @@
 {
-  "lava_name": "template_2_kd_defo",
+  "lava_name": "template_2_test",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
 
@@ -17,7 +17,7 @@
   "relative_viscosity_model":"kd",
   "relative_viscosity_bubbles_model":"deformable",
   "yield_strength_model":"basic",
-  "crust_temperature_model":"constant",
+  "crust_temperature_model":"field",
   "effective_cover_crust_model": "basic",
   "vesicle_fraction_model":"constant"
   },
@@ -64,7 +64,8 @@
     "buffer" : 140.0,
     "crust_cover_fraction": 1.0,
     "alpha" : -0.00756,
-    "crust_temperature": 773.15
+    "crust_temperature": 773.15,
+    "crust_temperature_file": "resource/field_data/example_slope_profile.txt"
 
   },
   "melt_viscosity_parameters":{
