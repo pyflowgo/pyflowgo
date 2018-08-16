@@ -198,7 +198,7 @@ if __name__ == "__main__":
         # plot5_fig1.legend(loc=2, prop={'size': 8})
         # axis1_f2.set_xlim(xmin=0)
         plot5_fig1.set_ylim(ymin=0, ymax=200)
-        plot5_fig1.set_xlim(xmax=1000)
+        #plot5_fig1.set_xlim(xmax=1000)
 
         plot6_fig1.plot(distance_array, crystal_fraction_array, '-', label=label)
         #plot6_fig1.legend(loc=2, prop={'size': 8})
