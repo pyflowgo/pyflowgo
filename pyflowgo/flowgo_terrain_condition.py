@@ -22,6 +22,25 @@ from scipy import interpolate
 
 
 class FlowGoTerrainCondition:
+    """This method permits to extract to slope from a slope file where each line represent the distance from the vent
+    (first column) and the corresponding slope in degree (second column) that is then converted in gradiant.
+    This method also allows the slope to be smoothed by making a running mean every 10m, this allows to avoid small
+    terrain irregularity (slope =<0).
+
+       Input data
+       -----------
+       txt file with first colomn is the distance from the vent (starting at 0)
+       and second column is the corresponding slope in degree.
+
+       Returns
+       ------------
+       Mean slope (in gradient) every 10m.
+
+       References
+       ---------
+
+       """
+
    #default values that are erased as soon as the slope_file is read
     _channel_depth = 5.5
     _channel_width = 5.5
@@ -44,20 +63,34 @@ class FlowGoTerrainCondition:
 
         distance = []
         slope = []
-        # here read the slope file (.txt) where each line represent the distance from the vent (first column) and
-        # the corresponding slope in degree (second column) that is then converted in gradiant
+
         f_slope = open(filename, "r")
         f_slope.readline()
+
+        #----------------------------original ----------------------------
+        #for line in f_slope:
+            #split_line = line.strip('\n').split('\t')
+            #distance.append(float(split_line[0]))
+            #slope.append(math.radians(float(split_line[1])))
+        #f_slope.close()
+
+        #----------------------------update----------------------------
+        #This allow to avoid bugs due to null or degative slope values
         for line in f_slope:
             split_line = line.strip('\n').split('\t')
-            distance.append(float(split_line[0]))
-            slope.append(math.radians(float(split_line[1])))
+            if float(split_line[1]) <=0:
+                pass
+            else:
+                slope.append(math.radians(float(split_line[1])))
+                # elevation.append(float(split_line[2]))
+                distance.append(float(split_line[0]))
         f_slope.close()
 
-        #slope = self.running_mean(slope, 15)
+        slope = self.running_mean(slope, 10)
 
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
-        self._slope_spline = interpolate.InterpolatedUnivariateSpline(distance, slope, k=1.)
+        self._slope_spline = interpolate.InterpolatedUnivariateSpline(distance, slope, k=1)
+
 
     def get_channel_slope(self, position_x):
         if (self._slope_spline is not None):
