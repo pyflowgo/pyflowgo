@@ -21,6 +21,8 @@ import pyflowgo.flowgo_state
 import pyflowgo.flowgo_terrain_condition
 import pyflowgo.flowgo_yield_strength_model_basic
 import pyflowgo.flowgo_yield_strength_model_dragoni
+import pyflowgo.flowgo_yield_strength_model_ryerson
+import pyflowgo.flowgo_yield_strength_model_dragoni_alone
 import pyflowgo.flowgo_melt_viscosity_model_basic
 import pyflowgo.flowgo_melt_viscosity_model_shaw
 #import pyflowgo.flowgo_melt_viscosity_model_grd
@@ -45,6 +47,7 @@ import pyflowgo.flowgo_crystallization_rate_model_bimodal_f_temp
 # import pyflowgo.flowgo_crystallization_rate_model_from_pymelts
 import pyflowgo.flowgo_crystallization_rate_model_melts
 import pyflowgo.flowgo_flux_radiation_heat
+import pyflowgo.flowgo_flux_radiation_heat_emissivity
 import pyflowgo.flowgo_flux_forced_convection_heat
 import pyflowgo.flowgo_flux_viscous_heating
 import pyflowgo.flowgo_flux_heat_loss_rain
@@ -80,6 +83,7 @@ class FlowgoModelFactory:
         self._vesicle_fraction_model = ""
 
         self._activate_heat_budget_radiation = ""
+        self._activate_heat_budget_radiation_emissivity = ""
         self._activate_heat_budget_conduction = ""
         self._activate_heat_budget_convection = ""
         self._activate_heat_budget_rain = ""
@@ -227,8 +231,12 @@ class FlowgoModelFactory:
             self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_basic.FlowGoYieldStrengthModelBasic()
         elif self._yield_strength_model == "dragoni":
             self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_dragoni.FlowGoYieldStrengthModelDragoni()
+        elif self._yield_strength_model == "dragoni-alone":
+            self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_dragoni_alone.FlowGoYieldStrengthModelDragoniAlone()
+        elif self._yield_strength_model == "ryerson":
+            self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_ryerson.FlowGoYieldStrengthModelRyerson()
         else:
-            raise NameError('Yield strength model must be "basic" or "dragoni" or ... ')
+            raise NameError('Yield strength model must be "basic" or "dragoni" or "dragoni-alone" or "ryerson"... ')
 
         assert isinstance(self._yield_strength_model_object,
                           pyflowgo.base.flowgo_base_yield_strength_model.FlowGoBaseYieldStrengthModel)
@@ -306,6 +314,17 @@ class FlowgoModelFactory:
         else:
             raise NameError('Radiation model must be "yes" or "no"... ')
 
+        if self._activate_heat_budget_radiation_emissivity == "yes":
+            radiation_heat_flux_emissivity = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeatEmissivity(
+                terrain_condition, self._material_lava, self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(radiation_heat_flux_emissivity)
+        elif self._activate_heat_budget_radiation_emissivity == "no":
+            pass
+        else:
+            raise NameError('Radiation Emissivity model must be "yes" or "no"... ')
+
+
         if self._activate_heat_budget_conduction == "yes":
             heat_conduction_flux = pyflowgo.flowgo_flux_conduction_heat.FlowGoFluxConductionHeat(self._material_lava)
             self._heat_budget.append_flux(heat_conduction_flux)
@@ -378,6 +397,7 @@ class FlowgoModelFactory:
             self._vesicle_fraction_model = data['models']['vesicle_fraction_model']
 
             self._activate_heat_budget_radiation = data['heat_budget_models']['radiation']
+            self._activate_heat_budget_radiation_emissivity = data['heat_budget_models']['radiation_emissivity']
             self._activate_heat_budget_conduction = data['heat_budget_models']['conduction']
             self._activate_heat_budget_convection = data['heat_budget_models']['convection']
             self._activate_heat_budget_rain = data['heat_budget_models']['rain']
