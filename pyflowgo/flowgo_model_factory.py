@@ -47,7 +47,6 @@ import pyflowgo.flowgo_crystallization_rate_model_bimodal_f_temp
 # import pyflowgo.flowgo_crystallization_rate_model_from_pymelts
 import pyflowgo.flowgo_crystallization_rate_model_melts
 import pyflowgo.flowgo_flux_radiation_heat
-import pyflowgo.flowgo_flux_radiation_heat_emissivity
 import pyflowgo.flowgo_flux_forced_convection_heat
 import pyflowgo.flowgo_flux_viscous_heating
 import pyflowgo.flowgo_flux_heat_loss_rain
@@ -83,7 +82,6 @@ class FlowgoModelFactory:
         self._vesicle_fraction_model = ""
 
         self._activate_heat_budget_radiation = ""
-        self._activate_heat_budget_radiation_emissivity = ""
         self._activate_heat_budget_conduction = ""
         self._activate_heat_budget_convection = ""
         self._activate_heat_budget_rain = ""
@@ -314,17 +312,6 @@ class FlowgoModelFactory:
         else:
             raise NameError('Radiation model must be "yes" or "no"... ')
 
-        if self._activate_heat_budget_radiation_emissivity == "yes":
-            radiation_heat_flux_emissivity = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeatEmissivity(
-                terrain_condition, self._material_lava, self._crust_temperature_model_object,
-                self._effective_cover_crust_model_object)
-            self._heat_budget.append_flux(radiation_heat_flux_emissivity)
-        elif self._activate_heat_budget_radiation_emissivity == "no":
-            pass
-        else:
-            raise NameError('Radiation Emissivity model must be "yes" or "no"... ')
-
-
         if self._activate_heat_budget_conduction == "yes":
             heat_conduction_flux = pyflowgo.flowgo_flux_conduction_heat.FlowGoFluxConductionHeat(self._material_lava)
             self._heat_budget.append_flux(heat_conduction_flux)
@@ -397,7 +384,6 @@ class FlowgoModelFactory:
             self._vesicle_fraction_model = data['models']['vesicle_fraction_model']
 
             self._activate_heat_budget_radiation = data['heat_budget_models']['radiation']
-            self._activate_heat_budget_radiation_emissivity = data['heat_budget_models']['radiation_emissivity']
             self._activate_heat_budget_conduction = data['heat_budget_models']['conduction']
             self._activate_heat_budget_convection = data['heat_budget_models']['convection']
             self._activate_heat_budget_rain = data['heat_budget_models']['rain']
