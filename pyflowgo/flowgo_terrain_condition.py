@@ -42,6 +42,7 @@ class FlowGoTerrainCondition:
        """
 
    #default values that are erased as soon as the slope_file is read
+    _effusion_rate_init= 0.1
     _channel_depth = 5.5
     _channel_width = 5.5
     _gravity = 9.81
@@ -52,6 +53,7 @@ class FlowGoTerrainCondition:
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:
             data = json.load(data_file)
+            self._effusion_rate_init = float(data['effusion_rate_init'])
             self._channel_depth = float(data['terrain_conditions']['depth'])
             self._channel_width = float(data['terrain_conditions']['width'])
             self._gravity = float(data['terrain_conditions']['gravity'])
@@ -75,16 +77,17 @@ class FlowGoTerrainCondition:
         #f_slope.close()
 
         #----------------------------update----------------------------
-        #This allow to avoid bugs due to null or degative slope values
+        #This allow to avoid bugs due to null or negative slope values
         for line in f_slope:
             split_line = line.strip('\n').split('\t')
-            if float(split_line[1]) <=0:
+            if float(split_line[1])<=0:
                 pass
             else:
                 slope.append(math.radians(float(split_line[1])))
                 # elevation.append(float(split_line[2]))
                 distance.append(float(split_line[0]))
         f_slope.close()
+    #TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
 
         slope = self.running_mean(slope, 10)
 
@@ -98,8 +101,14 @@ class FlowGoTerrainCondition:
         else:
             return self._default_slope
 
+    def get_effusion_rate_init(self, current_x):
+        return self._effusion_rate_init
+
     def get_channel_depth(self, current_x):
         return self._channel_depth
+
+    def set_channel_depth(self, channel_depth):
+        self._channel_depth = channel_depth
 
     def get_channel_width(self, current_x):
         return self._channel_width
