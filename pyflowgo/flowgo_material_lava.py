@@ -30,6 +30,7 @@ class FlowGoMaterialLava:
     _buffer = 0.
     _latent_heat_of_crystallization = 350000.  # L [K.Kg-1]
     _density_dre = 2600.
+    _max_packing = 0.52
 
     def __init__(self, melt_viscosity_model=None, relative_viscosity_model=None, relative_viscosity_bubbles_model=None, yield_strength_model=None, vesicle_fraction_model=None):
         super().__init__()
@@ -69,6 +70,10 @@ class FlowGoMaterialLava:
             self._buffer = float(data['thermal_parameters']['buffer'])
             self._latent_heat_of_crystallization = float(data['crystals_parameters']['latent_heat_of_crystallization'])
             self._density_dre = float(data['lava_state']['density_dre'])
+            self._max_packing = float(data['relative_viscosity_parameters']['max_packing'])
+
+    def get_max_packing(self):
+        return self._max_packing  # [K]
 
     def get_eruption_temperature(self):
         return self._eruption_temperature  # [K]
