@@ -89,7 +89,7 @@ class FlowGoTerrainCondition:
         f_slope.close()
     #TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
 
-        slope = self.running_mean(slope, 10)
+        #slope = self.running_mean(slope, 10)
 
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
         self._slope_spline = interpolate.InterpolatedUnivariateSpline(distance, slope, k=1)
