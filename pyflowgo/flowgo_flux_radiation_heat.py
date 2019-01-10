@@ -48,34 +48,88 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
             self._epsilon = float(data['radiation_parameters']['emissivity_epsilon'])
 
     def _compute_effective_radiation_temperature(self, state, terrain_condition):
-
-        #effective_cover_fraction = self._material_lava.compute_effective_cover_fraction(state, terrain_condition)
-
-        # TODO call effective_cover_fraction from a model like this:
-        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
-
         # the effective radiation temperature of the
         # surface (Te) is given by (Pieri & Baloga 1986; Crisp & Baloga, 1990; Pieri et al. 1990):
-        # The user is free to adjust the model, for example, f_crust can be set as a constant or can be varied
-        # downflow as a function of velocity (Harris & Rowland 2001). See in material_lava
+        # The user is free to adjust the model, for example, f_crust (effective_cover_fraction)
+        # can be set as a constant or can be varied
+        # downflow as a function of velocity (Harris & Rowland 2001).
+        # the user is also free to choose the temperature of teh crust (crust_temperature_model)
         # the effective radiation temperature of the surface (Te) is given by (Pieri & Baloga 1986;
         # Crisp & Baloga, 1990; Pieri et al. 1990):
 
+        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
         crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
-
         molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
-
         effective_radiation_temperature = math.pow(effective_cover_fraction * crust_temperature ** 4. +
                                                (1. - effective_cover_fraction) * molten_material_temperature ** 4.,
                                                0.25)
-
         self.logger.add_variable("effective_radiation_temperature", state.get_current_position(),
                                  effective_radiation_temperature)
         return effective_radiation_temperature
+
+    def _compute_epsilon_effective(self, state, terrain_condition):
+        epsilon_effective = self._epsilon
+        self.logger.add_variable("epsilon_effective", state.get_current_position(), epsilon_effective)
+        return epsilon_effective
+
+    def _compute_spectral_radiance (self, state, terrain_condition, channel_width):
+        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
+        crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
+        molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
+        background_temperature = 258  # K
+        #crust_temperature = 273.15
+
+        #area per pixel
+        Lpixel=30.0
+        A_pixel = Lpixel*Lpixel
+        A_lava = Lpixel*channel_width
+        Ahot=A_lava * (1-effective_cover_fraction)
+        Acrust= A_lava * effective_cover_fraction
+        #portion of pixel cover by molten lava
+        Phot=Ahot / A_pixel
+        Pcrust = Acrust / A_pixel
+        atmospheric_transmissivity = 0.8
+
+        # emissivity of snow
+        epsilon_3 = 0.1
+
+        lamda = 0.8675*10**(-6) #micro
+        h=6.6256*10**(-34) #Js
+        c=2.9979*10**8 #ms-1
+        C1=2*math.pi*h*c**2  # W.m^2
+        kapa=1.38*10**(-23) #JK-1
+        C2=h*c/kapa # m K
+
+        # crust component
+        crust_spectral_radiance =(C1*lamda**(-5))/(math.exp(C2/(lamda*crust_temperature))-1)
+
+        # molten component
+        molten_spectral_radiance = C1*lamda**(-5)/(math.exp(C2/(lamda*molten_material_temperature))-1)
+
+        # background component
+        background_spectral_radiance = C1*lamda**(-5)/(math.exp(C2/(lamda*background_temperature))-1)
+
+        # equation radiance W/m2/m
+        spectral_radiance_m = atmospheric_transmissivity*(self._epsilon*Phot*molten_spectral_radiance +
+                                                          self._epsilon*Pcrust*crust_spectral_radiance +
+                                                          (1-Phot-Pcrust)*epsilon_3*background_spectral_radiance)
+
+        # equation radiance W/m2/micro
+        spectral_radiance = spectral_radiance_m * 10**(-6)
+
+        self.logger.add_variable("spectral_radiance", state.get_current_position(), spectral_radiance)
+
+        return spectral_radiance
 
     def compute_flux(self, state, channel_width, channel_depth):
         effective_radiation_temperature = self._compute_effective_radiation_temperature \
             (state, self._terrain_condition)
 
-        qradiation = self._sigma * self._epsilon * (effective_radiation_temperature ** 4.) * channel_width
+        epsilon_effective = self._compute_epsilon_effective(state, self._terrain_condition)
+        qradiation = self._sigma * epsilon_effective * (effective_radiation_temperature ** 4.) * channel_width
+
+        # this was added on AUG 29 to  compute spectral_radiance
+
+        spectral_radiance = self._compute_spectral_radiance(state, self._terrain_condition, channel_width)
+
         return qradiation
