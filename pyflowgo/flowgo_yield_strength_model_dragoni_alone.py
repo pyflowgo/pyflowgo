@@ -22,7 +22,29 @@ import pyflowgo.flowgo_logger
 import pyflowgo.base.flowgo_base_yield_strength_model
 
 class FlowGoYieldStrengthModelDragoniAlone(pyflowgo.base.flowgo_base_yield_strength_model.FlowGoBaseYieldStrengthModel):
-        # using T_liquidus instead of T_erupt as given by Dragoni 1989
+
+    """
+    This methods permits to calculate the yield strength of the lava core as function of the temperature a given
+    by Dragoni (1989)
+
+        Input data
+        -----------
+        Temperature of the liquidus and Temperature of the lava core
+
+        variables
+        -----------
+        T_core
+
+        Returns
+        ------------
+        lava yield strength (Pa)
+
+        References
+        ---------
+      Dragoni, M., 1989. A dynamical model of lava flows cooling by radiation. Bull. Volcanol. 51, 88–95.
+
+    """
+
         # TODO: here I add the log
     def __init__(self):
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
@@ -50,7 +72,27 @@ class FlowGoYieldStrengthModelDragoniAlone(pyflowgo.base.flowgo_base_yield_stren
         return tho_0
 
     def compute_basal_shear_stress(self, state, terrain_condition, material_lava):
-        #basal_shear_stress is tho_b
+        """
+        This methods calculates the basal yield strength of the lava flow as function of the bulk density,
+        flow thickness, slope and gravity: rho * g * h * sin(alpha)
+
+          Input data
+          -----------
+          rho * g * h * sin(alpha)
+
+          variables
+          -----------
+          slope
+
+          Returns
+          ------------
+          flow basal shear stress (Pa)
+
+          References
+          ---------
+         Hulme, G., 1974. The interpretation of lava flow morphology. Geophys. J. R. Astron. Soc. 39, 361–383.
+
+         """
 
         g = terrain_condition.get_gravity(state.get_current_position)
         #print('g =', str(g))
