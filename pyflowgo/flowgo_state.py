@@ -21,6 +21,22 @@ import json
 #
 class FlowGoState:
 
+    """This method permits to get and define the state of the lava flow at a each or at a given position or time.
+    The state of the lava include its core temperature, crystal fraction,
+
+       Input data
+       -----------
+        the json file
+
+       Returns
+       ------------
+       crystal_fraction ; core_temperature ; current_position ; current_time ; current_slope
+
+       References
+       ---------
+
+       """
+
     _crystal_fraction = 0.15
     _core_temperature = 1137 + 273.15
     _current_position = 0.
