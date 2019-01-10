@@ -31,7 +31,7 @@ class MyTestCase(unittest.TestCase):
         filename = './resources/input_parameters_crust_temperature.json'
         crust_temperature_model_field = pyflowgo.flowgo_crust_temperature_model_field.FlowGoCrustTemperatureModelField()
         crust_temperature_model_field.read_initial_condition_from_json_file(filename)
-        self.assertEqual(crust_temperature_model_field._crust_temperature, 10)
+        self.assertEqual(crust_temperature_model_field._crust_temperature, 773.15)
 
     def test_read_crust_temperature_from_file(self):
         filename = './resources/input_parameters_crust_temperature.json'
