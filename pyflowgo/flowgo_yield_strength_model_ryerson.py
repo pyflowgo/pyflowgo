@@ -24,8 +24,32 @@ import pyflowgo.base.flowgo_base_yield_strength_model
 
 
 class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_model.FlowGoBaseYieldStrengthModel):
-    # Yield strength is calculated only with Ryerson et al. 1988 as proposed by Pinkerton and Stevenson 1994
-    #
+
+    """This methods permits to calculate the yield strength of the lava core as function of the
+     crystal cargo according to Ryerson et al. (1988) and as proposed by Pinkerton and Stevenson 1994
+      tho_0 = 6500. * (crystal_fraction ** 2.85)
+
+    Input data
+    -----------
+    crystal fraction
+
+    variables
+    -----------
+    crystal fraction: phi
+
+    Returns
+    ------------
+    lava yield strength due to the crystal cargo
+
+    References
+    ---------
+   Ryerson, F.J., Weed, H.C., Piwinskii, A.J., 1988. Rheology of subliquidus magmas: picritic compositions.
+   J. Geophys. Res. 93, 3421–3436.
+
+   Pinkerton, H., Stevenson, R.J., 1992. Methods of determining the rheological properties of magmas at sub-liquidus
+   temperatures. J. Volcanol. Geotherm. Res. 53, 47–66
+
+    """
     #  TODO: here I add the log
     def __init__(self):
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
@@ -48,7 +72,28 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
         return tho_0
 
     def compute_basal_shear_stress(self, state, terrain_condition, material_lava):
-        #basal_shear_stress is tho_b
+
+        """
+        This methods calculates the basal yield strength of the lava flow as function of the bulk density,
+        flow thickness, slope and gravity: rho * g * h * sin(alpha)
+
+          Input data
+          -----------
+          rho * g * h * sin(alpha)
+
+          variables
+          -----------
+          slope
+
+          Returns
+          ------------
+          flow basal shear stress (Pa)
+
+          References
+          ---------
+         Hulme, G., 1974. The interpretation of lava flow morphology. Geophys. J. R. Astron. Soc. 39, 361–383.
+
+         """
 
         g = terrain_condition.get_gravity(state.get_current_position)
         #print('g =', str(g))
@@ -58,7 +103,7 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
         channel_slope = terrain_condition.get_channel_slope(state.get_current_position())
 
         tho_b = channel_depth * bulk_density * g * math.sin(channel_slope)
-        # TODO: here I add the log
+        # here I add the log
         self.logger.add_variable("tho_b", state.get_current_position(), tho_b)
         #("tho_b=", tho_b)
         return tho_b
