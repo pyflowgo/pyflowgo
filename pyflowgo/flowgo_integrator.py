@@ -16,7 +16,7 @@
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
 import pyflowgo.flowgo_logger
-
+import numpy as np
 
 class FlowGoIntegrator:
 
@@ -40,6 +40,22 @@ class FlowGoIntegrator:
         self.terrain_condition = terrain_condition
         self.heat_budget = heat_budget
 
+    def init_effusion_rate(self, current_state):
+
+        for channel_depth in np.arange(0.01, 50.0, 0.001):
+
+            self.terrain_condition.set_channel_depth(channel_depth)
+            v_mean = self.material_lava.compute_mean_velocity(current_state, self.terrain_condition)
+
+            channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
+            self.effusion_rate = v_mean * channel_width * channel_depth
+            effusion_rate_init = self.terrain_condition.get_effusion_rate_init(current_state.get_current_position())
+            if self.effusion_rate >= effusion_rate_init:
+                print('effusion_rate =' + str(self.effusion_rate))
+                print('channel_depth =' + str(channel_depth))
+                break
+
+
     def single_step(self, current_state):
         """This function makes the flow advancing it takes the velocity that was calculated in material lava and check
         whether it is positif and then calculate the heat budget in order to get the new temperature and new crystal
@@ -47,12 +63,13 @@ class FlowGoIntegrator:
         as a function of the slope at this current location (that is given by the slope_distance file or by
         interpolation of it)"""
 
+
         v_mean = self.material_lava.compute_mean_velocity(current_state, self.terrain_condition)
 
         if v_mean <= 0.:
             self._has_finished = True
             return
-        #print('Vmean=', v_mean)
+        print('Vmean (m/s)=', v_mean)
 
         # computes the quantities at this current state from the terrain condition
         channel_depth = self.terrain_condition.get_channel_depth(current_state.get_current_position())
@@ -155,7 +172,8 @@ class FlowGoIntegrator:
 
         self.iteration += 1.
 
-        if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) or (new_phi >= 0.52) \
+        if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) \
+                or (new_phi >= self.material_lava.get_max_packing()) \
                 or (current_state.get_current_position() >= self.terrain_condition.get_max_channel_length()):
             self._has_finished = True
             return
