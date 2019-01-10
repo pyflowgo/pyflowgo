@@ -87,6 +87,8 @@ if __name__ == "__main__":
 
     state = pyflowgo.flowgo_state.FlowGoState()
     integrator.initialize_state(state, configuration_file)
+    # call the effusion rate optimisation
+    integrator.init_effusion_rate(state)
 
     while not integrator.has_finished():
         integrator.single_step(state)
