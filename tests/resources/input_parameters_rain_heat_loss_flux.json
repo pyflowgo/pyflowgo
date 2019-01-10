@@ -1,6 +1,7 @@
 {
   "lava_name": "Piton de la Fournaise 2010  lidar",
   "slope_file" : "LaReunion2010/validation_harrisetal2015/DEM_pdf2010_lidar.txt",
+  "effusion_rate_init":3.0,
 
   "terrain_conditions":{
   "width": 4.5,

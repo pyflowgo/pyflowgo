@@ -136,5 +136,9 @@ class MyTestCase(unittest.TestCase):
 
         self.assertAlmostEqual(qforcedconv, 26818.6520246127,6)
 
+        #TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+                            #slope = self.running_mean(slope, 10)
+
+
 if __name__ == '__main__':
     unittest.main()

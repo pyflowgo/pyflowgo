@@ -67,8 +67,6 @@ class MyTestCase(unittest.TestCase):
                                                                          yield_strength_model=yield_strength_model_basic,
                                                                          vesicle_fraction_model=vesicle_fraction_model_constant)
         material_lava.read_initial_condition_from_json_file(filename)
-        mean_velocity = material_lava.compute_mean_velocity(state, terrain_condition)
-        print(mean_velocity)
 
         effective_cover_crust_model_bimodal = pyflowgo.flowgo_effective_cover_crust_model_bimodal.\
             FlowGoEffectiveCoverCrustModelBimodal(terrain_condition,material_lava)
@@ -80,11 +78,15 @@ class MyTestCase(unittest.TestCase):
         effective_cover_fraction = effective_cover_crust_model_bimodal.compute_effective_cover_fraction(state)
         self.assertAlmostEqual(effective_cover_fraction, 0.968487820088, 10)
 
-        state.set_core_temperature(1387.07761422317)
-        state.set_crystal_fraction(0.104332974207)
-        state.set_current_position(30)
+        state.set_core_temperature(1382.6568629209)
+        state.set_crystal_fraction(0.13073959532)
+        state.set_current_position(1010)
         effective_cover_fraction = effective_cover_crust_model_bimodal.compute_effective_cover_fraction(state)
-        self.assertAlmostEqual(effective_cover_fraction, 0.809856902811,10)
+        self.assertAlmostEqual(effective_cover_fraction, 0.462212542509,10)
+
+        # TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+        # slope = self.running_mean(slope, 10)
+
 
 if __name__ == '__main__':
     unittest.main()

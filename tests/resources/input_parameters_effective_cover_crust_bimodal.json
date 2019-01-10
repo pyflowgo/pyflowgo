@@ -2,6 +2,7 @@
 {
   "lava_name": "Piton de la Fournaise 2010  lidar",
   "slope_file" : "./resources/DEM_pdf2010_lidar.txt",
+  "effusion_rate_init" : 0.0,
 
   "terrain_conditions":{
   "width": 4.5,
@@ -15,7 +16,7 @@
     "viscosity_eruption" : 100.0
   },
     "lava_state":{
-      "critical_distance" : 25,
+      "critical_distance" : 1000,
     "liquidus_temperature" : 1400.0,
     "density_dre" : 2970.0,
     "vesicle_fraction" : 0.64,
@@ -24,6 +25,7 @@
   "thermal_parameters":{
     "buffer" : 140.0,
     "crust_cover_fraction": 1.0,
+    "crust_cover_fraction_2": 0.5,
     "alpha_1" :  -0.00756,
     "alpha_2" : -0.03652,
     "crust_temperature": 773.15

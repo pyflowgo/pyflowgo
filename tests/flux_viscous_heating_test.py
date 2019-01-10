@@ -39,12 +39,11 @@ class MyTestCase(unittest.TestCase):
 
 
         state = pyflowgo.flowgo_state.FlowGoState()
-        state.set_core_temperature(1322.70208376477)
-        state.set_crystal_fraction(0.4888694761447)
-        state.set_current_position(3710)
-        #TODO:where do I get the width ?
-        channel_width = 4734.06367207989
-        channel_depth = terrain_condition.get_channel_depth(3710)
+        state.set_core_temperature(1387.08744030421)
+        state.set_crystal_fraction(0.10427427974911)
+        state.set_current_position(30)
+        channel_width = 4.5513885714650
+        channel_depth = terrain_condition.get_channel_depth(30)
 
         melt_viscosity_model_vft = pyflowgo.flowgo_melt_viscosity_model_vft.FlowGoMeltViscosityModelVFT()
         melt_viscosity_model_vft.read_initial_condition_from_json_file(filename)
@@ -71,8 +70,10 @@ class MyTestCase(unittest.TestCase):
 
         qviscous=flowgo_flux_viscous_heating.compute_flux(state,channel_width, channel_depth)
 
-        self.assertAlmostEqual(qviscous, 2090.0103751966,5)
+        self.assertAlmostEqual(qviscous, 29289.5162015191,5)
 
+    # TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+            # slope = self.running_mean(slope, 10)
 
 if __name__ == '__main__':
     unittest.main()

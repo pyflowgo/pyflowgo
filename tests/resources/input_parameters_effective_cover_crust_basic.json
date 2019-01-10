@@ -2,6 +2,7 @@
 {
   "lava_name": "Piton de la Fournaise 2010  lidar",
   "slope_file" : "./resources/DEM_pdf2010_lidar.txt",
+  "effusion_rate_init" : 0.0,
 
   "terrain_conditions":{
   "width": 4.5,

@@ -121,5 +121,10 @@ class MyTestCase(unittest.TestCase):
         mean_velocity = material_lava.compute_mean_velocity(state, terrain_condition)
         self.assertAlmostEqual(mean_velocity,4.2353667026582,8)
 
+
+        #TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+                            #slope = self.running_mean(slope, 10)
+
+
 if __name__ == '__main__':
     unittest.main()

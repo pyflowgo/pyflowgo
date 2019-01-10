@@ -37,11 +37,11 @@ class MyTestCase(unittest.TestCase):
         yield_strength_model_dragoni.read_initial_condition_from_json_file(filename)
 
         state = pyflowgo.flowgo_state.FlowGoState()
-        state.set_core_temperature(1273.15)
-        state.set_crystal_fraction(0.15)
-        yield_strength = yield_strength_model_dragoni.compute_yield_strength(state,eruption_temperature=1400)
+        state.set_core_temperature(1387.15)
+        state.set_crystal_fraction(0.104)
+        yield_strength = yield_strength_model_dragoni.compute_yield_strength(state,eruption_temperature=1387.15)
 
-        self.assertAlmostEqual(yield_strength, 123.1153581361,10)
+        self.assertAlmostEqual(yield_strength, 10.2776341191,10)
 
     def test_compute_basal_shear_stress(self):
 
@@ -61,12 +61,27 @@ class MyTestCase(unittest.TestCase):
         terrain_condition.read_slope_from_file(filename_dem)
 
         state = pyflowgo.flowgo_state.FlowGoState()
-        state.set_current_position(100)
+        basal_shear_stress = yield_strength_model_dragoni.compute_basal_shear_stress(state, terrain_condition,
+                                                                                   material_lava)
+        state.set_current_position(0)
+        self.assertAlmostEqual(basal_shear_stress, 4735.3382991549,10)
 
+        state.set_current_position(30)
         basal_shear_stress = yield_strength_model_dragoni.compute_basal_shear_stress(state, terrain_condition,
                                                                                    material_lava)
 
-        self.assertAlmostEqual(basal_shear_stress, 3582.02380873042,10)
+        self.assertAlmostEqual(basal_shear_stress, 4693.68722398169,10)
+
+        state.set_current_position(1010)
+        basal_shear_stress = yield_strength_model_dragoni.compute_basal_shear_stress(state, terrain_condition,
+                                                                                   material_lava)
+
+        self.assertAlmostEqual(basal_shear_stress, 2178.2894789708,10)
+
+
+        #TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+                            #slope = self.running_mean(slope, 10)
+
 
 if __name__ == '__main__':
     unittest.main()

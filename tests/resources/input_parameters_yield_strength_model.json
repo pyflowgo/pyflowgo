@@ -1,4 +1,6 @@
-{  "terrain_conditions":{
+{   "effusion_rate_init" : 3,
+
+  "terrain_conditions":{
   "width": 4.5,
   "depth": 1.4,
   "gravity": 9.81,
@@ -17,5 +19,10 @@
   },
   "crystals_parameters":{
     "latent_heat_of_crystallization": 350000.0
+  },
+    "relative_viscosity_parameters":{
+    "max_packing": 0.55,
+    "einstein_coef":3.27,
+    "strain_rate" : 1.0
   }
 }

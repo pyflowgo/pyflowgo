@@ -1,4 +1,6 @@
 {
+  "effusion_rate_init":3.0,
+
   "terrain_conditions":{
   "width": 4.5,
   "depth": 1.4,

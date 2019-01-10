@@ -69,6 +69,8 @@ class MyTestCase(unittest.TestCase):
         material_lava.read_initial_condition_from_json_file(filename)
         mean_velocity = material_lava.compute_mean_velocity(state, terrain_condition)
         print(mean_velocity)
+        # TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+        # slope = self.running_mean(slope, 10)
 
         effective_cover_crust_model_basic = pyflowgo.flowgo_effective_cover_crust_model_basic.FlowGoEffectiveCoverCrustModelBasic(
             terrain_condition, material_lava)

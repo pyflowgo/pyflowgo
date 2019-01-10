@@ -2,6 +2,7 @@
   "lava_name": "template_2_test",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
+  "effusion_rate_init" : 30,
 
   "heat_budget_models":{
    "radiation" : "yes",

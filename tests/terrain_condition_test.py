@@ -41,5 +41,8 @@ class MyTestCase(unittest.TestCase):
         state.set_current_position(0)
         slope = terrain_condition.get_channel_slope(state.get_current_position())
         self.assertAlmostEqual(slope, 0.328342197625647,15)
-        #self.assertAlmostEqual(terrain_condition.get_channel_slope(100),(0.24642041508094412),16)
+        self.assertAlmostEqual(terrain_condition.get_channel_slope(1000),(0.197395559779715),15)
+        self.assertAlmostEqual(terrain_condition.get_channel_slope(30), (0.325347225021063), 15)
 
+# TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
+# slope = self.running_mean(slope, 10)
