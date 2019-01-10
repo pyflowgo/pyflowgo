@@ -67,6 +67,7 @@ class FlowGoEffectiveCoverCrustModelBimodal(pyflowgo.base.flowgo_base_effective_
 
     _alpha = -7.56e-3
     _crust_cover_fraction = 0.9
+    _crust_cover_fraction_2 = 0.0
 
     def __init__(self, terrain_condition, material_lava):
         self._material_lava = material_lava
@@ -90,15 +91,14 @@ class FlowGoEffectiveCoverCrustModelBimodal(pyflowgo.base.flowgo_base_effective_
             self._alpha_1 = float(data['thermal_parameters']['alpha_1'])
             self._alpha_2 = float(data['thermal_parameters']['alpha_2'])
             self._crust_cover_fraction = float(data['thermal_parameters']['crust_cover_fraction'])
+            self._crust_cover_fraction_2 = float(data['thermal_parameters']['crust_cover_fraction_2'])
 
     def compute_effective_cover_fraction(self, state):
         current_position = state.get_current_position()
         # TODO is it ok to call the v_mean like this?
         v_mean = self._material_lava.compute_mean_velocity(state, self._terrain_condition)
 
-        current_position = state.get_current_position()
-
         if current_position <= self._critical_distance:
             return self._crust_cover_fraction * math.exp(self._alpha_1 * v_mean)
         else:
-            return self._crust_cover_fraction * math.exp(self._alpha_2 * v_mean)
+            return self._crust_cover_fraction_2 * math.exp(self._alpha_2 * v_mean)
