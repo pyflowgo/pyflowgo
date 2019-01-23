@@ -27,3 +27,7 @@ class FlowGoBaseRelativeViscosityModel(metaclass=ABCMeta):
     @abstractmethod
     def compute_relative_viscosity(self, state):
         pass
+
+    @abstractmethod
+    def is_compatible(self, state):
+        pass
