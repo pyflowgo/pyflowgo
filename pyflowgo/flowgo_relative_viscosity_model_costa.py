@@ -111,4 +111,5 @@ class FlowGoRelativeViscosityModelCosta(pyflowgo.base.flowgo_base_relative_visco
 
             return relative_viscosity
 
-
+    def is_compatible(self, state):
+        return True

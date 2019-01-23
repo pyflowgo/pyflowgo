@@ -90,6 +90,10 @@ class FlowGoMaterialLava:
                          self._relative_viscosity_bubbles_model.compute_relative_viscosity_bubbles(state)
         return bulk_viscosity  # [Pa/s]
 
+    def is_compatible(self, state):
+        is_compatible = self._relative_viscosity_model.is_compatible(state)
+        return is_compatible
+
     def compute_mean_velocity(self, state, terrain_condition):
         channel_depth = terrain_condition.get_channel_depth(state.get_current_position())
         bulk_viscosity = self.computes_bulk_viscosity(state)

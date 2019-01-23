@@ -50,9 +50,14 @@ class FlowGoRelativeViscosityModelPhanThienPham2(pyflowgo.base.flowgo_base_relat
         # here the vesicle model is directly called
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
 
-        if phi < (1-vesicle_fraction):
-            relative_viscosity = math.pow((1. - phi - vesicle_fraction),-((5. * phi + 2. * vesicle_fraction) / (2. * (phi + vesicle_fraction))))
-            return relative_viscosity
+        relative_viscosity = math.pow((1. - phi - vesicle_fraction),-((5. * phi + 2. * vesicle_fraction) / (2. * (phi + vesicle_fraction))))
+        return relative_viscosity
+
+    def is_compatible(self, state):
+        phi = state.get_crystal_fraction()
+        vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
+
+        if phi > (1 - vesicle_fraction):
+            return False
         else:
-            relative_viscosity = 10 ^ 5
-            return relative_viscosity
+            return True

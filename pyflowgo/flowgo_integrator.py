@@ -173,7 +173,7 @@ class FlowGoIntegrator:
         self.iteration += 1.
 
         if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) \
-                or (new_phi >= self.material_lava.get_max_packing()) \
+                or self.material_lava.is_compatible(current_state) \
                 or (current_state.get_current_position() >= self.terrain_condition.get_max_channel_length()):
             self._has_finished = True
             return
