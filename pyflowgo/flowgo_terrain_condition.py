@@ -49,6 +49,8 @@ class FlowGoTerrainCondition:
     _default_slope = math.radians(2.657414)
     _slope_spline = None
     _max_channel_length = -1
+    _slope_smoothing_active = False
+    _slope_smoothing_number_of_points = -1
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:
@@ -58,6 +60,9 @@ class FlowGoTerrainCondition:
             self._channel_width = float(data['terrain_conditions']['width'])
             self._gravity = float(data['terrain_conditions']['gravity'])
             self._max_channel_length = float(data['terrain_conditions']['max_channel_length'])
+            self._max_channel_length = float(data['terrain_conditions']['max_channel_length'])
+            self._slope_smoothing_active = bool(data['terrain_conditions']['slope_smoothing_active'])
+            self._slope_smoothing_number_of_points = float(data['terrain_conditions']['slope_smoothing_number_of_points'])
 
     def read_slope_from_file(self, filename=None):
         if filename == None:
@@ -87,9 +92,10 @@ class FlowGoTerrainCondition:
                 # elevation.append(float(split_line[2]))
                 distance.append(float(split_line[0]))
         f_slope.close()
-    #TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
 
-        #slope = self.running_mean(slope, 10)
+        # smooth the slope
+     #   if self._slope_smoothing_active is True:
+      #      slope = self.running_mean(slope, self._slope_smoothing_number_of_points)
 
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
         self._slope_spline = interpolate.InterpolatedUnivariateSpline(distance, slope, k=1)

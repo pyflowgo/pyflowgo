@@ -2,6 +2,8 @@
   "terrain_conditions":{
   "width": 55,
   "depth": 55,
+   "slope_smoothing_active": false,
+   "slope_smoothing_number_of_points": 10,
   "gravity": 981
   },
 
