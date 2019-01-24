@@ -29,5 +29,5 @@ class FlowGoBaseRelativeViscosityModel(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def is_compatible(self, state):
+    def is_notcompatible(self, state):
         pass

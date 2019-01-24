@@ -66,10 +66,10 @@ class FlowGoRelativeViscosityModelKD(pyflowgo.base.flowgo_base_relative_viscosit
 
         return relative_viscosity
 
-    def is_compatible(self, state):
+    def is_notcompatible(self, state):
         phi = state.get_crystal_fraction()
 
         if 1. < phi/self._phimax:
-            return False
-        else:
             return True
+        else:
+            return False
