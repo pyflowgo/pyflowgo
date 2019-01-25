@@ -42,18 +42,21 @@ class FlowGoIntegrator:
 
     def init_effusion_rate(self, current_state):
 
-        for channel_depth in np.arange(0.01, 50.0, 0.001):
+        if self.terrain_condition.get_effusion_rate_init(current_state.get_current_position()) == 0.:
+            pass
+        else:
+            for channel_depth in np.arange(0.01, 50.0, 0.001):
 
-            self.terrain_condition.set_channel_depth(channel_depth)
-            v_mean = self.material_lava.compute_mean_velocity(current_state, self.terrain_condition)
+                self.terrain_condition.set_channel_depth(channel_depth)
+                v_mean = self.material_lava.compute_mean_velocity(current_state, self.terrain_condition)
 
-            channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
-            self.effusion_rate = v_mean * channel_width * channel_depth
-            effusion_rate_init = self.terrain_condition.get_effusion_rate_init(current_state.get_current_position())
-            if self.effusion_rate >= effusion_rate_init:
-                print('effusion_rate =' + str(self.effusion_rate))
-                print('channel_depth =' + str(channel_depth))
-                break
+                channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
+                self.effusion_rate = v_mean * channel_width * channel_depth
+                effusion_rate_init = self.terrain_condition.get_effusion_rate_init(current_state.get_current_position())
+                if self.effusion_rate >= effusion_rate_init:
+                    print('effusion_rate =' + str(self.effusion_rate))
+                    print('channel_depth =' + str(channel_depth))
+                    break
 
 
     def single_step(self, current_state):
