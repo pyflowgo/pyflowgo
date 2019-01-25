@@ -25,10 +25,11 @@ class MyTestCase(unittest.TestCase):
         filename = './resources/input_parameters_terrain_condition.json'
         terrain_condition= pyflowgo.flowgo_terrain_condition.FlowGoTerrainCondition()
         terrain_condition.read_initial_condition_from_json_file(filename)
-
         self.assertEqual(terrain_condition.get_channel_depth(0), 1.4)
         self.assertEqual(terrain_condition.get_channel_width(0), 4.5)
         self.assertEqual(terrain_condition.get_gravity(0), 9.81)
+        self.assertEqual(terrain_condition._slope_smoothing_number_of_points, 6)
+        self.assertEqual(terrain_condition._slope_smoothing_active, True)
 
     def test_read_slope_file(self):
         filename = './resources/input_parameters_terrain_condition.json'
@@ -43,6 +44,3 @@ class MyTestCase(unittest.TestCase):
         self.assertAlmostEqual(slope, 0.328342197625647,15)
         self.assertAlmostEqual(terrain_condition.get_channel_slope(1000),(0.197395559779715),15)
         self.assertAlmostEqual(terrain_condition.get_channel_slope(30), (0.325347225021063), 15)
-
-# TODO: to pass the tests you need to comment the running_mean function in pyflowgo/flowgo_terrain_condition.py
-# slope = self.running_mean(slope, 10)

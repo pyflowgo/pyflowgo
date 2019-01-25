@@ -55,8 +55,8 @@ if __name__ == "__main__":
 # --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY ----------------------------------
 
     terrain_condition = pyflowgo.flowgo_terrain_condition.FlowGoTerrainCondition()
-    terrain_condition.read_slope_from_file(slope_file)
     terrain_condition.read_initial_condition_from_json_file(configuration_file)
+    terrain_condition.read_slope_from_file(slope_file)
 
     models_factory = pyflowgo.flowgo_model_factory.FlowgoModelFactory(configuration_file, terrain_condition)
 

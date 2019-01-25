@@ -5,8 +5,8 @@
   "width": 4.5,
   "depth": 1.4,
   "gravity": 9.81,
-  "slope_smoothing_active": false,
-  "slope_smoothing_number_of_points": 10,
+  "slope_smoothing_active": true,
+  "slope_smoothing_number_of_points": 6,
   "max_channel_length": 4000.0
   }
 }
