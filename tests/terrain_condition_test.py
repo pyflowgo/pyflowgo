@@ -29,7 +29,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(terrain_condition.get_channel_width(0), 4.5)
         self.assertEqual(terrain_condition.get_gravity(0), 9.81)
         self.assertEqual(terrain_condition._slope_smoothing_number_of_points, 6)
-        self.assertEqual(terrain_condition._slope_smoothing_active, True)
+        self.assertEqual(terrain_condition._slope_smoothing_active, False)
 
     def test_read_slope_file(self):
         filename = './resources/input_parameters_terrain_condition.json'
