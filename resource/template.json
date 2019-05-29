@@ -6,6 +6,7 @@
 
   "heat_budget_models":{
    "radiation" : "yes",
+   "radiation_emissivity":"no",
    "conduction" : "yes",
    "convection" : "yes",
    "rain" : "no",

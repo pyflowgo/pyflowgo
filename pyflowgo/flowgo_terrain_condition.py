@@ -60,7 +60,6 @@ class FlowGoTerrainCondition:
             self._channel_width = float(data['terrain_conditions']['width'])
             self._gravity = float(data['terrain_conditions']['gravity'])
             self._max_channel_length = float(data['terrain_conditions']['max_channel_length'])
-            self._max_channel_length = float(data['terrain_conditions']['max_channel_length'])
             self._slope_smoothing_active = bool(data['terrain_conditions']['slope_smoothing_active'])
             self._slope_smoothing_number_of_points = float(data['terrain_conditions']['slope_smoothing_number_of_points'])
 
@@ -88,8 +87,10 @@ class FlowGoTerrainCondition:
             if float(split_line[1])<=0:
                 pass
             else:
+                #slope.append(math.radians(float(split_line[4])))
                 slope.append(math.radians(float(split_line[1])))
                 # elevation.append(float(split_line[2]))
+                #distance.append(float(split_line[3]))
                 distance.append(float(split_line[0]))
         f_slope.close()
 

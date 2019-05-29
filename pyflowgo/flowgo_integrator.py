@@ -113,6 +113,7 @@ class FlowGoIntegrator:
 
         # Here we solve the differential equation
         dtemp_dx = (rhs / (self.effusion_rate * bulk_density * latent_heat_of_crystallization * dphi_dtemp))
+        dtemp_dt=-dtemp_dx*v_mean*60.0
         #print(dphi_dtemp)
         # ------------------------------------------ CRYSTALLIZATION PER METER -----------------------------------------
         dphi_dx = dtemp_dx * (-dphi_dtemp)
@@ -139,6 +140,8 @@ class FlowGoIntegrator:
                                  current_state.get_core_temperature())
         self.logger.add_variable("viscosity", current_state.get_current_position(),
                                  self.material_lava.computes_bulk_viscosity(current_state))
+        self.logger.add_variable("density", current_state.get_current_position(),
+                                 self.material_lava.get_bulk_density(current_state))
         self.logger.add_variable("mean_velocity", current_state.get_current_position(), v_mean)
         self.logger.add_variable("core_temperature", current_state.get_current_position(),
                                  current_state.get_core_temperature())
@@ -158,6 +161,9 @@ class FlowGoIntegrator:
         #TODO : here I added the log of the time in s, the slope, the effusion rate and the channel depth
         self.logger.add_variable("current_time", current_state.get_current_position(),
                                  current_state.get_current_time())
+        # TODO : here I added the log of the cooling rate Dtemp_dt
+        self.logger.add_variable("dtemp_dt", current_state.get_current_position(),dtemp_dt)
+
         self.logger.add_variable("slope", current_state.get_current_position(), channel_slope)
         self.logger.add_variable("effusion_rate", current_state.get_current_position(), str(self.effusion_rate))
         self.logger.add_variable("channel_depth", current_state.get_current_position(),channel_depth)
