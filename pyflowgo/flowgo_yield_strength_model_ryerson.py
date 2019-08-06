@@ -66,9 +66,6 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
 
         # the new yield strength is calculated using this new T and the corresponding slope:
         tho_0 = 6500. * (crystal_fraction ** 2.85)
-        # TODO: here I add the log
-        self.logger.add_variable("tho_0", state.get_current_position(),tho_0)
-        #print("tho_0=",tho_0)
         return tho_0
 
     def compute_basal_shear_stress(self, state, terrain_condition, material_lava):
@@ -103,7 +100,12 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
         channel_slope = terrain_condition.get_channel_slope(state.get_current_position())
 
         tho_b = channel_depth * bulk_density * g * math.sin(channel_slope)
-        # here I add the log
-        self.logger.add_variable("tho_b", state.get_current_position(), tho_b)
-        #("tho_b=", tho_b)
         return tho_b
+
+    def yield_strength_notcompatible(self, state, terrain_condition, material_lava):
+        tho_0 = self.compute_yield_strength(state, self._eruption_temperature)
+        tho_b = self.compute_basal_shear_stress(state, terrain_condition, material_lava)
+        if tho_0 >= tho_b:
+            return True
+        else:
+            return False

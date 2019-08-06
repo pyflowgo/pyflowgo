@@ -94,6 +94,18 @@ class FlowGoMaterialLava:
         is_notcompatible = self._relative_viscosity_model.is_notcompatible(state)
         return is_notcompatible
 
+    def get_yield_strength(self, state):
+        tho_0 = self._yield_strength_model.compute_yield_strength(state, self._eruption_temperature)
+        return tho_0
+
+    def get_basal_shear_stress(self, state, terrain_condition):
+        tho_b = self._yield_strength_model.compute_basal_shear_stress(state, terrain_condition, self)
+        return tho_b
+
+    def yield_strength_notcompatible(self, state, terrain_condition):
+        yield_strength_notcompatible = self._yield_strength_model.yield_strength_notcompatible(state, terrain_condition,self)
+        return yield_strength_notcompatible
+
     def compute_mean_velocity(self, state, terrain_condition):
         channel_depth = terrain_condition.get_channel_depth(state.get_current_position())
         bulk_viscosity = self.computes_bulk_viscosity(state)

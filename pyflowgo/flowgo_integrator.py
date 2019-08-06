@@ -167,6 +167,10 @@ class FlowGoIntegrator:
         self.logger.add_variable("slope", current_state.get_current_position(), channel_slope)
         self.logger.add_variable("effusion_rate", current_state.get_current_position(), str(self.effusion_rate))
         self.logger.add_variable("channel_depth", current_state.get_current_position(),channel_depth)
+        self.logger.add_variable("tho_0", current_state.get_current_position(),
+                                 self.material_lava.get_yield_strength(current_state))
+        self.logger.add_variable("tho_b", current_state.get_current_position(),
+                                 self.material_lava.get_basal_shear_stress(current_state, self.terrain_condition))
 
 
 
@@ -183,6 +187,7 @@ class FlowGoIntegrator:
 
         if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) \
                 or self.material_lava.is_notcompatible(current_state) \
+                or self.material_lava.yield_strength_notcompatible(current_state, self.terrain_condition) \
                 or (current_state.get_current_position() >= self.terrain_condition.get_max_channel_length()):
             self._has_finished = True
             return

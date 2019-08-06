@@ -32,6 +32,7 @@ class FlowGoYieldStrengthModelDragoni(pyflowgo.base.flowgo_base_yield_strength_m
         with open(filename) as data_file:
             data = json.load(data_file)
             self._liquidus_temperature = float(data['lava_state']['liquidus_temperature'])
+            self._eruption_temperature = float(data['eruption_condition']['eruption_temperature'])
 
     def compute_yield_strength(self, state, eruption_temperature):
         # yield_strength is tho_0
@@ -43,10 +44,6 @@ class FlowGoYieldStrengthModelDragoni(pyflowgo.base.flowgo_base_yield_strength_m
 
         # the new yield strength is calculated using this new T and the corresponding slope:
         tho_0 = b * (math.exp(c * (self._liquidus_temperature - core_temperature) - 1.)) + (6500. * (crystal_fraction ** 2.85))
-       # print(tho_0)
-        # TODO: here I add the log
-        self.logger.add_variable("tho_0", state.get_current_position(),tho_0)
-
         return tho_0
 
     def compute_basal_shear_stress(self, state, terrain_condition, material_lava):
@@ -60,7 +57,12 @@ class FlowGoYieldStrengthModelDragoni(pyflowgo.base.flowgo_base_yield_strength_m
         channel_slope = terrain_condition.get_channel_slope(state.get_current_position())
 
         tho_b = channel_depth * bulk_density * g * math.sin(channel_slope)
-        # TODO: here I add the log
-        self.logger.add_variable("tho_b", state.get_current_position(),tho_b)
-
         return tho_b
+
+    def yield_strength_notcompatible(self, state, terrain_condition,material_lava):
+        tho_0 = self.compute_yield_strength(state, self._eruption_temperature)
+        tho_b = self.compute_basal_shear_stress(state, terrain_condition, material_lava)
+        if tho_0 >= tho_b:
+            return True
+        else:
+            return False
