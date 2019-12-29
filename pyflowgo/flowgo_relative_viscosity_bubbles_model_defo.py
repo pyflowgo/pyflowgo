@@ -62,8 +62,6 @@ class FlowGoRelativeViscosityBubblesModelDefo(pyflowgo.base.flowgo_base_relative
             data = json.load(data_file)
 
     def compute_relative_viscosity_bubbles(self, state):
-
-        # here the vesicle model is directly called
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
 
         relative_viscosity_bubbles = math.pow((1. - vesicle_fraction), (5. / 3.))

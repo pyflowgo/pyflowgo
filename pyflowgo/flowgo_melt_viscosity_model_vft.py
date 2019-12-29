@@ -47,11 +47,13 @@ class FlowGoMeltViscosityModelVFT(pyflowgo.base.flowgo_base_melt_viscosity_model
     Earth and Planetary Science Letters, 271(1), 123-134.
 
     """
-    _a = -4.7
-    _b = 5429.7
-    _c = 595.5
+    def __init__(self) -> None:
+        super().__init__()
 
-    # faire le test de bien lire ces valeurs
+        self._a = -4.7
+        self._b = 5429.7
+        self._c = 595.5
+
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
         with open(filename) as data_file:
@@ -61,7 +63,6 @@ class FlowGoMeltViscosityModelVFT(pyflowgo.base.flowgo_base_melt_viscosity_model
             self._c = float(data['melt_viscosity_parameters']['c_vft'])
 
     def compute_melt_viscosity(self, state):
-
         core_temperature = state.get_core_temperature()
 
         melt_viscosity = 10 ** (self._a + self._b / (core_temperature - self._c))

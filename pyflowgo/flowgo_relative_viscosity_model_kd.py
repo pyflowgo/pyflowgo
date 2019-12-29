@@ -50,8 +50,11 @@ class FlowGoRelativeViscosityModelKD(pyflowgo.base.flowgo_base_relative_viscosit
 
     """
 
-    _phimax = 0.641
-    _beinstein = 3.27
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._phimax = 0.641
+        self._beinstein = 3.27
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:

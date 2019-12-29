@@ -26,9 +26,7 @@ import pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model
 
 class FlowGoRelativeViscosityBubblesModelNo(pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model.
                                      FlowGoBaseRelativeViscosityBubblesModel):
-
     """This methods permits to NOT consider the effect of bubbles on viscosity """
-
 
     def __init__(self, vesicle_fraction_model=None):
         super().__init__()
@@ -44,8 +42,6 @@ class FlowGoRelativeViscosityBubblesModelNo(pyflowgo.base.flowgo_base_relative_v
             data = json.load(data_file)
 
     def compute_relative_viscosity_bubbles(self, state):
-
-        # here the vesicle model is directly called
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
 
         relative_viscosity_bubbles = 1

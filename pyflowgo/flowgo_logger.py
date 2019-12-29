@@ -15,6 +15,7 @@
 # You should have received copies of the GNU Lesser General Public License
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
+
 class Singleton(type):
     _instances = {}
 
@@ -64,3 +65,6 @@ class FlowGoLogger(metaclass=Singleton):
             generated_list.append(current_row.get(variable_name, None))
 
         return generated_list
+
+    def clear(self):
+        self._variables = []

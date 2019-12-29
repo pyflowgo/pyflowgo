@@ -29,7 +29,10 @@ class FlowGoRelativeViscosityModelMP(pyflowgo.base.flowgo_base_relative_viscosit
     but is calculated from the relationship Bφm = 2
     The input parameters include the variable crystal fraction (phi) and the maximum packing (phimax)"""
 
-    _phimax = 0.633
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._phimax = 0.633
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:

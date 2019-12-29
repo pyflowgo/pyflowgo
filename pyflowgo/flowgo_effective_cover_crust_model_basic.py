@@ -58,12 +58,14 @@ class FlowGoEffectiveCoverCrustModelBasic(pyflowgo.base.flowgo_base_effective_co
 
     """
 
-    _alpha = -7.56e-3
-    _crust_cover_fraction = 0.9
+
 
     def __init__(self, terrain_condition, material_lava):
         self._material_lava = material_lava
         self._terrain_condition = terrain_condition
+
+        self._alpha = -7.56e-3
+        self._crust_cover_fraction = 0.9
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
@@ -74,7 +76,6 @@ class FlowGoEffectiveCoverCrustModelBasic(pyflowgo.base.flowgo_base_effective_co
 
     def compute_effective_cover_fraction(self, state):
 
-        #  TODO Is it ok to call the v_mean like this ?
         v_mean = self._material_lava.compute_mean_velocity(state, self._terrain_condition)
 
         effective_cover_fraction = self._crust_cover_fraction * math.exp(self._alpha * v_mean)

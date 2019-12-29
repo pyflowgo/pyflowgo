@@ -27,6 +27,7 @@ class FlowGoYieldStrengthModelBasic(pyflowgo.base.flowgo_base_yield_strength_mod
     # TODO: here I add the log
     def __init__(self):
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
+        self._eruption_temperature = None
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file

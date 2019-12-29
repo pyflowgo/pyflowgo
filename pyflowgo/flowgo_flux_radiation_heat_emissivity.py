@@ -28,9 +28,9 @@ import json
 
 import pyflowgo.base.flowgo_base_flux
 
+
 class FlowGoFluxRadiationHeatEmissivity(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
-    #def __init__(self, terrain_condition, material_lava, crust_temperature_model):
     def __init__(self, terrain_condition, material_lava, crust_temperature_model, effective_cover_crust_model):
         self._material_lava = material_lava
         self._crust_temperature_model = crust_temperature_model
@@ -51,7 +51,6 @@ class FlowGoFluxRadiationHeatEmissivity(pyflowgo.base.flowgo_base_flux.FlowGoBas
             self._epsilon_2 = float(data['radiation_parameters']['epsilon_hot'])
 
     def _compute_effective_radiation_temperature(self, state, terrain_condition):
-
         effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
 
         # the effective radiation temperature of the
@@ -74,9 +73,7 @@ class FlowGoFluxRadiationHeatEmissivity(pyflowgo.base.flowgo_base_flux.FlowGoBas
 
         return effective_radiation_temperature
 
-
     def _compute_epsilon_effective(self, state, terrain_condition):
-
         effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
 
         epsilon_effective = effective_cover_fraction * self._epsilon_1 + (1. - effective_cover_fraction) * self._epsilon_2
@@ -84,7 +81,6 @@ class FlowGoFluxRadiationHeatEmissivity(pyflowgo.base.flowgo_base_flux.FlowGoBas
         self.logger.add_variable("epsilon_effective", state.get_current_position(),
                                  epsilon_effective)
         return epsilon_effective
-
 
     def _compute_spectral_radiance (self, state, terrain_condition, channel_width):
         effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
@@ -134,7 +130,6 @@ class FlowGoFluxRadiationHeatEmissivity(pyflowgo.base.flowgo_base_flux.FlowGoBas
         self.logger.add_variable("spectral_radiance", state.get_current_position(), spectral_radiance)
 
         return spectral_radiance
-
 
     def compute_flux(self, state, channel_width, channel_depth):
         effective_radiation_temperature = self._compute_effective_radiation_temperature \

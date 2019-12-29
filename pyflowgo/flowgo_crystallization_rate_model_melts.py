@@ -43,11 +43,14 @@ class FlowGoCrystallizationRateModelMelts(pyflowgo.base.flowgo_base_crystallizat
 
     """
 
-    _solid_temperature = 990. + 273.15
-    _crystal_fraction = 0.01
-    _crystals_grown_during_cooling = 0.45
-    _eruption_temperature = 1137. + 273.15
-    _crystal_spline = None
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._solid_temperature = 990. + 273.15
+        self._crystal_fraction = 0.01
+        self._crystals_grown_during_cooling = 0.45
+        self._eruption_temperature = 1137. + 273.15
+        self._crystal_spline = None
 
     def read_initial_condition_from_json_file(self, filename):
         """
@@ -67,6 +70,7 @@ class FlowGoCrystallizationRateModelMelts(pyflowgo.base.flowgo_base_crystallizat
     def read_crystal_from_melts(self, filename=None):
         crystal_fraction = []
         temperature = []
+
         if filename == None:
             filename = '../pyflowgo/MaunaUlu74/Results-melts_MU74.csv'
 
@@ -78,7 +82,7 @@ class FlowGoCrystallizationRateModelMelts(pyflowgo.base.flowgo_base_crystallizat
         self._crystal_spline = interpolate.InterpolatedUnivariateSpline(temperature, crystal_fraction, k=1.)
 
     def get_crystal_fraction(self, temperature):
-        if (self._crystal_spline is not None):
+        if self._crystal_spline is not None:
             return self._crystal_spline(temperature)
         else:
             return self._crystal_fraction

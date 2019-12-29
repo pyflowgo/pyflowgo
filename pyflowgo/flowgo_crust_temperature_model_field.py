@@ -47,9 +47,10 @@ class FlowGoCrustTemperatureModelField(pyflowgo.base.flowgo_base_crust_temperatu
     Done for Piton de la Fournace Avril 2018 eruption
         """
 
-    _crust_temperature = 0 + 273.15
-    _crust_temperature_spline = None
-
+    def __init__(self) -> None:
+        super().__init__()
+        self._crust_temperature = 0 + 273.15
+        self._crust_temperature_spline = None
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
@@ -61,9 +62,9 @@ class FlowGoCrustTemperatureModelField(pyflowgo.base.flowgo_base_crust_temperatu
 
     def read_crust_temperature_from_file(self, f_crust_temperature=None):
         if f_crust_temperature == None:
-            #f_crust_temperature = 'resources/crust_temperature_profile.txt'
-        #TODO here enter the path to the look up table
+            #TODO here enter the path to the look up table
             f_crust_temperature = 'resources/crust_temperature_profile.txt'
+
         distance = []
         crust_temperature = []
         # here read the T_crust file (.txt) where each line represent the distance from the vent (first column) and
@@ -75,6 +76,7 @@ class FlowGoCrustTemperatureModelField(pyflowgo.base.flowgo_base_crust_temperatu
             distance.append(float(split_line[0]))
             crust_temperature.append((float(split_line[1]))+273.15)
         f_crust_temperature.close()
+
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
         self._crust_temperature_spline = interpolate.InterpolatedUnivariateSpline(distance, crust_temperature, k=1.)
 

@@ -57,21 +57,21 @@ class FlowGoEffectiveCoverCrustModelBimodal(pyflowgo.base.flowgo_base_effective_
 
     """
 
-    # For Mauna Loa 1859
-    _critical_distance = 10000.
-    _alpha_1 = - 0.04778
-    _alpha_2 = - 0.03652
-
-    # MaunaULU
-    # critical_distance = 4000.:
-
-    _alpha = -7.56e-3
-    _crust_cover_fraction = 0.9
-    _crust_cover_fraction_2 = 0.0
-
     def __init__(self, terrain_condition, material_lava):
         self._material_lava = material_lava
         self._terrain_condition = terrain_condition
+
+        # For Mauna Loa 1859
+        self._critical_distance = 10000.
+        self._alpha_1 = - 0.04778
+        self._alpha_2 = - 0.03652
+
+        # MaunaULU
+        # critical_distance = 4000.:
+
+        self._alpha = -7.56e-3
+        self._crust_cover_fraction = 0.9
+        self._crust_cover_fraction_2 = 0.0
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
@@ -95,7 +95,7 @@ class FlowGoEffectiveCoverCrustModelBimodal(pyflowgo.base.flowgo_base_effective_
 
     def compute_effective_cover_fraction(self, state):
         current_position = state.get_current_position()
-        # TODO is it ok to call the v_mean like this?
+
         v_mean = self._material_lava.compute_mean_velocity(state, self._terrain_condition)
 
         if current_position <= self._critical_distance:

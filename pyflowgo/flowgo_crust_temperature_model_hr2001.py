@@ -48,7 +48,10 @@ class FlowGoCrustTemperatureModelHR2001(pyflowgo.base.flowgo_base_crust_temperat
 
     """
 
-    _crust_temperature = 425 + 273.15
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._crust_temperature = 425 + 273.15
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file

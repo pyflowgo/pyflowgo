@@ -18,7 +18,7 @@
 import math
 import json
 
-#
+
 class FlowGoState:
 
     """This method permits to get and define the state of the lava flow at a each or at a given position or time.
@@ -37,11 +37,14 @@ class FlowGoState:
 
        """
 
-    _crystal_fraction = 0.15
-    _core_temperature = 1137 + 273.15
-    _current_position = 0.
-    _current_time = 0.
-    _current_slope = 0.
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._crystal_fraction = 0.15
+        self._core_temperature = 1137 + 273.15
+        self._current_position = 0.
+        self._current_time = 0.
+        self._current_slope = 0.
 
     def get_core_temperature(self):
         return self._core_temperature

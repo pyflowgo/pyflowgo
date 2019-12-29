@@ -18,12 +18,13 @@
 import json
 import pyflowgo.base.flowgo_base_vesicle_fraction_model
 
+
 class FlowGoVesicleFractionModelConstant(pyflowgo.base.flowgo_base_vesicle_fraction_model.
                                         FlowGoBaseVesicleFractionModel):
-    # TODO: comment the function
-
-    # this is the Volume fraction considered constant along the flow
-    _vesicle_fraction = 0.1
+    def __init__(self) -> None:
+        super().__init__()
+        # this is the Volume fraction considered constant along the flow
+        self._vesicle_fraction = 0.1
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file

@@ -26,7 +26,6 @@ import pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model
 
 class FlowGoRelativeViscosityBubblesModelRigid(pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model.
                                      FlowGoBaseRelativeViscosityBubblesModel):
-
     """This methods permits to calculate the effect of undeformable bubbles on viscosity:
     they act as rigid spheres and increase bulk viscosity:
 
@@ -62,8 +61,6 @@ class FlowGoRelativeViscosityBubblesModelRigid(pyflowgo.base.flowgo_base_relativ
             data = json.load(data_file)
 
     def compute_relative_viscosity_bubbles(self, state):
-
-        # here the vesicle model is directly called
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
 
         relative_viscosity_bubbles = math.pow((1. - vesicle_fraction), - 1.)

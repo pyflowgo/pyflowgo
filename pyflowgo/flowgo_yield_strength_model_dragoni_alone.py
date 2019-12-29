@@ -21,6 +21,7 @@ import pyflowgo.flowgo_logger
 
 import pyflowgo.base.flowgo_base_yield_strength_model
 
+
 class FlowGoYieldStrengthModelDragoniAlone(pyflowgo.base.flowgo_base_yield_strength_model.FlowGoBaseYieldStrengthModel):
 
     """
@@ -45,15 +46,17 @@ class FlowGoYieldStrengthModelDragoniAlone(pyflowgo.base.flowgo_base_yield_stren
 
     """
 
-
     def __init__(self):
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
+        self._liquidus_temperature = None
+        self._eruption_temperature = None
 
     def read_initial_condition_from_json_file(self, filename):
             # read json parameters file
         with open(filename) as data_file:
             data = json.load(data_file)
             self._liquidus_temperature = float(data['lava_state']['liquidus_temperature'])
+            self._eruption_temperature = float(data['eruption_condition']['eruption_temperature'])
 
     def compute_yield_strength(self, state, eruption_temperature):
         # yield_strength is tho_0
@@ -61,9 +64,8 @@ class FlowGoYieldStrengthModelDragoniAlone(pyflowgo.base.flowgo_base_yield_stren
         c = 0.08  # Constant C given by Dragoni, 1989[K-1]
         #liquidus_temperature = 1393.15
         core_temperature = state.get_core_temperature()
-        crystal_fraction = state.get_crystal_fraction()
 
-        # the new yield strength is calculated using this new T and the corresponding slope:
+        # the new yield strength is calculated using this core T
         tho_0 = b * (math.exp(c * (self._liquidus_temperature - core_temperature) - 1.))
         return tho_0
 

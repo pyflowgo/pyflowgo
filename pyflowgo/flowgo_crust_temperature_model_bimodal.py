@@ -65,13 +65,16 @@ class FlowGoCrustTemperatureModelHonBimodal(pyflowgo.base.flowgo_base_crust_temp
         Geol. Soc. Am. Bull., 106, 351–370
 
         """
+    def __init__(self) -> None:
+        super().__init__()
 
-# T_crust can be set to constant value,
-    # or allowed to decrease downflow as a function of time and distance from the vent (Harris & Rowland 2015).
-    # crust_temperature = (-140 * math.log(time / 3600) + 303) + 273.15
-    # with time given in hours define as distance = 0, time = 1s and then new_time = time + (step / v_mean)
-    _crust_temperature_1 = 425 + 273.15
-    _crust_temperature_2 = 425
+        # T_crust can be set to constant value,
+        # or allowed to decrease downflow as a function of time and distance from the vent (Harris & Rowland 2015).
+        # crust_temperature = (-140 * math.log(time / 3600) + 303) + 273.15
+        # with time given in hours define as distance = 0, time = 1s and then new_time = time + (step / v_mean)
+        self._critical_distance = 0.
+        self._crust_temperature_1 = 425 + 273.15
+        self._crust_temperature_2 = 425
 
     def read_initial_condition_from_json_file(self, filename):
         """

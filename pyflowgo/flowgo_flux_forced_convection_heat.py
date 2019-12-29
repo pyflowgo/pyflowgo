@@ -21,9 +21,9 @@ import pyflowgo.flowgo_logger
 
 import pyflowgo.base.flowgo_base_flux
 
+
 class FlowGoFluxForcedConvectionHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
-    #def __init__(self, terrain_condition, material_air, material_lava, crust_temperature_model):
     def __init__(self, terrain_condition, material_air, material_lava, crust_temperature_model, effective_cover_crust_model):
         self._material_air = material_air
         self._material_lava = material_lava
@@ -35,23 +35,13 @@ class FlowGoFluxForcedConvectionHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFl
     def compute_characteristic_surface_temperature(self, state, terrain_condition):
         """ This is Tconv of Harris and Rowland"""
         crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
-        #effective_cover_fraction = self._material_lava.compute_effective_cover_fraction(state, terrain_condition)
-        # TODO call effective_cover_fraction from a model like this:
         effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
-
         molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
-
         characteristic_surface_temperature = math.pow((effective_cover_fraction * crust_temperature **
                                                        1.333 + (1. - effective_cover_fraction) *
                                                        molten_material_temperature ** 1.333),0.75)
         self.logger.add_variable("characteristic_surface_temperature", state.get_current_position(),
                                  characteristic_surface_temperature)
-
-        # TODO I remove the log de Tcrust and f crust 21sept17
-
-        #print("effective_cover_fraction =", effective_cover_fraction)
-        #print("Tconv =", characteristic_surface_temperature)
-
         return characteristic_surface_temperature
 
     def compute_flux(self, state, channel_width, channel_depth):

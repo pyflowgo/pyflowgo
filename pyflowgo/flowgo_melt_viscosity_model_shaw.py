@@ -48,9 +48,11 @@ class FlowGoMeltViscosityModelShaw(pyflowgo.base.flowgo_base_melt_viscosity_mode
 
     """
 
-    _shaw_slope = 2.36
+    def __init__(self) -> None:
+        super().__init__()
 
-    # faire le test de bien lire ces valeurs
+        self._shaw_slope = 2.36
+
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
         with open(filename) as data_file:
@@ -59,7 +61,6 @@ class FlowGoMeltViscosityModelShaw(pyflowgo.base.flowgo_base_melt_viscosity_mode
             self._shaw_slope = float(data['melt_viscosity_parameters']['shaw_slope'])
 
     def compute_melt_viscosity(self, state):
-
         core_temperature = state.get_core_temperature()
 
         melt_viscosity = 10 ** (((self._shaw_slope * (10000. / core_temperature) - (1.5 * self._shaw_slope) - 6.4) / 2.303) - 1)

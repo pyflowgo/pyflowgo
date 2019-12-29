@@ -22,7 +22,7 @@ import pyflowgo.base.flowgo_base_flux
 class FlowGoHeatBudget:
 
     def __init__(self):
-        self._flux_list=[]
+        self._flux_list = []
         self.flowgo_logger = pyflowgo.flowgo_logger.FlowGoLogger()
 
     def append_flux(self, flux):

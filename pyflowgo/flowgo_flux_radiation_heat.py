@@ -28,9 +28,9 @@ import json
 
 import pyflowgo.base.flowgo_base_flux
 
+
 class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
-    #def __init__(self, terrain_condition, material_lava, crust_temperature_model):
     def __init__(self, terrain_condition, material_lava, crust_temperature_model, effective_cover_crust_model):
         self._material_lava = material_lava
         self._crust_temperature_model = crust_temperature_model

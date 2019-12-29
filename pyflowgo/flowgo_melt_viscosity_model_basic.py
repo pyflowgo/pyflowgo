@@ -47,10 +47,12 @@ class FlowGoMeltViscosityModelBasic(pyflowgo.base.flowgo_base_melt_viscosity_mod
     Dragoni M. (1989) A dynamical model of lava flows cooling by radiation. Bull Volcanol, 51:88-95
 
     """
-    _viscosity_eruption = 1000.
-    _eruption_temperature = 1137. + 273.15
+    def __init__(self) -> None:
+        super().__init__()
 
-    # faire le test de bien lire ces valeurs
+        self._viscosity_eruption = 1000.
+        self._eruption_temperature = 1137. + 273.15
+
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
         with open(filename) as data_file:

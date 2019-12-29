@@ -52,7 +52,10 @@ class FlowGoRelativeViscosityModelER(pyflowgo.base.flowgo_base_relative_viscosit
 
     """
 
-    _r = 1.51
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._r = 1.51
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:
@@ -61,14 +64,14 @@ class FlowGoRelativeViscosityModelER(pyflowgo.base.flowgo_base_relative_viscosit
     def compute_relative_viscosity(self, state):
         phi = state.get_crystal_fraction()
         self._r = 1.51
-
+        phimax = 1/self._r
         relative_viscosity = math.pow((1. - self._r * phi), - 2.5)
         return relative_viscosity
 
     def is_notcompatible(self, state):
         phi = state.get_crystal_fraction()
 
-        if 1. < (self._r * phi):
+        if phi >= (1/self._r):
             return True
         else:
             return False

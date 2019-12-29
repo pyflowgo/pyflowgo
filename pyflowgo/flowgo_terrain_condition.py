@@ -41,16 +41,19 @@ class FlowGoTerrainCondition:
 
        """
 
-   #default values that are erased as soon as the slope_file is read
-    _effusion_rate_init= 0.1
-    _channel_depth = 5.5
-    _channel_width = 5.5
-    _gravity = 9.81
-    _default_slope = math.radians(2.657414)
-    _slope_spline = None
-    _max_channel_length = -1
-    _slope_smoothing_active = False
-    _slope_smoothing_number_of_points = -1
+    def __init__(self) -> None:
+        super().__init__()
+
+        # default values that are erased as soon as the slope_file is read
+        self._effusion_rate_init = 0.1
+        self._channel_depth = 5.5
+        self._channel_width = 5.5
+        self._gravity = 9.81
+        self._default_slope = math.radians(2.657414)
+        self._slope_spline = None
+        self._max_channel_length = -1
+        self._slope_smoothing_active = False
+        self._slope_smoothing_number_of_points = -1
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:
@@ -73,25 +76,28 @@ class FlowGoTerrainCondition:
         f_slope = open(filename, "r")
         f_slope.readline()
 
-        #----------------------------original ----------------------------
-        #for line in f_slope:
-            #split_line = line.strip('\n').split('\t')
-            #distance.append(float(split_line[0]))
-            #slope.append(math.radians(float(split_line[1])))
-        #f_slope.close()
+        # ----------------------------original ----------------------------
+        # for line in f_slope:
+        #     split_line = line.strip('\n').split('\t')
+        #     distance.append(float(split_line[0]))
+        #     slope.append(math.radians(float(split_line[1])))
+        # f_slope.close()
 
-        #----------------------------update----------------------------
-        #This allow to avoid bugs due to null or negative slope values
+        # ----------------------------update----------------------------
+        # This allow to avoid bugs due to null or negative slope values
         for line in f_slope:
             split_line = line.strip('\n').split('\t')
             if float(split_line[1])<=0:
                 pass
             else:
-                #slope.append(math.radians(float(split_line[4])))
-                slope.append(math.radians(float(split_line[1])))
+                # to read DONWFLOW PROFILES:
+                slope.append(math.radians(float(split_line[4])))
+                distance.append(float(split_line[3]))
+                # to read any slope file distance, slope, elevation
+                # distance.append(float(split_line[0]))
+                # slope.append(math.radians(float(split_line[1])))
                 # elevation.append(float(split_line[2]))
-                #distance.append(float(split_line[3]))
-                distance.append(float(split_line[0]))
+
         f_slope.close()
 
         # smooth the slope
@@ -100,7 +106,6 @@ class FlowGoTerrainCondition:
 
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
         self._slope_spline = interpolate.InterpolatedUnivariateSpline(distance, slope, k=1)
-
 
     def get_channel_slope(self, position_x):
         if (self._slope_spline is not None):

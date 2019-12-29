@@ -42,10 +42,13 @@ class FlowGoCrystallizationRateModelBasic(pyflowgo.base.flowgo_base_crystallizat
 
         """
 
-    _crystal_fraction = 0.15
-    _crystals_grown_during_cooling = 0.45
-    _solid_temperature = 990. + 273.15
-    _eruption_temperature = 1137. + 273.15
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._crystal_fraction = 0.15
+        self._crystals_grown_during_cooling = 0.45
+        self._solid_temperature = 990. + 273.15
+        self._eruption_temperature = 1137. + 273.15
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file

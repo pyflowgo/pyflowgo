@@ -112,7 +112,7 @@ class FlowgoModelFactory:
                 FlowGoCrystallizationRateModelMelts()
         else:
             raise NameError('Crystallization rate model must be "basic" or "bimodal" '
-                            'or"bimodal_f_temp" or "melts" ... ')
+                            'or "bimodal_f_temp" or "melts" ... ')
 
         assert isinstance(self._crystallization_rate_model_object,
                           pyflowgo.base.flowgo_base_crystallization_rate_model.FlowGoBaseCrystallizationRateModel)
@@ -186,9 +186,6 @@ class FlowgoModelFactory:
         elif self._relative_viscosity_model == "ptp3":
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_ptp3.\
                 FlowGoRelativeViscosityModelPhanThienPham3(vesicle_fraction_model=self._vesicle_fraction_model_object)
-        #elif self._relative_viscosity_model == "costa":
-            #self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_costa.\
-                #FlowGoRelativeViscosityModelCosta()
         elif self._relative_viscosity_model == "costa1":
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_costa1.\
                 FlowGoRelativeViscosityModelCosta1()

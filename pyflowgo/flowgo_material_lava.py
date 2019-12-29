@@ -24,16 +24,18 @@ import pyflowgo.flowgo_yield_strength_model_basic
 import pyflowgo.flowgo_vesicle_fraction_model_constant
 import json
 
+
 class FlowGoMaterialLava:
 
-    _eruption_temperature = 1137. + 273.15
-    _buffer = 0.
-    _latent_heat_of_crystallization = 350000.  # L [K.Kg-1]
-    _density_dre = 2600.
-    _max_packing = 0.52
-
-    def __init__(self, melt_viscosity_model=None, relative_viscosity_model=None, relative_viscosity_bubbles_model=None, yield_strength_model=None, vesicle_fraction_model=None):
+    def __init__(self, melt_viscosity_model=None, relative_viscosity_model=None, relative_viscosity_bubbles_model=None,
+                 yield_strength_model=None, vesicle_fraction_model=None):
         super().__init__()
+
+        self._eruption_temperature = 1137. + 273.15
+        self._buffer = 0.
+        self._latent_heat_of_crystallization = 350000.  # L [K.Kg-1]
+        self._density_dre = 2600.
+        self._max_packing = 0.52
 
         # TODO: Raise a warning here that the default model is used if no model has been passed
         # TODO: Check that the models are in the good ABC type

@@ -18,6 +18,7 @@
 import pyflowgo.flowgo_logger
 import numpy as np
 
+
 class FlowGoIntegrator:
 
     """ The integrator allows to make the flow front advancing
@@ -54,7 +55,7 @@ class FlowGoIntegrator:
                 self.effusion_rate = v_mean * channel_width * channel_depth
                 effusion_rate_init = self.terrain_condition.get_effusion_rate_init(current_state.get_current_position())
                 if self.effusion_rate >= effusion_rate_init:
-                    print('effusion_rate =' + str(self.effusion_rate))
+
                     print('channel_depth =' + str(channel_depth))
                     break
 
@@ -66,7 +67,6 @@ class FlowGoIntegrator:
         as a function of the slope at this current location (that is given by the slope_distance file or by
         interpolation of it)"""
 
-
         v_mean = self.material_lava.compute_mean_velocity(current_state, self.terrain_condition)
 
         if v_mean <= 0.:
@@ -76,12 +76,12 @@ class FlowGoIntegrator:
 
         # computes the quantities at this current state from the terrain condition
         channel_depth = self.terrain_condition.get_channel_depth(current_state.get_current_position())
-
         # Here we set the initial condition (iteration = 0) and calculate the effusion rate
-        if self.iteration == 0.:
-            channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
-            self.effusion_rate = v_mean * channel_width * channel_depth
-            print('effusion_rate =' + str(self.effusion_rate))
+        #TODO: verifier si c'est bon en enlevant cette iteration
+        #if self.iteration == 0.:
+        channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
+        # TODO: verifier si c'est bon en enlevant ce calcul
+        # self.effusion_rate = v_mean * channel_width * channel_depth
 
         # Here we start the loop
         # Base on mass conservation, the effusion rate and the depth channel are kept fixed, so the width can
@@ -91,7 +91,7 @@ class FlowGoIntegrator:
 
         #TODO: Here I add the slope:ASK MIMI TO MOVE IT FROM HERE
         channel_slope = self.terrain_condition.get_channel_slope(current_state.get_current_position())
-        #print("slope=",channel_slope)
+        # print("slope=",channel_slope)
 
         # ------------------------------------------------- HEAT BUDGET ------------------------------------------------
         # Here the right hand side (rhs) from Eq. 7b, Harris and Rowland (2001)
@@ -125,6 +125,9 @@ class FlowGoIntegrator:
         phi = current_state.get_crystal_fraction()
         new_phi = phi + (dphi_dx * self.dx)
         print('phi=',new_phi)
+        if new_phi <= phi:
+            self._has_finished = True
+            return
 
         # ------------------------------------------ NOW WE JUMP TO THE NEXT STEP --------------------------------------
         # we calculate the new core temperature in K for the the next line, using Euler as well
@@ -147,23 +150,18 @@ class FlowGoIntegrator:
                                  current_state.get_core_temperature())
         self.logger.add_variable("core_temperature", current_state.get_current_position(),
                                  current_state.get_core_temperature())
-
         self.logger.add_variable("crust_temperature", current_state.get_current_position(),
                                  self.crust_temperature_model.compute_crust_temperature(current_state))
         self.logger.add_variable("effective_cover_fraction", current_state.get_current_position(),
                                  self.effective_cover_crust_model.compute_effective_cover_fraction(current_state))
-
         self.logger.add_variable("dphi_dx", current_state.get_current_position(), dphi_dx)
         self.logger.add_variable("dtemp_dx", current_state.get_current_position(), dtemp_dx)
-        #self.logger.add_variable("latent_heat_of_crystallization", current_state.get_current_position(),
-                                 #latent_heat_of_crystallization)
+        # self.logger.add_variable("latent_heat_of_crystallization", current_state.get_current_position(),
+                                 # latent_heat_of_crystallization)
         self.logger.add_variable("dphi_dtemp", current_state.get_current_position(), dphi_dtemp)
-        #TODO : here I added the log of the time in s, the slope, the effusion rate and the channel depth
-        self.logger.add_variable("current_time", current_state.get_current_position(),
-                                 current_state.get_current_time())
-        # TODO : here I added the log of the cooling rate Dtemp_dt
+        # self.logger.add_variable("current_time", current_state.get_current_position(),
+        # current_state.get_current_time())
         self.logger.add_variable("dtemp_dt", current_state.get_current_position(),dtemp_dt)
-
         self.logger.add_variable("slope", current_state.get_current_position(), channel_slope)
         self.logger.add_variable("effusion_rate", current_state.get_current_position(), str(self.effusion_rate))
         self.logger.add_variable("channel_depth", current_state.get_current_position(),channel_depth)
@@ -171,10 +169,6 @@ class FlowGoIntegrator:
                                  self.material_lava.get_yield_strength(current_state))
         self.logger.add_variable("tho_b", current_state.get_current_position(),
                                  self.material_lava.get_basal_shear_stress(current_state, self.terrain_condition))
-
-
-
-
 
         # -------------------------- UPDATE THE STATE WITH NEW CRYSTAL FRACTION AND NEW TEMPERATURE ----------------
         current_state.set_crystal_fraction(new_phi)
@@ -186,8 +180,8 @@ class FlowGoIntegrator:
         self.iteration += 1.
 
         if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) \
-                or self.material_lava.is_notcompatible(current_state) \
-                or self.material_lava.yield_strength_notcompatible(current_state, self.terrain_condition) \
+                or (self.material_lava.is_notcompatible(current_state)) \
+                or (self.material_lava.yield_strength_notcompatible(current_state, self.terrain_condition)) \
                 or (current_state.get_current_position() >= self.terrain_condition.get_max_channel_length()):
             self._has_finished = True
             return

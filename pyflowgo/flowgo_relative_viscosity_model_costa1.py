@@ -46,7 +46,10 @@ class FlowGoRelativeViscosityModelCosta1(pyflowgo.base.flowgo_base_relative_visc
     """
 
 
-    _strain_rate = 1.
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._strain_rate = 1.
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file

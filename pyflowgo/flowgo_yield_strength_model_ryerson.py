@@ -50,9 +50,10 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
    temperatures. J. Volcanol. Geotherm. Res. 53, 47–66
 
     """
-    #  TODO: here I add the log
+
     def __init__(self):
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
+        self._eruption_temperature = None
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
@@ -61,15 +62,13 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
             self._eruption_temperature = float(data['eruption_condition']['eruption_temperature'])
 
     def compute_yield_strength(self, state, eruption_temperature):
-        # yield_strength is tho_0
+        # tho_0 is the yield_strength
         crystal_fraction = state.get_crystal_fraction()
-
-        # the new yield strength is calculated using this new T and the corresponding slope:
         tho_0 = 6500. * (crystal_fraction ** 2.85)
         return tho_0
 
     def compute_basal_shear_stress(self, state, terrain_condition, material_lava):
-
+        # tho_b is the basal shearstress
         """
         This methods calculates the basal yield strength of the lava flow as function of the bulk density,
         flow thickness, slope and gravity: rho * g * h * sin(alpha)
@@ -91,11 +90,8 @@ class FlowGoYieldStrengthModelRyerson(pyflowgo.base.flowgo_base_yield_strength_m
          Hulme, G., 1974. The interpretation of lava flow morphology. Geophys. J. R. Astron. Soc. 39, 361–383.
 
          """
-
         g = terrain_condition.get_gravity(state.get_current_position)
-        #print('g =', str(g))
         bulk_density = material_lava.get_bulk_density(state)
-        #print('bulk_density =', str(bulk_density))
         channel_depth = terrain_condition.get_channel_depth(state.get_current_position())
         channel_slope = terrain_condition.get_channel_slope(state.get_current_position())
 

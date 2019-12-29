@@ -45,7 +45,10 @@ class FlowGoRelativeViscosityModelCosta2(pyflowgo.base.flowgo_base_relative_visc
 
     """
 
-    _strain_rate = 1.
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._strain_rate = 1.
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
@@ -54,7 +57,6 @@ class FlowGoRelativeViscosityModelCosta2(pyflowgo.base.flowgo_base_relative_visc
             self._strain_rate = float(data['relative_viscosity_parameters']['strain_rate'])
 
     def compute_relative_viscosity(self, state):
-
         phi = state.get_crystal_fraction()
         if self._strain_rate == 1.0:
             # needle-like B particles from Cimarelli et al., 2011

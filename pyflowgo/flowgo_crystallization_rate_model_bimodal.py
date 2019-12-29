@@ -44,13 +44,16 @@ class FlowGoCrystallizationRateModelBimodal(pyflowgo.base.flowgo_base_crystalliz
         of basalt flowing down a lava channel. Bull Volcanol  76:824 DOI 10.1007/s00445-014-0824-8
     """
 
-    _crystal_fraction = 0.15
-    _crystals_grown_during_cooling = 0.45
-    _solid_temperature = 990. + 273.15
-    _eruption_temperature = 1137. + 273.15
-    _crystallization_rate_1= 0.05
-    _crystallization_rate_2 =0.1
-    _critical_distance=10.
+    def __init__(self) -> None:
+        super().__init__()
+
+        self._crystal_fraction = 0.15
+        self._crystals_grown_during_cooling = 0.45
+        self._solid_temperature = 990. + 273.15
+        self._eruption_temperature = 1137. + 273.15
+        self._crystallization_rate_1 = 0.05
+        self._crystallization_rate_2 = 0.1
+        self._critical_distance = 10.
 
     def read_initial_condition_from_json_file(self, filename):
         """
