@@ -72,6 +72,7 @@ class FlowGoTerrainCondition:
 
         distance = []
         slope = []
+        elevation = []
 
         f_slope = open(filename, "r")
         f_slope.readline()
@@ -85,18 +86,23 @@ class FlowGoTerrainCondition:
 
         # ----------------------------update----------------------------
         # This allow to avoid bugs due to null or negative slope values
+        # to read DONWFLOW PROFILES:
+        #elevation_column_number = 2
+        #distance_column_number = 3
+        #slope_column_number = 4
+        # to read any slope file distance, slope (in °), elevation
+        distance_column_number = 0
+        slope_column_number = 1
+
         for line in f_slope:
             split_line = line.strip('\n').split('\t')
-            if float(split_line[1])<=0:
+            if float(split_line[slope_column_number]) <= 0:
                 pass
             else:
-                # to read DONWFLOW PROFILES:
-                slope.append(math.radians(float(split_line[4])))
-                distance.append(float(split_line[3]))
-                # to read any slope file distance, slope, elevation
-                # distance.append(float(split_line[0]))
-                # slope.append(math.radians(float(split_line[1])))
-                # elevation.append(float(split_line[2]))
+                slope.append(math.radians(float(split_line[slope_column_number])))
+                distance.append(float(split_line[distance_column_number]))
+                #elevation.append(float(split_line[elevation_column_number]))
+
 
         f_slope.close()
 

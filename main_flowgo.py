@@ -39,6 +39,7 @@ if __name__ == "__main__":
     # read json parameters file
     with open(configuration_file) as data_file:
         data = json.load(data_file)
+        effusion_rate_init = data["effusion_rate_init"]
 
         if 'lava_name' not in data:
             raise ValueError("Missing ['lava_name'] entry in json")
@@ -80,7 +81,6 @@ if __name__ == "__main__":
                                                              crust_temperature_model=crust_temperature_model,
                                                              effective_cover_crust_model=effective_cover_crust_model)
     integrator.read_initial_condition_from_json_file(configuration_file)
-
     # ------------------------------------------------- LOG THE DATA --------------------------------------------------
 
     logger = pyflowgo.flowgo_logger.FlowGoLogger()
@@ -93,4 +93,6 @@ if __name__ == "__main__":
     while not integrator.has_finished():
         integrator.single_step(state)
 
-    logger.write_values_to_file("results_"+str(lava_name).replace(" ", "_").lower() + "_"+ str(step_size) +"m.csv")
+    file_name_results = './results_main_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+
+    logger.write_values_to_file(file_name_results)
