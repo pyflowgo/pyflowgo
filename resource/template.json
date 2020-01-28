@@ -1,6 +1,6 @@
 {
   "lava_name": "template",
-  "slope_file": "resource/example_slope_profile.txt",
+  "slope_file": "resource/DEM_MaunaLoa1984.txt",
   "step_size": 10.0,
   "effusion_rate_init" : 3,
 
@@ -30,7 +30,7 @@
   "gravity": 9.81,
     "slope_smoothing_active": false,
     "slope_smoothing_number_of_points": 10,
-  "max_channel_length": 4000.0
+  "max_channel_length": 30000.0
   },
   "eruption_condition":{
   "eruption_temperature" : 1387.15,

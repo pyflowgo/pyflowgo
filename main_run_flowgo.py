@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     # TODO: enter the json file you want to run
 
-    json_file = './resources/template.json'
+    json_file = './resource/template.json'
     # instanciate flowgo runner and run it
     #flowgo = run_flowgo.RunFlowgo()
     #flowgo.run(json_file, path_to_folder)
@@ -38,6 +38,6 @@ if __name__ == "__main__":
     #instanciate flowgo runner and run it for many effusion rate
     simulation = run_flowgo_effusion_rate_array.StartFlowgo()
 
-    slope_file =  "./resources/profile_00000.txt"
+    slope_file = "resource/DEM_MaunaLoa1984.txt"
 
     simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file)
