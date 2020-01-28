@@ -70,6 +70,8 @@ class FlowGoTerrainCondition:
         if filename == None:
             filename = '../MaunaUlu74/DEM_maunaulu74.txt'
 
+        latitude = []
+        longitude = []
         distance = []
         slope = []
         elevation = []
@@ -86,22 +88,25 @@ class FlowGoTerrainCondition:
 
         # ----------------------------update----------------------------
         # This allow to avoid bugs due to null or negative slope values
-        # to read DONWFLOW PROFILES:
-        #elevation_column_number = 2
-        #distance_column_number = 3
-        #slope_column_number = 4
-        # to read any slope file distance, slope (in °), elevation
-        distance_column_number = 0
-        slope_column_number = 1
+        #
+        latitude_column_number = 0
+        longitude_column_number = 1
+        elevation_column_number = 2
+        elevation_column_number = 2
+        distance_column_number = 3
+        slope_column_number = 4
+
 
         for line in f_slope:
             split_line = line.strip('\n').split('\t')
-            if float(split_line[slope_column_number]) <= 0:
+            if float(split_line[slope_column_number]) <= 0.1:
                 pass
             else:
                 slope.append(math.radians(float(split_line[slope_column_number])))
                 distance.append(float(split_line[distance_column_number]))
-                #elevation.append(float(split_line[elevation_column_number]))
+                elevation.append(float(split_line[elevation_column_number]))
+                latitude.append(float(split_line[latitude_column_number]))
+                longitude.append(float(split_line[longitude_column_number]))
 
 
         f_slope.close()

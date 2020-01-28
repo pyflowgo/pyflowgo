@@ -16,6 +16,7 @@
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
 import run_flowgo
+import run_flowgo_effusion_rate_array
 
 
 
@@ -23,14 +24,21 @@ if __name__ == "__main__":
 
     # -------------------------------------------------- RUN FLOWGO  ---------------------------------------------------
 
-    #TODO: enter the json file you want to run
+    # TODO: enter the path where to store the results
 
-    path_to_folder = "./"
-    json_file = path_to_folder + 'resource/template.json'
+    path_to_folder = '/Volumes/Macintosh HD 1/OryaStorage/Eruption_PdF/downflow_calibration_pdf/calibration_2010/20101209/'
 
+    # TODO: enter the json file you want to run
+
+    json_file = '/Volumes/Macintosh HD 1/OryaStorage/Eruption_PdF/downflow_calibration_pdf/calibration_2010/20101209/parameters_20101209.json'
     # instanciate flowgo runner and run it
-    flowgo = run_flowgo.RunFlowgo()
-    flowgo.run(json_file, path_to_folder)
+    #flowgo = run_flowgo.RunFlowgo()
+    #flowgo.run(json_file, path_to_folder)
 
+    #instanciate flowgo runner and run it for many effusion rate
+    simulation = run_flowgo_effusion_rate_array.StartFlowgo()
 
+    slope_file = path_to_folder + "profile_00000.txt"
 
+    simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file)
+cd
