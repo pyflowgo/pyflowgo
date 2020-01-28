@@ -92,7 +92,6 @@ class FlowGoTerrainCondition:
         latitude_column_number = 0
         longitude_column_number = 1
         elevation_column_number = 2
-        elevation_column_number = 2
         distance_column_number = 3
         slope_column_number = 4
 

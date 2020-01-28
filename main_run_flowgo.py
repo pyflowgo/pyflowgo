@@ -26,11 +26,11 @@ if __name__ == "__main__":
 
     # TODO: enter the path where to store the results
 
-    path_to_folder = '/Volumes/Macintosh HD 1/OryaStorage/Eruption_PdF/downflow_calibration_pdf/calibration_2010/20101209/'
+    path_to_folder = './'
 
     # TODO: enter the json file you want to run
 
-    json_file = '/Volumes/Macintosh HD 1/OryaStorage/Eruption_PdF/downflow_calibration_pdf/calibration_2010/20101209/parameters_20101209.json'
+    json_file = './resources/template.json'
     # instanciate flowgo runner and run it
     #flowgo = run_flowgo.RunFlowgo()
     #flowgo.run(json_file, path_to_folder)
@@ -38,6 +38,6 @@ if __name__ == "__main__":
     #instanciate flowgo runner and run it for many effusion rate
     simulation = run_flowgo_effusion_rate_array.StartFlowgo()
 
-    slope_file = path_to_folder + "profile_00000.txt"
+    slope_file =  "./resources/profile_00000.txt"
 
     simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file)
