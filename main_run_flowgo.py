@@ -41,4 +41,3 @@ if __name__ == "__main__":
     slope_file = path_to_folder + "profile_00000.txt"
 
     simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file)
-cd
