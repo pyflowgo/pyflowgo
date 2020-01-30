@@ -93,6 +93,6 @@ if __name__ == "__main__":
     while not integrator.has_finished():
         integrator.single_step(state)
 
-    file_name_results = './results_main_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+    file_name_results = './results_flowgo/results_main_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
 
     logger.write_values_to_file(file_name_results)

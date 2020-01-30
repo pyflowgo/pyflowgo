@@ -95,7 +95,6 @@ class FlowGoTerrainCondition:
         distance_column_number = 3
         slope_column_number = 4
 
-
         for line in f_slope:
             split_line = line.strip('\n').split('\t')
             if float(split_line[slope_column_number]) <= 0.1:
@@ -107,10 +106,10 @@ class FlowGoTerrainCondition:
                 latitude.append(float(split_line[latitude_column_number]))
                 longitude.append(float(split_line[longitude_column_number]))
 
-
         f_slope.close()
 
         # smooth the slope
+
         if self._slope_smoothing_active == True:
             slope = self.running_mean(slope, self._slope_smoothing_number_of_points)
 

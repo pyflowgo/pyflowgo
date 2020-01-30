@@ -16,6 +16,7 @@
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
 import plot_flowgo_results
+import os.path
 
 if __name__ == "__main__":
 
@@ -26,11 +27,12 @@ if __name__ == "__main__":
     
     """
 
-    # TODO: enter the CSV file you want to plot
-    path_to_folder =  "./"
+    # TODO: enter the CSV files you want to plot
 
-    filename_array = ["./results_main_flowgo_template_3m3s.csv",
-                      "./results_main_flowgo_template_10m3s.csv"]
+    path_to_folder = os.path.abspath('')
+
+    filename_array = ["./results_flowgo/results_flowgo_template_3m3s.csv",
+                      "./results_flowgo/results_flowgo_template_15m3s.csv"]
 
     plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
 

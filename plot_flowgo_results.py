@@ -19,6 +19,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+import os.path
 
 
 def plot_all_results(path_to_folder, filename_array):
@@ -54,24 +55,25 @@ def plot_all_results(path_to_folder, filename_array):
     plot_slope = figF.add_subplot(111)
 
     # -------------------------------- plot the slope  --------------------------------
-    distance_downflow = []
+    distance_original= []
     latitude = []  # X
     longitude = []  # Y
     altitude = []
-    slope_downflow = []
-    slope_file = path_to_folder + "profile_00000.txt"
+    slope_original = []
+    #slope_file = path_to_folder + "profile_00000.txt"
+    slope_file = "./resource/DEM_MaunaLoa1984.txt"
     f_slope = open(slope_file, "r")
     f_slope.readline()
     for line in f_slope:
         split_line = line.strip('\n').split('\t')
-        distance_downflow.append(float(split_line[3]))
-        slope_downflow.append(float(split_line[4]))
+        distance_original.append(float(split_line[3]))
+        slope_original.append(float(split_line[4]))
 
-    plot_slope.plot(distance_downflow, slope_downflow, '-k', label="downflow")
-
+    plot_slope.plot(distance_original, slope_original, '-k', label="Original")
+    flow_id = os.path.abspath(path_to_folder)
+    title=os.path.basename(flow_id)
     for filename in filename_array:
-        flow_id = filename_array[0].strip(path_to_folder).strip(".csv")
-        title = flow_id
+
         label = filename.replace(path_to_folder+"results_flowgo_","").strip(".csv")
         distance_array = []
         slope_array = []
@@ -161,7 +163,6 @@ def plot_all_results(path_to_folder, filename_array):
         for i in range (0,len(effusion_rate)):
             effusion_rate_init.append(effusion_rate[0])
 
-        plot1_fig1.set_title(str(title))
         plot1_fig1.plot(distance_array, temperature_celcius, '-', label=label)
 
         plot1_fig1.set_ylabel('Core Temperature (°C)')
@@ -212,7 +213,6 @@ def plot_all_results(path_to_folder, filename_array):
         # plot6_fig1.set_xlim(xmax=500)
 
         # figure 2
-        plot1_fig2.set_title("Heat fluxes for " + str(title))
 
         plot1_fig2.plot(distance_array, flowgofluxforcedconvectionheat_array, '-', label=label)
         plot1_fig2.set_xlabel('Distance (m)')
@@ -247,8 +247,6 @@ def plot_all_results(path_to_folder, filename_array):
         # plot5_fig2.set_ylim(ymin=0, ymax=100000000)
         # plot5_fig2.grid(True)
 
-        plot1_fig3.set_title("Crustal and surface conditions for " + str(title))
-
         plot1_fig3.plot(distance_array, effective_cover_fraction_array, '-', label=label)
         plot1_fig3.set_xlabel('Distance (m)')
         plot1_fig3.set_ylabel('f crust')
@@ -271,22 +269,26 @@ def plot_all_results(path_to_folder, filename_array):
 
         plot_slope.plot(distance_array, slope_degrees, '-', label=label)
         plot_slope.set_ylabel('slope (°)')
-        plot_slope.set_xlim(xmin=0, xmax=max(distance_array))
+        plot_slope.set_xlim(xmin=0, xmax=max(distance_array)+1000)
         plot_slope.grid(True)
 
+    plot1_fig1.set_title(str(title))
     plot2_fig1.legend(loc=1, prop={'size': 8})
     plot1_fig2.legend(loc=0, prop={'size': 8})
+    plot1_fig2.set_title("Heat fluxes for " + str(title))
     plot1_fig3.legend(loc=0, prop={'size': 8})
+    plot1_fig3.set_title("Crustal and surface conditions for " + str(title))
     plot_slope.legend(loc=0, prop={'size': 8})
 
+
     fig1.tight_layout()
-    fig1.savefig(path_to_folder + flow_id + "_lava_properties.pdf", format='pdf')
+    fig1.savefig("./results_flowgo/lava_properties.png")
 
     fig2.tight_layout()
-    fig2.savefig(path_to_folder + flow_id + "_heat_fluxes.pdf", format='pdf')
+    fig2.savefig("./results_flowgo/heat_fluxes.png")
 
     fig3.tight_layout()
-    fig3.savefig(path_to_folder + flow_id + "_crustal_conditions.pdf", format='pdf')
+    fig3.savefig("./results_flowgo/crustal_conditions.png")
 
-    figF.savefig(path_to_folder + flow_id + "_slope.pdf", format='pdf')
+    figF.savefig("./results_flowgo/slope.png")
     plt.close()
