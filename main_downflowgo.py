@@ -17,10 +17,10 @@ if __name__ == "__main__":
     dem = path + '/DEM/CLIP_completed_2010_SE_5pt0_nullSea_32740.asc'
 
     # TODO : choose the name of the lava flow (flow_id) and the X, Y coordinates
-    csv_vent_file = '/Users/chevrel/Desktop/test_downflowgo/vent_coordinates.csv'
+    csv_vent_file = './vent_coordinates.csv'
 
     # TODO : choose the lava input parameter file for FLOWGO
-    template_json_file = '/Users/chevrel/Desktop/test_downflowgo/PdF_template.json'
+    template_json_file = path + '/PdF_template.json'
 
     run_outs_file_array = []
 
@@ -34,9 +34,9 @@ if __name__ == "__main__":
             long = str(row['Y'])
             # Run DOWNFLOW
             name_folder = path + '/results_downflowgo/' + flow_id
-            #os.mkdir(name_folder)
+            os.mkdir(name_folder)
             os.chdir(name_folder)
-            #downflow.get_downflow_profile(lat, long, dem, path)
+            downflow.get_downflow_profile(lat, long, dem, path)
             print('*********************************  FLOW ID =', flow_id)
 
             # Run FLOWGO
