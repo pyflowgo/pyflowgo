@@ -9,18 +9,19 @@ import run_flowgo_effusion_rate_array
 if __name__ == "__main__":
 
     #  ------------------------------------------------ RUN DOWNFLOW  -------------------------------------------------
-
-    # TODO : choose the path
     path = os.path.abspath('')
+    # TODO : choose the path
+
+    path_to_results = "wherever/you/want/to/put/your/data"
 
     # TODO : choose the DEM
-    dem = path + '/DEM/CLIP_completed_2010_SE_5pt0_nullSea_32740.asc'
+    dem = path +'/DEM/CLIP_completed_2010_SE_5pt0_nullSea_32740.asc'
 
     # TODO : choose the name of the lava flow (flow_id) and the X, Y coordinates
-    csv_vent_file = './vent_coordinates.csv'
+    csv_vent_file = 'wherever is vent_coordinates.csv'
 
     # TODO : choose the lava input parameter file for FLOWGO
-    template_json_file = path + '/PdF_template.json'
+    template_json_file = "wherever is template.json"
 
     run_outs_file_array = []
 
@@ -33,8 +34,8 @@ if __name__ == "__main__":
             lat = str(row['X'])
             long = str(row['Y'])
             # Run DOWNFLOW
-            name_folder = path + '/results_downflowgo/' + flow_id
-            os.mkdir(name_folder)
+            name_folder = path_to_results +'/' + flow_id
+            #os.mkdir(name_folder)
             os.chdir(name_folder)
             downflow.get_downflow_profile(lat, long, dem, path)
             print('*********************************  FLOW ID =', flow_id)
