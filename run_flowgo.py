@@ -90,6 +90,17 @@ class RunFlowgo:
 
         while not integrator.has_finished():
             integrator.single_step(state)
-        file_name_results = './results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+        file_name_results = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
         logger.write_values_to_file(file_name_results)
         print("----------------------------------------- END RUN FLOWGO ---------------------------------------------")
+
+    def get_file_name_results(self, path_to_folder, json_file):
+        configuration_file = json_file
+        with open(configuration_file) as data_file:
+            data = json.load(data_file)
+            effusion_rate_init = data["effusion_rate_init"]
+            if 'lava_name' not in data:
+                raise ValueError("Missing ['lava_name'] entry in json")
+            lava_name = data['lava_name']
+        file_name_results = path_to_folder + '/results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+        return file_name_results
