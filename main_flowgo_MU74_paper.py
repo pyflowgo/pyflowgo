@@ -16,19 +16,19 @@
 # You should have received copies of the GNU Lesser General Public License
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
-import run_flowgo
+
 import math
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
 import json
 import os
-
+import run_flowgo
 
 if __name__ == "__main__":
 
     # TODO: Enter the path to the main folder
-    path_to_folder = "/Users/chevrel/Documents/GitHub/pyflowgo/MaunaUlu74/"
+    path_to_folder = "./MaunaUlu74/"
     # ------------------------------------------------------ RUN FLOWGO -----------------------------------------------
     # TODO: enter the json file you want to run
     json_file= path_to_folder + "input_parameters_MaunaUlu74_this_study.json"
@@ -37,10 +37,9 @@ if __name__ == "__main__":
     flowgo = run_flowgo.RunFlowgo()
     flowgo.run(json_file, path_to_folder)
     file_name_results = flowgo.get_file_name_results(path_to_folder, json_file)
-    print("file_name_results= ",file_name_results)
     result_1 = file_name_results.replace(path_to_folder, path_to_folder+"results/")
     os.replace(file_name_results, result_1)
-    print("result_1= ", result_1)
+    print("Results are now stored under :", result_1)
     # ------------------------------------------------ PLOT RESULTS FROM CSV -----------------------------------------
     # Load field data
     # TODO: enter the field data you want to plot
@@ -54,12 +53,12 @@ if __name__ == "__main__":
     #  The path must be writen as result_XX= " path to the results", and separate each path by a coma
 
     # result_2 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
-    # results_3 = "XXX"
+    results_3 = "/Users/chevrel/Documents/Projets_en_cours/MU74-BG/article/appendix_FLOWGO/results_main_flowgo_Mauna Ulu June 1974 Best fit_165m3s_original_main_pyflowgo.csv"
 
     filename_array = [
         result_1,
         # result_2,
-        # result_3
+        results_3
                         ]
     # Here define the title of the graph if needed
     title = "Mauna Ulu June 1974"
