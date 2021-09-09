@@ -18,7 +18,6 @@
 import pyflowgo.flowgo_logger
 import numpy as np
 
-
 class FlowGoIntegrator:
 
     """ The integrator allows to make the flow front advancing
