@@ -78,10 +78,10 @@ class FlowGoIntegrator:
         channel_depth = self.terrain_condition.get_channel_depth(current_state.get_current_position())
         # Here we set the initial condition (iteration = 0) and calculate the effusion rate
         #TODO: verifier si c'est bon en enlevant cette iteration
-        #if self.iteration == 0.:
-        channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
+        if self.iteration == 0.:
+            channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
         # TODO: verifier si c'est bon en enlevant ce calcul
-        # self.effusion_rate = v_mean * channel_width * channel_depth
+            self.effusion_rate = v_mean * channel_width * channel_depth
 
         # Here we start the loop
         # Base on mass conservation, the effusion rate and the depth channel are kept fixed, so the width can
