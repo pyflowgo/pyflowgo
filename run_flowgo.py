@@ -102,5 +102,5 @@ class RunFlowgo:
             if 'lava_name' not in data:
                 raise ValueError("Missing ['lava_name'] entry in json")
             lava_name = data['lava_name']
-        file_name_results = path_to_folder + '/results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+        file_name_results = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
         return file_name_results
