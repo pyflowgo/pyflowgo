@@ -143,7 +143,7 @@ if __name__ == "__main__":
     # plot5_fig3 = fig3.add_subplot(325)
     # plot6_fig3 = fig3.add_subplot(326)
 
-    fig4 = plt.figure() #crust and surface temperature
+    fig4 = plt.figure(figsize=(6,7)) #crust and surface temperature
     plot1_fig4 = fig4.add_subplot(411)
     plot2_fig4 = fig4.add_subplot(412)
     plot3_fig4 = fig4.add_subplot(413)
