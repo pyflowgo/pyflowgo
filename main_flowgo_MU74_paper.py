@@ -53,12 +53,12 @@ if __name__ == "__main__":
     #  The path must be writen as result_XX= " path to the results", and separate each path by a coma
 
     # result_2 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
-    results_3 = "/Users/chevrel/Documents/Projets_en_cours/MU74-BG/article/appendix_FLOWGO/results_main_flowgo_Mauna Ulu June 1974 Best fit_165m3s_original_main_pyflowgo.csv"
+    #results_3 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
 
     filename_array = [
         result_1,
         # result_2,
-        results_3
+        #results_3
                         ]
     # Here define the title of the graph if needed
     title = "Mauna Ulu June 1974"
