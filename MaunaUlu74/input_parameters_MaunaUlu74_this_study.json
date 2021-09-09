@@ -1,6 +1,6 @@
 {
   "lava_name": "Mauna Ulu June 1974 Best fit",
-  "slope_file" : "/Users/chevrel/Documents/GitHub/pyflowgo/MaunaUlu74/field_data/slope_file_1mLidar.txt",
+  "slope_file" : "./MaunaUlu74/field_data/slope_file_1mLidar.txt",
   "step_size" : 10.0,
   "effusion_rate_init": 165,
 
