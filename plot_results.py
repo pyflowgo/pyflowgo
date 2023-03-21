@@ -102,7 +102,7 @@ if __name__ == "__main__":
                 crystal_fraction_array.append(float(row['crystal_fraction']))
                 width_array.append(float(row['channel_width']))
                 depth_array.append(float(row['channel_depth']))
-                time_array.append(float(row['current_time']))
+                #time_array.append(float(row['current_time']))
                 effusion_rate.append(float(row['effusion_rate']))
                 crust_temperature_array.append(float(row['crust_temperature']))
                 effective_cover_fraction_array.append(float(row['effective_cover_fraction']))
