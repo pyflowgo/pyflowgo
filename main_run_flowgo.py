@@ -27,7 +27,8 @@ if __name__ == "__main__":
 
     # TODO: enter the path where to store the results
 
-    path_to_folder = os.path.abspath('')
+    #path_to_folder = os.path.abspath('')
+    path_to_folder = "./results_flowgo/"
 
     # TODO: enter the json file you want to run
 
