@@ -62,12 +62,12 @@ def plot_all_results(path_to_folder, filename_array):
     slope_original = []
     slope_file = path_to_folder + "profile_00000.txt"
     #slope_file = "./resource/DEM_MaunaLoa1984.txt"
-    f_slope = open(slope_file, "r")
-    f_slope.readline()
-    for line in f_slope:
-        split_line = line.strip('\n').split('\t')
-        distance_original.append(float(split_line[3]))
-        slope_original.append(float(split_line[4]))
+    #f_slope = open(slope_file, "r")
+    #f_slope.readline()
+    #for line in f_slope:
+    #    split_line = line.strip('\n').split('\t')
+    #    distance_original.append(float(split_line[3]))
+    #    slope_original.append(float(split_line[4]))
 
     plot_slope.plot(distance_original, slope_original, '-k', label="Original")
     flow_id = os.path.abspath(path_to_folder)
@@ -291,4 +291,5 @@ def plot_all_results(path_to_folder, filename_array):
     fig3.savefig("./crustal_conditions.png")
 
     figF.savefig(".//slope.png")
+    plt.show()
     plt.close()
