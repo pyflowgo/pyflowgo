@@ -126,7 +126,7 @@ if __name__ == "__main__":
             slope_degrees.append(math.degrees(slope_array[i]))
 
         # convert time to minutes
-        duration = (max(time_array)/ 60.)
+        #duration = (max(time_array)/ 60.)
         time_minutes= []
         for i in range (0,len(time_array)):
             time_minutes.append(time_array[i] / 60.0)
