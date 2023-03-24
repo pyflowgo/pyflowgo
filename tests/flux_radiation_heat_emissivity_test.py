@@ -24,7 +24,7 @@ import pyflowgo.flowgo_relative_viscosity_model_er
 import pyflowgo.flowgo_vesicle_fraction_model_constant
 import pyflowgo.flowgo_state
 import pyflowgo.flowgo_terrain_condition
-import pyflowgo.flowgo_flux_radiation_heat
+import pyflowgo.flowgo_flux_radiation_heat_emissivity
 import pyflowgo.flowgo_crust_temperature_model_constant
 import pyflowgo.flowgo_effective_cover_crust_model_basic
 
@@ -34,15 +34,16 @@ class MyTestCase(unittest.TestCase):
         filename = './resources/input_parameters_radiation_flux.json'
         terrain_condition = pyflowgo.flowgo_terrain_condition.FlowGoTerrainCondition()
         material_lava = pyflowgo.flowgo_material_lava.FlowGoMaterialLava()
-        material_air = pyflowgo.flowgo_material_air.FlowGoMaterialAir()
+        material_air= pyflowgo.flowgo_material_air.FlowGoMaterialAir()
         crust_temperature_model_constant = pyflowgo.flowgo_crust_temperature_model_constant.FlowGoCrustTemperatureModelConstant()
         effective_cover_crust_model_basic = pyflowgo.flowgo_effective_cover_crust_model_basic.FlowGoEffectiveCoverCrustModelBasic(terrain_condition, material_lava)
 
-        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat.FlowGoFluxRadiationHeat(terrain_condition,material_lava, material_air, crust_temperature_model_constant,effective_cover_crust_model_basic)
+        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeat(terrain_condition,material_lava,material_air,crust_temperature_model_constant,effective_cover_crust_model_basic)
         flowgo_flux_radiation_heat.read_initial_condition_from_json_file(filename)
 
         self.assertEqual(flowgo_flux_radiation_heat._sigma, 5.67e-8)
-        self.assertEqual(flowgo_flux_radiation_heat._epsilon, 0.95)
+        self.assertEqual(flowgo_flux_radiation_heat._epsilon_1, 0.95)
+        self.assertEqual(flowgo_flux_radiation_heat._epsilon_2, 0.6)
 
     def test_compute_epsilon_effective(self):
         filename = './resources/input_parameters_radiation_flux.json'
@@ -98,15 +99,14 @@ class MyTestCase(unittest.TestCase):
         print("crust_temperature=", crust_temperature)
 
 
-        flowgo_flux_radiation_heat= pyflowgo.flowgo_flux_radiation_heat.FlowGoFluxRadiationHeat(terrain_condition,
-                                                                                                 material_lava,
-                                                                                                 material_air,
+        flowgo_flux_radiation_heat= pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeat(terrain_condition,
+                                                                                                 material_lava,material_air,
                                                                                                  crust_temperature_model_constant,
                                                                                                  effective_cover_crust_model_basic)
         flowgo_flux_radiation_heat.read_initial_condition_from_json_file(filename)
 
         effective_epsilon = flowgo_flux_radiation_heat._compute_epsilon_effective(state, terrain_condition)
-        self.assertAlmostEqual(effective_epsilon,0.95,5)
+        self.assertAlmostEqual(effective_epsilon,0.938970737028,5)
 
     def test_compute_effective_radiation_temperature(self):
         filename = './resources/input_parameters_radiation_flux.json'
@@ -161,7 +161,7 @@ class MyTestCase(unittest.TestCase):
         crust_temperature = crust_temperature_model_constant.compute_crust_temperature(state)
         print("crust_temperature=", crust_temperature)
 
-        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat.FlowGoFluxRadiationHeat(terrain_condition,
+        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeat(terrain_condition,
                                                                                                  material_lava,
                                                                                                  material_air,
                                                                                                  crust_temperature_model_constant,
@@ -205,8 +205,6 @@ class MyTestCase(unittest.TestCase):
                                                                          vesicle_fraction_model=vesicle_fraction_model_constant)
         material_lava.read_initial_condition_from_json_file(filename)
 
-
-
         molten_material_temperature = material_lava.computes_molten_material_temperature(state)
         print("molten_material_temperature=", molten_material_temperature)
 
@@ -220,25 +218,28 @@ class MyTestCase(unittest.TestCase):
         effective_cover_crust_model_basic = pyflowgo.flowgo_effective_cover_crust_model_basic.FlowGoEffectiveCoverCrustModelBasic(
             terrain_condition, material_lava)
         effective_cover_crust_model_basic.read_initial_condition_from_json_file(filename)
-        effective_cover_crust=effective_cover_crust_model_basic.compute_effective_cover_fraction(state)
-        print("effective_cover_crust=",effective_cover_crust)
+        effective_cover_crust = effective_cover_crust_model_basic.compute_effective_cover_fraction(state)
+        print("effective_cover_crust=", effective_cover_crust)
 
         crust_temperature_model_constant = pyflowgo.flowgo_crust_temperature_model_constant.FlowGoCrustTemperatureModelConstant()
         crust_temperature_model_constant.read_initial_condition_from_json_file(filename)
         crust_temperature = crust_temperature_model_constant.compute_crust_temperature(state)
         print("crust_temperature=", crust_temperature)
 
-        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat.FlowGoFluxRadiationHeat(terrain_condition,
+        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeat(terrain_condition,
                                                                                                  material_lava,
                                                                                                  material_air,
                                                                                                  crust_temperature_model_constant,
                                                                                                  effective_cover_crust_model_basic)
         flowgo_flux_radiation_heat.read_initial_condition_from_json_file(filename)
 
+        spectral_radiance = flowgo_flux_radiation_heat._compute_spectral_radiance(state, terrain_condition,
+                                                                                  channel_width=6.20861841618025)
 
         spectral_radiance = flowgo_flux_radiation_heat._compute_spectral_radiance(state, terrain_condition, channel_width=6.20861841618025)
+        self.assertAlmostEqual(spectral_radiance,4.031562377,5)
+
         print("spectral_radiance=", spectral_radiance)
-        self.assertAlmostEqual(spectral_radiance,6.350916121,5)
 
     def test_compute_flux(self):
         filename = './resources/input_parameters_radiation_flux.json'
@@ -269,6 +270,9 @@ class MyTestCase(unittest.TestCase):
                                                                          yield_strength_model=yield_strength_model_basic,
                                                                          vesicle_fraction_model=vesicle_fraction_model_constant)
         material_lava.read_initial_condition_from_json_file(filename)
+
+
+
         molten_material_temperature = material_lava.computes_molten_material_temperature(state)
         print("molten_material_temperature=", molten_material_temperature)
 
@@ -278,6 +282,7 @@ class MyTestCase(unittest.TestCase):
         print("air_temperature=", air_temperature)
 
         mean_velocity = material_lava.compute_mean_velocity(state, terrain_condition)
+
         effective_cover_crust_model_basic = pyflowgo.flowgo_effective_cover_crust_model_basic.FlowGoEffectiveCoverCrustModelBasic(
             terrain_condition, material_lava)
         effective_cover_crust_model_basic.read_initial_condition_from_json_file(filename)
@@ -289,7 +294,7 @@ class MyTestCase(unittest.TestCase):
         crust_temperature = crust_temperature_model_constant.compute_crust_temperature(state)
         print("crust_temperature=", crust_temperature)
 
-        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat.FlowGoFluxRadiationHeat(terrain_condition,
+        flowgo_flux_radiation_heat = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeat(terrain_condition,
                                                                                                  material_lava,
                                                                                                  material_air,
                                                                                                  crust_temperature_model_constant,
@@ -297,15 +302,15 @@ class MyTestCase(unittest.TestCase):
         flowgo_flux_radiation_heat.read_initial_condition_from_json_file(filename)
 
         effective_radiation_temperature = flowgo_flux_radiation_heat._compute_effective_radiation_temperature(state, terrain_condition)
-        print("effective_radiation_temperature", effective_radiation_temperature)
 
-        qradiation = flowgo_flux_radiation_heat.compute_flux(state, channel_depth=1.4,
+        qradiation = flowgo_flux_radiation_heat.compute_flux(state,channel_depth=1.4,
                                                                       channel_width=6.20861841803369)
+        # if T air not considered :
+        # self.assertAlmostEqual(qradiation, 139585.34438464, 4)
 
-        # if T air not considered :
-        #self.assertAlmostEqual(qradiation, 141224.930628606, 4)
-        # if T air not considered :
-        self.assertAlmostEqual(qradiation, 138755.133815, 4)
+        # if T air considered :
+        self.assertAlmostEqual(qradiation, 137144.221331, 4)
+
 
 if __name__ == '__main__':
     unittest.main()

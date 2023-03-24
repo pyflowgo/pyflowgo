@@ -2,15 +2,16 @@
   "lava_name": "template",
   "slope_file": "resource/DEM_MaunaLoa1984.txt",
   "step_size": 10.0,
-  "effusion_rate_init" : 3,
+  "effusion_rate_init" : 15,
 
   "heat_budget_models":{
-   "radiation" : "yes",
-   "radiation_emissivity":"no",
+   "radiation" : "basic",
+   "snyder":"no",
    "conduction" : "yes",
    "convection" : "yes",
    "rain" : "no",
    "viscous_heating" : "no"
+  }
   },
 
   "models":{

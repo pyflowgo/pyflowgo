@@ -31,8 +31,9 @@ import pyflowgo.base.flowgo_base_flux
 
 class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
-    def __init__(self, terrain_condition, material_lava, crust_temperature_model, effective_cover_crust_model):
+    def __init__(self, terrain_condition, material_lava, material_air, crust_temperature_model, effective_cover_crust_model):
         self._material_lava = material_lava
+        self._material_air = material_air
         self._crust_temperature_model = crust_temperature_model
         self._terrain_condition = terrain_condition
         self._effective_cover_crust_model = effective_cover_crust_model
@@ -48,21 +49,25 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
             self._epsilon = float(data['radiation_parameters']['emissivity_epsilon'])
 
     def _compute_effective_radiation_temperature(self, state, terrain_condition):
-        # the effective radiation temperature of the
-        # surface (Te) is given by (Pieri & Baloga 1986; Crisp & Baloga, 1990; Pieri et al. 1990):
+        """" the effective radiation temperature of the surface (Te) is given by
+        Pieri & Baloga 1986; Crisp & Baloga, 1990; Pieri et al. 1990)
+        Equation A.6 Chevrel et al. 2018
         # The user is free to adjust the model, for example, f_crust (effective_cover_fraction)
         # can be set as a constant or can be varied
         # downflow as a function of velocity (Harris & Rowland 2001).
-        # the user is also free to choose the temperature of teh crust (crust_temperature_model)
+        # the user is also free to choose the temperature of the crust (crust_temperature_model)
         # the effective radiation temperature of the surface (Te) is given by (Pieri & Baloga 1986;
-        # Crisp & Baloga, 1990; Pieri et al. 1990):
+        # Crisp & Baloga, 1990; Pieri et al. 1990):"""
 
         effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
         crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
         molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
-        effective_radiation_temperature = math.pow(effective_cover_fraction * crust_temperature ** 4. +
-                                               (1. - effective_cover_fraction) * molten_material_temperature ** 4.,
+        air_temperature = self._material_air.get_temperature()
+
+        effective_radiation_temperature = math.pow(effective_cover_fraction * (crust_temperature ** 4.- air_temperature ** 4.) +
+                                               (1. - effective_cover_fraction) * (molten_material_temperature ** 4.- air_temperature ** 4.),
                                                0.25)
+
         self.logger.add_variable("effective_radiation_temperature", state.get_current_position(),
                                  effective_radiation_temperature)
         return effective_radiation_temperature
@@ -102,7 +107,7 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
         # crust component
         crust_spectral_radiance =(C1*lamda**(-5))/(math.exp(C2/(lamda*crust_temperature))-1)
-
+        print("crust_spectral_radiance",crust_spectral_radiance)
         # molten component
         molten_spectral_radiance = C1*lamda**(-5)/(math.exp(C2/(lamda*molten_material_temperature))-1)
 

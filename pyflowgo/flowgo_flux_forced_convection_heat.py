@@ -55,6 +55,13 @@ class FlowGoFluxForcedConvectionHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFl
         qforcedconv = conv_heat_transfer_coef * (
             characteristic_surface_temperature - air_temperature) * channel_width
 
+        #log Snyder flux to zero
+        effective_temperature_snyder = 0
+        flowgofluxsnyderheat = 0
+        self.logger.add_variable("effective_temperature_snyder", state.get_current_position(),
+                                 effective_temperature_snyder)
+        self.logger.add_variable("flowgofluxsnyderheat", state.get_current_position(), flowgofluxsnyderheat)
+
         return qforcedconv
 
     def read_initial_condition_from_json_file(self, filename):

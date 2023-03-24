@@ -47,11 +47,14 @@ import pyflowgo.flowgo_crystallization_rate_model_bimodal_f_temp
 # import pyflowgo.flowgo_crystallization_rate_model_from_pymelts
 import pyflowgo.flowgo_crystallization_rate_model_melts
 import pyflowgo.flowgo_flux_radiation_heat
+import pyflowgo.flowgo_flux_radiation_heat_lin_emi
+import pyflowgo.flowgo_flux_radiation_heat_emissivity_cont
 import pyflowgo.flowgo_flux_radiation_heat_emissivity
 import pyflowgo.flowgo_flux_forced_convection_heat
 import pyflowgo.flowgo_flux_viscous_heating
 import pyflowgo.flowgo_flux_heat_loss_rain
 import pyflowgo.flowgo_flux_conduction_heat
+import pyflowgo.flowgo_flux_snyder2002fig4_heat
 import pyflowgo.flowgo_crust_temperature_model_hon
 import pyflowgo.flowgo_crust_temperature_model_constant
 import pyflowgo.flowgo_crust_temperature_model_bimodal
@@ -61,6 +64,8 @@ import pyflowgo.flowgo_effective_cover_crust_model_basic
 import pyflowgo.flowgo_effective_cover_crust_model_bimodal
 import pyflowgo.flowgo_vesicle_fraction_model_constant
 import pyflowgo.flowgo_vesicle_fraction_model_bimodal
+import pyflowgo.flowgo_vesicle_fraction_model_variable
+import pyflowgo.flowgo_vesicle_fraction_model_variable_bimodal
 import json
 
 import pyflowgo.base.flowgo_base_crystallization_rate_model
@@ -83,11 +88,11 @@ class FlowgoModelFactory:
         self._vesicle_fraction_model = ""
 
         self._activate_heat_budget_radiation = ""
-        self._activate_heat_budget_radiation_emissivity = ""
         self._activate_heat_budget_conduction = ""
         self._activate_heat_budget_convection = ""
         self._activate_heat_budget_rain = ""
         self._activate_heat_budget_viscous_heating = ""
+        self._activate_heat_budget_snyder = ""
         self._crust_temperature_file = ""
 
         self._read_initial_condition_from_json_file(configuration_file)
@@ -134,8 +139,14 @@ class FlowgoModelFactory:
         elif self._vesicle_fraction_model == "bimodal":
             self._vesicle_fraction_model_object = pyflowgo.flowgo_vesicle_fraction_model_bimodal. \
                 FlowGoVesicleFractionModelBimodal()
+        elif self._vesicle_fraction_model == "variable":
+            self._vesicle_fraction_model_object = pyflowgo.flowgo_vesicle_fraction_model_variable. \
+                FlowGoVesicleFractionModelVariable()
+        elif self._vesicle_fraction_model == "variable_bimodal":
+            self._vesicle_fraction_model_object = pyflowgo.flowgo_vesicle_fraction_model_variable_bimodal. \
+                FlowGoVesicleFractionModelVariableBimodal()
         else:
-            raise NameError('vesicle fraction model must be "constant" or "bimodal" or ... ')
+            raise NameError('vesicle fraction model must be "constant" or "bimodal" or "variable" or "variable_bimodal"... ')
 
         assert isinstance(self._vesicle_fraction_model_object,
                           pyflowgo.base.flowgo_base_vesicle_fraction_model.FlowGoBaseVesicleFractionModel)
@@ -301,25 +312,43 @@ class FlowgoModelFactory:
         # =========================
         self._heat_budget = pyflowgo.flowgo_heat_budget.FlowGoHeatBudget()
 
-        if self._activate_heat_budget_radiation == "yes":
+        if self._activate_heat_budget_radiation == "basic":
             radiation_heat_flux = pyflowgo.flowgo_flux_radiation_heat.FlowGoFluxRadiationHeat(
-                terrain_condition, self._material_lava, self._crust_temperature_model_object,
+                terrain_condition,
+                self._material_lava,
+                self._material_air,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(radiation_heat_flux)
+        elif self._activate_heat_budget_radiation == "2_emi":
+            radiation_heat_flux_emissivity = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeat(
+                terrain_condition,
+                self._material_lava,
+                self._material_air,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(radiation_heat_flux_emissivity)
+        elif self._activate_heat_budget_radiation == "cont":
+            radiation_heat_flux = pyflowgo.flowgo_flux_radiation_heat_emissivity_cont.FlowGoFluxRadiationHeat(
+                terrain_condition,
+                self._material_lava,
+                self._material_air,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(radiation_heat_flux)
+        elif self._activate_heat_budget_radiation == "lin_emi":
+            radiation_heat_flux = pyflowgo.flowgo_flux_radiation_heat_lin_emi.FlowGoFluxRadiationHeat(
+                terrain_condition,
+                self._material_lava,
+                self._material_air,
+                self._crust_temperature_model_object,
                 self._effective_cover_crust_model_object)
             self._heat_budget.append_flux(radiation_heat_flux)
         elif self._activate_heat_budget_radiation == "no":
             pass
         else:
-            raise NameError('Radiation model must be "yes" or "no"... ')
-
-        if self._activate_heat_budget_radiation_emissivity == "yes":
-            radiation_heat_flux_emissivity = pyflowgo.flowgo_flux_radiation_heat_emissivity.FlowGoFluxRadiationHeatEmissivity(
-                terrain_condition, self._material_lava, self._crust_temperature_model_object,
-                self._effective_cover_crust_model_object)
-            self._heat_budget.append_flux(radiation_heat_flux_emissivity)
-        elif self._activate_heat_budget_radiation_emissivity == "no":
-            pass
-        else:
-            raise NameError('Radiation Emissivity model must be "yes" or "no"... ')
+            raise NameError('Radiation model must be "basic" as originally or "2_emi" as Ramsey et al. 2019 '
+                            ' or "cont" or "lin_emi" see Thompson et al.,  or "no"')
 
         if self._activate_heat_budget_conduction == "yes":
             heat_conduction_flux = pyflowgo.flowgo_flux_conduction_heat.FlowGoFluxConductionHeat(self._material_lava)
@@ -359,6 +388,19 @@ class FlowgoModelFactory:
         else:
             raise NameError('Viscous heating model must be "yes" or "no"... ')
 
+        if self._activate_heat_budget_snyder == "yes" and self._activate_heat_budget_convection == "no" \
+                and self._activate_heat_budget_radiation == "no":
+            snyder_heat_flux = pyflowgo.flowgo_flux_snyder2002fig4_heat.FlowGoFluxSnyderHeat(
+                terrain_condition,
+                self._material_lava,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(snyder_heat_flux)
+        elif self._activate_heat_budget_snyder == "no":
+            pass
+        else:
+            raise NameError('Snyder model must be "yes" or "no", if yes forced convection and radiation must be off... ')
+
         self._heat_budget.read_initial_condition_from_json_file(configuration_file)
 
     def get_effective_cover_crust_model(self):
@@ -393,7 +435,7 @@ class FlowgoModelFactory:
             self._vesicle_fraction_model = data['models']['vesicle_fraction_model']
 
             self._activate_heat_budget_radiation = data['heat_budget_models']['radiation']
-            self._activate_heat_budget_radiation_emissivity = data['heat_budget_models']['radiation_emissivity']
+            self._activate_heat_budget_snyder = data['heat_budget_models']['snyder']
             self._activate_heat_budget_conduction = data['heat_budget_models']['conduction']
             self._activate_heat_budget_convection = data['heat_budget_models']['convection']
             self._activate_heat_budget_rain = data['heat_budget_models']['rain']

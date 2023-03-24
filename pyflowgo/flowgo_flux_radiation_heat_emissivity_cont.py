@@ -28,21 +28,29 @@ import json
 
 import pyflowgo.base.flowgo_base_flux
 
-"""" This is a model from Ramsey et al. 2019 where radiative heat flux is calculated from
- an effective emissivity depending on two different emissivity attributed to the crust (0.9) 
- and to the molten lava (0.6) 
+""" This is a model from Thompson and Ramsey 2021 where radiative heat flux is calculated from an effective emissivity 
+depending on two different emissivity attributed to the crust and to the molten lava which are dependant on crust 
+temperature and molten temperature, respectively :
  
- References :
+ emissivity_crust  = 0.474709 + (crust_temperature * 0.000719320) + ((crust_temperature** 2.) * -0.000000340085)
+ emissivity_molten = 0.474709 + (molten_material_temperature * 0.000719320) + (
+                    (molten_material_temperature ** 2.) * -0.000000340085)
 
- Ramsey, M. S., Chevrel, M. O., Coppola, D., & Harris, A. J. L. (2019a). The influence of emissivity on the 
- thermo-rheological modeling of the channelized lava flows at tolbachik volcano. 
- Annals of Geophysics, 62(2 Special Issue). https://doi.org/10.4401/ag-8077
+epsilon_effective = effective_cover_fraction * emissivity_crust + (1. - effective_cover_fraction) * emissivity_molten
+
+
+References:
+
+Thompson, J. O., & Ramsey, M. S. (2021). The influence of variable emissivity on lava flow propagation modeling. 
+Bulletin of Volcanology, 83(6), 1–19. https://doi.org/10.1007/s00445-021-01462-3
+
  """
 
 
 class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
-    def __init__(self, terrain_condition, material_lava, material_air, crust_temperature_model, effective_cover_crust_model):
+    #def __init__(self, terrain_condition, material_lava, crust_temperature_model):
+    def __init__(self, terrain_condition, material_lava,material_air, crust_temperature_model, effective_cover_crust_model):
         self._material_lava = material_lava
         self._material_air = material_air
         self._crust_temperature_model = crust_temperature_model
@@ -50,17 +58,25 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
         self._effective_cover_crust_model = effective_cover_crust_model
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
         self._sigma = 0.0000000567  # Stefan-Boltzmann [W m-1 K-4]
-        self._epsilon = 0.95  # Emissivity
-        self._epsilon_1 = 0.0
-        self._epsilon_2 = 0.0
+
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
         with open(filename) as data_file:
             data = json.load(data_file)
             self._sigma = float(data['radiation_parameters']['stefan-boltzmann_sigma'])
-            self._epsilon_1 = float(data['radiation_parameters']['epsilon_crust'])
-            self._epsilon_2 = float(data['radiation_parameters']['epsilon_hot'])
+
+    def _compute_emissivity_crust(self, state, terrain_condition):
+
+        crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
+        emissivity_crust = 0.474709 + (crust_temperature * 0.000719320) + ((crust_temperature** 2.) * -0.000000340085)
+        return emissivity_crust
+
+    def _compute_emissivity_molten(self, state, terrain_condition):
+        molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
+        emissivity_molten = 0.474709 + (molten_material_temperature * 0.000719320) + (
+                    (molten_material_temperature ** 2.) * -0.000000340085)
+        return emissivity_molten
 
     def _compute_effective_radiation_temperature(self, state, terrain_condition):
         """" the effective radiation temperature of the surface (Te) is given by
@@ -77,9 +93,6 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
         molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
         air_temperature = self._material_air.get_temperature()
 
-        #effective_radiation_temperature = math.pow(effective_cover_fraction * crust_temperature ** 4. +
-         #                                          (1. - effective_cover_fraction) * molten_material_temperature ** 4.,0.25)
-
         effective_radiation_temperature = math.pow(
             effective_cover_fraction * (crust_temperature ** 4. - air_temperature ** 4.) +
             (1. - effective_cover_fraction) * (molten_material_temperature ** 4. - air_temperature ** 4.),
@@ -90,9 +103,12 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
         return effective_radiation_temperature
 
     def _compute_epsilon_effective(self, state, terrain_condition):
-        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
 
-        epsilon_effective = effective_cover_fraction * self._epsilon_1 + (1. - effective_cover_fraction) * self._epsilon_2
+        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
+        emissivity_crust = self._compute_emissivity_crust(state, self._terrain_condition)
+        emissivity_molten = self._compute_emissivity_molten(state, self._terrain_condition)
+
+        epsilon_effective = effective_cover_fraction * emissivity_crust + (1. - effective_cover_fraction) * emissivity_molten
 
         self.logger.add_variable("epsilon_effective", state.get_current_position(),
                                  epsilon_effective)
@@ -103,10 +119,13 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
         crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
         molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
         background_temperature = 258  # K
-        # crust_temperature = 273.15
+
+        emissivity_crust = self._compute_emissivity_crust(state, self._terrain_condition)
+        emissivity_molten = self._compute_emissivity_molten(state, self._terrain_condition)
 
         # area per pixel
-        Lpixel = 30.0
+        #Lpixel = 30.0 #I changed this
+        Lpixel = 0.1
         A_pixel = Lpixel * Lpixel
         A_lava = Lpixel * channel_width
         Ahot = A_lava * (1 - effective_cover_fraction)
@@ -116,7 +135,8 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
         Pcrust = Acrust / A_pixel
         atmospheric_transmissivity = 0.8
 
-        # emissivity of snow
+
+        # of snow
         epsilon_3 = 0.1
 
         lamda = 0.8675 * 10 ** (-6)  # micro
@@ -136,8 +156,8 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
         background_spectral_radiance = C1 * lamda ** (-5) / (math.exp(C2 / (lamda * background_temperature)) - 1)
 
         # equation radiance W/m2/m
-        spectral_radiance_m = atmospheric_transmissivity * (self._epsilon_2 * Phot * molten_spectral_radiance +
-                                                            self._epsilon_1 * Pcrust * crust_spectral_radiance +
+        spectral_radiance_m = atmospheric_transmissivity * (emissivity_molten * Phot * molten_spectral_radiance +
+                                                            emissivity_crust * Pcrust * crust_spectral_radiance +
                                                             (1 - Phot - Pcrust) * epsilon_3 * background_spectral_radiance)
 
         # equation radiance W/m2/micro
