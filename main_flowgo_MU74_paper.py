@@ -37,9 +37,10 @@ if __name__ == "__main__":
     flowgo = run_flowgo.RunFlowgo()
     flowgo.run(json_file, path_to_folder)
     file_name_results = flowgo.get_file_name_results(path_to_folder, json_file)
-    result_1 = file_name_results.replace(path_to_folder, path_to_folder+"results/")
+    path_to_results = path_to_folder+"results/"
+    result_1 = file_name_results.replace(path_to_folder, path_to_results)
+    print("Results are now stored under :", path_to_results)
     os.replace(file_name_results, result_1)
-    print("Results are now stored under :", result_1)
     # ------------------------------------------------ PLOT RESULTS FROM CSV -----------------------------------------
     # Load field data
     # TODO: enter the field data you want to plot
@@ -236,7 +237,7 @@ if __name__ == "__main__":
             effusion_rate_init.append(effusion_rate[0])
 
         #Here enter the label for data
-        label= filename.strip(path_to_folder).strip("results/results_flowgo_").strip(".csv")
+        label= filename.strip(result_1).strip("results_flowgo_").strip(".csv")
         #plot1_fig1.set_title(str(title))
         plot1_fig1.plot(distance_array, temperature_celcius, '-', label=label)
         plot1_fig1.set_ylabel('Core Temperature (°C)')
@@ -376,10 +377,10 @@ if __name__ == "__main__":
     plot1_fig1.legend(loc=0, prop={'size': 8})
     plot5_fig1.legend(loc=0, prop={'size': 8})
 
-    fig1.savefig(path_to_folder+"/results/fig1"+".pdf", dpi=300, format="pdf")
-    fig2.savefig(path_to_folder+"/results/fig2"+".pdf", dpi=300, format='pdf')
-    fig3.savefig(path_to_folder+"/results/fig3"+".pdf", dpi=300, format='pdf')
-    fig4.savefig(path_to_folder+"/results/fig4"+".pdf", dpi=300, format='pdf')
-    fig5.savefig(path_to_folder+"/results/slope"+".pdf", dpi=300, format='pdf')
+    fig1.savefig(path_to_results+"/fig1"+".pdf", dpi=300, format="pdf")
+    fig2.savefig(path_to_results+"fig2"+".pdf", dpi=300, format='pdf')
+    fig3.savefig(path_to_results+"fig3"+".pdf", dpi=300, format='pdf')
+    fig4.savefig(path_to_results+"fig4"+".pdf", dpi=300, format='pdf')
+    fig5.savefig(path_to_results+"slope"+".pdf", dpi=300, format='pdf')
 
     plt.show()
