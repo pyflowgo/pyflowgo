@@ -54,36 +54,6 @@ def plot_all_results(path_to_folder, filename_array):
     figF = plt.figure()
     plot_slope = figF.add_subplot(111)
 
-    # -------------------------------- plot the slope  --------------------------------
-    distance_original= []
-    latitude = []  # X
-    longitude = []  # Y
-    altitude = []
-    slope_original = []
-    latitude_column_number = 0
-    longitude_column_number = 1
-    elevation_column_number = 2
-    distance_column_number = 3
-    slope_column_number = 4
-    #slope_file = path_to_folder + "profile_00000.txt"
-    slope_file = "./resource/DEM_MaunaLoa1984.txt"
-    f_slope = open(slope_file, "r")
-    f_slope.readline()
-    for line in f_slope:
-        split_line = line.strip('\n').split('\t')
-        distance_original.append(float(split_line[distance_column_number]))
-        slope_original.append(float(split_line[slope_column_number]))
-        altitude.append(float(split_line[elevation_column_number]))
-
-    plot_slope.plot(distance_original, slope_original, '-k', label="Original")
-    ax2 = plot_slope.twinx()  # instantiate a second axes that shares the same x-axis
-    color = 'tab:green'
-    ax2.set_ylabel('elevation (m)', color=color)  # we already handled the x-label with ax1
-    ax2.plot(distance_original, altitude, color=color)
-    #ax2.set_ylim(ymin=altitude[distance_array.index(max(distance_array))])
-    #ax2.set_ylim(ymin=1800)
-    ax2.tick_params(axis='y', labelcolor=color)
-
     flow_id = os.path.abspath(path_to_folder)
     title=os.path.basename(flow_id)
 
@@ -297,14 +267,14 @@ def plot_all_results(path_to_folder, filename_array):
 
 
     fig1.tight_layout()
-    fig1.savefig("./lava_properties.png")
+    fig1.savefig("./results_flowgo/lava_properties.png")
 
     fig2.tight_layout()
-    fig2.savefig("./heat_fluxes.png")
+    fig2.savefig("./results_flowgo/heat_fluxes.png")
 
     fig3.tight_layout()
-    fig3.savefig("./crustal_conditions.png")
+    fig3.savefig("./results_flowgo/crustal_conditions.png")
 
-    figF.savefig(".//slope.png")
+    figF.savefig("./results_flowgo/slope.png")
     plt.show()
     plt.close()

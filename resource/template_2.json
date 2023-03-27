@@ -1,11 +1,12 @@
 {
-  "lava_name": "template_2_test",
+  "lava_name": "template2",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
-  "effusion_rate_init" : 30,
+  "effusion_rate_init" : 10,
 
   "heat_budget_models":{
-   "radiation" : "yes",
+   "radiation" : "basic",
+   "snyder":"no",
    "conduction" : "yes",
    "convection" : "yes",
    "rain" : "no",
@@ -18,7 +19,7 @@
   "relative_viscosity_model":"kd",
   "relative_viscosity_bubbles_model":"deformable",
   "yield_strength_model":"basic",
-  "crust_temperature_model":"field",
+  "crust_temperature_model":"constant",
   "effective_cover_crust_model": "basic",
   "vesicle_fraction_model":"constant"
   },

@@ -33,7 +33,7 @@ if __name__ == "__main__":
     path_to_folder = os.path.abspath('')
 
     filename_array = ["./results_flowgo/results_flowgo_template_3m3s.csv",
-                      "./results_flowgo/results_flowgo_template_15m3s.csv"]
+                      "./results_flowgo/results_flowgo_template2_10m3s.csv"]
 
     # Here define the title of the graphs
     title = "lava name template"
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     # TODO: Enter the path to the data
 
-    with open("./resource/DEM_MaunaLoa1984.txt", "r") as f_slope:
+    with open("./resource/example_slope_profile.txt", "r") as f_slope:
         distance_original = []
         latitude = []  # X
         longitude = []  # Y
@@ -360,11 +360,12 @@ if __name__ == "__main__":
     print("Figures are now stored under :", result_1)
 
     fig1.tight_layout()
-    fig1.savefig("./results_flowgo/lava_properties.png")
+    fig1.savefig("./results_flowgo/lava_properties_field.png")
     fig2.tight_layout()
-    fig2.savefig("./results_flowgo/heat_fluxes.png")
+    fig2.savefig("./results_flowgo/heat_fluxes_field.png")
     fig3.tight_layout()
-    fig3.savefig("./results_flowgo/crustal_conditions.png")
-    fig4.savefig("./results_flowgo/slope.png")
+    fig3.savefig("./results_flowgo/crustal_conditions_field.png")
+    fig4.tight_layout()
+    fig4.savefig("./results_flowgo/slope_field.png")
     plt.show()
     plt.close()

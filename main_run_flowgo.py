@@ -32,7 +32,7 @@ if __name__ == "__main__":
     """
     #path_to_folder = os.path.abspath('')
     path_to_folder = "./results_flowgo/"
-    json_file = './resource/template.json'
+    json_file = './resource/template_2.json'
 
     # *****************************
     """Instanciate flowgo vi arun flowgo for the given json """

@@ -1,8 +1,8 @@
 {
   "lava_name": "template",
-  "slope_file": "resource/DEM_MaunaLoa1984.txt",
+  "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
-  "effusion_rate_init" : 15,
+  "effusion_rate_init" :3,
 
   "heat_budget_models":{
    "radiation" : "basic",
@@ -11,7 +11,6 @@
    "convection" : "yes",
    "rain" : "no",
    "viscous_heating" : "no"
-  }
   },
 
   "models":{
@@ -29,8 +28,8 @@
   "width": 4.5,
   "depth": 1.4,
   "gravity": 9.81,
-    "slope_smoothing_active": false,
-    "slope_smoothing_number_of_points": 10,
+    "slope_smoothing_active": true,
+    "slope_smoothing_number_of_points": 5,
   "max_channel_length": 30000.0
   },
   "eruption_condition":{

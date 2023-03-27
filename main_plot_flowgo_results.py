@@ -32,7 +32,7 @@ if __name__ == "__main__":
     path_to_folder = os.path.abspath('')
 
     filename_array = ["./results_flowgo/results_flowgo_template_3m3s.csv",
-                      "./results_flowgo/results_flowgo_template_15m3s.csv"]
+                      "./results_flowgo/results_flowgo_template2_10m3s.csv"]
 
     plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
 
