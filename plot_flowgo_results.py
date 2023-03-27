@@ -60,18 +60,33 @@ def plot_all_results(path_to_folder, filename_array):
     longitude = []  # Y
     altitude = []
     slope_original = []
-    slope_file = path_to_folder + "profile_00000.txt"
-    #slope_file = "./resource/DEM_MaunaLoa1984.txt"
-    #f_slope = open(slope_file, "r")
-    #f_slope.readline()
-    #for line in f_slope:
-    #    split_line = line.strip('\n').split('\t')
-    #    distance_original.append(float(split_line[3]))
-    #    slope_original.append(float(split_line[4]))
+    latitude_column_number = 0
+    longitude_column_number = 1
+    elevation_column_number = 2
+    distance_column_number = 3
+    slope_column_number = 4
+    #slope_file = path_to_folder + "profile_00000.txt"
+    slope_file = "./resource/DEM_MaunaLoa1984.txt"
+    f_slope = open(slope_file, "r")
+    f_slope.readline()
+    for line in f_slope:
+        split_line = line.strip('\n').split('\t')
+        distance_original.append(float(split_line[distance_column_number]))
+        slope_original.append(float(split_line[slope_column_number]))
+        altitude.append(float(split_line[elevation_column_number]))
 
     plot_slope.plot(distance_original, slope_original, '-k', label="Original")
+    ax2 = plot_slope.twinx()  # instantiate a second axes that shares the same x-axis
+    color = 'tab:green'
+    ax2.set_ylabel('elevation (m)', color=color)  # we already handled the x-label with ax1
+    ax2.plot(distance_original, altitude, color=color)
+    #ax2.set_ylim(ymin=altitude[distance_array.index(max(distance_array))])
+    #ax2.set_ylim(ymin=1800)
+    ax2.tick_params(axis='y', labelcolor=color)
+
     flow_id = os.path.abspath(path_to_folder)
     title=os.path.basename(flow_id)
+
     for filename in filename_array:
 
         label = filename.replace(path_to_folder+"results_flowgo_","").strip(".csv")
