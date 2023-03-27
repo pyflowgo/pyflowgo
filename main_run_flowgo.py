@@ -23,22 +23,27 @@ import run_flowgo_effusion_rate_array
 
 if __name__ == "__main__":
 
-    # -------------------------------------------------- RUN FLOWGO  ---------------------------------------------------
 
-    # TODO: enter the path where to store the results
-
+    """ Instanciate Flowgo via run flowgo (either for one effusion rate or for many effusion rates
+    for the given input paramters (json file) and log the results in a define folder 
+    json file : e.g 'template.json'
+    path to the result folder, e.g './results_flowgo/'
+    
+    """
     #path_to_folder = os.path.abspath('')
     path_to_folder = "./results_flowgo/"
-
-    # TODO: enter the json file you want to run
-
     json_file = './resource/template.json'
-    # *************** instanciate flowgo runner and run it ***************
+
+    # *****************************
+    """Instanciate flowgo vi arun flowgo for the given json """
+
     flowgo = run_flowgo.RunFlowgo()
     flowgo.run(json_file, path_to_folder)
 
-    # *************** instanciate flowgo runner and run it for many effusion rate ***************
+    # ******************************
+    """I nstanciate flowgo runner and run it for many effusion rate using a given slope file 
+    For that define the slope file execute the simulation"""
 
+    # slope_file = "resource/DEM_MaunaLoa1984.txt"
     #simulation = run_flowgo_effusion_rate_array.StartFlowgo()
-    #slope_file = "resource/DEM_MaunaLoa1984.txt"
     #simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file)
