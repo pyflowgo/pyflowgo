@@ -102,7 +102,7 @@ if __name__ == "__main__":
                 crystal_fraction_array.append(float(row['crystal_fraction']))
                 width_array.append(float(row['channel_width']))
                 depth_array.append(float(row['channel_depth']))
-                time_array.append(float(row['current_time']))
+                #time_array.append(float(row['current_time']))
                 effusion_rate.append(float(row['effusion_rate']))
                 crust_temperature_array.append(float(row['crust_temperature']))
                 effective_cover_fraction_array.append(float(row['effective_cover_fraction']))
@@ -126,7 +126,7 @@ if __name__ == "__main__":
             slope_degrees.append(math.degrees(slope_array[i]))
 
         # convert time to minutes
-        duration = (max(time_array)/ 60.)
+        #duration = (max(time_array)/ 60.)
         time_minutes= []
         for i in range (0,len(time_array)):
             time_minutes.append(time_array[i] / 60.0)

@@ -37,10 +37,9 @@ if __name__ == "__main__":
     flowgo = run_flowgo.RunFlowgo()
     flowgo.run(json_file, path_to_folder)
     file_name_results = flowgo.get_file_name_results(path_to_folder, json_file)
-    path_to_results = path_to_folder+"results/"
-    result_1 = file_name_results.replace(path_to_folder, path_to_results)
-    print("Results are now stored under :", path_to_results)
+    result_1 = file_name_results.replace(path_to_folder, path_to_folder+"results/")
     os.replace(file_name_results, result_1)
+    print("Results are now stored under :", result_1)
     # ------------------------------------------------ PLOT RESULTS FROM CSV -----------------------------------------
     # Load field data
     # TODO: enter the field data you want to plot
@@ -52,15 +51,18 @@ if __name__ == "__main__":
     # in order to plot several results on the same plot, use filename_array = ["Path_to_file1.csv","Path_to_file2.csv"]
     # TODO: Enter the path to other outputs files (csv file) that you want to compare with.
     #  The path must be writen as result_XX= " path to the results", and separate each path by a coma
-
-    # result_2 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
-    #results_3 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
+    #here we compare with lower and upper limit of the simulation
+    result_2 = path_to_folder +'results/results_flowgo_Mauna Ulu June 1974 Best fit_165m3s-upper.csv'
+    result_3 = path_to_folder +'results/results_flowgo_Mauna Ulu June 1974 Best fit_165m3s-lower.csv'
+    #result_2 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
+    #results_3 = "/Users/chevrel/Documents/Projets_en_cours/MU74-BG/article/appendix_FLOWGO/results_main_flowgo_Mauna Ulu June 1974 Best fit_165m3s_original_main_pyflowgo.csv"
 
     filename_array = [
         result_1,
-        # result_2,
-        #results_3
+        result_2,
+        result_3
                         ]
+    print (filename_array)
     # Here define the title of the graph if needed
     title = "Mauna Ulu June 1974"
     # ------------------------------------------------- LOAD FIELD DATA ------------------------------------------------
@@ -79,6 +81,10 @@ if __name__ == "__main__":
     field_xstals_surge = []
     field_xstals_pond = []
     field_ys = []
+    field_xstals_error = []
+    field_tglass_surge_error = []
+    field_tglass_pond_error = []
+
 
     # open the field data to be plotted
     with open(core_temperature_field) as csvf:
@@ -88,6 +94,8 @@ if __name__ == "__main__":
             field_tglass_surge.append(float(row['Temperature_surge C (glass method)']))
             field_distance1_pond.append(float(row['Distance_pond (m)']))
             field_tglass_pond.append(float(row['Temperature_pond C (glass method)']))
+            field_tglass_pond_error.append(float(row['Error_T_pond']))
+            field_tglass_surge_error.append(float(row['Error_T_surge']))
 
     with open(crystal_content_field) as csvf:
         csvreader = csv.DictReader(csvf, delimiter=';')
@@ -96,6 +104,7 @@ if __name__ == "__main__":
             field_xstals_surge.append(float(row['Xstals_surge']))
             field_distance2_pond.append(float(row['Distance_pond (m)']))
             field_xstals_pond.append(float(row['Xstals_pond']))
+            field_xstals_error.append(float(row['Error']))
 
     with open(channel_width_field) as csvf:
         csvreader = csv.DictReader(csvf, delimiter=',')
@@ -144,7 +153,7 @@ if __name__ == "__main__":
     # plot5_fig3 = fig3.add_subplot(325)
     # plot6_fig3 = fig3.add_subplot(326)
 
-    fig4 = plt.figure(figsize=(6,7)) #crust and surface temperature
+    fig4 = plt.figure() #crust and surface temperature
     plot1_fig4 = fig4.add_subplot(411)
     plot2_fig4 = fig4.add_subplot(412)
     plot3_fig4 = fig4.add_subplot(413)
@@ -177,11 +186,13 @@ if __name__ == "__main__":
         flowgofluxradiationheat_array = []
         flowgofluxheatlossrain_array = []
         flowgofluxviscousheating_array = []
-
+        label_array=[]
 
         with open(filename, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter=',')
 
+            for l in range(0, len(filename_array)):
+               label_array.append(l)
             for row in csvreader:
                 distance_array.append(float(row['position']))
                 slope_array.append(float(row['slope']))
@@ -237,9 +248,12 @@ if __name__ == "__main__":
             effusion_rate_init.append(effusion_rate[0])
 
         #Here enter the label for data
-        label= filename.strip(result_1).strip("results_flowgo_").strip(".csv")
+        label= filename.strip(path_to_folder).strip("results/results_flowgo_").strip(".csv")
+
+        plot1_fig1.plot(distance_array, temperature_celcius, '#7f7f7f', linewidth=0.5, label=label)
+
         #plot1_fig1.set_title(str(title))
-        plot1_fig1.plot(distance_array, temperature_celcius, '-', label=label)
+        #plot1_fig1.plot(distance_array, temperature_celcius, 'k-', label=label)
         plot1_fig1.set_ylabel('Core Temperature (°C)')
         plot1_fig1.set_xlim(xmax=7000)
         plot1_fig1.grid(True)
@@ -248,7 +262,7 @@ if __name__ == "__main__":
         # text_run_out ="The run out distance is {:3.2f} km in {:3.2f} min".format(float(run_out_distance),float(duration))
         # axis2_f1.text(100, 0.8, text_run_out)
 
-        plot2_fig1.plot(distance_array, v_mean_array, '-', label=label)
+        plot2_fig1.plot(distance_array, v_mean_array, '#7f7f7f', linewidth=0.5, label=label)
         plot2_fig1.set_xlim(xmax=7000)
         plot2_fig1.set_xlabel('Distance (m)')
         # plot2_fig1.legend(loc=3, prop={'size': 8})
@@ -260,7 +274,7 @@ if __name__ == "__main__":
         # plot2_fig1.set_xlim(xmin=0)
         # plot2_fig1.set_ylim(ymin=0, ymax=100)
 
-        plot5_fig1.plot(distance_array, width_array, '-',  label=label)
+        plot5_fig1.plot(distance_array, width_array,  '#7f7f7f', linewidth=0.5, label=label)
         plot5_fig1.set_xlabel('Distance (m)')
         plot5_fig1.set_ylabel('Width (m)')
         plot5_fig1.grid(True)
@@ -270,7 +284,7 @@ if __name__ == "__main__":
         plot5_fig1.set_xlim(xmin=0)
         plot5_fig1.set_xlim(xmax=7000)
 
-        plot6_fig1.plot(distance_array, crystal_fraction_array, '-', label=label)
+        plot6_fig1.plot(distance_array, crystal_fraction_array,  '#7f7f7f', linewidth=0.5, label=label)
         #plot6_fig1.legend(loc=2, prop={'size': 8})
         #plot6_fig1.set_xlabel('Distance (m)')
         plot6_fig1.set_ylabel('Crystal fraction')
@@ -278,7 +292,7 @@ if __name__ == "__main__":
         # plot6_fig1.set_ylim(ymin=0, ymax=0.6)
         plot6_fig1.set_xlim(xmax=7000)
 
-        plot3_fig2.plot(distance_array, viscosity_array, '-', label=label)
+        plot3_fig2.plot(distance_array, viscosity_array,  '#7f7f7f', linewidth=0.5, label=label)
         plot3_fig2.set_xlabel('Distance (m)')
         plot3_fig2.set_ylabel('Viscosity (Pa s)')
         plot3_fig2.set_ylim(ymin=100, ymax=10000)
@@ -286,7 +300,7 @@ if __name__ == "__main__":
         plot3_fig2.set_yscale('log')
         plot3_fig2.grid(True)
 
-        plot4_fig2.plot(distance_array, yieldstrength_array, '-',  label= label)
+        plot4_fig2.plot(distance_array, yieldstrength_array,  '#7f7f7f', linewidth=0.5, label=label)
         plot4_fig2.set_xlabel('Distance (m)')
         plot4_fig2.set_ylabel('Yield strength (Pa)')
         plot4_fig2.set_yscale('log')
@@ -364,8 +378,16 @@ if __name__ == "__main__":
         #plot1_fig5.grid(True)
        # plot1_fig5.set_title("Slope profile for " + str(title))
 
+
+
+    plot1_fig1.errorbar(field_distance1_surge, field_tglass_surge, xerr=0, yerr=field_tglass_surge_error, fmt='none', ecolor='black', elinewidth=1, capsize=2)
+    plot1_fig1.errorbar(field_distance1_pond, field_tglass_pond, xerr=0, yerr=field_tglass_pond_error, fmt= 'none', ecolor='black', elinewidth=1, capsize=2)
     plot1_fig1.plot(field_distance1_surge, field_tglass_surge, 'r.', label='Field data')
     plot1_fig1.plot(field_distance1_pond, field_tglass_pond,'c.',label='Field data (pond)')
+
+
+    plot6_fig1.errorbar(field_distance2_surge, field_xstals_surge, xerr=0, yerr=field_xstals_error, fmt= 'none', ecolor='black', elinewidth=1, capsize=2)
+    plot6_fig1.errorbar(field_distance2_pond, field_xstals_pond, xerr=0, yerr=field_xstals_error, fmt= 'none', ecolor='black', elinewidth=1, capsize=2)
     plot6_fig1.plot(field_distance2_surge, field_xstals_surge, 'r.')
     plot6_fig1.plot(field_distance2_pond, field_xstals_pond, 'c.',label='Field data (pond)')
     plot5_fig1.plot(field_distance3, field_width, 'k.', label='channel width')
@@ -374,13 +396,13 @@ if __name__ == "__main__":
     plot1_fig3.legend(loc=0, prop={'size': 8})
     plot1_fig4.legend(loc=0, prop={'size': 8})
     plot1_fig5.legend(loc=0, prop={'size': 8})
-    plot1_fig1.legend(loc=0, prop={'size': 8})
+    plot1_fig1.legend(loc='lower left', prop={'size': 8})
     plot5_fig1.legend(loc=0, prop={'size': 8})
 
-    fig1.savefig(path_to_results+"/fig1"+".pdf", dpi=300, format="pdf")
-    fig2.savefig(path_to_results+"fig2"+".pdf", dpi=300, format='pdf')
-    fig3.savefig(path_to_results+"fig3"+".pdf", dpi=300, format='pdf')
-    fig4.savefig(path_to_results+"fig4"+".pdf", dpi=300, format='pdf')
-    fig5.savefig(path_to_results+"slope"+".pdf", dpi=300, format='pdf')
+    fig1.savefig(path_to_folder+"/results/fig1"+".pdf", dpi=300, format="pdf")
+    fig2.savefig(path_to_folder+"/results/fig2"+".pdf", dpi=300, format='pdf')
+    fig3.savefig(path_to_folder+"/results/fig3"+".pdf", dpi=300, format='pdf')
+    fig4.savefig(path_to_folder+"/results/fig4"+".pdf", dpi=300, format='pdf')
+    fig5.savefig(path_to_folder+"/results/slope"+".pdf", dpi=300, format='pdf')
 
     plt.show()
