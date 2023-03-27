@@ -40,13 +40,15 @@ if __name__ == "__main__":
     result_1 = file_name_results.replace(path_to_folder, path_to_folder+"results/")
     os.replace(file_name_results, result_1)
     print("Results are now stored under :", result_1)
+
     # ------------------------------------------------ PLOT RESULTS FROM CSV -----------------------------------------
-    # Load field data
+
     # TODO: enter the field data you want to plot
     channel_width_field = path_to_folder+"field_data/field_width_MU74.csv"
     crystal_content_field = path_to_folder+"field_data/field_xtals_MU74.csv"
     core_temperature_field = path_to_folder + "field_data/field_temp_glass_MU74.csv"
     slope_file= path_to_folder+'field_data/slope_file_1mLidar.txt'
+
     # -------------------------------------------- LOAD RESULTS FROM CSV --------------------------------------------
     # in order to plot several results on the same plot, use filename_array = ["Path_to_file1.csv","Path_to_file2.csv"]
     # TODO: Enter the path to other outputs files (csv file) that you want to compare with.
@@ -54,8 +56,8 @@ if __name__ == "__main__":
     #here we compare with lower and upper limit of the simulation
     result_2 = path_to_folder +'results/results_flowgo_Mauna Ulu June 1974 Best fit_165m3s-upper.csv'
     result_3 = path_to_folder +'results/results_flowgo_Mauna Ulu June 1974 Best fit_165m3s-lower.csv'
-    #result_2 = path_to_folder + "/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
-    #results_3 = "/Users/chevrel/Documents/Projets_en_cours/MU74-BG/article/appendix_FLOWGO/results_main_flowgo_Mauna Ulu June 1974 Best fit_165m3s_original_main_pyflowgo.csv"
+    #result_2 = path_to_folder + "results/results_flowgo_Mauna Ulu June 1974_Robertetal2014_published_chevreletal2018_164m3s.csv"
+    #result_3 = path_to_folder + "results/results_main_flowgo_Mauna Ulu June 1974 Best fit_165m3s_original_main_pyflowgo.csv"
 
     filename_array = [
         result_1,
@@ -87,6 +89,7 @@ if __name__ == "__main__":
 
 
     # open the field data to be plotted
+
     with open(core_temperature_field) as csvf:
         csvreader = csv.DictReader(csvf, delimiter=';')
         for row in csvreader:
@@ -111,26 +114,28 @@ if __name__ == "__main__":
         for row in csvreader:
             field_distance3.append(float(row['Distance (m)']))
             field_width.append(float(row['Measured Width (m)']))
-    # SLOPE
-    latitude = []
-    longitude = []
-    distance = []
-    slope = []
-    elevation = []
-    latitude_column_number = 0
-    longitude_column_number = 1
-    elevation_column_number = 2
-    distance_column_number = 3
-    slope_column_number = 4
-    f_slope = open(slope_file, "r")
-    f_slope.readline()
-    for line in f_slope:
-        split_line = line.strip('\n').split('\t')
-        slope.append(float(split_line[slope_column_number]))
-        distance.append(float(split_line[distance_column_number]))
-        elevation.append(float(split_line[elevation_column_number]))
-        latitude.append(float(split_line[latitude_column_number]))
-        longitude.append(float(split_line[longitude_column_number]))
+
+    with open(slope_file, "r") as f_slope:
+        # SLOPE
+        latitude = []
+        longitude = []
+        distance = []
+        slope = []
+        elevation = []
+        latitude_column_number = 0
+        longitude_column_number = 1
+        elevation_column_number = 2
+        distance_column_number = 3
+        slope_column_number = 4
+
+        f_slope.readline()
+        for line in f_slope:
+            split_line = line.strip('\n').split('\t')
+            slope.append(float(split_line[slope_column_number]))
+            distance.append(float(split_line[distance_column_number]))
+            elevation.append(float(split_line[elevation_column_number]))
+            latitude.append(float(split_line[latitude_column_number]))
+            longitude.append(float(split_line[longitude_column_number]))
 
     # plot the figures and define the positions of the graphs
 
@@ -161,6 +166,7 @@ if __name__ == "__main__":
 
     fig5 = plt.figure() #: the slope
     plot1_fig5 = fig5.add_subplot(111)
+    plot1_fig5.plot(distance, slope, '#7f7f7f', linewidth=0.5, label="Original slope profile")
 
     for filename in filename_array:
         distance_array = []
@@ -250,10 +256,10 @@ if __name__ == "__main__":
         #Here enter the label for data
         label= filename.strip(path_to_folder).strip("results/results_flowgo_").strip(".csv")
 
-        plot1_fig1.plot(distance_array, temperature_celcius, '#7f7f7f', linewidth=0.5, label=label)
+        #plot1_fig1.plot(distance_array, temperature_celcius, '#7f7f7f', linewidth=0.5, label=label)
 
         #plot1_fig1.set_title(str(title))
-        #plot1_fig1.plot(distance_array, temperature_celcius, 'k-', label=label)
+        plot1_fig1.plot(distance_array, temperature_celcius, '-', label=label)
         plot1_fig1.set_ylabel('Core Temperature (°C)')
         plot1_fig1.set_xlim(xmax=7000)
         plot1_fig1.grid(True)
@@ -262,7 +268,7 @@ if __name__ == "__main__":
         # text_run_out ="The run out distance is {:3.2f} km in {:3.2f} min".format(float(run_out_distance),float(duration))
         # axis2_f1.text(100, 0.8, text_run_out)
 
-        plot2_fig1.plot(distance_array, v_mean_array, '#7f7f7f', linewidth=0.5, label=label)
+        plot2_fig1.plot(distance_array, v_mean_array,'-', label=label)
         plot2_fig1.set_xlim(xmax=7000)
         plot2_fig1.set_xlabel('Distance (m)')
         # plot2_fig1.legend(loc=3, prop={'size': 8})
@@ -274,7 +280,7 @@ if __name__ == "__main__":
         # plot2_fig1.set_xlim(xmin=0)
         # plot2_fig1.set_ylim(ymin=0, ymax=100)
 
-        plot5_fig1.plot(distance_array, width_array,  '#7f7f7f', linewidth=0.5, label=label)
+        plot5_fig1.plot(distance_array, width_array, '-', label=label)
         plot5_fig1.set_xlabel('Distance (m)')
         plot5_fig1.set_ylabel('Width (m)')
         plot5_fig1.grid(True)
@@ -284,7 +290,7 @@ if __name__ == "__main__":
         plot5_fig1.set_xlim(xmin=0)
         plot5_fig1.set_xlim(xmax=7000)
 
-        plot6_fig1.plot(distance_array, crystal_fraction_array,  '#7f7f7f', linewidth=0.5, label=label)
+        plot6_fig1.plot(distance_array, crystal_fraction_array, '-', label=label)
         #plot6_fig1.legend(loc=2, prop={'size': 8})
         #plot6_fig1.set_xlabel('Distance (m)')
         plot6_fig1.set_ylabel('Crystal fraction')
@@ -292,7 +298,7 @@ if __name__ == "__main__":
         # plot6_fig1.set_ylim(ymin=0, ymax=0.6)
         plot6_fig1.set_xlim(xmax=7000)
 
-        plot3_fig2.plot(distance_array, viscosity_array,  '#7f7f7f', linewidth=0.5, label=label)
+        plot3_fig2.plot(distance_array, viscosity_array,  '-', label=label)
         plot3_fig2.set_xlabel('Distance (m)')
         plot3_fig2.set_ylabel('Viscosity (Pa s)')
         plot3_fig2.set_ylim(ymin=100, ymax=10000)
@@ -300,7 +306,7 @@ if __name__ == "__main__":
         plot3_fig2.set_yscale('log')
         plot3_fig2.grid(True)
 
-        plot4_fig2.plot(distance_array, yieldstrength_array,  '#7f7f7f', linewidth=0.5, label=label)
+        plot4_fig2.plot(distance_array, yieldstrength_array, '-', label=label)
         plot4_fig2.set_xlabel('Distance (m)')
         plot4_fig2.set_ylabel('Yield strength (Pa)')
         plot4_fig2.set_yscale('log')
@@ -370,14 +376,13 @@ if __name__ == "__main__":
         plot4_fig4.set_ylabel('T conv(°C)')
         # plot1_fig4.set_xlim(xmax=1000)
 
-        plot1_fig5.plot(distance, slope, '#7f7f7f', linewidth=0.5, label="Slope profile")
-        plot1_fig5.plot(distance_array, slope_degrees, 'k-',  label = label)
+
+        plot1_fig5.plot(distance_array, slope_degrees, '-',  label = label)
         plot1_fig5.set_xlabel('Distance (m)')
         plot1_fig5.set_ylabel('Slope (°)')
         plot1_fig5.set_xlim(xmax=7000)
         #plot1_fig5.grid(True)
        # plot1_fig5.set_title("Slope profile for " + str(title))
-
 
 
     plot1_fig1.errorbar(field_distance1_surge, field_tglass_surge, xerr=0, yerr=field_tglass_surge_error, fmt='none', ecolor='black', elinewidth=1, capsize=2)
