@@ -28,18 +28,17 @@ import run_flowgo
 if __name__ == "__main__":
 
     # TODO: Enter the path to the main folder
-    path_to_folder = "./MaunaUlu74/"
+    path_to_folder = ('')
     # ------------------------------------------------------ RUN FLOWGO -----------------------------------------------
     # TODO: enter the json file you want to run
-    json_file= path_to_folder + "input_parameters_MaunaUlu74_this_study.json"
+    json_file= "input_parameters_MaunaUlu74_this_study.json"
 
     # Instanciate flowgo runner and run it
     flowgo = run_flowgo.RunFlowgo()
     flowgo.run(json_file, path_to_folder)
     file_name_results = flowgo.get_file_name_results(path_to_folder, json_file)
-    result_1 = file_name_results.replace(path_to_folder, path_to_folder+"results/")
-    os.replace(file_name_results, result_1)
-    print("Results are now stored under :", result_1)
+    result_1 = file_name_results
+    print("Results are now stored under :", "/results/"+result_1)
 
     # ------------------------------------------------ PLOT RESULTS FROM CSV -----------------------------------------
 
@@ -406,14 +405,14 @@ if __name__ == "__main__":
 
 
     fig1.tight_layout()
-    fig1.savefig(path_to_folder  + "/results/fig1.png")
+    fig1.savefig(path_to_folder + "./results/fig1.png")
     fig2.tight_layout()
-    fig2.savefig(path_to_folder + "/results/fig2.png")
+    fig2.savefig(path_to_folder + "./results/fig2.png")
     fig3.tight_layout()
-    fig3.savefig(path_to_folder + "/results/fig3.png")
+    fig3.savefig(path_to_folder + "./results/fig3.png")
     fig4.tight_layout()
-    fig4.savefig(path_to_folder + "/results/fig4.png")
+    fig4.savefig(path_to_folder + "./results/fig4.png")
     fig5.tight_layout()
-    fig5.savefig(path_to_folder + "/results/fig5.png")
+    fig5.savefig(path_to_folder + "./results/fig5.png")
     plt.show()
     plt.close()
