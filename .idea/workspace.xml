@@ -114,7 +114,7 @@
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_downflowgo">
+  <component name="RunManager" selected="Python.main_plot_results_field_data">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -171,7 +171,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main_flowgo_MU74_paper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main_flowgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -180,10 +180,10 @@
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MaunaUlu74/main_flowgo_MU74_paper.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_flowgo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -257,18 +257,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
-      <item itemvalue="Python.main_flowgo_MU74_paper" />
       <item itemvalue="Python.main_plot_flowgo_results" />
       <item itemvalue="Python.main_plot_results_field_data" />
       <item itemvalue="Python.main_run_flowgo" />
+      <item itemvalue="Python.main_flowgo" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_downflowgo" />
         <item itemvalue="Python.main_plot_results_field_data" />
         <item itemvalue="Python.main_plot_flowgo_results" />
         <item itemvalue="Python.main_run_flowgo" />
-        <item itemvalue="Python.main_flowgo_MU74_paper" />
+        <item itemvalue="Python.main_flowgo" />
+        <item itemvalue="Python.main_downflowgo" />
       </list>
     </recent_temporary>
   </component>
