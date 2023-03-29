@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="update downflow file">
+      <change beforePath="$PROJECT_DIR$/results_flowgo/results_flowgo_template2_10m3s.csv" beforeDir="false" afterPath="$PROJECT_DIR$/results_flowgo/results_flowgo_template2_10m3s.csv" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="Develop" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="downflowgo" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SWAP_SIDES_IN_COMPARE_BRANCHES" value="true" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/pyflowgo/pyflowgo.git" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1Q9GO9uUTRPIjm0zyEZrPX91inB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="176" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="177" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="181" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="975" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="176" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="177" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="181" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="975" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SearchEverywhereHistoryKey" value="time&#9;null&#9;null&#10;spectr&#9;null&#9;null&#10;effusion&#9;null&#9;null&#10;heat transfer&#9;null&#9;null" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/MaunaUlu74/results" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
+      <recent name="$PROJECT_DIR$/tests" />
+      <recent name="$PROJECT_DIR$/pyflowgo" />
+      <recent name="$PROJECT_DIR$/PdF" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Tolbachik" />
+      <recent name="$PROJECT_DIR$/Venus" />
+      <recent name="$PROJECT_DIR$/MaunaUlu74" />
+      <recent name="$PROJECT_DIR$/MaunaUlu74/field_data" />
+      <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.main_flowgo_MU74_paper">
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="pyflowgo" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration name="pyflowgo" type="JupiterNotebook" factoryName="Jupyter Notebook">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="additionalOptions" value="" />
+      <option name="ipnbHost" value="127.0.0.1" />
+      <option name="ipnbPort" value="8888" />
+    </configuration>
+    <configuration name="main_downflow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_downflow.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_downflowgo (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$ 2" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$ 2/main_downflowgo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_downflowgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_downflowgo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_flowgo_MU74_paper" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MaunaUlu74/main_flowgo_MU74_paper.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_run_flowgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_run_flowgo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.main_run_flowgo" />
+      <item itemvalue="Python.main_flowgo_MU74_paper" />
+      <item itemvalue="Python.main_downflowgo" />
+      <item itemvalue="Python.main_downflowgo (1)" />
+      <item itemvalue="Python.main_downflow" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main_downflow" />
+        <item itemvalue="Python.main_downflowgo (1)" />
+        <item itemvalue="Python.main_downflowgo" />
+        <item itemvalue="Python.main_flowgo_MU74_paper" />
+        <item itemvalue="Python.main_run_flowgo" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration>$USER_HOME$/.subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="" />
+      <created>1496180443852</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1496180443852</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Add two component emissivity model">
+      <created>1559108055524</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1559108055524</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Add of a limiting condition dending on yield strength: the flow stops if yield strength is &gt;= basal shear stress&#10;+log of the yield strength and basal shear stress is now in integrator">
+      <created>1565074451197</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1565074451197</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Add init function and clean the models">
+      <created>1577629819422</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1577629819423</updated>
+    </task>
+    <task id="LOCAL-00044" summary="script to plot the results with the main to run it">
+      <created>1578027033702</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1578027033702</updated>
+    </task>
+    <task id="LOCAL-00045" summary="pyflowgo from json file and the main to run it">
+      <created>1578027144381</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1578027144381</updated>
+    </task>
+    <task id="LOCAL-00046" summary="upldating file to read the slope file">
+      <created>1578292781741</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1578292781741</updated>
+    </task>
+    <task id="LOCAL-00047" summary="change in terrain condition to make sure slope is always &gt;0.1°">
+      <created>1580202289001</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1580202289002</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Run flowgo for various effusion rate">
+      <created>1580202389930</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1580202389930</updated>
+    </task>
+    <task id="LOCAL-00049" summary="upload main">
+      <created>1580202423471</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1580202423471</updated>
+    </task>
+    <task id="LOCAL-00050" summary="update terrain condidition and slope files">
+      <created>1580202803393</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1580202803394</updated>
+    </task>
+    <task id="LOCAL-00051" summary="upload of pyflowgo to run and plot from different file">
+      <created>1580206593524</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1580206593525</updated>
+    </task>
+    <task id="LOCAL-00052" summary="upload of pyflowgo to run and plot from different file">
+      <created>1580380090089</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1580380090090</updated>
+    </task>
+    <task id="LOCAL-00053" summary="run flowgo for various eruption rates">
+      <created>1580381826090</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1580381826090</updated>
+    </task>
+    <task id="LOCAL-00054" summary="upload downflowgo">
+      <created>1580383736260</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1580383736261</updated>
+    </task>
+    <task id="LOCAL-00055" summary="update of the main">
+      <created>1580384951390</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1580384951390</updated>
+    </task>
+    <task id="LOCAL-00056" summary="update main downflowgo">
+      <created>1580387004256</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1580387004257</updated>
+    </task>
+    <task id="LOCAL-00057" summary="updtae of folder path to same results and add def to get the result fiel">
+      <created>1631185137239</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1631185137240</updated>
+    </task>
+    <task id="LOCAL-00058" summary="update of folder path to same results and add def to get the result file">
+      <created>1631195305247</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1631195305248</updated>
+    </task>
+    <task id="LOCAL-00059" summary="update of folder path to same results and add def to get the result file">
+      <created>1631195519955</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1631195519955</updated>
+    </task>
+    <task id="LOCAL-00060" summary="update on the iteration of channel width and effusion rate">
+      <created>1631195576107</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1631195576107</updated>
+    </task>
+    <task id="LOCAL-00061" summary="folder for Mauna Ulu 1974 modelling">
+      <created>1631198275307</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1631198275307</updated>
+    </task>
+    <task id="LOCAL-00062" summary="folder for Mauna Ulu 1974 modelling">
+      <created>1631198470794</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1631198470794</updated>
+    </task>
+    <task id="LOCAL-00063" summary="folder for Mauna Ulu 1974 modelling">
+      <created>1631198567356</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1631198567356</updated>
+    </task>
+    <task id="LOCAL-00064" summary="correction on the path to results">
+      <created>1631198666853</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1631198666853</updated>
+    </task>
+    <task id="LOCAL-00065" summary="correction on the path to results">
+      <created>1631200847424</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1631200847424</updated>
+    </task>
+    <task id="LOCAL-00066" summary="update">
+      <created>1631205187693</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1631205187693</updated>
+    </task>
+    <task id="LOCAL-00067" summary="update figure size">
+      <created>1631206033493</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1631206033493</updated>
+    </task>
+    <task id="LOCAL-00068" summary="update slope file path">
+      <created>1631206917062</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1631206917062</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Add and update heat flux models:&#10;--&gt; update the 'basic' radiation model with Teff calculated considering T_air &#10;--&gt; update of the &quot;two-emissivity&quot; radiationmodel from Ramsey te al. 2019 &#10;--&gt; add of the radiation heat model (linemi) from Thompson and Ramsey 2021 (where emissivity depend on tempature)&#10;---&gt; add heat model of Snyder 2002 (for Venus) from Flynn et al. submitted article to JGR&#10;&#10;--&gt; Add and update the test files for all these models.&#10;&#10;--&gt; update of the model_factory to include these models&#10;--&gt; update template.json to include these new models&#10;&#10;NEED to update the Json files now !">
+      <created>1679640196598</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1679640196599</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Update o fth eMaron Pierce model now including the crystal aspect ratio">
+      <created>1679640629175</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1679640629175</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Update o fth eMaron Pierce model now including the crystal aspect ratio">
+      <created>1679640639834</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1679640639834</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Update of the Maron Pierce model now including the crystal aspect ratio">
+      <created>1679640674239</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1679640674239</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Add model to calculate the vesicle fraction along the flow&#10;it may now be variable or variable bimodal (i.e. variable until a critical distance and then constant)">
+      <created>1679640813391</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1679640813391</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Add results data">
+      <created>1679651516664</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1679651516664</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Add results data">
+      <created>1679651614121</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1679651614121</updated>
+    </task>
+    <task id="LOCAL-00076" summary="update json">
+      <created>1679651640258</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1679651640258</updated>
+    </task>
+    <task id="LOCAL-00077" summary="update path to results">
+      <created>1679900067416</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1679900067416</updated>
+    </task>
+    <task id="LOCAL-00078" summary="update read slope file with column names and plot elevation profile">
+      <created>1679908805541</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1679908805541</updated>
+    </task>
+    <task id="LOCAL-00079" summary="update the plot of the  flowgo results compare with field data">
+      <created>1679915214921</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1679915214921</updated>
+    </task>
+    <task id="LOCAL-00080" summary="update path to results and to figure saving">
+      <created>1679916742940</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1679916742940</updated>
+    </task>
+    <task id="LOCAL-00081" summary="update exemple figures with field data">
+      <created>1679916801752</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1679916801752</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Add vesicle fraction model downflow">
+      <created>1679916872751</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1679916872751</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Update json for new version (snyder) and update main for runing all in the same folder">
+      <created>1679918381862</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1679918381862</updated>
+    </task>
+    <task id="LOCAL-00084" summary="Add fig . png and update main for saving as png">
+      <created>1679918893171</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1679918893171</updated>
+    </task>
+    <task id="LOCAL-00085" summary="Add fig . png and update main for saving as png">
+      <created>1679918911568</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1679918911568</updated>
+    </task>
+    <task id="LOCAL-00086" summary="update path to folder">
+      <created>1679981122131</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1679981122131</updated>
+    </task>
+    <task id="LOCAL-00087" summary="Add Venus folder for the Flynn et al. case">
+      <created>1679982329262</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1679982329262</updated>
+    </task>
+    <task id="LOCAL-00088" summary="update downflowgo file">
+      <created>1680064808542</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1680064808542</updated>
+    </task>
+    <task id="LOCAL-00089" summary="update downflow file">
+      <created>1680065502600</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1680065502600</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="range">
+                    <value>
+                      <list>
+                        <option value="HEAD..origin/downflowgo" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="LIMIT_HISTORY" value="false" />
+    <MESSAGE value="update of folder path to same results and add def to get the result file" />
+    <MESSAGE value="update on the iteration of channel width and effusion rate" />
+    <MESSAGE value="folder for Mauna Ulu 1974 modelling" />
+    <MESSAGE value="correction on the path to results" />
+    <MESSAGE value="update" />
+    <MESSAGE value="update figure size" />
+    <MESSAGE value="update slope file path" />
+    <MESSAGE value="Add and update heat flux models:&#10;--&gt; update the 'basic' radiation model with Teff calculated considering T_air &#10;--&gt; update of the &quot;two-emissivity&quot; radiationmodel from Ramsey te al. 2019 &#10;--&gt; add of the radiation heat model (linemi) from Thompson and Ramsey 2021 (where emissivity depend on tempature)&#10;---&gt; add heat model of Snyder 2002 (for Venus) from Flynn et al. submitted article to JGR&#10;&#10;--&gt; Add and update the test files for all these models.&#10;&#10;--&gt; update of the model_factory to include these models&#10;--&gt; update template.json to include these new models&#10;&#10;NEED to update the Json files now !" />
+    <MESSAGE value="Update o fth eMaron Pierce model now including the crystal aspect ratio" />
+    <MESSAGE value="Update of the Maron Pierce model now including the crystal aspect ratio" />
+    <MESSAGE value="Add model to calculate the vesicle fraction along the flow&#10;it may now be variable or variable bimodal (i.e. variable until a critical distance and then constant)" />
+    <MESSAGE value="Add results data" />
+    <MESSAGE value="update json" />
+    <MESSAGE value="update path to results" />
+    <MESSAGE value="update read slope file with column names and plot elevation profile" />
+    <MESSAGE value="update the plot of the  flowgo results compare with field data" />
+    <MESSAGE value="update path to results and to figure saving" />
+    <MESSAGE value="update exemple figures with field data" />
+    <MESSAGE value="Add vesicle fraction model downflow" />
+    <MESSAGE value="Update json for new version (snyder) and update main for runing all in the same folder" />
+    <MESSAGE value="Add fig . png and update main for saving as png" />
+    <MESSAGE value="update path to folder" />
+    <MESSAGE value="Add Venus folder for the Flynn et al. case" />
+    <MESSAGE value="update downflowgo file" />
+    <MESSAGE value="update downflow file" />
+    <option name="LAST_COMMIT_MESSAGE" value="update downflow file" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="428" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1680072438639">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state x="428" y="166" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680072438639" />
+    <state x="568" y="290" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1677050904074">
+      <screen x="0" y="23" width="1920" height="1001" />
+    </state>
+    <state x="568" y="290" key="#com.intellij.fileTypes.FileTypeChooser/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1676975596956" />
+    <state x="568" y="290" key="#com.intellij.fileTypes.FileTypeChooser/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677050904074" />
+    <state x="426" y="242" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.821@0.23.1440.821" timestamp="1671791918770" />
+    <state x="159" y="123" width="1262" height="740" key="DiffContextDialog" timestamp="1679652060932">
+      <screen x="0" y="23" width="1920" height="1001" />
+    </state>
+    <state x="159" y="123" width="1262" height="740" key="DiffContextDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679652060932" />
+    <state x="159" y="123" width="1262" height="740" key="DiffContextDialog/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679650005174" />
+    <state width="1758" height="210" key="GridCell.Tab.0.bottom" timestamp="1680073415185">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1469" height="189" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492389" />
+    <state width="1548" height="211" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698415" />
+    <state width="1548" height="211" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001877" />
+    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058809" />
+    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280141" />
+    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785386" />
+    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258614" />
+    <state width="1577" height="211" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679913617167" />
+    <state width="1787" height="211" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
+    <state width="1456" height="210" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065777574" />
+    <state width="1456" height="210" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680070085963" />
+    <state width="1758" height="210" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680073415185" />
+    <state width="1316" height="243" key="GridCell.Tab.0.bottom/0.23.1440.821@0.23.1440.821" timestamp="1678712832873" />
+    <state width="1380" height="210" key="GridCell.Tab.0.bottom/0.23.1440.834@0.23.1440.834" timestamp="1680068085826" />
+    <state width="1758" height="210" key="GridCell.Tab.0.center" timestamp="1680073415184">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1469" height="189" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492388" />
+    <state width="1548" height="211" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698413" />
+    <state width="1548" height="211" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001875" />
+    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058808" />
+    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280140" />
+    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785385" />
+    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258613" />
+    <state width="1577" height="211" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679913617166" />
+    <state width="1787" height="211" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
+    <state width="1456" height="210" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065777573" />
+    <state width="1456" height="210" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680070085962" />
+    <state width="1758" height="210" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680073415184" />
+    <state width="1316" height="243" key="GridCell.Tab.0.center/0.23.1440.821@0.23.1440.821" timestamp="1678712832872" />
+    <state width="1380" height="210" key="GridCell.Tab.0.center/0.23.1440.834@0.23.1440.834" timestamp="1680068085826" />
+    <state width="1758" height="210" key="GridCell.Tab.0.left" timestamp="1680073415184">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1469" height="189" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492387" />
+    <state width="1548" height="211" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698413" />
+    <state width="1548" height="211" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001874" />
+    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058807" />
+    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280140" />
+    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785384" />
+    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258613" />
+    <state width="1577" height="211" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679913617165" />
+    <state width="1787" height="211" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
+    <state width="1456" height="210" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065777573" />
+    <state width="1456" height="210" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680070085961" />
+    <state width="1758" height="210" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680073415184" />
+    <state width="1316" height="243" key="GridCell.Tab.0.left/0.23.1440.821@0.23.1440.821" timestamp="1678712832872" />
+    <state width="1380" height="210" key="GridCell.Tab.0.left/0.23.1440.834@0.23.1440.834" timestamp="1680068085825" />
+    <state width="1758" height="210" key="GridCell.Tab.0.right" timestamp="1680073415185">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state width="1469" height="189" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492389" />
+    <state width="1548" height="211" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698414" />
+    <state width="1548" height="211" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001876" />
+    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058808" />
+    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280141" />
+    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785385" />
+    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258614" />
+    <state width="1577" height="211" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679913617166" />
+    <state width="1787" height="211" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
+    <state width="1456" height="210" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065777574" />
+    <state width="1456" height="210" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680070085962" />
+    <state width="1758" height="210" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680073415185" />
+    <state width="1316" height="243" key="GridCell.Tab.0.right/0.23.1440.821@0.23.1440.821" timestamp="1678712832873" />
+    <state width="1380" height="210" key="GridCell.Tab.0.right/0.23.1440.834@0.23.1440.834" timestamp="1680068085826" />
+    <state width="1144" height="325" key="GridCell.Tab.1.bottom" timestamp="1679921399271">
+      <screen x="0" y="23" width="1920" height="1002" />
+    </state>
+    <state width="1302" height="320" key="GridCell.Tab.1.bottom/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404806" />
+    <state width="1144" height="325" key="GridCell.Tab.1.bottom/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399271" />
+    <state width="1144" height="325" key="GridCell.Tab.1.bottom/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551538" />
+    <state width="1144" height="325" key="GridCell.Tab.1.center" timestamp="1679921399270">
+      <screen x="0" y="23" width="1920" height="1002" />
+    </state>
+    <state width="1302" height="320" key="GridCell.Tab.1.center/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404805" />
+    <state width="1144" height="325" key="GridCell.Tab.1.center/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399270" />
+    <state width="1144" height="325" key="GridCell.Tab.1.center/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551537" />
+    <state width="1144" height="325" key="GridCell.Tab.1.left" timestamp="1679921399270">
+      <screen x="0" y="23" width="1920" height="1002" />
+    </state>
+    <state width="1302" height="320" key="GridCell.Tab.1.left/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404804" />
+    <state width="1144" height="325" key="GridCell.Tab.1.left/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399270" />
+    <state width="1144" height="325" key="GridCell.Tab.1.left/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551537" />
+    <state width="1144" height="325" key="GridCell.Tab.1.right" timestamp="1679921399270">
+      <screen x="0" y="23" width="1920" height="1002" />
+    </state>
+    <state width="1302" height="320" key="GridCell.Tab.1.right/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404806" />
+    <state width="1144" height="325" key="GridCell.Tab.1.right/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399270" />
+    <state width="1144" height="325" key="GridCell.Tab.1.right/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551538" />
+    <state x="397" y="265" key="IDE.errors.dialog" timestamp="1677050756204">
+      <screen x="0" y="23" width="1920" height="1001" />
+    </state>
+    <state x="397" y="265" key="IDE.errors.dialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677050756204" />
+    <state x="209" y="120" key="MergeDialog" timestamp="1680065443668">
+      <screen x="0" y="23" width="1920" height="1003" />
+    </state>
+    <state x="209" y="120" key="MergeDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679900541044" />
+    <state x="209" y="120" key="MergeDialog/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065443668" />
+    <state x="209" y="120" key="MergeDialog/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063376179" />
+    <state x="423" y="283" width="1107" height="495" key="MultipleFileMergeDialog" timestamp="1679900234283">
+      <screen x="0" y="23" width="1920" height="1001" />
+    </state>
+    <state x="423" y="283" width="1107" height="495" key="MultipleFileMergeDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679900234283" />
+    <state x="738" y="226" key="RollbackChangesDialog" timestamp="1679982506252">
+      <screen x="0" y="23" width="1920" height="1004" />
+    </state>
+    <state x="738" y="226" key="RollbackChangesDialog/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679982506252" />
+    <state x="541" y="81" key="SettingsEditor" timestamp="1679646388525">
+      <screen x="0" y="23" width="1920" height="1001" />
+    </state>
+    <state x="541" y="81" key="SettingsEditor/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679646388525" />
+    <state x="472" y="92" width="1262" height="740" key="ShowDiffWithBranchDialog" timestamp="1679650005174">
+      <screen x="0" y="23" width="1920" height="1002" />
+    </state>
+    <state x="472" y="92" width="1262" height="740" key="ShowDiffWithBranchDialog/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679650005174" />
+    <state x="661" y="218" width="938" height="594" key="Vcs.Push.Dialog.v2" timestamp="1680073113952">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981133070" />
+    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679982547807" />
+    <state x="360" y="179" width="938" height="594" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679920493111" />
+    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679920828972" />
+    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065518142" />
+    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679918917869" />
+    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680073113952" />
+    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog" timestamp="1680073238258">
+      <screen x="0" y="23" width="1920" height="1005" />
+    </state>
+    <state x="569" y="205" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679646848681" />
+    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680065357459" />
+    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063308004" />
+    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1680073238258" />
+    <state x="411" y="202" width="894" height="823" key="search.everywhere.popup" timestamp="1676879716260">
+      <screen x="0" y="23" width="1920" height="1001" />
+    </state>
+    <state x="411" y="202" width="894" height="823" key="search.everywhere.popup/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1676879716260" />
+    <state x="411" y="202" width="894" height="823" key="search.everywhere.popup/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1674542024577" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main_PdF.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
