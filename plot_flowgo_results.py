@@ -267,14 +267,14 @@ def plot_all_results(path_to_folder, filename_array):
 
 
     fig1.tight_layout()
-    fig1.savefig("./results_flowgo/lava_properties.png")
+    fig1.savefig("./lava_properties.png")
 
     fig2.tight_layout()
-    fig2.savefig("./results_flowgo/heat_fluxes.png")
+    fig2.savefig("./heat_fluxes.png")
 
     fig3.tight_layout()
-    fig3.savefig("./results_flowgo/crustal_conditions.png")
+    fig3.savefig("./crustal_conditions.png")
 
-    figF.savefig("./results_flowgo/slope.png")
+    figF.savefig("./slope.png")
     plt.show()
     plt.close()
