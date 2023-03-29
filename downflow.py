@@ -9,7 +9,6 @@ import csv
 
 
 def get_downflow_profile(lat, long, dem, path):
-
     lat = lat
     space = ' '
     long = long
@@ -17,15 +16,43 @@ def get_downflow_profile(lat, long, dem, path):
     path = path
 
     # Parameters files to run DOWNFLOW
-    # This will find the area of inundation for N=10000 and dh of 2 m
 
+    # This will find the area of inundation for N=10000 and dh of 5 m
+    parameters_DH5_N10000 = path + '/prova_DOWNFLOW/parameters_DH5_N10000.txt'
+    # This will fill the DEM with 1000 iteration with dh of 0.001 m
+
+    # This will find the area of inundation for N=10000 and dh of 2 m
     parameters_DH2_N10000 = path + '/prova_DOWNFLOW/parameters_DH2_N10000.txt'
     # This will fill the DEM with 1000 iteration with dh of 0.001 m
     parameters_DH0_001_N1000 = path + '/prova_DOWNFLOW/parameters_DH0.001_N1000.txt'
     # Look for the steepest line of descent:
     parameters_DH0_001_N1 = path + '/prova_DOWNFLOW/parameters_DH0.001_N1.txt'
 
-    #modify parameters_file_with good DEM
+    parameters_DH5_N10000 = path + '/prova_DOWNFLOW/parameters_DH5_N10000.txt'
+
+    parameters_DH04_N10000 = path + '/prova_DOWNFLOW/parameters_DH04_N10000.txt'
+
+    # modify parameters_file_with good DEM
+
+    with open(parameters_DH5_N10000) as f:
+        l = list(f)
+
+    with open(parameters_DH5_N10000, 'w') as output:
+        for line in l:
+            if line.startswith('input_DEM'):
+                output.write('input_DEM ' + dem + '\n')
+            else:
+                output.write(line)
+
+    with open(parameters_DH04_N10000) as f:
+        l = list(f)
+
+    with open(parameters_DH04_N10000, 'w') as output:
+        for line in l:
+            if line.startswith('input_DEM'):
+                output.write('input_DEM ' + dem + '\n')
+            else:
+                output.write(line)
 
     with open(parameters_DH2_N10000) as f:
         l = list(f)
@@ -33,7 +60,7 @@ def get_downflow_profile(lat, long, dem, path):
     with open(parameters_DH2_N10000, 'w') as output:
         for line in l:
             if line.startswith('input_DEM'):
-                output.write('input_DEM '+dem+'\n')
+                output.write('input_DEM ' + dem + '\n')
             else:
                 output.write(line)
 
@@ -43,45 +70,56 @@ def get_downflow_profile(lat, long, dem, path):
     with open(parameters_DH0_001_N1000, 'w') as output:
         for line in l:
             if line.startswith('input_DEM'):
-                output.write('input_DEM '+dem+'\n')
+                output.write('input_DEM ' + dem + '\n')
             else:
                 output.write(line)
 
     # path to executive downflow
     dem2 = path + '/prova_DOWNFLOW/dem2 -DOWNFLOW '
 
-   # Execute DOWNFLOW and reate a shapefile 'path.shp' with the steepest descent path, using the pitfilling algorithm of DOWNFLOW itself
+    # Execute DOWNFLOW and reate a shapefile 'path.shp' with the steepest descent path, using the pitfilling algorithm of DOWNFLOW itself
+    # TODO: HERE Change back to DH = 2 for Piton
+    DOWNFLOW_DH2_N10000 = dem2 + parameters_DH2_N10000 + ' -write_shp_path_debug -input_point ' + lat + space + long
+    os.system(DOWNFLOW_DH2_N10000)
+    # TODO: HERE Change to DH = 5
+    # DOWNFLOW_DH5_N10000 = dem2 + parameters_DH5_N10000 + ' -write_shp_path_debug -input_point ' + lat + space + long
+    # os.system(DOWNFLOW_DH5_N10000)
 
-    DOWNFLOW_DH1_5_N10000 = dem2+parameters_DH2_N10000+' -write_shp_path_debug -input_point '+lat+space+long
-    os.system(DOWNFLOW_DH1_5_N10000)
+    # TODO: HERE Change to DH = 0.4 (Nyiragongo)
+    # DOWNFLOW_DH04_N10000 = dem2 + parameters_DH04_N10000 + ' -write_shp_path_debug -input_point ' + lat + space + long
+    # os.system(DOWNFLOW_DH04_N10000)
 
-    DOWNFLOW_DH0_001_N1000 = dem2+parameters_DH0_001_N1000+' -write_shp_path_debug -input_point '+lat+space+long
+    DOWNFLOW_DH0_001_N1000 = dem2 + parameters_DH0_001_N1000 + ' -write_shp_path_debug -input_point ' + lat + space + long
     os.system(DOWNFLOW_DH0_001_N1000)
     # paths to filled dem
-    dem_filled =' dem_filled_DH0.001_N1000.asc '
+    dem_filled = ' dem_filled_DH0.001_N1000.asc '
 
-    DOWNFLOW_DH0_001_N1 = dem2+parameters_DH0_001_N1+' -write_shp_path_debug -input_point '+lat+space+long
+    DOWNFLOW_DH0_001_N1 = dem2 + parameters_DH0_001_N1 + ' -write_shp_path_debug -input_point ' + lat + space + long
     os.system(DOWNFLOW_DH0_001_N1)
 
-    #Then create the slope file: This will create the text file: "profile_00000.txt" containing the profile data of path2.shp
+    # Then create the slope file: This will create the text file: "profile_00000.txt" containing the profile data of path2.shp
     path_shp = ' path.shp '
-    #file to be created with the new path on the dem filled
+    # file to be created with the new path on the dem filled
     path_dem_filled = ' path_dem_filled.shp'
-    poliline = path +'/prova_DOWNFLOW/dem2 -VEC_GRD_shp_polilinee_to_3d_shape '
-    profile_losd = poliline+path_shp+dem_filled+' 10 '+path_dem_filled
+    poliline = path + '/prova_DOWNFLOW/dem2 -VEC_GRD_shp_polilinee_to_3d_shape '
+    profile_losd = poliline + path_shp + dem_filled + ' 10 ' + path_dem_filled
     os.system(profile_losd)
 
-def get_one_downflow_profile(lat,long,parameters_files,dem, path):
+def get_one_downflow_profile(lat,long,dem, path):
     lat = lat
     space = ' '
     long = long
-    parameters_files = parameters_files
     dem = dem
-    # os.system('cd /Users/chevrel/Documents/GitHub/pyflowgo/downflowgo/test/')
+    path = path
 
-    # paths to parameters files
-    parameters_DH0_001_N1000 = parameters_files[0]
-    parameters_DH0_001_N1 = parameters_files[1]
+    # Parameters files to run DOWNFLOW
+    # This will find the main LoSD with DH=0.001
+
+    parameters_DH0_001_N1000 = path + '/prova_DOWNFLOW/parameters_DH0.001_N1000.txt'
+    # Look for the steepest line of descent:
+    parameters_DH0_001_N1 = path + '/prova_DOWNFLOW/parameters_DH0.001_N1.txt'
+
+    # modify parameters_file_with good DEM
 
     with open(parameters_DH0_001_N1000) as f:
         l = list(f)
@@ -96,7 +134,7 @@ def get_one_downflow_profile(lat,long,parameters_files,dem, path):
     # path to executive downflow
     dem2 = path +'/prova_DOWNFLOW/dem2 -DOWNFLOW '
 
-    # Execute DOWNFLOW and reate a shapefile 'path.shp' with the steepest descent path, using the pitfilling algorithm of DOWNFLOW itself
+    # Execute DOWNFLOW and create a shapefile 'path.shp' with the steepest descent path, using the pitfilling algorithm of DOWNFLOW itself
 
     DOWNFLOW_DH0_001_N1000 = dem2 + parameters_DH0_001_N1000 + ' -write_shp_path_debug -input_point ' + lat + space + long
     os.system(DOWNFLOW_DH0_001_N1000)
@@ -107,12 +145,13 @@ def get_one_downflow_profile(lat,long,parameters_files,dem, path):
     os.system(DOWNFLOW_DH0_001_N1)
 
     # Then create the slope file: This will create the text file: "profile_00000.txt" containing the profile data of path2.shp
-    path = ' path.shp '
+    path_shp = ' path.shp '
     # file to be created with the new path on the dem filled
     path_dem_filled = ' path_dem_filled.shp'
-    poliline = path +'/prova_DOWNFLOW/dem2 -VEC_GRD_shp_polilinee_to_3d_shape '
-    profile_losd = poliline + path + dem_filled + ' 10 ' + path_dem_filled
+    poliline = path + '/prova_DOWNFLOW/dem2 -VEC_GRD_shp_polilinee_to_3d_shape '
+    profile_losd = poliline + path_shp + dem_filled + ' 10 ' + path_dem_filled
     os.system(profile_losd)
+
 
 
 
