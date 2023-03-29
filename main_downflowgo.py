@@ -2,7 +2,6 @@ import csv
 import os
 import math
 import matplotlib.pyplot as plt
-import downflow
 import downflow2
 import run_flowgo_effusion_rate_array
 import pandas as pd
@@ -42,7 +41,7 @@ if __name__ == "__main__":
     #dem_name = '_2010'
 
     dem = path + '/DEM/Clip_Pdf_NE_Lidar2010_5m_complete.asc'
-    dem_name = '_2010NE_jj'
+    dem_name = '_2010NE_testdownflow2_proba'
     #dem = path + '/DEM/dem_complete_fournaise_5m_SE.asc'
     #dem_name = '_2010SE'
     #dem = path + '/DEM/reunion_25m.asc'
@@ -87,14 +86,14 @@ if __name__ == "__main__":
             long = str(row['Y'])
             # Run DOWNFLOW
             name_folder = path_to_results +'/' + flow_id + dem_name
-            os.mkdir(name_folder)
+            #os.mkdir(name_folder)
             os.chdir(name_folder)
             #downflow.get_one_downflow_profile(lat, long, dem, path)
-            downflow.get_downflow_profile(lat, long, dem, path)
+            #downflow.get_downflow_profile(lat, long, dem, path)
 
             #downflow2.get_downflow_probabilities(lat, long, dem, path)
             #downflow2.get_downflow_filled_dem(lat, long, dem, path)
-            #downflow2.get_downflow_losd(lat, long, path)
+            downflow2.get_downflow_losd(lat, long, path)
             print('*********************************  FLOW ID =', flow_id)
 
             # Run FLOWGO
