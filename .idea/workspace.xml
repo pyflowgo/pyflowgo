@@ -29,20 +29,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="add downflow2 and commit main for downflowgo">
-      <change afterPath="$PROJECT_DIR$/DOWNFLOW/parameters_range.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.o" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/downflowcpp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/txt_to_shape.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/pyflowgo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyflowgo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/downflow2.py" beforeDir="false" afterPath="$PROJECT_DIR$/downflow2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_downflowgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_downflowgo.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot_flowgo_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_flowgo_results.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run_outs.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_outs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/downflowcpp.py" beforeDir="false" afterPath="$PROJECT_DIR$/downflowcpp.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

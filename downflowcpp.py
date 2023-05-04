@@ -9,7 +9,7 @@ import csv
 
 def run_downflow(parameter_file_downflow, path):
     # Run DOWNFLOW
-    os.system(path + '/DOWNFLOW/src/DOWNFLOW ' + parameter_file_downflow)
+    os.system(path + '/DOWNFLOW/DOWNFLOW ' + parameter_file_downflow)
 def get_downflow_probabilities(lat, long, dem, path, parameter_file_downflow):
     """    # Run DOWNFLOW and create a raster file 'sim.asc' with the probability of trajectories for a given dem (dem)
     and a given parameter file"""
@@ -33,7 +33,7 @@ def get_downflow_probabilities(lat, long, dem, path, parameter_file_downflow):
             else:
                 output.write(line)
     # Run DOWNFLOW
-    os.system(path + '/DOWNFLOW/src/DOWNFLOW ' + parameter_file_downflow)
+    os.system(path + '/DOWNFLOW/DOWNFLOW ' + parameter_file_downflow)
 
 def get_downflow_filled_dem(lat, long, dem, path, parameter_file_downflow):
 
@@ -65,7 +65,7 @@ def get_downflow_filled_dem(lat, long, dem, path, parameter_file_downflow):
             else:
                 output.write(line)
     # Run DOWNFLOW
-    os.system(path + '/DOWNFLOW/src/DOWNFLOW ' + parameter_file_downflow)
+    os.system(path + '/DOWNFLOW/DOWNFLOW ' + parameter_file_downflow)
 
 def get_downflow_losd(lat, long, filled_dem, path,parameter_file_downflow):
     """ Execute DOWNFLOW and create the profile.txt """
@@ -95,4 +95,4 @@ def get_downflow_losd(lat, long, filled_dem, path,parameter_file_downflow):
             else:
                 output.write(line)
     # Run DOWNFLOW
-    os.system(path + '/DOWNFLOW/src/DOWNFLOW ' + parameter_file_downflow)
+    os.system(path + '/DOWNFLOW/DOWNFLOW ' + parameter_file_downflow)
