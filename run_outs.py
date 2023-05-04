@@ -9,8 +9,8 @@ def get_run_outs(path_to_folder, flowgo_results, slope_file, lava_name):
     csv_file_run_outs = path_to_folder + "run_outs_" + lava_name + ".csv"
 
     with open(csv_file_run_outs, 'w') as csvfile:
-        heads = ["flow_id", "Effusion rate (m3/s)", "Depth (m)", "Width_init (m)", "X_init", "Y_init", "Elevation_init",
-                 "X_run_out", "Y_run_out", "Elevation_run_out", "Distance_run_out (m)"]
+        heads = ["flow_id", "Effusion_rate", "Depth", "Width_init", "X_init", "Y_init", "Elevation_init",
+                 "X_run_out", "Y_run_out", "Elevation_run_out", "Distance_run_out"]
         writer = csv.writer(csvfile)
         writer.writerow(heads)
 
@@ -99,8 +99,8 @@ def get_run_outs(path_to_folder, flowgo_results, slope_file, lava_name):
         csvreader = csv.DictReader(csvfile, delimiter=',')
         for row in csvreader:
             flow_id = str(row['flow_id'])
-            effusion_rate_init_array.append(float(row['Effusion rate (m3/s)']))
-            distance_array.append(float(row['Distance_run_out (m)']))
+            effusion_rate_init_array.append(float(row['Effusion_rate']))
+            distance_array.append(float(row['Distance_run_out']))
 
         plot.set_title(str(flow_id))
         plot.plot(distance_array, effusion_rate_init_array, '-', label=flow_id)

@@ -8,43 +8,32 @@ import numpy as np
 import csv
 
 
-def get_downflow_probabilities(lat, long, dem, path):
+def get_downflow_probabilities(lat, long, dem, path, parameter_file_downflow):
     """    # Execute DOWNFLOW and create a raster file 'sim.asc' with the probability of trajectories for a given dem (dem)
     Change n_path and DH for the given volcano  = 2 for Piton / 0.4 (Nyiragongo)"""
 
-    n_path = "10000"
-    DH = "2.0"
-    lat = lat
     space = ' '
-    long = long
-    dem = dem
-    path = path
 
-    # Parameters files to run DOWNFLOW
-    parameters = path + '/prova_DOWNFLOW/parameters_DOWNFLOW.txt'
-    with open(parameters) as f:
+    with open(parameter_file_downflow) as f:
         l = list(f)
-
-    with open(parameters, 'w') as output:
+    with open(parameter_file_downflow, 'w') as output:
         for line in l:
             if line.startswith('input_DEM'):
                 output.write('input_DEM '+dem+'\n')
-            elif line.startswith('n_path'):
-                output.write('n_path '+n_path+'\n')
-            elif line.startswith('DH'):
-                output.write('DH '+DH+'\n')
             elif line.startswith('attiva_output_grid_L'):
                 output.write('attiva_output_grid_L ' + '1' + '\n')
             elif line.startswith('attiva_w_grid_new_h'):
                 output.write('attiva_w_grid_new_h ' + '0' + '\n')
-
+            elif line.startswith('Xorigine'):
+                output.write('Xorigine ' + lat + '\n')
+            elif line.startswith('Yorigine'):
+                output.write('Yorigine ' + long + '\n')
             else:
                 output.write(line)
 
     # path to executive downflow
     dem2 = path + '/prova_DOWNFLOW/dem2 -DOWNFLOW '
-
-    os.system(dem2 + parameters + ' -write_shp_path_debug -input_point ' + lat + space + long)
+    os.system(dem2 + parameter_file_downflow + ' -write_shp_path_debug -input_point ' + lat + space + long)
 
 
 def get_downflow_filled_dem(lat, long, dem, path):
@@ -75,6 +64,10 @@ def get_downflow_filled_dem(lat, long, dem, path):
                 output.write('n_path '+n_path+'\n')
             elif line.startswith('DH'):
                 output.write('DH '+DH+'\n')
+            elif line.startswith('Xorigine'):
+                output.write('Xorigine ' + lat + '\n')
+            elif line.startswith('Yorigine'):
+                output.write('Yorigine ' + long + '\n')
             elif line.startswith('attiva_output_grid_L'):
                 output.write('attiva_output_grid_L ' + '0' + '\n')
             elif line.startswith('attiva_w_grid_new_h'):
@@ -112,6 +105,10 @@ def get_downflow_losd(lat, long, path):
                 output.write('n_path '+n_path+'\n')
             elif line.startswith('DH'):
                 output.write('DH '+DH+'\n')
+            elif line.startswith('Xorigine'):
+                output.write('Xorigine ' + lat + '\n')
+            elif line.startswith('Yorigine'):
+                output.write('Yorigine ' + long + '\n')
             elif line.startswith('attiva_output_grid_L'):
                 output.write('attiva_output_grid_L ' + '0' + '\n')
             elif line.startswith('attiva_w_grid_new_h'):

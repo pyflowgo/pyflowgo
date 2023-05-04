@@ -276,5 +276,5 @@ def plot_all_results(path_to_folder, filename_array):
     fig3.savefig("./crustal_conditions.png")
 
     figF.savefig("./slope.png")
-    plt.show()
-    plt.close()
+    #plt.show()
+    #plt.close()

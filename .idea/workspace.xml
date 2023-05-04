@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -16,12 +19,30 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:develop_downflowgo" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="commit to main and plot (and workspace) to downflowgo">
+    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="add downflow2 and commit main for downflowgo">
+      <change afterPath="$PROJECT_DIR$/DOWNFLOW/parameters_range.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DOWNFLOW/src/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/downflowcpp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/txt_to_shape.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pyflowgo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyflowgo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/downflow2.py" beforeDir="false" afterPath="$PROJECT_DIR$/downflow2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_downflowgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_downflowgo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plot_flowgo_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_flowgo_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_outs.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_outs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,38 +88,20 @@
       </set>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1Q9GO9uUTRPIjm0zyEZrPX91inB" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="176" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="177" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="181" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="975" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="176" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="177" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="181" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="975" />
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="time&#9;null&#9;null&#10;spectr&#9;null&#9;null&#10;effusion&#9;null&#9;null&#10;heat transfer&#9;null&#9;null" />
-    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
@@ -151,40 +154,20 @@
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
     </configuration>
-    <configuration name="main_downflowgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="/opt/anaconda3/envs/py3k/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_downflowgo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main_flowgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main_downflowgo" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/bin/python" />
+      <option name="SDK_NAME" value="$USER_HOME$/anaconda3" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_flowgo.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_downflowgo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -256,23 +239,44 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="txt_to_shape" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/txt_to_shape.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
       <item itemvalue="Python.main_plot_flowgo_results" />
       <item itemvalue="Python.main_plot_results_field_data" />
       <item itemvalue="Python.main_run_flowgo" />
-      <item itemvalue="Python.main_flowgo" />
+      <item itemvalue="Python.txt_to_shape" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_downflowgo" />
+        <item itemvalue="Python.txt_to_shape" />
         <item itemvalue="Python.main_plot_results_field_data" />
         <item itemvalue="Python.main_plot_flowgo_results" />
         <item itemvalue="Python.main_run_flowgo" />
-        <item itemvalue="Python.main_flowgo" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
   </component>
@@ -283,13 +287,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496180443852</updated>
-    </task>
-    <task id="LOCAL-00042" summary="Add of a limiting condition dending on yield strength: the flow stops if yield strength is &gt;= basal shear stress&#10;+log of the yield strength and basal shear stress is now in integrator">
-      <created>1565074451197</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1565074451197</updated>
     </task>
     <task id="LOCAL-00043" summary="Add init function and clean the models">
       <created>1577629819422</created>
@@ -627,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680088716483</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="add downflow2 and commit main for downflowgo">
+      <created>1680089850235</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1680089850235</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -658,12 +662,22 @@
                   <entry key="Show.Git.Branches" value="false" />
                 </map>
               </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="develop_downflowgo" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
             </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -676,7 +690,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="LIMIT_HISTORY" value="false" />
-    <MESSAGE value="update on the iteration of channel width and effusion rate" />
     <MESSAGE value="folder for Mauna Ulu 1974 modelling" />
     <MESSAGE value="correction on the path to results" />
     <MESSAGE value="update" />
@@ -701,162 +714,8 @@
     <MESSAGE value="add update MU74" />
     <MESSAGE value="add workspace.xml" />
     <MESSAGE value="commit to main and plot (and workspace) to downflowgo" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit to main and plot (and workspace) to downflowgo" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="568" y="290" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1677050904074">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="568" y="290" key="#com.intellij.fileTypes.FileTypeChooser/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1676975596956" />
-    <state x="568" y="290" key="#com.intellij.fileTypes.FileTypeChooser/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677050904074" />
-    <state x="426" y="242" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.821@0.23.1440.821" timestamp="1671791918770" />
-    <state x="788" y="89" key="#main_downflowgo" timestamp="1680087354950">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="788" y="89" key="#main_downflowgo/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680087354950" />
-    <state x="159" y="123" width="1262" height="740" key="DiffContextDialog" timestamp="1679652060932">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="159" y="123" width="1262" height="740" key="DiffContextDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679652060932" />
-    <state x="159" y="123" width="1262" height="740" key="DiffContextDialog/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679650005174" />
-    <state width="786" height="203" key="GridCell.Tab.0.bottom" timestamp="1680089773553">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state width="1469" height="189" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492389" />
-    <state width="1548" height="211" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698415" />
-    <state width="1548" height="211" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001877" />
-    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058809" />
-    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280141" />
-    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785386" />
-    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258614" />
-    <state width="786" height="203" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680089773553" />
-    <state width="1787" height="211" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
-    <state width="1456" height="210" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680063763881" />
-    <state width="1380" height="210" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063391028" />
-    <state width="1787" height="211" key="GridCell.Tab.0.bottom/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679918262583" />
-    <state width="1316" height="243" key="GridCell.Tab.0.bottom/0.23.1440.821@0.23.1440.821" timestamp="1678712832873" />
-    <state width="786" height="203" key="GridCell.Tab.0.center" timestamp="1680089773552">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state width="1469" height="189" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492388" />
-    <state width="1548" height="211" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698413" />
-    <state width="1548" height="211" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001875" />
-    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058808" />
-    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280140" />
-    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785385" />
-    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258613" />
-    <state width="786" height="203" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680089773552" />
-    <state width="1787" height="211" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
-    <state width="1456" height="210" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680063763879" />
-    <state width="1380" height="210" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063391027" />
-    <state width="1787" height="211" key="GridCell.Tab.0.center/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679918262581" />
-    <state width="1316" height="243" key="GridCell.Tab.0.center/0.23.1440.821@0.23.1440.821" timestamp="1678712832872" />
-    <state width="786" height="203" key="GridCell.Tab.0.left" timestamp="1680089773552">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state width="1469" height="189" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492387" />
-    <state width="1548" height="211" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698413" />
-    <state width="1548" height="211" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001874" />
-    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058807" />
-    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280140" />
-    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785384" />
-    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258613" />
-    <state width="786" height="203" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680089773552" />
-    <state width="1787" height="211" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
-    <state width="1456" height="210" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680063763878" />
-    <state width="1380" height="210" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063391026" />
-    <state width="1787" height="211" key="GridCell.Tab.0.left/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679918262581" />
-    <state width="1316" height="243" key="GridCell.Tab.0.left/0.23.1440.821@0.23.1440.821" timestamp="1678712832872" />
-    <state width="786" height="203" key="GridCell.Tab.0.right" timestamp="1680089773553">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state width="1469" height="189" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1678857492389" />
-    <state width="1548" height="211" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981698414" />
-    <state width="1548" height="211" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679982001876" />
-    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679990058808" />
-    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679992280141" />
-    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1006@0.23.1920.1006" timestamp="1679990785385" />
-    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.203.1440.877/0.23.1920.1007@0.23.1920.1007" timestamp="1679991258614" />
-    <state width="786" height="203" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680089773553" />
-    <state width="1787" height="211" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399273" />
-    <state width="1456" height="210" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1680063763880" />
-    <state width="1380" height="210" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063391027" />
-    <state width="1787" height="211" key="GridCell.Tab.0.right/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679918262582" />
-    <state width="1316" height="243" key="GridCell.Tab.0.right/0.23.1440.821@0.23.1440.821" timestamp="1678712832873" />
-    <state width="1144" height="325" key="GridCell.Tab.1.bottom" timestamp="1679921399271">
-      <screen x="0" y="23" width="1920" height="1002" />
-    </state>
-    <state width="1302" height="320" key="GridCell.Tab.1.bottom/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404806" />
-    <state width="1144" height="325" key="GridCell.Tab.1.bottom/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399271" />
-    <state width="1144" height="325" key="GridCell.Tab.1.bottom/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551538" />
-    <state width="1144" height="325" key="GridCell.Tab.1.center" timestamp="1679921399270">
-      <screen x="0" y="23" width="1920" height="1002" />
-    </state>
-    <state width="1302" height="320" key="GridCell.Tab.1.center/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404805" />
-    <state width="1144" height="325" key="GridCell.Tab.1.center/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399270" />
-    <state width="1144" height="325" key="GridCell.Tab.1.center/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551537" />
-    <state width="1144" height="325" key="GridCell.Tab.1.left" timestamp="1679921399270">
-      <screen x="0" y="23" width="1920" height="1002" />
-    </state>
-    <state width="1302" height="320" key="GridCell.Tab.1.left/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404804" />
-    <state width="1144" height="325" key="GridCell.Tab.1.left/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399270" />
-    <state width="1144" height="325" key="GridCell.Tab.1.left/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551537" />
-    <state width="1144" height="325" key="GridCell.Tab.1.right" timestamp="1679921399270">
-      <screen x="0" y="23" width="1920" height="1002" />
-    </state>
-    <state width="1302" height="320" key="GridCell.Tab.1.right/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677489404806" />
-    <state width="1144" height="325" key="GridCell.Tab.1.right/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679921399270" />
-    <state width="1144" height="325" key="GridCell.Tab.1.right/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916551538" />
-    <state x="397" y="265" key="IDE.errors.dialog" timestamp="1677050756204">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="397" y="265" key="IDE.errors.dialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1677050756204" />
-    <state x="209" y="120" key="MergeDialog" timestamp="1680063376179">
-      <screen x="0" y="23" width="1920" height="1004" />
-    </state>
-    <state x="209" y="120" key="MergeDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679900541044" />
-    <state x="209" y="120" key="MergeDialog/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063376179" />
-    <state x="423" y="283" width="1107" height="495" key="MultipleFileMergeDialog" timestamp="1679900234283">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="423" y="283" width="1107" height="495" key="MultipleFileMergeDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679900234283" />
-    <state x="738" y="226" key="RollbackChangesDialog" timestamp="1679982506252">
-      <screen x="0" y="23" width="1920" height="1004" />
-    </state>
-    <state x="738" y="226" key="RollbackChangesDialog/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679982506252" />
-    <state x="541" y="81" key="SettingsEditor" timestamp="1680087432352">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="541" y="81" key="SettingsEditor/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680087432352" />
-    <state x="472" y="92" width="1262" height="740" key="ShowDiffWithBranchDialog" timestamp="1679650005174">
-      <screen x="0" y="23" width="1920" height="1002" />
-    </state>
-    <state x="472" y="92" width="1262" height="740" key="ShowDiffWithBranchDialog/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679650005174" />
-    <state x="360" y="179" width="938" height="594" key="Vcs.Push.Dialog.v2" timestamp="1680088314745">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.203.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679981133070" />
-    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.203.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679982547807" />
-    <state x="360" y="179" width="938" height="594" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680088314745" />
-    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1002@0.23.1920.1002" timestamp="1679920828972" />
-    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679916880201" />
-    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1679918917869" />
-    <state x="661" y="218" key="Vcs.Push.Dialog.v2/-1440.23.1440.877/0.23.1920.1005@0.23.1920.1005" timestamp="1679918390189" />
-    <state x="697" y="124" width="598" height="735" key="find.popup" timestamp="1680080792296">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="697" y="124" width="598" height="735" key="find.popup/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1680080792296" />
-    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog" timestamp="1680063308004">
-      <screen x="0" y="23" width="1920" height="1004" />
-    </state>
-    <state x="569" y="205" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1679646848681" />
-    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1003@0.23.1920.1003" timestamp="1679647397891" />
-    <state x="786" y="151" key="git4idea.branch.GitSmartOperationDialog/-1440.23.1440.877/0.23.1920.1004@0.23.1920.1004" timestamp="1680063308004" />
-    <state x="411" y="202" width="894" height="823" key="search.everywhere.popup" timestamp="1676879716260">
-      <screen x="0" y="23" width="1920" height="1001" />
-    </state>
-    <state x="411" y="202" width="894" height="823" key="search.everywhere.popup/-1440.203.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1676879716260" />
-    <state x="411" y="202" width="894" height="823" key="search.everywhere.popup/-1440.23.1440.877/0.23.1920.1001@0.23.1920.1001" timestamp="1674542024577" />
+    <MESSAGE value="add downflow2 and commit main for downflowgo" />
+    <option name="LAST_COMMIT_MESSAGE" value="add downflow2 and commit main for downflowgo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
