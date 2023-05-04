@@ -93,18 +93,7 @@ if __name__ == "__main__":
     #parameter_file_downflow = path + '/prova_DOWNFLOW/parameters_DOWNFLOW.txt'
     n_path = '10000'
     DH = '2'
-
-    with open(parameter_file_downflow) as f:
-        l = list(f)
-    with open(parameter_file_downflow, 'w') as output:
-        for line in l:
-            if line.startswith('DH'):
-                output.write('DH ' + DH + '\n')
-            elif line.startswith('n_path'):
-                output.write('n_path ' + n_path + '\n')
-            else:
-                output.write(line)
-
+    
     with open(csv_vent_file, 'r') as csvfile:
         csvreader = csv.DictReader(csvfile, delimiter=';')
 
@@ -121,7 +110,18 @@ if __name__ == "__main__":
             os.mkdir(name_folder)
             os.chdir(name_folder)
 
-         #downflow.get_downflow_profile(lat, long, dem, path)
+            with open(parameter_file_downflow) as f:
+                l = list(f)
+            with open(parameter_file_downflow, 'w') as output:
+                for line in l:
+                    if line.startswith('DH'):
+                        output.write('DH ' + DH + '\n')
+                    elif line.startswith('n_path'):
+                        output.write('n_path ' + n_path + '\n')
+                    else:
+                        output.write(line)
+
+            #downflow.get_downflow_profile(lat, long, dem, path)
 
         #    downflowcpp.run_downflow(parameter_file_downflow, path)
 
