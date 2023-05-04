@@ -257,10 +257,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
+      <item itemvalue="Python.main_flowgo" />
       <item itemvalue="Python.main_plot_flowgo_results" />
       <item itemvalue="Python.main_plot_results_field_data" />
       <item itemvalue="Python.main_run_flowgo" />
-      <item itemvalue="Python.main_flowgo" />
     </list>
     <recent_temporary>
       <list>
