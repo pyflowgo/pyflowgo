@@ -14,29 +14,28 @@ import shutil
 
 if __name__ == "__main__":
 
-    #  ------------------------------------------------ RUN DOWNFLOW  -------------------------------------------------
+    # ------------>   TODO : choose the path to the working folder   <------------
 
-# ------------>   choose the path to the working folder   <------------
     path = os.path.abspath('')
     #path_to_results = "/Users/chevrel/GoogleDrive/Eruption_PdF/exercice_EMZ"
     #path_to_results = "/Volumes/Macintosh HD/OryaStorage/Eruption_PdF/Pdf_exercice_EMZ"
     #path_to_results = "/Volumes/Macintosh HD/OryaStorage/Eruption_PdF/Pdf_090421"
     #path_to_results = "/Volumes/Macintosh HD/OryaStorage/Eruption_PdF/Pdf_221221"
 
-    path_to_results ="/Users/chevrel/GoogleDrive/Eruption_PdF/030523"
+    path_to_results ="/Users/chevrel/GoogleDrive/Eruption_PdF/251019"
     #path_to_results = "/Users/chevrel/Documents/iceland-simu"
     #path_to_results = "/Users/chevrel/Documents/VIRUNGA/Nyiragongo/downflowgo_simu/scenarios"
 
-# ------------>   choose the path to the DEM   <------------
+    # ------------>   TODO : choose the path to the DEM   <------------
 
     #dem = path + '/DEM/Clip_Pdf_NE_Lidar2010_5m_complete.asc'
     #dem_name = '_2010NE_testdownflow2'
 
-    dem = path + '/DEM/MNT-post-20220919_5m.asc'
-    dem_name = '_MNT2022_test_downflowcpp'
+    ##dem = path + '/DEM/MNT-post-20220919_5m.asc'
+    ##dem_name = '_MNT2022_test_downflowcpp'
 
-    #dem = path + '/DEM/Clip_DEM_update_oct2010_aug2015_nosea.asc'
-    #dem_name = '_2010modified_testdownflowcpp'
+    dem = path + '/DEM/Clip_DEM_update_oct2010_aug2015_nosea.asc'
+    dem_name = '_2010modified'
 
 
     #dem = path + '/DEM/clip_MNT_ENCLOS_2017_5m.asc'
@@ -70,16 +69,16 @@ if __name__ == "__main__":
     #dem = path + '/DEM/Clip_Pdf-Est_Lidar_2010_5m_complete.asc'
     #dem_name = '_2020'
 
-# ------------>   choose the name of the lava flow (flow_id) and the X, Y coordinates <------------
+    # ------------>   TODO : choose the name of the lava flow (flow_id) and the X, Y coordinates <------------
 
     #csv_vent_file = '/Users/chevrel/GoogleDrive/Eruption_PdF/exercice_EMZ/fissure_exercice_EMZ.csv'
     #csv_vent_file = '/Users/chevrel/Documents/VIRUNGA/Nyiragongo/downflowgo_simu/new_fissure_hypo.csv'
     #csv_vent_file = '/Volumes/Macintosh HD/OryaStorage/Eruption_PdF/Pdf_090421/vent-position-110421.csv'
-    csv_vent_file = "/Users/chevrel/GoogleDrive/Eruption_PdF/vent_hypothetic.csv"
+    csv_vent_file = "/Users/chevrel/GoogleDrive/Eruption_PdF/251019/vent_251019.csv"
     #csv_vent_file ="/Users/chevrel/GoogleDrive/Eruption_PdF/exercice_EMZ/vent_approx_BB.csv"
     #csv_vent_file = "/Users/chevrel/Documents/iceland-simu/Newfissure-050421.csv"
 
-# ----->>  TODO : choose json file for FLOWGO <------------
+    # ----->>  TODO : choose json file for FLOWGO <------------
 
     #template_json_file = "/Users/chevrel/Documents/VIRUNGA/Nyiragongo/Nyiragongo_template.json"
     template_json_file = "/Users/chevrel/GoogleDrive/Eruption_PdF/PdF_template.json"
@@ -87,7 +86,7 @@ if __name__ == "__main__":
 
     run_outs_file_array = []
 
-    # ------------>   choose parameter file and N and Dh for DOWNFLOW  <------------
+    # ------------>    define parameter file and N and Dh for DOWNFLOW  <------------
 
     parameter_file_downflow = path + '/DOWNFLOW/parameters_range.txt'
     #parameter_file_downflow = path + '/prova_DOWNFLOW/parameters_DOWNFLOW.txt'
@@ -161,6 +160,7 @@ if __name__ == "__main__":
             # convert profile to shape line
             run_outs = path_to_folder + 'run_outs_'+flow_id+'.csv'
             txt_to_shape.get_runouts_shp(run_outs, path_to_folder, flow_id)
+            txt_to_shape.get_vent_shp(run_outs, path_to_folder, flow_id)
             print('*********** run outs file is saved in:', map, '/run_outs_'+flow_id+'.shp', '***********')
 
     print("************************************** THE END *************************************")

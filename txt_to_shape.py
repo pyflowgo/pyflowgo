@@ -52,3 +52,25 @@ def get_runouts_shp(run_outs, path_to_folder, flow_id):
         pointShp.write(rowDict)
     # close fiona object
     pointShp.close()
+
+def get_vent_shp(run_outs, path_to_folder, flow_id):
+    # import points from slope file
+    pointDf = pd.read_csv(run_outs, header=0, sep=',')
+    pointDf.head()
+    # define schema for line shape file
+    schema = {'geometry': 'Point', 'properties': [("flow_id", 'str'),]}
+    # open a fiona object
+    name_vent = 'vent_' + flow_id + '.shp'
+    pointShp = fiona.open(path_to_folder+'map/' + name_vent, mode='w',
+                         driver='ESRI Shapefile', schema=schema, crs="EPSG:32740")
+
+    # iterate over each row in the dataframe and save record
+    for index, row in pointDf.iterrows():
+        rowDict = {
+            'geometry': {'type': 'Point',
+                         'coordinates': (row.X_init, row.Y_init)},
+            'properties': {'flow_id': row.flow_id,
+                           }}
+        pointShp.write(rowDict)
+    # close fiona object
+    pointShp.close()

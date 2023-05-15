@@ -28,12 +28,11 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="add downflow2 and commit main for downflowgo">
-      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/DOWNFLOW.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DOWNFLOW/src/makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/downflowcpp.py" beforeDir="false" afterPath="$PROJECT_DIR$/downflowcpp.py" afterDir="false" />
+    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="little modification in the main DOWNFLOWGO">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DOWNFLOW/parameters_range.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DOWNFLOW/parameters_range.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_downflowgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_downflowgo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/txt_to_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/txt_to_shape.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +108,7 @@
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_downflowgo">
+  <component name="RunManager" selected="Python.main_flowgo_Venus_Tolba">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -159,6 +158,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_downflowgo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_flowgo_Venus_Tolba" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Venus" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Venus/main_flowgo_Venus_Tolba.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -253,6 +273,7 @@
     </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
+      <item itemvalue="Python.main_flowgo_Venus_Tolba" />
       <item itemvalue="Python.main_plot_flowgo_results" />
       <item itemvalue="Python.main_plot_results_field_data" />
       <item itemvalue="Python.main_run_flowgo" />
@@ -260,6 +281,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_flowgo_Venus_Tolba" />
         <item itemvalue="Python.txt_to_shape" />
         <item itemvalue="Python.main_plot_results_field_data" />
         <item itemvalue="Python.main_plot_flowgo_results" />
@@ -278,20 +300,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496180443852</updated>
-    </task>
-    <task id="LOCAL-00043" summary="Add init function and clean the models">
-      <created>1577629819422</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1577629819423</updated>
-    </task>
-    <task id="LOCAL-00044" summary="script to plot the results with the main to run it">
-      <created>1578027033702</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1578027033702</updated>
     </task>
     <task id="LOCAL-00045" summary="pyflowgo from json file and the main to run it">
       <created>1578027144381</created>
@@ -622,7 +630,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680089850235</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="little modification on the localisation of DOWNFLOW">
+      <created>1683183907368</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1683183907368</updated>
+    </task>
+    <task id="LOCAL-00093" summary="little modification in the main DOWNFLOWGO">
+      <created>1683195564616</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1683195564616</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -681,8 +703,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="LIMIT_HISTORY" value="false" />
-    <MESSAGE value="folder for Mauna Ulu 1974 modelling" />
-    <MESSAGE value="correction on the path to results" />
     <MESSAGE value="update" />
     <MESSAGE value="update figure size" />
     <MESSAGE value="update slope file path" />
@@ -706,7 +726,9 @@
     <MESSAGE value="add workspace.xml" />
     <MESSAGE value="commit to main and plot (and workspace) to downflowgo" />
     <MESSAGE value="add downflow2 and commit main for downflowgo" />
-    <option name="LAST_COMMIT_MESSAGE" value="add downflow2 and commit main for downflowgo" />
+    <MESSAGE value="little modification on the localisation of DOWNFLOW" />
+    <MESSAGE value="little modification in the main DOWNFLOWGO" />
+    <option name="LAST_COMMIT_MESSAGE" value="little modification in the main DOWNFLOWGO" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
