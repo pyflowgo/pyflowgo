@@ -18,31 +18,36 @@
 import math
 import json
 
+#The density, thermal conductivity, specific heat capacity and dynamic viscosity of seawater have been estimated at T = 2°C, S = 26.1 and P = 300 bar
 
 class FlowGoMaterialWater:
 
     def __init__(self) -> None:
         super().__init__()
 
-        self._temp_water = 10. + 273.15  # temperature of the water [K]
-        self._water_current_speed = 5.0  # Water current speed [m/s]
-        self._ch_water = 0.0036  # value from Greeley and Iverson (1987) C_H= (U'/U)^2 where U' is the fraction of wind speed according to Kesztheleyi and Denlinger (1996)
-        self._rho_water = 0.4412  # density of the water [kg/m3]
-        self._cp_water = 1099.  # water specific heat capacity [J kg-1 K-1]
+        self._temp_water = 2. + 273.15  # temperature of the seawater [K]
+        self._water_speed = 1.0  # Seawater speed [m/s]
+        self._k_water = 0.581  # Seawater thermal conductivity [W m-1 K-1]
+        self._rho_water = 1040.  # density of the seawater [kg/m3]
+        self._cp_water = 3945.  # Seawater specific heat capacity [J kg-1 K-1]
+        self.effusivity_water = 1505.41 # Effusivity of the seawater [J K-1 m-2 s-1/2] 
+        self.dynamic_visco_water = 1.75E-03 # Dynamic viscosity of the seawater [Pa s] 
+        self.kinematic_visco_water = 1.72E-06 # Kinematic viscosity of the seawater [m2 s-1] 
+
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
         with open(filename) as data_file:
             data = json.load(data_file)
             self._temp_water = float(data['convection_parameters']['water_temperature'])
-            self._water_current_speed = float(data['convection_parameters']['water_current_speed'])
-            self._ch_water = float(data['convection_parameters']['ch_water'])
+            self._water_speed = float(data['convection_parameters']['water_speed'])
+            self._k_water = float(data['convection_parameters']['k_water'])
             self._rho_water = float(data['convection_parameters']['water_density'])
             self._cp_water = float(data['convection_parameters']['water_specific_heat_capacity'])
+            self._effusivity_water = float(data['convection_parameters']['E_water'])
+            self._dynamic_visco_water = float(data['convection_parameters']['water_dynamic_visco'])
+            self._kinematic_visco_water = float(data['convection_parameters']['water_kinematic_visco'])
 
-    def compute_conv_heat_transfer_coef_water(self):
-        #return 35
-        return self._ch_water * self._rho_water * self._cp_water * self._water_current_speed
 
     def get_temperature(self):
         return self._temp_water
