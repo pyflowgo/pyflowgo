@@ -24,7 +24,7 @@ class FlowGoIntegrator:
     It is here that the differential equation of the flow advance is solved
     and here where the limits are fixed"""
 
-    def __init__(self, dx, material_lava, material_air, terrain_condition, heat_budget,
+    def __init__(self, dx, material_lava, material_air, material_water, terrain_condition, heat_budget,
                  crystallization_rate_model, crust_temperature_model, effective_cover_crust_model):
         """ this function allows to set the initial parameters"""
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
@@ -37,6 +37,7 @@ class FlowGoIntegrator:
         self.effective_cover_crust_model = effective_cover_crust_model
         self.material_lava = material_lava
         self.material_air = material_air
+        self.material_water = material_water
         self.terrain_condition = terrain_condition
         self.heat_budget = heat_budget
 
@@ -140,15 +141,13 @@ class FlowGoIntegrator:
                                  current_state.get_crystal_fraction())
         self.logger.add_variable("core_temperature", current_state.get_current_position(),
                                  current_state.get_core_temperature())
+        self.logger.add_variable("molten_material_temperature", current_state.get_current_position(),
+                                 self.material_lava.computes_molten_material_temperature(current_state))
         self.logger.add_variable("viscosity", current_state.get_current_position(),
                                  self.material_lava.computes_bulk_viscosity(current_state))
         self.logger.add_variable("density", current_state.get_current_position(),
                                  self.material_lava.get_bulk_density(current_state))
         self.logger.add_variable("mean_velocity", current_state.get_current_position(), v_mean)
-        self.logger.add_variable("core_temperature", current_state.get_current_position(),
-                                 current_state.get_core_temperature())
-        self.logger.add_variable("core_temperature", current_state.get_current_position(),
-                                 current_state.get_core_temperature())
         self.logger.add_variable("crust_temperature", current_state.get_current_position(),
                                  self.crust_temperature_model.compute_crust_temperature(current_state))
         self.logger.add_variable("effective_cover_fraction", current_state.get_current_position(),

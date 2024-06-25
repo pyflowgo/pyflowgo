@@ -28,10 +28,38 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="little modification in the main DOWNFLOWGO">
+    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="push setup.py">
+      <change afterPath="$PROJECT_DIR$/compute_spectral_radiance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/edit_json_gui.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_run_flowgo_Holuhraun.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mapping.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_convection_heat_water.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pyflowgo/flowgo_material_water.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pyflowgo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyflowgo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DOWNFLOW/parameters_range.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DOWNFLOW/parameters_range.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main_downflowgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_downflowgo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/main_flowgo_MU74_paper.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/results/fig1.png" beforeDir="false" afterPath="$PROJECT_DIR$/MaunaUlu74/results/fig1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/results/fig2.png" beforeDir="false" afterPath="$PROJECT_DIR$/MaunaUlu74/results/fig2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/results/fig3.png" beforeDir="false" afterPath="$PROJECT_DIR$/MaunaUlu74/results/fig3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/results/fig4.png" beforeDir="false" afterPath="$PROJECT_DIR$/MaunaUlu74/results/fig4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/results/fig5.png" beforeDir="false" afterPath="$PROJECT_DIR$/MaunaUlu74/results/fig5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MaunaUlu74/results_flowgo_Mauna Ulu June 1974 Best fit_165m3s.csv" beforeDir="false" afterPath="$PROJECT_DIR$/MaunaUlu74/results_flowgo_Mauna Ulu June 1974 Best fit_165m3s.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Venus/main_flowgo_Venus_Tolba.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_downflowgo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_plot_flowgo_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_plot_flowgo_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_run_flowgo.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_run_flowgo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plot_flowgo_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot_flowgo_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat_emissivity.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat_emissivity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat_emissivity_cont.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat_emissivity_cont.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat_lin_emi.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_radiation_heat_lin_emi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_integrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_material_lava.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_material_lava.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_model_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_model_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/template.json" beforeDir="false" afterPath="$PROJECT_DIR$/resource/template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/txt_to_shape.py" beforeDir="false" afterPath="$PROJECT_DIR$/txt_to_shape.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +93,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="downflowgo" />
+        <entry key="$PROJECT_DIR$" value="develop_downflowgo" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -87,18 +115,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "develop__downflowgo",
+    "last_opened_file_path": "/Users/chevrel/Documents/GitHub/pyflowgo/pyflowgo",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/pyflowgo" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Holuhraun2014" />
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
       <recent name="$PROJECT_DIR$/tests" />
-      <recent name="$PROJECT_DIR$/pyflowgo" />
-      <recent name="$PROJECT_DIR$/PdF" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Tolbachik" />
@@ -108,7 +138,7 @@
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_flowgo_Venus_Tolba">
+  <component name="RunManager" selected="Python.main_run_flowgo_Holuhraun">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -144,6 +174,27 @@
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
     </configuration>
+    <configuration name="compute_spectral_radiance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/compute_spectral_radiance.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_downflowgo" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -166,7 +217,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main_flowgo_Venus_Tolba" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main_flowgo_Tolbachik" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -174,53 +225,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Venus" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Venus/main_flowgo_Venus_Tolba.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main_plot_flowgo_results" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyflowgo" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_plot_flowgo_results.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main_plot_results_field_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyflowgo" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_plot_results_field_data.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_flowgo_Tolbachik.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -238,7 +247,7 @@
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_run_flowgo.py" />
@@ -250,7 +259,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="txt_to_shape" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main_run_flowgo_Holuhraun" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -262,7 +271,28 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/txt_to_shape.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_run_flowgo_Holuhraun.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_run_flowgo_Holuhraun_jonas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_run_flowgo_Holuhraun_jonas.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -273,18 +303,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
-      <item itemvalue="Python.main_flowgo_Venus_Tolba" />
-      <item itemvalue="Python.main_plot_flowgo_results" />
-      <item itemvalue="Python.main_plot_results_field_data" />
+      <item itemvalue="Python.compute_spectral_radiance" />
+      <item itemvalue="Python.main_flowgo_Tolbachik" />
       <item itemvalue="Python.main_run_flowgo" />
-      <item itemvalue="Python.txt_to_shape" />
+      <item itemvalue="Python.main_run_flowgo_Holuhraun" />
+      <item itemvalue="Python.main_run_flowgo_Holuhraun_jonas" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main_flowgo_Venus_Tolba" />
-        <item itemvalue="Python.txt_to_shape" />
-        <item itemvalue="Python.main_plot_results_field_data" />
-        <item itemvalue="Python.main_plot_flowgo_results" />
+        <item itemvalue="Python.main_run_flowgo_Holuhraun" />
+        <item itemvalue="Python.main_flowgo_Tolbachik" />
+        <item itemvalue="Python.compute_spectral_radiance" />
+        <item itemvalue="Python.main_run_flowgo_Holuhraun_jonas" />
         <item itemvalue="Python.main_run_flowgo" />
       </list>
     </recent_temporary>
@@ -300,13 +330,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496180443852</updated>
-    </task>
-    <task id="LOCAL-00045" summary="pyflowgo from json file and the main to run it">
-      <created>1578027144381</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1578027144381</updated>
     </task>
     <task id="LOCAL-00046" summary="upldating file to read the slope file">
       <created>1578292781741</created>
@@ -644,7 +667,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683195564616</updated>
     </task>
-    <option name="localTasksCounter" value="94" />
+    <task id="LOCAL-00094" summary="push setup.py">
+      <created>1716287112580</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1716287112580</updated>
+    </task>
+    <option name="localTasksCounter" value="95" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -703,7 +733,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="LIMIT_HISTORY" value="false" />
-    <MESSAGE value="update" />
     <MESSAGE value="update figure size" />
     <MESSAGE value="update slope file path" />
     <MESSAGE value="Add and update heat flux models:&#10;--&gt; update the 'basic' radiation model with Teff calculated considering T_air &#10;--&gt; update of the &quot;two-emissivity&quot; radiationmodel from Ramsey te al. 2019 &#10;--&gt; add of the radiation heat model (linemi) from Thompson and Ramsey 2021 (where emissivity depend on tempature)&#10;---&gt; add heat model of Snyder 2002 (for Venus) from Flynn et al. submitted article to JGR&#10;&#10;--&gt; Add and update the test files for all these models.&#10;&#10;--&gt; update of the model_factory to include these models&#10;--&gt; update template.json to include these new models&#10;&#10;NEED to update the Json files now !" />
@@ -728,7 +757,8 @@
     <MESSAGE value="add downflow2 and commit main for downflowgo" />
     <MESSAGE value="little modification on the localisation of DOWNFLOW" />
     <MESSAGE value="little modification in the main DOWNFLOWGO" />
-    <option name="LAST_COMMIT_MESSAGE" value="little modification in the main DOWNFLOWGO" />
+    <MESSAGE value="push setup.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="push setup.py" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

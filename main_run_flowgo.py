@@ -18,6 +18,12 @@
 import run_flowgo
 import os.path
 import run_flowgo_effusion_rate_array
+import tkinter as tk
+from tkinter import filedialog
+import numpy as np
+root = tk.Tk()
+root.withdraw() # Hide the main window
+
 
 
 
@@ -31,18 +37,31 @@ if __name__ == "__main__":
     
     """
     #path_to_folder = os.path.abspath('')
-    path_to_folder = "./results_flowgo/"
-    json_file = './resource/template_2.json'
+    #path_to_folder = "/Users/chevrel/Documents/GitHub/pyflowgo/resource/"
+    #json_file = "/Users/chevrel/Documents/GitHub/pyflowgo/resource/template.json"
+
+    # Select a file
+    fichier = filedialog.askopenfilename(
+        title='Select a json file',
+        filetypes=(("Json file", "*.json"), ("All files", "*.*")))
+    # Close the Tkinter root window
+    root.destroy()
+    # Extract the directory and file name
+    path_to_folder = os.path.dirname(fichier)+"/"
+    json_file = os.path.basename(fichier)
+    Wd = (path_to_folder)
+    print(path_to_folder)
+    os.chdir(Wd)
 
     # *****************************
-    """Instanciate flowgo vi arun flowgo for the given json """
+    """Instanciate flowgo via run_flowgo.py for the given json """
 
     flowgo = run_flowgo.RunFlowgo()
     flowgo.run(json_file, path_to_folder)
 
     # ******************************
-    """I nstanciate flowgo runner and run it for many effusion rate using a given slope file 
-    For that define the slope file execute the simulation"""
+    """Instanciate flowgo ia run_flowgo_effusion_rate_array.py and run it for many effusion rate using a given slope file 
+    For that: define the slope file execute the simulation"""
 
     # slope_file = "resource/DEM_MaunaLoa1984.txt"
     #simulation = run_flowgo_effusion_rate_array.StartFlowgo()

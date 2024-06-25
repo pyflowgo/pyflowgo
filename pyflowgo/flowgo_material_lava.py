@@ -84,7 +84,8 @@ class FlowGoMaterialLava:
         return self._latent_heat_of_crystallization  # L [K.Kg-1]
 
     def computes_molten_material_temperature(self, state):
-        return state.get_core_temperature() - self._buffer  # [K]
+        molten_material_temperature = state.get_core_temperature() - self._buffer  # [K]
+        return molten_material_temperature
 
     def computes_bulk_viscosity(self, state):
         bulk_viscosity = self._melt_viscosity_model.compute_melt_viscosity(state) * \

@@ -1,11 +1,11 @@
 {
-  "lava_name": "template",
+  "lava_name": "template_test",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
   "effusion_rate_init" :3,
 
   "heat_budget_models":{
-   "radiation" : "basic",
+   "radiation" : "no",
    "snyder":"no",
    "conduction" : "yes",
    "convection" : "yes",

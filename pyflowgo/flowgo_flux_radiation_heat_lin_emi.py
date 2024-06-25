@@ -37,7 +37,6 @@ References:
 Thompson, J. O., & Ramsey, M. S. (2021). The influence of variable emissivity on lava flow propagation modeling. 
 Bulletin of Volcanology, 83(6), 1–19. https://doi.org/10.1007/s00445-021-01462-3
 
-
 """
 
 class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
@@ -108,64 +107,6 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
                                  epsilon_effective)
         return epsilon_effective
 
-
-    def _compute_spectral_radiance (self, state, terrain_condition, channel_width):
-        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
-        crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
-        molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
-        background_temperature = 258  # K
-        # crust_temperature = 273.15
-
-        emissivity_crust = self._compute_emissivity_crust(state, self._terrain_condition)
-        emissivity_molten = self._compute_emissivity_molten(state, self._terrain_condition)
-
-        # area per pixel
-        #Lpixel = 30.0 #I changed this
-        Lpixel = 0.100
-        A_pixel = Lpixel * Lpixel
-        A_lava = Lpixel * channel_width
-        Ahot = A_lava * (1 - effective_cover_fraction)
-        Acrust = A_lava * effective_cover_fraction
-        # portion of pixel cover by molten lava
-        Phot = Ahot / A_pixel
-        print("Phot",Phot)
-        Pcrust = Acrust / A_pixel
-        atmospheric_transmissivity = 0.8
-
-        # emissivity of snow
-        epsilon_3 = 0.1
-
-        lamda = 0.8675 * 10 ** (-6)  # micro
-        h = 6.6256 * 10 ** (-34)  # Js
-        c = 2.9979 * 10 ** 8  # ms-1
-        C1 = 2 * math.pi * h * c ** 2  # W.m^2
-
-        kapa = 1.38 * 10 ** (-23)  # JK-1
-        C2 = h * c / kapa  # m K
-        print("c2", C2)
-        # crust component
-        crust_spectral_radiance = (C1 * lamda ** (-5)) / (math.exp(C2 / (lamda * crust_temperature)) - 1)
-        print("crust_spectral_radiance",crust_spectral_radiance)
-        # molten component
-        molten_spectral_radiance = C1 * lamda ** (-5) / (math.exp(C2 / (lamda * molten_material_temperature)) - 1)
-        print("molten_spectral_radiance", molten_spectral_radiance)
-        # background component
-        background_spectral_radiance = C1 * lamda ** (-5) / (math.exp(C2 / (lamda * background_temperature)) - 1)
-        print("background_spectral_radiance",background_spectral_radiance)
-        # equation radiance W/m2/m
-
-        spectral_radiance_m = atmospheric_transmissivity * (emissivity_molten * Phot * molten_spectral_radiance +
-                                                            emissivity_crust * Pcrust * crust_spectral_radiance +
-                                                            (1 - Phot - Pcrust) * epsilon_3 * background_spectral_radiance)
-
-        # equation radiance W/m2/micro
-        spectral_radiance = spectral_radiance_m * 10 ** (-6)
-
-        self.logger.add_variable("spectral_radiance", state.get_current_position(), spectral_radiance)
-
-        return spectral_radiance
-
-
     def compute_flux(self, state, channel_width, channel_depth):
         effective_radiation_temperature = self._compute_effective_radiation_temperature \
             (state, self._terrain_condition)
@@ -174,7 +115,47 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
         qradiation = self._sigma * epsilon_effective * (effective_radiation_temperature ** 4.) * channel_width
 
-        # TODO: add on AUG 29_ compute spectral_radiance
         spectral_radiance = self._compute_spectral_radiance(state, self._terrain_condition, channel_width)
-
+        self.logger.add_variable("spectral_radiance", state.get_current_position(), spectral_radiance)
         return qradiation
+    def _compute_spectral_radiance (self, state, terrain_condition, channel_width):
+        effective_cover_fraction = self._effective_cover_crust_model.compute_effective_cover_fraction(state)
+        crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
+        molten_material_temperature = self._material_lava.computes_molten_material_temperature(state)
+        air_temperature = self._material_air.get_temperature()
+        emissivity_crust = self._compute_emissivity_crust(state, self._terrain_condition)
+        emissivity_molten = self._compute_emissivity_molten(state, self._terrain_condition)
+
+        # Constants
+        l_pixel = 30  # pixel length (m) for ALI 30 m
+        a_pixel = l_pixel * l_pixel  #m2
+        lamda = 0.8675e-6  # micrometers ALI unsaturated band 7 data, band center at: 0.8675 microns
+        c1 = 3.741832e-16  # first radiation constant in W.m^2  (c1 = 2 * math.pi * h * c ** 2
+        # with h = 6.6256e-34 Js the Planck constant  and  c = 2.9979e8 m/s the speed of light)
+        c2 = 1.438786e-2  # the second radiation constant in m K (c2 = h * c / kapa
+        # with kapa = 1.38e-23 J/K the Boltzmann constant )
+        epsilon_3 = 0.1  # Background emissivity, here emissivity of snow
+        atmospheric_transmissivity = 0.8
+
+        a_lava = l_pixel * channel_width  #m2 Area cover by lava
+        a_hot = a_lava * (1 - effective_cover_fraction)  # m2 Area cover by molten lava
+        a_crust = a_lava * effective_cover_fraction  # Area cover by crust
+        p_hot = a_hot / a_pixel  # portion of pixel cover by molten lava
+        p_crust = a_crust / a_pixel  # portion of pixel cover by crust
+
+        # crust component
+        crust_spectral_radiance = c1 * lamda ** (-5) / (math.exp(c2 / (lamda * crust_temperature)) - 1)
+        # molten component
+        molten_spectral_radiance = c1 * lamda**(-5) / (math.exp(c2 / (lamda * molten_material_temperature)) - 1)
+        # background component
+        background_spectral_radiance = c1 * lamda**(-5) / (math.exp(c2 / (lamda * air_temperature)) - 1)
+
+        # equation radiance W/m2/m
+        spectral_radiance_m = atmospheric_transmissivity * (emissivity_molten * p_hot * molten_spectral_radiance +
+                                                            emissivity_crust * p_crust * crust_spectral_radiance +
+                                                            (1-p_hot-p_crust) * epsilon_3 * background_spectral_radiance)
+
+        # equation radiance W/m2/micro
+        spectral_radiance = spectral_radiance_m * 10e-6
+
+        return spectral_radiance

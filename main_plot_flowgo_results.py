@@ -31,8 +31,11 @@ if __name__ == "__main__":
 
     path_to_folder = os.path.abspath('')
 
-    filename_array = ["./results_flowgo/results_flowgo_template_3m3s.csv",
-                      "./results_flowgo/results_flowgo_template2_10m3s.csv"]
+    filename_array = [#"/Users/chevrel/Documents/GitHub/pyflowgo/resource/results_flowgo_template_test_3m3s.csv",
+                      #"./results_flowgo/results_flowgo_template_3m3s.csv",
+                      "/Users/chevrel/Documents/MAYOTTE/Flowgo-FaniMaore/Flowgo-FaniMaoreresults_flowgo_FM_water_env_slope5_200m3s.csv"
+                      #"./results_flowgo/results_flowgo_template2_10m3s.csv",
+                      ]
 
     plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
 

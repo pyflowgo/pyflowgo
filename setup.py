@@ -10,5 +10,5 @@ setup(
     author='Oryalava',
     author_email='oryaelle.chevrel@ird.fr',
     description='Compute the thermo-rheological properties down a lava channel',
-    url='https://github.com/pyflowgo/pyflowgo',  # URL du projet si disponible
+    url='https://github.com/oryalava/DOWNFLOWGO',  # URL du projet si disponible
 )
