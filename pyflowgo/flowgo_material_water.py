@@ -30,9 +30,9 @@ class FlowGoMaterialWater:
         self._k_water = 0.581  # Seawater thermal conductivity [W m-1 K-1]
         self._rho_water = 1040.  # density of the seawater [kg/m3]
         self._cp_water = 3945.  # Seawater specific heat capacity [J kg-1 K-1]
-        self.effusivity_water = 1505.41 # Effusivity of the seawater [J K-1 m-2 s-1/2] 
-        self.dynamic_visco_water = 1.75E-03 # Dynamic viscosity of the seawater [Pa s] 
-        self.kinematic_visco_water = 1.72E-06 # Kinematic viscosity of the seawater [m2 s-1] 
+        self._effusivity_water = 1505.41 # Effusivity of the seawater [J K-1 m-2 s-1/2] 
+        self._dynamic_visco_water = 1.75E-03 # Dynamic viscosity of the seawater [Pa s] 
+        self._kinematic_visco_water = 1.72E-06 # Kinematic viscosity of the seawater [m2 s-1] 
 
 
     def read_initial_condition_from_json_file(self, filename):
@@ -47,7 +47,10 @@ class FlowGoMaterialWater:
             self._effusivity_water = float(data['convection_parameters']['E_water'])
             self._dynamic_visco_water = float(data['convection_parameters']['water_dynamic_visco'])
             self._kinematic_visco_water = float(data['convection_parameters']['water_kinematic_visco'])
-
+    
+    def compute_conv_heat_transfer_coef_water(self):
+        #return 35
+        return self._k_water * self._rho_water * self._cp_water * self._water_speed
 
     def get_temperature(self):
         return self._temp_water

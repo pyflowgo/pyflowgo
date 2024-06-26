@@ -28,8 +28,12 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="push setup.py">
+    <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="correction to remove biren models">
+      <change afterPath="$PROJECT_DIR$/resource/template_water.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_flux_convection_heat_water.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_convection_heat_water.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_integrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_material_water.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_material_water.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_model_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_model_factory.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,20 +89,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;git-widget-placeholder&quot;: &quot;develop__downflowgo&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/chevrel/Documents/GitHub/pyflowgo/pyflowgo&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "develop__downflowgo",
+    "last_opened_file_path": "/Users/chevrel/Documents/GitHub/pyflowgo/resource",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resource" />
       <recent name="$PROJECT_DIR$/pyflowgo" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Holuhraun2014" />
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
-      <recent name="$PROJECT_DIR$/tests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Tolbachik" />
@@ -108,7 +112,7 @@
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_run_flowgo">
+  <component name="RunManager" selected="Python.main_flowgo">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -187,6 +191,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main_flowgo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_flowgo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_flowgo_Tolbachik" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -250,42 +275,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main_run_flowgo_Holuhraun_jonas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyflowgo" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_run_flowgo_Holuhraun_jonas.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
+      <item itemvalue="Python.main_flowgo" />
       <item itemvalue="Python.compute_spectral_radiance" />
       <item itemvalue="Python.main_flowgo_Tolbachik" />
       <item itemvalue="Python.main_run_flowgo" />
       <item itemvalue="Python.main_run_flowgo_Holuhraun" />
-      <item itemvalue="Python.main_run_flowgo_Holuhraun_jonas" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_flowgo" />
         <item itemvalue="Python.main_run_flowgo" />
         <item itemvalue="Python.main_run_flowgo_Holuhraun" />
         <item itemvalue="Python.main_flowgo_Tolbachik" />
         <item itemvalue="Python.compute_spectral_radiance" />
-        <item itemvalue="Python.main_run_flowgo_Holuhraun_jonas" />
       </list>
     </recent_temporary>
   </component>
@@ -300,13 +304,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1496180443852</updated>
-    </task>
-    <task id="LOCAL-00046" summary="upldating file to read the slope file">
-      <created>1578292781741</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1578292781741</updated>
     </task>
     <task id="LOCAL-00047" summary="change in terrain condition to make sure slope is always &gt;0.1°">
       <created>1580202289001</created>
@@ -644,7 +641,14 @@
       <option name="project" value="LOCAL" />
       <updated>1716287112580</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="correction to remove biren models">
+      <created>1719325755769</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1719325755769</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -703,7 +707,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_NEW_TODO" value="false" />
     <option name="LIMIT_HISTORY" value="false" />
-    <MESSAGE value="update figure size" />
     <MESSAGE value="update slope file path" />
     <MESSAGE value="Add and update heat flux models:&#10;--&gt; update the 'basic' radiation model with Teff calculated considering T_air &#10;--&gt; update of the &quot;two-emissivity&quot; radiationmodel from Ramsey te al. 2019 &#10;--&gt; add of the radiation heat model (linemi) from Thompson and Ramsey 2021 (where emissivity depend on tempature)&#10;---&gt; add heat model of Snyder 2002 (for Venus) from Flynn et al. submitted article to JGR&#10;&#10;--&gt; Add and update the test files for all these models.&#10;&#10;--&gt; update of the model_factory to include these models&#10;--&gt; update template.json to include these new models&#10;&#10;NEED to update the Json files now !" />
     <MESSAGE value="Update o fth eMaron Pierce model now including the crystal aspect ratio" />
@@ -728,7 +731,8 @@
     <MESSAGE value="little modification on the localisation of DOWNFLOW" />
     <MESSAGE value="little modification in the main DOWNFLOWGO" />
     <MESSAGE value="push setup.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="push setup.py" />
+    <MESSAGE value="correction to remove biren models" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction to remove biren models" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

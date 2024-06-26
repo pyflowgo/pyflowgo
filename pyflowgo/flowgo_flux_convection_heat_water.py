@@ -44,30 +44,16 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
                                  characteristic_surface_temperature)
         return characteristic_surface_temperature
 
-
-    def compute_rayleight_number(self):
-        Pr=
-
-    def compute_qforced(self):
-
-    def compute_qfree(self):
-
     def compute_flux(self, state, channel_width, channel_depth):
-        conv_heat_transfer_coef = self._material_air.compute_conv_heat_transfer_coef()
-        air_temperature = self._material_air.get_temperature()
+        conv_heat_transfer_coef_water = self._material_water.compute_conv_heat_transfer_coef_water()
+        water_temperature = self._material_water.get_temperature()
 
         characteristic_surface_temperature = self.compute_characteristic_surface_temperature \
             (state, self._terrain_condition)
             # For convection, we use a calculation of the convective heat transfer coefficient
             # taken from Keszthelyi & Denlinger (1996), whereby: h_c = C_H * rho_air * C_p_air * U
-
-        qforced = self.qforced(state, self._terrain_condition)
-
-        if Qforced<Qfree:
-            qconv = conv_heat_transfer_coef * (
-            characteristic_surface_temperature - air_temperature) * channel_width
-        else :
-            qconv = XXX
+        qconv = conv_heat_transfer_coef_water * (
+            characteristic_surface_temperature - water_temperature) * channel_width
 
         #log Snyder flux to zero
         effective_temperature_snyder = 0
@@ -76,7 +62,7 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
                                  effective_temperature_snyder)
         self.logger.add_variable("flowgofluxsnyderheat", state.get_current_position(), flowgofluxsnyderheat)
 
-        return qdconv
+        return qconv
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file

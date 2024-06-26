@@ -52,6 +52,7 @@ import pyflowgo.flowgo_flux_radiation_heat_lin_emi
 import pyflowgo.flowgo_flux_radiation_heat_emissivity_cont
 import pyflowgo.flowgo_flux_radiation_heat_emissivity
 import pyflowgo.flowgo_flux_forced_convection_heat
+import pyflowgo.flowgo_flux_convection_heat_water
 import pyflowgo.flowgo_flux_viscous_heating
 import pyflowgo.flowgo_flux_heat_loss_rain
 import pyflowgo.flowgo_flux_conduction_heat
@@ -130,13 +131,6 @@ class FlowgoModelFactory:
         # =========================
         self._material_air = pyflowgo.flowgo_material_air.FlowGoMaterialAir()
         self._material_air.read_initial_condition_from_json_file(configuration_file)
-
-        # =========================
-        # Material water
-        # =========================
-        self._material_water = pyflowgo.flowgo_material_water.FlowGoMaterialWater()
-        self._material_water.read_initial_condition_from_json_file(configuration_file)
-
 
         # =========================
         # Vesicle fraction model
@@ -392,6 +386,12 @@ class FlowgoModelFactory:
                 self._effective_cover_crust_model_object)
             self._heat_budget.append_flux(forced_convection_heat_flux)
         elif self._activate_heat_budget_convection == "water":
+            # =========================
+            # Material water
+            # =========================
+            self._material_water = pyflowgo.flowgo_material_water.FlowGoMaterialWater()
+            self._material_water.read_initial_condition_from_json_file(configuration_file)
+
             convection_heat_water_flux = pyflowgo.flowgo_flux_convection_heat_water.FlowGoFluxConvectionHeatWater(
                 terrain_condition,
                 self._material_water,
@@ -448,9 +448,6 @@ class FlowgoModelFactory:
 
     def get_material_air(self):
         return self._material_air
-
-    def get_material_water(self):
-        return self._material_water
 
     def get_material_lava(self):
         return self._material_lava
