@@ -140,15 +140,13 @@ class FlowGoIntegrator:
                                  current_state.get_crystal_fraction())
         self.logger.add_variable("core_temperature", current_state.get_current_position(),
                                  current_state.get_core_temperature())
+        self.logger.add_variable("molten_material_temperature", current_state.get_current_position(),
+                                 self.material_lava.computes_molten_material_temperature(current_state))
         self.logger.add_variable("viscosity", current_state.get_current_position(),
                                  self.material_lava.computes_bulk_viscosity(current_state))
         self.logger.add_variable("density", current_state.get_current_position(),
                                  self.material_lava.get_bulk_density(current_state))
         self.logger.add_variable("mean_velocity", current_state.get_current_position(), v_mean)
-        self.logger.add_variable("core_temperature", current_state.get_current_position(),
-                                 current_state.get_core_temperature())
-        self.logger.add_variable("core_temperature", current_state.get_current_position(),
-                                 current_state.get_core_temperature())
         self.logger.add_variable("crust_temperature", current_state.get_current_position(),
                                  self.crust_temperature_model.compute_crust_temperature(current_state))
         self.logger.add_variable("effective_cover_fraction", current_state.get_current_position(),

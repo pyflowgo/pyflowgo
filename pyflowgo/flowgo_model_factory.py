@@ -50,6 +50,8 @@ import pyflowgo.flowgo_flux_radiation_heat
 import pyflowgo.flowgo_flux_radiation_heat_lin_emi
 import pyflowgo.flowgo_flux_radiation_heat_emissivity_cont
 import pyflowgo.flowgo_flux_radiation_heat_emissivity
+import pyflowgo.flowgo_flux_radiation_heat_lin_emi_biren_swir
+import pyflowgo.flowgo_flux_radiation_heat_lin_emi_biren_tir
 import pyflowgo.flowgo_flux_forced_convection_heat
 import pyflowgo.flowgo_flux_viscous_heating
 import pyflowgo.flowgo_flux_heat_loss_rain
@@ -344,11 +346,28 @@ class FlowgoModelFactory:
                 self._crust_temperature_model_object,
                 self._effective_cover_crust_model_object)
             self._heat_budget.append_flux(radiation_heat_flux)
+        elif self._activate_heat_budget_radiation == "lin_emi_biren_tir":
+            radiation_heat_flux = pyflowgo.flowgo_flux_radiation_heat_lin_emi_biren_tir.FlowGoFluxRadiationHeat(
+                terrain_condition,
+                self._material_lava,
+                self._material_air,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(radiation_heat_flux)
+        elif self._activate_heat_budget_radiation == "lin_emi_biren_swir":
+            radiation_heat_flux = pyflowgo.flowgo_flux_radiation_heat_lin_emi_biren_swir.FlowGoFluxRadiationHeat(
+                terrain_condition,
+                self._material_lava,
+                self._material_air,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(radiation_heat_flux)
         elif self._activate_heat_budget_radiation == "no":
             pass
         else:
             raise NameError('Radiation model must be "basic" as originally or "2_emi" as Ramsey et al. 2019 '
-                            ' or "cont" or "lin_emi" see Thompson et al.,  or "no"')
+                            ' or "cont" or "lin_emi" see Thompson et al. 2021, '
+                            'or "lin_emi_biren_tir or lin_emi_biren_swir  see Biren et al.2024" or "no"')
 
         if self._activate_heat_budget_conduction == "yes":
             heat_conduction_flux = pyflowgo.flowgo_flux_conduction_heat.FlowGoFluxConductionHeat(self._material_lava)
@@ -366,10 +385,25 @@ class FlowgoModelFactory:
                 self._crust_temperature_model_object,
                 self._effective_cover_crust_model_object)
             self._heat_budget.append_flux(forced_convection_heat_flux)
+        elif self._activate_heat_budget_convection == "water":
+            # =========================
+            # Material water
+            # =========================
+            self._material_water = pyflowgo.flowgo_material_water.FlowGoMaterialWater()
+            self._material_water.read_initial_condition_from_json_file(configuration_file)
+
+            convection_heat_water_flux = pyflowgo.flowgo_flux_convection_heat_water.FlowGoFluxConvectionHeatWater(
+                terrain_condition,
+                self._material_water,
+                self._material_lava,
+                self._crust_temperature_model_object,
+                self._effective_cover_crust_model_object)
+            self._heat_budget.append_flux(convection_heat_water_flux)
+
         elif self._activate_heat_budget_convection == "no":
             pass
         else:
-            raise NameError('Forced convection model must be "yes" or "no"... ')
+            raise NameError('Convection model must be "yes for forced convection in air" or "Water for convection under water" or "no"... ')
 
         if self._activate_heat_budget_rain == "yes":
             heat_loss_rain_flux = pyflowgo.flowgo_flux_heat_loss_rain.FlowGoFluxHeatLossRain()
