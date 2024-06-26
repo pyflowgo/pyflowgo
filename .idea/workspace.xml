@@ -29,12 +29,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c051ad8a-e4ae-484c-bc92-ce34b61f6350" name="Default" comment="correction to remove biren models">
-      <change afterPath="$PROJECT_DIR$/resource/template_water.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_flux_convection_heat_water.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_flux_convection_heat_water.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_integrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_integrator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_material_water.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_material_water.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyflowgo/flowgo_model_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/pyflowgo/flowgo_model_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resource/template_water.json" beforeDir="false" afterPath="$PROJECT_DIR$/resource/template_water.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_flowgo/crustal_conditions_field.png" beforeDir="false" afterPath="$PROJECT_DIR$/results_flowgo/crustal_conditions_field.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_flowgo/heat_fluxes_field.png" beforeDir="false" afterPath="$PROJECT_DIR$/results_flowgo/heat_fluxes_field.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_flowgo/lava_properties_field.png" beforeDir="false" afterPath="$PROJECT_DIR$/results_flowgo/lava_properties_field.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/results_flowgo/slope_field.png" beforeDir="false" afterPath="$PROJECT_DIR$/results_flowgo/slope_field.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,13 +91,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "develop__downflowgo",
-    "last_opened_file_path": "/Users/chevrel/Documents/GitHub/pyflowgo/resource",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;develop__downflowgo&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/chevrel/Documents/GitHub/pyflowgo/resource&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resource" />
@@ -112,7 +114,7 @@
       <recent name="$PROJECT_DIR$/MaunaUlu74/results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main_flowgo">
+  <component name="RunManager" selected="Python.flux_forced_convection_heat_test">
     <configuration default="true" type="tests" factoryName="Attests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -148,7 +150,7 @@
       <option name="ipnbHost" value="127.0.0.1" />
       <option name="ipnbPort" value="8888" />
     </configuration>
-    <configuration name="compute_spectral_radiance" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="flux_forced_convection_heat_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pyflowgo" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -156,11 +158,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/compute_spectral_radiance.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/flux_forced_convection_heat_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="flux_radiation_heat_lin_emi_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pyflowgo" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/flux_radiation_heat_lin_emi_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -204,27 +227,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_flowgo.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main_flowgo_Tolbachik" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="pyflowgo" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_flowgo_Tolbachik.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -277,19 +279,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.main_downflowgo" />
+      <item itemvalue="Python.flux_forced_convection_heat_test" />
+      <item itemvalue="Python.flux_radiation_heat_lin_emi_test" />
       <item itemvalue="Python.main_flowgo" />
-      <item itemvalue="Python.compute_spectral_radiance" />
-      <item itemvalue="Python.main_flowgo_Tolbachik" />
       <item itemvalue="Python.main_run_flowgo" />
       <item itemvalue="Python.main_run_flowgo_Holuhraun" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.flux_forced_convection_heat_test" />
+        <item itemvalue="Python.flux_radiation_heat_lin_emi_test" />
         <item itemvalue="Python.main_flowgo" />
         <item itemvalue="Python.main_run_flowgo" />
         <item itemvalue="Python.main_run_flowgo_Holuhraun" />
-        <item itemvalue="Python.main_flowgo_Tolbachik" />
-        <item itemvalue="Python.compute_spectral_radiance" />
       </list>
     </recent_temporary>
   </component>

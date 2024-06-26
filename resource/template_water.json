@@ -8,7 +8,7 @@
    "radiation" : "no",
    "snyder":"no",
    "conduction" : "yes",
-   "convection" : "water",
+   "convection" : "yes",
    "rain" : "no",
    "viscous_heating" : "no"
   },
@@ -25,7 +25,7 @@
   },
 
   "terrain_conditions":{
-  "width": 4.5,
+  "width": 8,
   "depth": 1.4,
   "gravity": 9.81,
     "slope_smoothing_active": true,
@@ -65,12 +65,13 @@
     "air_specific_heat_capacity":1099.0,
     "water_temperature" : 275.15,
     "water_speed": 1.0,
-    "k_water" : 0.581,
+    "water_thermal_conductivity" : 0.581,
     "water_density" : 1040,
     "water_specific_heat_capacity" : 3945,
     "E_water" : 1505.41,
-    "water_dynamic_visco" : 1.75E-03,
-    "water_kinematic_visco" : 1.72E-06
+    "water_kinematic_visco" : 1.72e-06,
+    "water_dynamic_visco" : 1.75e-03
+
   },
   "thermal_parameters":{
     "buffer" : 140.0,

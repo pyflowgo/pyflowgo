@@ -41,7 +41,7 @@ class FlowGoMaterialWater:
             data = json.load(data_file)
             self._temp_water = float(data['convection_parameters']['water_temperature'])
             self._water_speed = float(data['convection_parameters']['water_speed'])
-            self._k_water = float(data['convection_parameters']['k_water'])
+            self._water_thermal_conductivity = float(data['convection_parameters']['water_thermal_conductivity'])
             self._rho_water = float(data['convection_parameters']['water_density'])
             self._cp_water = float(data['convection_parameters']['water_specific_heat_capacity'])
             self._effusivity_water = float(data['convection_parameters']['E_water'])

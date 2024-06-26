@@ -32,6 +32,19 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         self._effective_cover_crust_model = effective_cover_crust_model
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
 
+    def read_initial_condition_from_json_file(self, filename):
+        # read json parameters file
+        with open(filename) as data_file:
+            data = json.load(data_file)
+            self._temp_water = float(data['convection_parameters']['water_temperature'])
+            self._water_speed = float(data['convection_parameters']['water_speed'])
+            self._water_thermal_conductivity = float(data['convection_parameters']['water_thermal_conductivity'])
+            self._rho_water = float(data['convection_parameters']['water_density'])
+            self._cp_water = float(data['convection_parameters']['water_specific_heat_capacity'])
+            self._effusivity_water = float(data['convection_parameters']['E_water'])
+            self._water_dynamic_visco = float(data['convection_parameters']['water_dynamic_visco'])
+            self._water_kinematic_visco = float(data['convection_parameters']['water_kinematic_visco'])
+            self._gravity=float(data['terrain_conditions']['gravity'])
     def compute_characteristic_surface_temperature(self, state, terrain_condition):
         """ This is Tconv of Harris and Rowland"""
         crust_temperature = self._crust_temperature_model.compute_crust_temperature(state)
@@ -43,80 +56,90 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         self.logger.add_variable("characteristic_surface_temperature", state.get_current_position(),
                                  characteristic_surface_temperature)
         return characteristic_surface_temperature
+
+    def compute_length_scale(self, channel_width):
         
-    
-    def compute_lentgh_scale(self, channel_width):
-        
-        length_scale = (1*channel_width) / (2*1 + 2*channel_width)         #1 corresponds to the volume unity
-        
+        length_scale = (channel_width) / (2 + 2 * channel_width)         #1 corresponds to the volume unity
+        print(length_scale)
+        print("channel_width", channel_width)
         return length_scale
-    
-    
+
     def compute_prandlt_number(self):
-        dynamic_visco_water = self._dynamic_visco_water
-        cp_water = self._cp_water
-        water_thermal_conductivity = self._water_thermal_conductivity
-        
-        prandlt_number = (dynamic_visco_water*cp_water)/water_thermal_conductivity
-        
+
+        prandlt_number = (self._water_dynamic_visco*self._cp_water)/self._water_thermal_conductivity
+        print("prandlt_number",prandlt_number)
         return prandlt_number
-    
-    
+
     def compute_rayleight_number(self, state, channel_width):
+        length_scale = self.compute_length_scale(channel_width)
+        prandlt_number = self.compute_prandlt_number()
         water_temperature = self._material_water.get_temperature()
-        kinematic_visco_water = self._kinematic_visco_water
+        water_kinematic_visco = self._water_kinematic_visco
         gravity = self._gravity
-        
+        characteristic_surface_temperature = self.compute_characteristic_surface_temperature \
+            (state, self._terrain_condition)
+
         T = (characteristic_surface_temperature - water_temperature)/2.
         B = 1./T
-        
-        grasholf_number = ((gravity * B * (characteristic_surface_temperature-water_temperature)/kinematic_visco_water**2)*length_scale**3
-        
+        print('water_temperature',water_temperature)
+        grasholf_number = (gravity * B * (characteristic_surface_temperature-water_temperature)/water_kinematic_visco**2)*length_scale**3
+        print("T=",T)
+        print("B=", B)
+        print('water_kinematic_visco',water_kinematic_visco)
+        print("characteristic_surface_temperature", characteristic_surface_temperature)
+
+        print("grasholf_number", grasholf_number)
         rayleight_number = prandlt_number * grasholf_number
-        
+        print("rayleight_number",rayleight_number)
         return rayleight_number
-        
-    
-    def compute_qconvfree(self, state):
+    def compute_hfree(self,state, channel_width):
+        length_scale = self.compute_length_scale(channel_width)
+        rayleight_number = self.compute_rayleight_number(state, channel_width)
+
+        if rayleight_number < 10 ** 9:
+            Nu = 0.59 * rayleight_number ** (1 / 4)
+            hfree = (Nu * self._water_thermal_conductivity) / length_scale
+        else:
+            Nu = 0.1 * rayleight_number ** (1 / 3)
+            hfree = (Nu * self._water_thermal_conductivity) / length_scale
+        return hfree
+    def compute_qconvfree(self, state, channel_width):
+        hfree = self.compute_hfree(state, channel_width)
         water_temperature = self._material_water.get_temperature()
         water_thermal_conductivity = self._water_thermal_conductivity        
-        
-        if rayleight_number < 10**9:
-            Nu = 0.59*rayleight_number**(1/4)
-            hfree = (Nu*water_thermal_conductivity)/length_scale
-            qconvfree = hfree*(characteristic_surface_temperature - water_temperature) * channel_width
-        else:
-            Nu = 0.1*rayleight_number**(1/3)
-            hfree = (Nu*water_thermal_conductivity)/length_scale
-            qconvfree = hfree*(characteristic_surface_temperature - water_temperature) * channel_width
+        characteristic_surface_temperature = self.compute_characteristic_surface_temperature \
+            (state, self._terrain_condition)
+
+        qconvfree = hfree*(characteristic_surface_temperature - water_temperature) * channel_width
         return qconvfree
-        
-    
-    def compute_reynolds_number(self, channel_width):
-        water_speed = self._water_speed
-        kinematic_visco_water = self._kinematic_visco_water
-        
-        reynolds_number = (water_speed*channel_width)/kinematic_visco_water
-        
-        return reynolds_number    
-    
-    
+    def compute_hforced(self, channel_width):
+        water_temperature = self._material_water.get_temperature()
+        water_thermal_conductivity = self._water_thermal_conductivity
+        prandlt_number = self.compute_prandlt_number()
+        reynolds_number = self._water_speed * channel_width / self._water_kinematic_visco
+
+        if reynolds_number < 5e5:
+            Nu = 0.332 * reynolds_number ** (1 / 2) * prandlt_number ** (1 / 3)
+            hforced = 2 * (Nu * water_thermal_conductivity) / channel_width
+        else:
+            Nu = 0.0296 * reynolds_number ** (4 / 5) * prandlt_number ** (1 / 3)
+            hforced = 2 * (Nu * water_thermal_conductivity) / channel_width
+        return hforced
     def compute_qconvforced(self, state, channel_width):
         water_temperature = self._material_water.get_temperature()
-        water_thermal_conductivity = self._water_thermal_conductivity       
-        
-        if reynolds_number < 5*10**5:
-            Nu = 0.332*reynolds_number**(1/2)*prandlt_number**(1/3)
-            hforced = 2*(Nu*water_thermal_conductivity)/channel_width
-            qconvforced = hforced*(characteristic_surface_temperature - water_temperature) * channel_width
-        else:
-            Nu = 0.0296*reynolds_number**(4/5)*prandlt_number**(1/3)
-            hforced = 2*(Nu*water_thermal_conductivity)/channel_width
-            qconvforced = hforced*(characteristic_surface_temperature - water_temperature) * channel_width
+        hforced = self.compute_hforced(channel_width)
+        characteristic_surface_temperature = self.compute_characteristic_surface_temperature \
+            (state, self._terrain_condition)
+
+        qconvforced = hforced*(characteristic_surface_temperature - water_temperature) * channel_width
         return qconvforced    
 
-
     def compute_flux(self, state, channel_width, channel_depth):
+
+        qconvforced = self.compute_qconvforced(state, channel_width)
+        qconvfree = self.compute_qconvfree(state, channel_width)
+        hfree = self.compute_hfree(state, channel_width)
+        hforced = self.compute_hforced(channel_width)
 
         if hfree<hforced:
             qconv = qconvforced  
@@ -129,12 +152,5 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         self.logger.add_variable("effective_temperature_snyder", state.get_current_position(),
                                  effective_temperature_snyder)
         self.logger.add_variable("flowgofluxsnyderheat", state.get_current_position(), flowgofluxsnyderheat)
-
+        print("qconv = ",qconv)
         return qconv
-
-  
-    def read_initial_condition_from_json_file(self, filename):
-        # read json parameters file
-        with open(filename) as data_file:
-            data = json.load(data_file)
-
