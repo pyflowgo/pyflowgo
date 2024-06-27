@@ -2,13 +2,13 @@
   "lava_name": "template_test_water",
   "slope_file": "resource/example_slope_profile.txt",
   "step_size": 10.0,
-  "effusion_rate_init" :3,
+  "effusion_rate_init" :200,
 
   "heat_budget_models":{
    "radiation" : "no",
    "snyder":"no",
    "conduction" : "yes",
-   "convection" : "yes",
+   "convection" : "water",
    "rain" : "no",
    "viscous_heating" : "no"
   },
@@ -27,21 +27,21 @@
   "terrain_conditions":{
   "width": 8,
   "depth": 1.4,
-  "gravity": 9.81,
+  "gravity": 6.23,
     "slope_smoothing_active": true,
     "slope_smoothing_number_of_points": 5,
   "max_channel_length": 30000.0
   },
   "eruption_condition":{
-  "eruption_temperature" : 1387.15,
-  "viscosity_eruption" : 1000.0
+  "eruption_temperature" : 1388.15,
+  "viscosity_eruption" : 679.0
   },
   "lava_state":{
   "position" : 0.0,
   "time" : 1.0,
-  "crystal_fraction": 0.104,
-  "density_dre" : 2970.0,
-  "vesicle_fraction" : 0.64,
+  "crystal_fraction": 0.04,
+  "density_dre" : 2870.0,
+  "vesicle_fraction" : 0.35,
   "liquidus_temperature": 0.0
   },
   "radiation_parameters":{
@@ -58,40 +58,41 @@
     "latent_heat_vaporization" : 2.8e6
   },
   "convection_parameters":{
-    "wind_speed" : 5.0,
+    "wind_speed" : 0.0,
     "ch_air" : 0.0036,
-    "air_temperature" : 293.15,
-    "air_density" : 0.4412,
-    "air_specific_heat_capacity":1099.0,
+    "air_temperature" : 283.15,
+    "air_density" :  1.0,
+    "air_specific_heat_capacity":3870.0
+	
+	
+	  "water_speed" : 1.0,
     "water_temperature" : 275.15,
-    "water_speed": 1.0,
-    "water_thermal_conductivity" : 0.581,
-    "water_density" : 1040,
-    "water_specific_heat_capacity" : 3945,
-    "E_water" : 1505.41,
-    "water_kinematic_visco" : 1.72e-06,
-    "water_dynamic_visco" : 1.75e-03
+    "water_density" :  1040,
+    "water_specific_heat_capacity" :3945.0,
+	  "water_thermal_conductivity" : 0.581,
+	  "water_dynamic_visco" : 1.75e-3,
+	  "water_kinematic_visco" : 1.68e-6,
 
   },
   "thermal_parameters":{
     "buffer" : 140.0,
     "crust_cover_fraction": 1.0,
     "alpha" : -0.00756,
-    "crust_temperature": 773.15
+    "crust_temperature": 709.0
   },
   "melt_viscosity_parameters":{
-    "shaw_slope" :2.36,
-    "a_vft" : -4.52,
-    "b_vft": 5558,
-    "c_vft" : 582.9
+    "shaw_slope" :0.0,
+    "a_vft" : -4.6,
+    "b_vft": 6053.1,
+    "c_vft" : 573.6
   },
   "crystals_parameters":{
-    "crystals_grown_during_cooling": 0.896,
-    "solid_temperature": 1237.15,
+    "crystals_grown_during_cooling": 0.45,
+    "solid_temperature": 1368.15,
     "latent_heat_of_crystallization": 350000.0
   },
     "relative_viscosity_parameters":{
-    "max_packing": 0.641,
+    "max_packing": 0.53,
     "einstein_coef":3.27,
     "strain_rate" : 1.0
   }
