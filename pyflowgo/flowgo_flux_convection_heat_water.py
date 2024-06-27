@@ -58,14 +58,12 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         return characteristic_surface_temperature
 
     def compute_length_scale(self, channel_width):
-        
         length_scale = (channel_width) / (2 + 2 * channel_width)         #1 corresponds to the volume unity
-        print(length_scale)
+        print("length_scale", length_scale)
         print("channel_width", channel_width)
         return length_scale
 
     def compute_prandlt_number(self):
-
         prandlt_number = (self._water_dynamic_visco*self._cp_water)/self._water_thermal_conductivity
         print("prandlt_number",prandlt_number)
         return prandlt_number
@@ -81,17 +79,20 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
 
         T = (characteristic_surface_temperature - water_temperature)/2.
         B = 1./T
-        print('water_temperature',water_temperature)
+        
         grasholf_number = (gravity * B * (characteristic_surface_temperature-water_temperature)/water_kinematic_visco**2)*length_scale**3
+       
+        rayleight_number = prandlt_number * grasholf_number
+        
+        print("water_temperature",water_temperature)
         print("T=",T)
         print("B=", B)
-        print('water_kinematic_visco',water_kinematic_visco)
+        print("water_kinematic_visco",water_kinematic_visco)
         print("characteristic_surface_temperature", characteristic_surface_temperature)
-
         print("grasholf_number", grasholf_number)
-        rayleight_number = prandlt_number * grasholf_number
         print("rayleight_number",rayleight_number)
         return rayleight_number
+    
     def compute_hfree(self,state, channel_width):
         length_scale = self.compute_length_scale(channel_width)
         rayleight_number = self.compute_rayleight_number(state, channel_width)
@@ -102,6 +103,9 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         else:
             Nu = 0.1 * rayleight_number ** (1 / 3)
             hfree = (Nu * self._water_thermal_conductivity) / length_scale
+        
+        print("Nu",Nu)
+        print("hfree", hfree)
         return hfree
     def compute_qconvfree(self, state, channel_width):
         hfree = self.compute_hfree(state, channel_width)
@@ -111,7 +115,10 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
             (state, self._terrain_condition)
 
         qconvfree = hfree*(characteristic_surface_temperature - water_temperature) * channel_width
+        
+        print("qconvfree", qconvfree)
         return qconvfree
+    
     def compute_hforced(self, channel_width):
         water_temperature = self._material_water.get_temperature()
         water_thermal_conductivity = self._water_thermal_conductivity
@@ -124,6 +131,11 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         else:
             Nu = 0.0296 * reynolds_number ** (4 / 5) * prandlt_number ** (1 / 3)
             hforced = 2 * (Nu * water_thermal_conductivity) / channel_width
+        
+        print("prandlt_number",prandlt_number)
+        print("reynolds_number",reynolds_number)
+        print("Nu",Nu)
+        print("hforced", hforced)        
         return hforced
     def compute_qconvforced(self, state, channel_width):
         water_temperature = self._material_water.get_temperature()
@@ -132,10 +144,10 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
             (state, self._terrain_condition)
 
         qconvforced = hforced*(characteristic_surface_temperature - water_temperature) * channel_width
+        print("qconvforced", qconvforced )
         return qconvforced    
 
     def compute_flux(self, state, channel_width, channel_depth):
-
         qconvforced = self.compute_qconvforced(state, channel_width)
         qconvfree = self.compute_qconvfree(state, channel_width)
         hfree = self.compute_hfree(state, channel_width)
@@ -152,5 +164,5 @@ class FlowGoFluxConvectionHeatWater(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlu
         self.logger.add_variable("effective_temperature_snyder", state.get_current_position(),
                                  effective_temperature_snyder)
         self.logger.add_variable("flowgofluxsnyderheat", state.get_current_position(), flowgofluxsnyderheat)
-        print("qconv = ",qconv)
+        print("qconv",qconv)
         return qconv
