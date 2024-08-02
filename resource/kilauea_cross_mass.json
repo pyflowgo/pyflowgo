@@ -1,0 +1,95 @@
+{
+  "lava_name": "Kilauea2018_cross_1mm_mass",
+  "slope_file": "resource/KLERZ_Slope_Profile_Combined_roll.txt",
+  "step_size": 10.0,
+  "effusion_rate_init" :1593,
+
+  "heat_budget_models":{
+   "radiation" : "basic",
+   "snyder":"no",
+   "conduction" : "yes",
+   "convection" : "yes",
+   "rain" : "no",
+   "viscous_heating" : "yes"
+  },
+
+  "models":{
+  "crystallization_rate_model":"basic",
+  "melt_viscosity_model":"vft",
+  "relative_viscosity_model":"kd",
+  "relative_viscosity_bubbles_model":"cross",
+  "yield_strength_model":"basic",
+  "crust_temperature_model":"hon",
+  "effective_cover_crust_model": "basic",
+  "vesicle_fraction_model":"poly"
+  },
+
+  "terrain_conditions":{
+  "width": 35.0,
+  "depth": 6.5,
+  "gravity": 9.81,
+  "slope_smoothing_active": false,
+  "slope_smoothing_number_of_points": 5,
+  "max_channel_length":  13450.0
+  },
+  "eruption_condition":{
+  "eruption_temperature" : 1423.15,
+  "viscosity_eruption" : 60.0
+  },
+  "lava_state":{
+  "position" : 0.0,
+  "time" : 1.0,
+  "crystal_fraction": 0.05,
+  "density_dre" : 2870.0,
+ "vesicle_fraction" : 0.7622,
+  "vesicle_poly_a": 0,
+  "vesicle_poly_b": -0.0000258,
+  "liquidus_temperature": 1235
+  },
+  "radiation_parameters":{
+    "stefan-boltzmann_sigma" : 5.67e-8,
+    "emissivity_epsilon" : 0.95
+  },
+  "conduction_parameters":{
+    "basal_temperature" : 1000,
+    "core_base_distance" : 2.0
+  },
+    "rain_parameters":{
+    "rainfall_rate" : 7.93e-8,
+    "density_water" : 958.0,
+    "latent_heat_vaporization" : 2.8e6
+  },
+  "convection_parameters":{
+    "wind_speed" : 2.63,
+    "ch_air" : 0.0036,
+    "air_temperature" : 310.3,
+    "air_density" : 0.4412,
+    "air_specific_heat_capacity":1099.0
+  },
+  "thermal_parameters":{
+    "buffer" : 30.0,
+    "crust_cover_fraction": 0.75,
+    "alpha" : -0.00756,
+    "crust_temperature": 623.15
+  },
+  "melt_viscosity_parameters":{
+    "shaw_slope" :2.36,
+    "a_vft" : -4.55,
+    "b_vft": 5343.7,
+    "c_vft" : 622.0
+  },
+  "crystals_parameters":{
+    "crystals_grown_during_cooling": 0.25,
+    "solid_temperature": 1237.15,
+    "latent_heat_of_crystallization": 350000.0
+  },
+    "relative_viscosity_parameters":{
+    "max_packing": 0.56,
+    "crit_packing": 0.39,
+    "einstein_coef" :2.72,
+    "beinstein_coef": 1.98,
+    "radius": 0.0005,
+    "surface_tension": 0.37,
+    "strain_rate" : 1.0
+  }
+}
