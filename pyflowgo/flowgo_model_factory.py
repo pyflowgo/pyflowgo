@@ -23,6 +23,7 @@ import pyflowgo.flowgo_yield_strength_model_basic
 import pyflowgo.flowgo_yield_strength_model_dragoni
 import pyflowgo.flowgo_yield_strength_model_ryerson
 import pyflowgo.flowgo_yield_strength_model_dragoni_alone
+import pyflowgo.flowgo_yield_strength_model_bll
 import pyflowgo.flowgo_melt_viscosity_model_basic
 import pyflowgo.flowgo_melt_viscosity_model_shaw
 #import pyflowgo.flowgo_melt_viscosity_model_grd
@@ -30,6 +31,7 @@ import pyflowgo.flowgo_melt_viscosity_model_vft
 import pyflowgo.flowgo_relative_viscosity_model_er
 import pyflowgo.flowgo_relative_viscosity_model_kd
 import pyflowgo.flowgo_relative_viscosity_model_mp
+import pyflowgo.flowgo_relative_viscosity_model_bll
 #import pyflowgo.flowgo_relative_viscosity_model_costa
 import pyflowgo.flowgo_relative_viscosity_model_costa1
 import pyflowgo.flowgo_relative_viscosity_model_costa2
@@ -39,6 +41,7 @@ import pyflowgo.flowgo_relative_viscosity_model_ptp3
 import pyflowgo.flowgo_relative_viscosity_bubbles_model_rigid
 import pyflowgo.flowgo_relative_viscosity_bubbles_model_defo
 import pyflowgo.flowgo_relative_viscosity_bubbles_model_no
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_cross
 import pyflowgo.flowgo_material_lava
 import pyflowgo.flowgo_material_air
 import pyflowgo.flowgo_crystallization_rate_model_basic
@@ -66,6 +69,7 @@ import pyflowgo.flowgo_vesicle_fraction_model_constant
 import pyflowgo.flowgo_vesicle_fraction_model_bimodal
 import pyflowgo.flowgo_vesicle_fraction_model_variable
 import pyflowgo.flowgo_vesicle_fraction_model_variable_bimodal
+import pyflowgo.flowgo_vesicle_fraction_model_poly
 import json
 
 import pyflowgo.base.flowgo_base_crystallization_rate_model
@@ -145,8 +149,11 @@ class FlowgoModelFactory:
         elif self._vesicle_fraction_model == "variable_bimodal":
             self._vesicle_fraction_model_object = pyflowgo.flowgo_vesicle_fraction_model_variable_bimodal. \
                 FlowGoVesicleFractionModelVariableBimodal()
+        elif self._vesicle_fraction_model == "poly":
+            self._vesicle_fraction_model_object = pyflowgo.flowgo_vesicle_fraction_model_poly. \
+                FlowGoVesicleFractionModelPoly()
         else:
-            raise NameError('vesicle fraction model must be "constant" or "bimodal" or "variable" or "variable_bimodal"... ')
+            raise NameError('vesicle fraction model must be "constant" or "bimodal" or "variable" or "variable_bimodal" or "poly"... ')
 
         assert isinstance(self._vesicle_fraction_model_object,
                           pyflowgo.base.flowgo_base_vesicle_fraction_model.FlowGoBaseVesicleFractionModel)
@@ -188,6 +195,9 @@ class FlowgoModelFactory:
         elif self._relative_viscosity_model == "mp":
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_mp.\
                 FlowGoRelativeViscosityModelMP()
+        elif self._relative_viscosity_model == "bll":
+            self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_bll.\
+                FlowGoRelativeViscosityModelBLL()
         elif self._relative_viscosity_model == "ptp1":
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_ptp1.\
                 FlowGoRelativeViscosityModelPhanThienPham1(vesicle_fraction_model=self._vesicle_fraction_model_object)
@@ -205,7 +215,7 @@ class FlowgoModelFactory:
                 FlowGoRelativeViscosityModelCosta2()
         else:
             raise NameError('Relative viscosity model must be "er" or "kd" or "mp" or "costa1" ou "costa2" or "ptp1" or'
-                            '"ptp2" or "ptp3"... ')
+                            '"ptp2" or "ptp3" or "bll"... ')
 
         assert isinstance(self._relative_viscosity_model_object,
                           pyflowgo.base.flowgo_base_relative_viscosity_model.FlowGoBaseRelativeViscosityModel)
@@ -224,8 +234,11 @@ class FlowgoModelFactory:
         elif self._relative_viscosity_bubbles_model == "no":
             self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_no. \
                 FlowGoRelativeViscosityBubblesModelNo(vesicle_fraction_model=self._vesicle_fraction_model_object)
+        elif self._relative_viscosity_bubbles_model == "cross":
+            self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_cross. \
+                FlowGoRelativeViscosityBubblesModelCross(vesicle_fraction_model=self._vesicle_fraction_model_object)
         else:
-            raise NameError('Relative viscosity bubbles model must be "rigid" or "deformable" or "no"...')
+            raise NameError('Relative viscosity bubbles model must be "rigid" or "deformable" or "no" or "cross"...')
 
         assert isinstance(self._relative_viscosity_bubbles_model_object,
                           pyflowgo.base.flowgo_base_relative_viscosity_bubbles_model.FlowGoBaseRelativeViscosityBubblesModel)
@@ -243,8 +256,10 @@ class FlowgoModelFactory:
             self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_dragoni_alone.FlowGoYieldStrengthModelDragoniAlone()
         elif self._yield_strength_model == "ryerson":
             self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_ryerson.FlowGoYieldStrengthModelRyerson()
+        elif self._yield_strength_model == "bll":
+            self._yield_strength_model_object = pyflowgo.flowgo_yield_strength_model_bll.FlowGoYieldStrengthModelBLL()
         else:
-            raise NameError('Yield strength model must be "basic" or "dragoni" or "dragoni-alone" or "ryerson"... ')
+            raise NameError('Yield strength model must be "basic" or "dragoni" or "dragoni-alone" or "ryerson" or "bll"... ')
 
         assert isinstance(self._yield_strength_model_object,
                           pyflowgo.base.flowgo_base_yield_strength_model.FlowGoBaseYieldStrengthModel)
