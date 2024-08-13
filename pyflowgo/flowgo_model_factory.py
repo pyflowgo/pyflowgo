@@ -30,6 +30,7 @@ import pyflowgo.flowgo_melt_viscosity_model_vft
 import pyflowgo.flowgo_relative_viscosity_model_er
 import pyflowgo.flowgo_relative_viscosity_model_kd
 import pyflowgo.flowgo_relative_viscosity_model_mp
+import pyflowgo.flowgo_relative_viscosity_model_mp_mueller2010
 #import pyflowgo.flowgo_relative_viscosity_model_costa
 import pyflowgo.flowgo_relative_viscosity_model_costa1
 import pyflowgo.flowgo_relative_viscosity_model_costa2
@@ -188,6 +189,9 @@ class FlowgoModelFactory:
         elif self._relative_viscosity_model == "mp":
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_mp.\
                 FlowGoRelativeViscosityModelMP()
+        elif self._relative_viscosity_model == "mp_mueller":
+            self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_mp_mueller2010.\
+                FlowGoRelativeViscosityModelMPMUELLER()
         elif self._relative_viscosity_model == "ptp1":
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_ptp1.\
                 FlowGoRelativeViscosityModelPhanThienPham1(vesicle_fraction_model=self._vesicle_fraction_model_object)
@@ -204,7 +208,7 @@ class FlowgoModelFactory:
             self._relative_viscosity_model_object = pyflowgo.flowgo_relative_viscosity_model_costa2.\
                 FlowGoRelativeViscosityModelCosta2()
         else:
-            raise NameError('Relative viscosity model must be "er" or "kd" or "mp" or "costa1" ou "costa2" or "ptp1" or'
+            raise NameError('Relative viscosity model must be "er" or "kd" or "mp" or "mp_mueller" or "costa1" ou "costa2" or "ptp1" or'
                             '"ptp2" or "ptp3"... ')
 
         assert isinstance(self._relative_viscosity_model_object,

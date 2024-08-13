@@ -21,35 +21,49 @@ import json
 import pyflowgo.base.flowgo_base_relative_viscosity_model
 
 
-class FlowGoRelativeViscosityModelMP(pyflowgo.base.flowgo_base_relative_viscosity_model.
+class FlowGoRelativeViscosityModelMPMUELLER(pyflowgo.base.flowgo_base_relative_viscosity_model.
                                      FlowGoBaseRelativeViscosityModel):
     """This methods permits to calculate the effect of crystal cargo on viscosity according to the Maron-Pierce []
-    relationship. This relationship has only the maximum packing (phimax, φm) as adjustable parameter.
-    This relationship differs from the Krieger-Dougherty [] equation because B (beinstein) is not a fit parameter,
-    but is calculated from the relationship Bφm = 2
-    The input parameters include the variable crystal fraction (phi) and the maximum packing (phimax)"""
+    relationship. This relationship has one adjustable parameter only :  the maximum packing (phimax, φm) and
+    following Mueller et al. (2010)
+    Φmax depend on Φm1, b and on the aspect ratio Rp of the particles
+    phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
+
+    phim1 is the maximum packing fraction for equant particles and given as 0.656 for smooth and 0.55 for rough
+     particles(Mader et al. 2013);
+
+    b is a fitting parameter equal to 1.08 and 1 for smooth and rough particles, respectively
+
+    The input parameters include the crystal aspect ratio RP
+
+    """
 
     def __init__(self) -> None:
         super().__init__()
-        self._phimax = 0.633
+        self._Rp = 3.2
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:
             data = json.load(data_file)
-            if 'max_packing' not in data['relative_viscosity_parameters']:
-                raise ValueError("Missing 'max_packing' in 'relative_viscosity_parameters' entry in json")
-            self._phimax = float(data['relative_viscosity_parameters']['max_packing'])
+            if 'crystal_aspect_ratio' not in data['relative_viscosity_parameters']:
+                raise ValueError("Missing 'crystal_aspect_ratio' in 'relative_viscosity_parameters' entry in json")
+            self._Rp = float(data['relative_viscosity_parameters']['crystal_aspect_ratio'])
 
     def compute_relative_viscosity(self, state):
         phi = state.get_crystal_fraction()
 
-        relative_viscosity = math.pow((1. - phi/self._phimax), - 2)
-
+        phim1 = 0.55  # 0.656
+        b = 1.08
+        phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
+        relative_viscosity = math.pow((1. - phi/phimax), - 2)
         return relative_viscosity
 
     def is_notcompatible(self, state):
         phi = state.get_crystal_fraction()
-        if 1. < phi/self._phimax:
+        phim1 = 0.55  # 0.656
+        b = 1.08
+        phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
+        if 1. < phi/phimax:
             return True
         else:
             return False

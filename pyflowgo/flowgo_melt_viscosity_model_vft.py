@@ -58,6 +58,12 @@ class FlowGoMeltViscosityModelVFT(pyflowgo.base.flowgo_base_melt_viscosity_model
         # read json parameters file
         with open(filename) as data_file:
             data = json.load(data_file)
+            if 'a_vft' not in data['melt_viscosity_parameters']:
+                raise ValueError("a_vft' in 'melt_viscosity_parameters' entry in json")
+            if 'b_vft' not in data['melt_viscosity_parameters']:
+                raise ValueError("b_vft' in 'melt_viscosity_parameters' entry in json")
+            if 'c_vft' not in data['melt_viscosity_parameters']:
+                raise ValueError("c_vft' in 'melt_viscosity_parameters' entry in json")
             self._a = float(data['melt_viscosity_parameters']['a_vft'])
             self._b = float(data['melt_viscosity_parameters']['b_vft'])
             self._c = float(data['melt_viscosity_parameters']['c_vft'])

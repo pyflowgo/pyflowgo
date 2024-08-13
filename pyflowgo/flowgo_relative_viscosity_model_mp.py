@@ -31,35 +31,25 @@ class FlowGoRelativeViscosityModelMP(pyflowgo.base.flowgo_base_relative_viscosit
 
     def __init__(self) -> None:
         super().__init__()
-
         self._phimax = 0.633
 
     def read_initial_condition_from_json_file(self, filename):
         with open(filename) as data_file:
             data = json.load(data_file)
-            self._Rp = float(data['relative_viscosity_parameters']['crystal_aspect_ratio'])
+            if 'max_packing' not in data['relative_viscosity_parameters']:
+                raise ValueError("Missing 'max_packing' in 'relative_viscosity_parameters' entry in json")
             self._phimax = float(data['relative_viscosity_parameters']['max_packing'])
 
     def compute_relative_viscosity(self, state):
-        """
-        Φmax depend on Φm1 and on the aspect ration Rp of the particules
-        Φm1 is the maximum packing fraction for equant particles and given as 0.656 and 0.55 for smooth and rough
-        particles, respectively (Mader et al. 2013);
-        b is a fitting parameter equal to 1.08 and 1 for smooth and rough particles, respectively
-        """
         phi = state.get_crystal_fraction()
-        phim1 = 0.55  # 0.656
-        b = 1.08
-        phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
-        relative_viscosity = math.pow((1. - 1/phimax * phi), - 2.)
+
+        relative_viscosity = math.pow((1. - phi/self._phimax), - 2)
+
         return relative_viscosity
 
     def is_notcompatible(self, state):
         phi = state.get_crystal_fraction()
-        phim1 = 0.55  # 0.656
-        b = 1.08
-        phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
-        if 1. < phi/phimax:
+        if 1. < phi/self._phimax:
             return True
         else:
             return False

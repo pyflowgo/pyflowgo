@@ -45,6 +45,7 @@ class FlowGoState:
         self._current_position = 0.
         self._current_time = 0.
         self._current_slope = 0.
+        self._strain_rate = 0.
 
     def get_core_temperature(self):
         return self._core_temperature
@@ -69,6 +70,13 @@ class FlowGoState:
 
     def set_current_time(self, current_time):
         self._current_time = current_time
+
+    def get_strain_rate(self):
+        return self._strain_rate
+
+    def set_strain_rate(self, strain_rate):
+        self._strain_rate = strain_rate
+
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
