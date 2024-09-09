@@ -15,9 +15,10 @@
 # You should have received copies of the GNU Lesser General Public License
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
-import run_flowgo
+import pyflowgo.run_flowgo as run_flowgo
 import os.path
-import run_flowgo_effusion_rate_array
+import pyflowgo.run_flowgo_effusion_rate_array as run_flowgo_effusion_rate_array
+import pyflowgo.plot_flowgo_results as plot_flowgo_results
 
 
 
@@ -35,15 +36,22 @@ if __name__ == "__main__":
     json_file = './resource/template_2.json'
 
     # *****************************
-    """Instanciate flowgo vi arun flowgo for the given json """
+    """Instanciate flowgo via run-flowgo for the given json """
 
     flowgo = run_flowgo.RunFlowgo()
-    flowgo.run(json_file, path_to_folder)
+    #flowgo.run(json_file, path_to_folder)
 
     # ******************************
-    """I nstanciate flowgo runner and run it for many effusion rate using a given slope file 
-    For that define the slope file execute the simulation"""
+    """Instanciate flowgo and run it for a range of effusion rates using a given slope file 
+    For that you must define 
+    -> the range of effusion rates
+    -> the slope file """
 
-    # slope_file = "resource/DEM_MaunaLoa1984.txt"
-    #simulation = run_flowgo_effusion_rate_array.StartFlowgo()
-    #simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file)
+    effusion_rates = {
+        "first_eff_rate": 5,
+        "last_eff_rate": 35,
+        "step_eff_rate": 5
+    }
+    slope_file = "resource/DEM_MaunaLoa1984.txt"
+    simulation = run_flowgo_effusion_rate_array.StartFlowgo()
+    simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)

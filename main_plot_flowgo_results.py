@@ -15,7 +15,7 @@
 # You should have received copies of the GNU Lesser General Public License
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
-import plot_flowgo_results
+import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import os.path
 
 if __name__ == "__main__":
@@ -35,5 +35,6 @@ if __name__ == "__main__":
                       "./results_flowgo/results_flowgo_template2_10m3s.csv"]
 
     plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
+    plot_flowgo_results.plt.show()
 
 

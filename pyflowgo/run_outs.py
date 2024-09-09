@@ -109,5 +109,5 @@ def get_run_outs(path_to_folder, flowgo_results, slope_file, lava_name):
         # plot1_fig1.set_xlim(xmax=500)
         plot.grid(True)
 
-    plt.savefig(path_to_folder+'effusionrate_vs_distance.png')
+    plt.savefig(path_to_folder+'effusion_rate_vs_distance.png')
 

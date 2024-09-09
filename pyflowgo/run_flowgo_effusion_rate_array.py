@@ -2,10 +2,9 @@ import csv
 import json
 import os
 
-import run_flowgo
-import plot_flowgo_results
-import run_outs
-
+import pyflowgo.run_flowgo as run_flowgo
+import pyflowgo.plot_flowgo_results as plot_flowgo_results
+import pyflowgo.run_outs as run_outs
 
 
 class StartFlowgo:
@@ -32,14 +31,16 @@ class StartFlowgo:
         with open(output_file, 'w') as fp:
             json.dump(read_json_data, fp)
 
-    def run_flowgo_effusion_rate_array(self, json_file: str, path_to_folder, slope_file):
+    def run_flowgo_effusion_rate_array(self, json_file: str, path_to_folder, slope_file, effusion_rates):
         """
         This method allows running pyFLOWGO for various eruption rate and given an eruption name
 
         """
         filename_array = []
 
-        for effusion_rate_init in range(5, 65, 5):
+        for effusion_rate_init in range(effusion_rates["first_eff_rate"],
+                                        effusion_rates["last_eff_rate"] + effusion_rates["step_eff_rate"],
+                                        effusion_rates["step_eff_rate"]):
             # update and write the effusion rate in configuration file
             file_directory = os.path.dirname(json_file)
             file_name = os.path.splitext(os.path.basename(json_file))[0]
@@ -73,23 +74,4 @@ class StartFlowgo:
 
         run_outs.get_run_outs(path_to_folder, filename_array, slope_file, lava_name)
 
-        #run_outs_file_array = []
-        #run_outs_file_array.append(run_outs.run_outs_get_file_name(path_to_folder, flow_id))
-
-        #for run_outs_file in run_outs_file_array:
-            #run_outs.plot_run_outs(path_to_folder, run_outs_file)
-
         print("******************************  End of the eruption rates loop ******************************")
-
-
-
-
-
-
-
-
-
-
-
-
-
