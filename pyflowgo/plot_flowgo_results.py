@@ -266,13 +266,13 @@ def plot_all_results(path_to_folder, filename_array):
 
 
     lava_properties.tight_layout()
-    lava_properties.savefig("./lava_properties.png")
+    lava_properties.savefig(path_to_folder+"/lava_properties.png")
 
     heat_fluxes.tight_layout()
-    heat_fluxes.savefig("./heat_fluxes.png")
+    heat_fluxes.savefig(path_to_folder+"/heat_fluxes.png")
 
     crustal_conditions.tight_layout()
-    crustal_conditions.savefig("./crustal_conditions.png")
+    crustal_conditions.savefig(path_to_folder+"/crustal_conditions.png")
 
-    slope.savefig("./slope.png")
+    slope.savefig(path_to_folder+"/slope.png")
 
