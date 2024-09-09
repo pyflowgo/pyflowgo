@@ -355,17 +355,14 @@ if __name__ == "__main__":
     plot1_fig3.legend(loc=0, prop={'size': 8})
     plot1_fig4.legend(loc=0, prop={'size': 8})
 
-    result_1 = path_to_folder+"/results_flowgo/"
-
-    print("Figures are now stored under :", result_1)
 
     fig1.tight_layout()
-    fig1.savefig("./results_flowgo/lava_properties_field.png")
+    fig1.savefig("./lava_properties_field.png")
     fig2.tight_layout()
-    fig2.savefig("./results_flowgo/heat_fluxes_field.png")
+    fig2.savefig("./heat_fluxes_field.png")
     fig3.tight_layout()
-    fig3.savefig("./results_flowgo/crustal_conditions_field.png")
+    fig3.savefig("./crustal_conditions_field.png")
     fig4.tight_layout()
-    fig4.savefig("./results_flowgo/slope_field.png")
+    fig4.savefig("./slope_field.png")
     plt.show()
     plt.close()

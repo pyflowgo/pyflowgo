@@ -25,34 +25,34 @@ import os.path
 def plot_all_results(path_to_folder, filename_array):
 
     # plot figure 1: here define the positions of the graphs in figure 1
-    fig1 = plt.figure(figsize=(8, 8))
-    plot_core_temperature = fig1.add_subplot(321)
-    plot_v_mean = fig1.add_subplot(322)
-    plot_viscosity = fig1.add_subplot(323)
-    plot_yield_strength = fig1.add_subplot(324)
-    plot_width = fig1.add_subplot(325)
-    plot_crystal = fig1.add_subplot(326)
+    lava_properties = plt.figure(figsize=(8, 8))
+    plot_core_temperature = lava_properties.add_subplot(321)
+    plot_v_mean = lava_properties.add_subplot(322)
+    plot_viscosity = lava_properties.add_subplot(323)
+    plot_yield_strength = lava_properties.add_subplot(324)
+    plot_width = lava_properties.add_subplot(325)
+    plot_crystal = lava_properties.add_subplot(326)
 
     # plot figure 2: here define the positions of the graphs in figure 2
-    fig2 = plt.figure(figsize=(8, 8))
-    plot_Q_forced_conv = fig2.add_subplot(311)
-    plot_Q_cond = fig2.add_subplot(312)
-    plot_Q_rad = fig2.add_subplot(313)
-    # plot_Q_rain = fig3.add_subplot(514)
-    # plot_Q_visc = fig3.add_subplot(515)
+    heat_fluxes = plt.figure(figsize=(8, 8))
+    plot_Q_forced_conv = heat_fluxes.add_subplot(311)
+    plot_Q_cond = heat_fluxes.add_subplot(312)
+    plot_Q_rad = heat_fluxes.add_subplot(313)
+    # plot_Q_rain = crustal_conditions.add_subplot(514)
+    # plot_Q_visc = crustal_conditions.add_subplot(515)
 
 
     # plot figure 3: here define the positions of the graphs in figure 3
-    fig3 = plt.figure(figsize=(8, 8))
-    plot_eff_cov_frac = fig3.add_subplot(411)
-    plot_T_crust = fig3.add_subplot(412)
-    plot_T_eff_rad = fig3.add_subplot(413)
-    plot_T_surf_conv = fig3.add_subplot(414)
+    crustal_conditions = plt.figure(figsize=(8, 8))
+    plot_eff_cov_frac = crustal_conditions.add_subplot(411)
+    plot_T_crust = crustal_conditions.add_subplot(412)
+    plot_T_eff_rad = crustal_conditions.add_subplot(413)
+    plot_T_surf_conv = crustal_conditions.add_subplot(414)
 
     # plot figure 4: here define the positions of the graphs in figure 4
 
-    fig4 = plt.figure()
-    plot_slope = fig4.add_subplot(111)
+    slope = plt.figure()
+    plot_slope = slope.add_subplot(111)
 
     flow_id = os.path.abspath(path_to_folder)
     title = os.path.basename(flow_id)
@@ -234,7 +234,7 @@ def plot_all_results(path_to_folder, filename_array):
         plot_eff_cov_frac.plot(distance_array, effective_cover_fraction_array, '-', label=label)
         plot_eff_cov_frac.set_xlabel('Distance (m)')
         plot_eff_cov_frac.set_ylabel('f crust')
-        #plot1_fig4.set_xlim(xmax=1000)
+        #plot1_slope.set_xlim(xmax=1000)
 
         plot_T_crust.plot(distance_array, crust_temperature_celcius, '-', label=label)
         plot_T_crust.set_xlabel('Distance (m)')
@@ -265,14 +265,14 @@ def plot_all_results(path_to_folder, filename_array):
     plot_slope.legend(loc=0, prop={'size': 8})
 
 
-    fig1.tight_layout()
-    fig1.savefig("./results_flowgo/lava_properties.png")
+    lava_properties.tight_layout()
+    lava_properties.savefig("./lava_properties.png")
 
-    fig2.tight_layout()
-    fig2.savefig("./results_flowgo/heat_fluxes.png")
+    heat_fluxes.tight_layout()
+    heat_fluxes.savefig("./heat_fluxes.png")
 
-    fig3.tight_layout()
-    fig3.savefig("./results_flowgo/crustal_conditions.png")
+    crustal_conditions.tight_layout()
+    crustal_conditions.savefig("./crustal_conditions.png")
 
-    fig4.savefig("./results_flowgo/slope.png")
+    slope.savefig("./slope.png")
 
