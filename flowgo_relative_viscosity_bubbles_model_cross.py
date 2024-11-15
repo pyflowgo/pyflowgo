@@ -32,7 +32,9 @@ class FlowGoRelativeViscosityBubblesModelCross(pyflowgo.base.flowgo_base_relativ
 
     Input data
     -----------
-    The vesicle fraction in the json file containing
+    The vesicle fraction in the json file as either a single value (float or int), or as a list with the structure
+    [[r1,w1],[r2,w2],...[rn,wn]]
+    where ri is a bubble radius and wi is the fraction of bubbles of this size. The sum of all w should equal 1.
 
     Variables
     -----------
@@ -66,7 +68,7 @@ class FlowGoRelativeViscosityBubblesModelCross(pyflowgo.base.flowgo_base_relativ
         with open(filename) as data_file:
             data = json.load(data_file)
 
-        self._radius = float(data['relative_viscosity_parameters']['radius'])
+        self._radius = data['relative_viscosity_parameters']['radius']
         self._surfacetension = float(data['relative_viscosity_parameters']['surface_tension'])
 
     def compute_relative_viscosity_bubbles(self, state):
@@ -74,10 +76,21 @@ class FlowGoRelativeViscosityBubblesModelCross(pyflowgo.base.flowgo_base_relativ
         strain_rate = state.get_strain_rate()
         melt_viscosity = self._melt_viscosity_model.compute_melt_viscosity(state)
 
-        Ca = self._radius * strain_rate * melt_viscosity / self._surfacetension
         relative_viscosity_inf = math.pow((1. - vesicle_fraction), 5/3.)
         relative_viscosity_0 = math.pow((1. - vesicle_fraction), - 1.)
-        relative_viscosity_bubbles = relative_viscosity_inf + (relative_viscosity_0 - relative_viscosity_inf)/(1+math.pow(6/5*Ca,2))
+
+        D = 1e-15
+        if type(self._radius) != list:
+            size = self._radius
+            Ca = size * strain_rate * melt_viscosity / self._surfacetension
+            D = 1 / (1 + math.pow(6 / 5 * Ca, 2))
+
+        else:
+            for size,w in self._radius:
+                Ca = size * strain_rate * melt_viscosity / self._surfacetension
+                D += w/(1+math.pow(6/5*Ca,2))
+
+        relative_viscosity_bubbles = relative_viscosity_inf + (relative_viscosity_0 - relative_viscosity_inf)*D
 
         return relative_viscosity_bubbles
 
