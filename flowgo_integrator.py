@@ -27,7 +27,8 @@ class FlowGoIntegrator:
     and here where the limits are fixed"""
 
     def __init__(self, dx, material_lava, material_air, terrain_condition, heat_budget,
-                 crystallization_rate_model, crust_temperature_model, effective_cover_crust_model):
+                 crystallization_rate_model, crust_temperature_model, effective_cover_crust_model,
+                 mass_conservation):
         """ this function allows to set the initial parameters"""
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
         self.dx = dx  # in m
@@ -41,6 +42,7 @@ class FlowGoIntegrator:
         self.material_air = material_air
         self.terrain_condition = terrain_condition
         self.heat_budget = heat_budget
+        self.mass_conservation = mass_conservation
 
     def init_effusion_rate(self, current_state):
 
@@ -90,9 +92,12 @@ class FlowGoIntegrator:
         # be calculated at each step :
         print('distance from vent (m) =', current_state.get_current_position())
 
+        # Switch between volume and mass conservation
         bulk_density = self.material_lava.get_bulk_density(current_state)
-        channel_width = self.flux_rate / (v_mean * channel_depth) / bulk_density
-        #channel_width = self.effusion_rate / (v_mean * channel_depth)
+        if self.mass_conservation:
+            channel_width = self.flux_rate / (v_mean * channel_depth) / bulk_density
+        else: 
+            channel_width = self.effusion_rate / (v_mean * channel_depth)
 
         #TODO: Here I add the slope:ASK MIMI TO MOVE IT FROM HERE
         channel_slope = self.terrain_condition.get_channel_slope(current_state.get_current_position())
