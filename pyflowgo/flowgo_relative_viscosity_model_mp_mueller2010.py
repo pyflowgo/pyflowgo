@@ -52,8 +52,8 @@ class FlowGoRelativeViscosityModelMPMUELLER(pyflowgo.base.flowgo_base_relative_v
     def compute_relative_viscosity(self, state):
         phi = state.get_crystal_fraction()
 
-        phim1 = 0.55  # 0.656
-        b = 1.08
+        phim1 = 0.55  # 0.656 for smooth particles
+        b = 1.0 # 1.08 for smooth particles
         phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
         relative_viscosity = math.pow((1. - phi/phimax), - 2)
         return relative_viscosity
@@ -61,7 +61,7 @@ class FlowGoRelativeViscosityModelMPMUELLER(pyflowgo.base.flowgo_base_relative_v
     def is_notcompatible(self, state):
         phi = state.get_crystal_fraction()
         phim1 = 0.55  # 0.656
-        b = 1.08
+        b = 1.0 # 1.08 for smooth particles
         phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2))
         if 1. < phi/phimax:
             return True

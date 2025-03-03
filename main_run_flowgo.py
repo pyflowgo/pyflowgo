@@ -34,6 +34,9 @@ if __name__ == "__main__":
     #path_to_folder = os.path.abspath('')
     path_to_folder = "./results_flowgo/"
     json_file = './resource/template_2.json'
+    with open(json_file, "r") as file:
+        json_data = json.load(file)
+        slope_file = json_data.get('slope_file')
 
     # *****************************
     """Instanciate flowgo via run-flowgo for the given json """
@@ -52,6 +55,5 @@ if __name__ == "__main__":
         "last_eff_rate": 35,
         "step_eff_rate": 5
     }
-    slope_file = "resource/DEM_MaunaLoa1984.txt"
     simulation = run_flowgo_effusion_rate_array.StartFlowgo()
     simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)

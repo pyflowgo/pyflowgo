@@ -33,6 +33,11 @@ if __name__ == "__main__":
     json_file = './resource/template_2.json'
     #json_file= '/Users/chevrel/Documents/GitHub/pyflowgo/resource/input_parameters_MaunaUlu74_tests.json'
     #json_file = '/Users/chevrel/Documents/ICELAND/Jonas-holurhaun-2014/flowgo/Holuhraun14.json'
+    with open(json_file, "r") as file:
+        json_data = json.load(file)
+        slope_file = json_data.get('slope_file')
+
+
 
     # ******** Instanciate flowgo via run flowgo for the given json *********************
 
@@ -59,7 +64,6 @@ if __name__ == "__main__":
         "last_eff_rate": 35,
         "step_eff_rate": 5
     }
-    slope_file = "resource/DEM_MaunaLoa1984.txt"
     simulation = run_flowgo_effusion_rate_array.StartFlowgo()
     simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
     # ******** PLOT THE RESULTS *********************

@@ -90,7 +90,8 @@ class RunFlowgo:
 
         while not integrator.has_finished():
             integrator.single_step(state)
-        file_name_results = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+        #file_name_results = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+        file_name_results = os.path.join(path_to_folder, f"results_flowgo_{lava_name}_{effusion_rate_init}m3s.csv")
         logger.write_values_to_file(file_name_results)
         print("----------------------------------------- END RUN FLOWGO ---------------------------------------------")
 
