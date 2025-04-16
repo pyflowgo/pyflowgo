@@ -70,7 +70,7 @@ class FlowGoState:
 
     def set_current_time(self, current_time):
         self._current_time = current_time
-
+        
     def get_strain_rate(self):
         return self._strain_rate
 

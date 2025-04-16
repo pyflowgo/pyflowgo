@@ -1,0 +1,14 @@
+{
+  "melt_viscosity_parameters":{
+    "a_vft" : -4.55,
+    "b_vft": 5893.61830,
+    "c_vft" : 583.56462
+  },
+  "lava_state":{
+      "vesicle_fraction" : 0.64 } ,
+    "relative_viscosity_parameters":{
+      "crystal_aspect_ratio": 3.2,
+    "bubble_radius": 0.79,
+      "surface_tension": 0.3
+    }
+}

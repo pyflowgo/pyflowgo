@@ -1,0 +1,34 @@
+{
+  "lava_name": "etna_bll",
+  "slope_file": "birnbaum/Etna-slope-profile.txt",
+  "step_size": 10,
+  "effusion_rate_init" : 20,
+
+  "eruption_condition":{
+  "eruption_temperature" : 1223.15,
+  "viscosity_eruption" : 1000.0
+  },
+  "lava_state":{
+  "position" : 0.0,
+  "time" : 1.0,
+  "crystal_fraction": 0.15,
+  "density_dre" : 2700.0,
+  "vesicle_fraction" : 0.64,
+  "liquidus_temperature": 0.0
+  },
+
+  "melt_viscosity_parameters":{
+    "a_vft" : -4.55,
+    "b_vft": 5893.61830,
+    "c_vft" : 583.5646200
+  },
+    "relative_viscosity_parameters":{
+    "max_packing": 0.56,
+    "crit_packing": 0.39,
+    "Bsolid" :2.74,
+    "Bgas": 1.98,
+    "vesicle_radius": 0.001,
+    "surface_tension": 0.3,
+    "strain_rate" : 1.0
+  }
+}

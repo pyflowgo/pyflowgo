@@ -109,13 +109,24 @@ class FlowGoMaterialLava:
         return yield_strength_notcompatible
 
     def compute_mean_velocity(self, state, terrain_condition):
+        strain_rate = 0
+        n = 0
         channel_depth = terrain_condition.get_channel_depth(state.get_current_position())
-        bulk_viscosity = self.computes_bulk_viscosity(state)
         tho_0 = self._yield_strength_model.compute_yield_strength(state, self._eruption_temperature)
         tho_b = self._yield_strength_model.compute_basal_shear_stress(state, terrain_condition, self)
 
+        while (abs(strain_rate - state.get_strain_rate())>0.01*strain_rate):
+            strain_rate = state.get_strain_rate()
+            bulk_viscosity = self.computes_bulk_viscosity(state)
+            v_mean = ((channel_depth * tho_b) / (3. * bulk_viscosity)) * (
+                1. - (3. / 2.) * (tho_0 / tho_b) + 0.5 * ((tho_0 / tho_b) ** 3.))
+
+            state.set_strain_rate(3*v_mean/channel_depth)
+            n+=1
+
+        bulk_viscosity = self.computes_bulk_viscosity(state)
         v_mean = ((channel_depth * tho_b) / (3. * bulk_viscosity)) * (
-            1. - (3. / 2.) * (tho_0 / tho_b) + 0.5 * ((tho_0 / tho_b) ** 3.))
+                1. - (3. / 2.) * (tho_0 / tho_b) + 0.5 * ((tho_0 / tho_b) ** 3.))
 
         return v_mean  # [m/s]
 

@@ -17,6 +17,7 @@
 
 import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import os.path
+import json
 
 if __name__ == "__main__":
 
@@ -31,10 +32,16 @@ if __name__ == "__main__":
 
     path_to_folder = os.path.abspath('')
 
-    filename_array = ["./results_flowgo/results_flowgo_template_3m3s.csv",
+    filename_array = ["./results_flowgo/results_flowgo_template2-test_5m3s.csv",
                       "./results_flowgo/results_flowgo_template2_10m3s.csv"]
 
-    plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
+    json_file = './resource/template_2.json'
+
+    with open(json_file, "r") as file:
+        json_data = json.load(file)
+        slope_file = json_data.get('slope_file')
+
+    plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
     plot_flowgo_results.plt.show()
 
 

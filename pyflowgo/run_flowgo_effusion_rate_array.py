@@ -68,7 +68,7 @@ class StartFlowgo:
             print('^^^^^^^^^^^^^^^^^^^^^^ End  for ' + str(effusion_rate_init) + "_m3s ^^^^^^^^^^^^^^^^^^^^^^^^")
             filename_array.append(filename)
 
-        plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
+        plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
 
         with open(json_file, "r") as data_file:
             data = json.load(data_file)

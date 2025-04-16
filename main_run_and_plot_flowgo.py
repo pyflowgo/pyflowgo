@@ -20,6 +20,7 @@ import os.path
 import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import pyflowgo.run_flowgo_effusion_rate_array as run_flowgo_effusion_rate_array
 import os.path
+import json
 
 
 if __name__ == "__main__":
@@ -47,7 +48,7 @@ if __name__ == "__main__":
     # ******** PLOT THE RESULTS *********************
     filename_results = flowgo.get_file_name_results(path_to_folder, json_file)
     filename_array = [filename_results, "./results_flowgo/results_flowgo_template2_10m3s.csv"]
-    plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
+    plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
     plot_flowgo_results.plt.show()
     plot_flowgo_results.plt.close()
 

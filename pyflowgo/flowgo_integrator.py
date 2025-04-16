@@ -17,6 +17,8 @@
 
 import pyflowgo.flowgo_logger
 import numpy as np
+import json
+import math
 
 class FlowGoIntegrator:
 
@@ -25,7 +27,8 @@ class FlowGoIntegrator:
     and here where the limits are fixed"""
 
     def __init__(self, dx, material_lava, material_air, terrain_condition, heat_budget,
-                 crystallization_rate_model, crust_temperature_model, effective_cover_crust_model):
+                 crystallization_rate_model, crust_temperature_model, effective_cover_crust_model,
+                 mass_conservation):
         """ this function allows to set the initial parameters"""
         self.logger = pyflowgo.flowgo_logger.FlowGoLogger()
         self.dx = dx  # in m
@@ -39,6 +42,7 @@ class FlowGoIntegrator:
         self.material_air = material_air
         self.terrain_condition = terrain_condition
         self.heat_budget = heat_budget
+        self.mass_conservation = mass_conservation
 
     def init_effusion_rate(self, current_state):
 
@@ -52,6 +56,7 @@ class FlowGoIntegrator:
 
                 channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
                 self.effusion_rate = v_mean * channel_width * channel_depth
+                self.flux_rate = self.effusion_rate * self.material_lava.get_bulk_density(current_state)
                 effusion_rate_init = self.terrain_condition.get_effusion_rate_init(current_state.get_current_position())
                 if self.effusion_rate >= effusion_rate_init:
 
@@ -62,7 +67,7 @@ class FlowGoIntegrator:
     def single_step(self, current_state):
         """This function makes the flow advancing it takes the velocity that was calculated in material lava and check
         whether it is positif and then calculate the heat budget in order to get the new temperature and new crystal
-        content in order to get the new viscosity and therefore with this new viscosity it calculate the new velocity
+        content in order to get the new viscosity and therefore with this new viscosity it calculates the new velocity
         as a function of the slope at this current location (that is given by the slope_distance file or by
         interpolation of it)"""
 
@@ -86,7 +91,13 @@ class FlowGoIntegrator:
         # Base on mass conservation, the effusion rate and the depth channel are kept fixed, so the width can
         # be calculated at each step :
         print('distance from vent (m) =', current_state.get_current_position())
-        channel_width = self.effusion_rate / (v_mean * channel_depth)
+
+        # Switch between volume and mass conservation
+        bulk_density = self.material_lava.get_bulk_density(current_state)
+        if self.mass_conservation:
+            channel_width = self.flux_rate / (v_mean * channel_depth) / bulk_density
+        else: 
+            channel_width = self.effusion_rate / (v_mean * channel_depth)
 
         #TODO: Here I add the slope:ASK MIMI TO MOVE IT FROM HERE
         channel_slope = self.terrain_condition.get_channel_slope(current_state.get_current_position())
@@ -107,7 +118,6 @@ class FlowGoIntegrator:
 
         # Cooling per unit of distance is calculated
         # from Eq. 7b HR01 / Eq. 21 HR14 / Eq. 15 Harris et al. 2015 / Eq. 21 HR14
-        bulk_density = self.material_lava.get_bulk_density(current_state)
         latent_heat_of_crystallization = self.material_lava.get_latent_heat_of_crystallization()
 
         # Here we solve the differential equation
@@ -140,15 +150,15 @@ class FlowGoIntegrator:
                                  current_state.get_crystal_fraction())
         self.logger.add_variable("core_temperature", current_state.get_current_position(),
                                  current_state.get_core_temperature())
+        self.logger.add_variable("strain_rate", current_state.get_current_position(),
+                                 current_state.get_strain_rate())
+        self.logger.add_variable("vesicle_fraction", current_state.get_current_position(),
+                                 self.material_lava.computes_vesicle_fraction(current_state))
         self.logger.add_variable("viscosity", current_state.get_current_position(),
                                  self.material_lava.computes_bulk_viscosity(current_state))
         self.logger.add_variable("density", current_state.get_current_position(),
                                  self.material_lava.get_bulk_density(current_state))
         self.logger.add_variable("mean_velocity", current_state.get_current_position(), v_mean)
-        self.logger.add_variable("core_temperature", current_state.get_current_position(),
-                                 current_state.get_core_temperature())
-        self.logger.add_variable("core_temperature", current_state.get_current_position(),
-                                 current_state.get_core_temperature())
         self.logger.add_variable("crust_temperature", current_state.get_current_position(),
                                  self.crust_temperature_model.compute_crust_temperature(current_state))
         self.logger.add_variable("effective_cover_fraction", current_state.get_current_position(),
@@ -176,6 +186,8 @@ class FlowGoIntegrator:
         current_state.set_current_position(current_state.get_current_position() + self.dx)
         current_state.set_current_time(current_state.get_current_time() + self.dx / v_mean)
 
+        current_state.set_strain_rate(3*v_mean/channel_depth)
+
         self.iteration += 1.
 
         if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) \
@@ -190,8 +202,12 @@ class FlowGoIntegrator:
         return self._has_finished
 
     def read_initial_condition_from_json_file(self, filename):
-        # read json parameters file\
-        pass
+        with open(filename) as data_file:
+            data = json.load(data_file)
+        self._effusion_rate_init = float(data['effusion_rate_init'])
+        self._width = float(data['terrain_conditions']['width'])
+        self._depth = float(data['terrain_conditions']['depth'])
+
     # ------------------------------------------------ INITIALIZE THE STATE --------------------------------------------
 
     def initialize_state(self, current_state, filename):
@@ -204,3 +220,4 @@ class FlowGoIntegrator:
 
         current_state.set_crystal_fraction(initial_crystal_fraction)
         current_state.set_core_temperature(initial_temperature)
+        current_state.set_strain_rate(3*self._effusion_rate_init/math.pow(self._depth,2)/self._width)

@@ -52,6 +52,13 @@ class RunFlowgo:
                 raise ValueError("Missing ['step_size'] entry in json")
             step_size = float(data['step_size'])
 
+            if 'mass_conservation' not in data['terrain_conditions']:
+                print('Volume conservation')
+                mass_conservation = False
+            else:
+                mass_conservation = data['terrain_conditions']['mass_conservation']
+                print('Mass conservation')
+
 # --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY -----------------------------
         terrain_condition = pyflowgo.flowgo_terrain_condition.FlowGoTerrainCondition()
         terrain_condition.read_initial_condition_from_json_file(configuration_file)
@@ -77,7 +84,8 @@ class RunFlowgo:
                                                                  heat_budget=heat_budget,
                                                                  crystallization_rate_model=crystallization_rate_model,
                                                                  crust_temperature_model=crust_temperature_model,
-                                                                 effective_cover_crust_model=effective_cover_crust_model)
+                                                                 effective_cover_crust_model=effective_cover_crust_model,
+                                                                 mass_conservation=mass_conservation)
         integrator.read_initial_condition_from_json_file(configuration_file)
         # ------------------------------------------------- LOG THE DATA -----------------------------------------------
 
@@ -103,5 +111,5 @@ class RunFlowgo:
             if 'lava_name' not in data:
                 raise ValueError("Missing ['lava_name'] entry in json")
             lava_name = data['lava_name']
-        file_name_results = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
+        file_name_results = os.path.join(path_to_folder, f"results_flowgo_{lava_name}_{effusion_rate_init}m3s.csv")
         return file_name_results

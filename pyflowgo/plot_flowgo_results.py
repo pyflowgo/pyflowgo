@@ -20,9 +20,34 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 import os.path
+import json
+
+def plot_all_results(path_to_folder, filename_array, json_file):
+    
+    with open(json_file, "r") as file:
+        json_data = json.load(file)
+        slope_file = json_data.get('slope_file')
+    
+    with open(slope_file, "r") as f_slope:
+        distance_original = []
+        latitude = []  # X
+        longitude = []  # Y
+        altitude = []
+        slope_original = []
+        latitude_column_number = 0
+        longitude_column_number = 1
+        elevation_column_number = 2
+        distance_column_number = 3
+        slope_column_number = 4
+        # slope_file = path_to_folder + "profile_00000.txt"
+        f_slope.readline()
+        for line in f_slope:
+            split_line = line.strip('\n').split('\t')
+            distance_original.append(float(split_line[distance_column_number]))
+            slope_original.append(float(split_line[slope_column_number]))
+            altitude.append(float(split_line[elevation_column_number]))
 
 
-def plot_all_results(path_to_folder, filename_array):
 
     # plot figure 1: here define the positions of the graphs in figure 1
     lava_properties = plt.figure(figsize=(8, 8))
@@ -53,19 +78,24 @@ def plot_all_results(path_to_folder, filename_array):
 
     slope = plt.figure()
     plot_slope = slope.add_subplot(111)
+    plot_slope.plot(distance_original, slope_original, '-k', label="Original")
 
     flow_id = os.path.abspath(path_to_folder)
     title = os.path.basename(flow_id)
 
     for filename in filename_array:
 
-        label = filename.replace(path_to_folder+"results_flowgo_","").strip(".csv")
+       # label = filename.replace(path_to_folder+"results_flowgo_","").strip(".csv")
+        label = filename.replace(os.path.join(path_to_folder, "results_flowgo_"), "")
+        if label.endswith(".csv"):
+            label = label[:-4]  # Remove last 4 characters (".csv")
         distance_array = []
         slope_array = []
         temperature_array = []
         v_mean_array = []
         viscosity_array = []
         crystal_fraction_array = []
+        vesicle_fraction_array = []
         width_array = []
         depth_array = []
         effusion_rate = []
@@ -95,6 +125,7 @@ def plot_all_results(path_to_folder, filename_array):
                 yield_strength_array.append(float(row['tho_0']))
                 shear_stress_array.append(float(row['tho_b']))
                 crystal_fraction_array.append(float(row['crystal_fraction']))
+                vesicle_fraction_array.append(float(row['vesicle_fraction']))
                 width_array.append(float(row['channel_width']))
                 depth_array.append(float(row['channel_depth']))
                # time_array.append(float(row['current_time']))
@@ -193,6 +224,12 @@ def plot_all_results(path_to_folder, filename_array):
         plot_crystal.set_xlabel('Distance (m)')
         plot_crystal.set_ylabel('Crystal fraction')
         plot_crystal.grid(True)
+
+        plot_vesicle = plot_crystal.twinx()
+        plot_vesicle.plot(distance_array, vesicle_fraction_array, '--', label='Vesicle fraction')
+        plot_vesicle.set_ylabel('Vesicle fraction')
+        plot_vesicle.tick_params(axis='y')
+
         # plot_crystal.set_ylim(ymin=0, ymax=0.6)
         # plot_crystal.set_xlim(xmax=500)
 
@@ -253,7 +290,7 @@ def plot_all_results(path_to_folder, filename_array):
 
         plot_slope.plot(distance_array, slope_degrees, '-', label=label)
         plot_slope.set_ylabel('slope (°)')
-        plot_slope.set_xlim(xmin=0, xmax=max(distance_array)+1000)
+        #plot_slope.set_xlim(xmin=0, xmax=max(distance_array)+1000)
         plot_slope.grid(True)
 
     plot_core_temperature.set_title(str(title))

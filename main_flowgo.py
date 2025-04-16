@@ -52,8 +52,15 @@ if __name__ == "__main__":
         if 'step_size' not in data:
             raise ValueError("Missing ['step_size'] entry in json")
         step_size = float(data['step_size'])
+        
+        if 'mass_conservation' not in data['terrain_conditions']:
+            print('Volume conservation')
+            mass_conservation = False
+        else:
+            mass_conservation = data['terrain_conditions']['mass_conservation']
+            print('Mass conservation')
 
-# --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY ----------------------------------
+    # --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY ----------------------------------
 
     terrain_condition = pyflowgo.flowgo_terrain_condition.FlowGoTerrainCondition()
     terrain_condition.read_initial_condition_from_json_file(configuration_file)
@@ -79,7 +86,8 @@ if __name__ == "__main__":
                                                              heat_budget=heat_budget,
                                                              crystallization_rate_model=crystallization_rate_model,
                                                              crust_temperature_model=crust_temperature_model,
-                                                             effective_cover_crust_model=effective_cover_crust_model)
+                                                             effective_cover_crust_model=effective_cover_crust_model,
+                                                             mass_conservation=mass_conservation)
     integrator.read_initial_condition_from_json_file(configuration_file)
     # ------------------------------------------------- LOG THE DATA --------------------------------------------------
 

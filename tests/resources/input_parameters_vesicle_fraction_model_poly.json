@@ -1,0 +1,8 @@
+{
+  "lava_state": {
+    "Vesicle_fracrion": 0.7415,
+    "vesicle_poly_a" : -1.4e-9,
+    "vesicle_poly_b" : -2.16e-5,
+    "critical_distance": 10000
+  }
+}

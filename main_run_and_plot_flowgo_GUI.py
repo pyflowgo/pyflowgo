@@ -5,13 +5,12 @@ import pyflowgo.run_flowgo as run_flowgo
 import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import pyflowgo.run_flowgo_effusion_rate_array as run_flowgo_effusion_rate_array
 import json
-
+from edit_json import open_editor  # import your function
 
 def select_json_file():
     file_path = filedialog.askopenfilename(filetypes=[("JSON files", "*.json")])
     if file_path:
         json_path_var.set(file_path)
-
 
 def select_results_folder():
     folder_path = filedialog.askdirectory()
@@ -36,7 +35,7 @@ def run_flowgo_single():
     filename_results = flowgo.get_file_name_results(path_to_folder, json_file)
     filename_array = [filename_results]
 
-    plot_flowgo_results.plot_all_results(path_to_folder, filename_array)
+    plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
     plot_flowgo_results.plt.show()
     plot_flowgo_results.plt.close()
     messagebox.showinfo("Success", "FlowGo simulation completed successfully!")
@@ -86,7 +85,7 @@ def run_flowgo_effusion():
 # Setup Tkinter window
 root = tk.Tk()
 root.title("FlowGo Simulation GUI")
-root.geometry("600x300")
+root.geometry("700x300")
 
 json_path_var = tk.StringVar()
 results_folder_var = tk.StringVar()
@@ -101,7 +100,7 @@ frame.pack(pady=10)
 tk.Label(frame, text="Select JSON File:").grid(row=0, column=0, sticky="w")
 tk.Entry(frame, textvariable=json_path_var, width=40).grid(row=0, column=1, padx=5)
 tk.Button(frame, text="Browse", command=select_json_file).grid(row=0, column=2)
-
+tk.Button(frame, text="Edit Json", command=lambda: open_editor(root, json_path_var)).grid(row=0, column=3)
 # Results folder selection
 tk.Label(frame, text="Select Results Folder:").grid(row=1, column=0, sticky="w")
 tk.Entry(frame, textvariable=results_folder_var, width=40).grid(row=1, column=1, padx=5)
