@@ -67,20 +67,26 @@ class FlowGoRelativeViscosityModelMADER(pyflowgo.base.flowgo_base_relative_visco
         strain_rate = state.get_strain_rate()
         phim1 = 0.55  # 0.656 for smooth particles
         b = 1 # 1.08 for smooth particles
+
         phimax = phim1 * math.exp(-(math.log10(self._Rp) ** 2 / 2 * b ** 2)) # eq. 49
         n = 1 - 0.2 * self._Rp * (phi / phimax) ** 4  # eq. 50
 
+        print(f"phi = {phi:.4f}, phimax = {phimax:.4f}, phi/phimax = {phi / phimax:.4f}, n = {n:.4f}")
+
         if phi / phimax >= 0.5:
             if n < 0.9:  # strain rate dependance of relarive viscosity
+                if strain_rate <= 0:
+                    raise ValueError("strain_rate must be > 0 when n < 1 (non-Newtonian case)")
                 # implicteley phi_critique (when strain-rate dependency start) = 0.27 that is 50% of phi max; relative_viscosity is not relative consistency :
                 relative_viscosity = math.pow((1. - phi/phimax), - 2) * strain_rate**(n-1) #eq 51
-                #print("phi/phimax > 0.5 and n < 0.9 : Non-newtonian, relative_viscosity is not relative consistency")
+                print("Non-Newtonian regime: relative_viscosity depends on strain_rate")
             else:
                 relative_viscosity = math.pow((1. - phi / phimax), - 2)  # eq 46 Maron-Pierce equation
-            #print("phi/phimax > 0.5 but < 0.9 ; Newtonian, relative_viscosity is relative consistency")
+                print("Newtonian regime (n>1) at high phi: Maron-Pierce equation applied")
+
         else:  # relative_viscosity = relative consistency
             relative_viscosity = math.pow((1. - phi / phimax), - 2)  # eq 46 Maron-Pierce equation
-            #print("phi/phimax < 0.5 and n>0.9; Newtonian, relative_viscosity is relative consistency")
+            print("Newtonian regime at low phi: Maron-Pierce equation applied")
 
         return relative_viscosity
     

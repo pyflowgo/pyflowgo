@@ -124,27 +124,41 @@ class FlowGoRelativeViscosityModelBLL(pyflowgo.base.flowgo_base_relative_viscosi
     def compute_relative_viscosity(self, state):
         phi = state.get_crystal_fraction()
         strain_rate = state.get_strain_rate()
+        print("strain_rate", strain_rate )
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
-        
         melt_viscosity = self._melt_viscosity_model.compute_melt_viscosity(state)
-        if phi *(1- vesicle_fraction)+vesicle_fraction> self._phicrit:
-            print(phi * (1 - vesicle_fraction) + vesicle_fraction, ">", self._phicrit)
-            Ca = melt_viscosity * self._vesicle_radius * strain_rate / self._surfacetension
-            n = 1 + (0.7 - 0.55 * Ca) * (self._phicrit - phi*(1. - vesicle_fraction) - vesicle_fraction)
+        relaxation_time = self._vesicle_radius * melt_viscosity / self._surfacetension
+        Ca = relaxation_time * strain_rate
+
+        phi_effective = phi * (1 - vesicle_fraction) + vesicle_fraction
+
+        if phi_effective > self._phicrit:
+            print(f"{phi_effective:.4f} > {self._phicrit:.4f}")
+            if Ca>10:
+                Ca=10
+            n = 1 + (0.7 - 0.55 * Ca) * (self._phicrit - phi*(1. - vesicle_fraction) - vesicle_fraction) # Eq.4.1c
+            n = min(1.2, max(0.2, n))  # n between 0.2 and 1.2
             # equation alternative : n = 1 + (0.7 - 0.55 * Ca) * (self._phicrit - phi - vesicle_fraction)
-            print("Ca=",Ca, "n=",n)
+            print(f"Ca = {Ca:.4e}, n = {n:.4f}")
+            relative_viscosity = (1. - (phi / self._phimax)) ** (-self._Bsolid) * \
+                                 (1. - vesicle_fraction) ** (-self._Bgas) * ((strain_rate) ** (n - 1)) # Eq.4.1a
+
         else:
             n = 1
-            "relative viscosity = relative consistency"
-            print("n = 1")
+            relative_viscosity = (1. - (phi / self._phimax)) ** (-self._Bsolid) * \
+                                 (1. - vesicle_fraction) ** (-self._Bgas) # Eq.4.1a
+            print("n = 1 (Newtonian regime)")
+
+        if strain_rate <= 0:
+            raise ValueError("strain_rate <= 0")
 
         #relative_viscosity = (1. - phi / (self._phimax * (1. - vesicle_fraction))) ** (-self._Bsolid) * \
         #                     (1. - vesicle_fraction) ** (-self._Bgas) * ((strain_rate) ** (n - 1))
 
-        relative_viscosity = (1. - (phi/self._phimax)) ** (-self._Bsolid) * \
-                             (1. - vesicle_fraction) ** (-self._Bgas) * ((strain_rate) ** (n - 1))
 
         return relative_viscosity
+
+
     def is_notcompatible(self, state):
         phi = state.get_crystal_fraction()
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)

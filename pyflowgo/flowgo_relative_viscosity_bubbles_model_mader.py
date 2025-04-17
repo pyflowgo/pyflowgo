@@ -71,17 +71,17 @@ class FlowGoRelativeViscosityBubblesModelMader(pyflowgo.base.flowgo_base_relativ
         with open(filename) as data_file:
             data = json.load(data_file)
 
-            if 'bubble_radius' not in data['relative_viscosity_parameters']:
-                raise ValueError("Missing bubble_radius in ['relative_viscosity_parameters'] entry in json")
+            if 'vesicle_radius' not in data['relative_viscosity_parameters']:
+                raise ValueError("Missing vesicle_radius in ['relative_viscosity_parameters'] entry in json")
             if 'surface_tension' not in data['relative_viscosity_parameters']:
                 raise ValueError("Missing 'surface_tension' in ['relative_viscosity_parameters'] entry in json")
 
-            self._bubble_radius = float(data['relative_viscosity_parameters']['bubble_radius'])
+            self._vesicle_radius = float(data['relative_viscosity_parameters']['vesicle_radius'])
             self._surfacetension = float(data['relative_viscosity_parameters']['surface_tension'])
 
     def compute_relative_viscosity_bubbles(self, state):
         strain_rate = state.get_strain_rate()
-        # print("strain_rate", strain_rate)
+        print("strain_rate", strain_rate)
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
         melt_viscosity = self._melt_viscosity_model.compute_melt_viscosity(state)
 
@@ -89,13 +89,15 @@ class FlowGoRelativeViscosityBubblesModelMader(pyflowgo.base.flowgo_base_relativ
 
         effective_medium_viscosity = melt_viscosity * relative_viscosity_crystals
 
-        relaxation_time = self._bubble_radius * effective_medium_viscosity / self._surfacetension
+        relaxation_time = self._vesicle_radius * effective_medium_viscosity / self._surfacetension
         Ca = relaxation_time * strain_rate
- 
+        print("Ca", Ca)
         if Ca < 1:
-            relative_viscosity_bubbles = (1. - vesicle_fraction) ** - 1.0
             print("bubbles are solid like")
+            relative_viscosity_bubbles = (1. - vesicle_fraction) ** - 1.0
+
         else:
-            relative_viscosity_bubbles = (1. - vesicle_fraction) ** (5. / 3.)
             print("bubbles are deformable")
+            relative_viscosity_bubbles = (1. - vesicle_fraction) ** (5. / 3.)
+
         return relative_viscosity_bubbles

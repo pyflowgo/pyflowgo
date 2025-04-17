@@ -81,7 +81,6 @@ class FlowGoYieldStrengthModelBLL(pyflowgo.base.flowgo_base_yield_strength_model
         # with  respect to 3 phase
         #tho_0 = math.pow(10, 80 * (phi / (1 - vesicle_fraction) - phi_crit_ys)) + math.pow(10,
         #    1.98 * (phi / (1 - vesicle_fraction) + vesicle_fraction - phi_crit_ys))
-
         return tho_0
 
     def compute_basal_shear_stress(self, state, terrain_condition, material_lava):
