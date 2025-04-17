@@ -33,6 +33,13 @@ You can then run the software using:
 ```sh
 $ python3 main_flowgo.py ./resource/template.json
 ```
+
+You can now run the software using:
+```sh
+$ python main_run_and_plot_flowgo_GUI.py   
+```
+This will open a GUI where you can upload (and edit) the json file and the results folder and run and plot the results
+
 For further information, please read the PyFLOWGO_for_dummies.pdf file.
 
 # Authors / developers
