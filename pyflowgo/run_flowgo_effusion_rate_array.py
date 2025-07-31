@@ -46,7 +46,6 @@ class StartFlowgo:
             file_name = os.path.splitext(os.path.basename(json_file))[0]
             file_extension = os.path.splitext(os.path.basename(json_file))[1]
 
-            #updated_json_file = path_to_folder + file_name + "_" + str(effusion_rate_init) + "m3s" + file_extension
             updated_json_file = os.path.join(path_to_folder, f"{file_name}_{effusion_rate_init}m3s{file_extension}")
 
             with open(json_file, "r") as data_file:
@@ -61,7 +60,6 @@ class StartFlowgo:
             flowgo.run(updated_json_file, path_to_folder)
 
             lava_name = data["lava_name"]
-            #filename = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
             filename = os.path.join(path_to_folder, f"results_flowgo_{lava_name}_{effusion_rate_init}m3s.csv")
 
             # print(filename)

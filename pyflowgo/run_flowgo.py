@@ -21,6 +21,7 @@ import pyflowgo.flowgo_integrator
 import pyflowgo.flowgo_state
 import pyflowgo.flowgo_logger
 import json
+import os
 import os.path
 
 
@@ -98,12 +99,12 @@ class RunFlowgo:
 
         while not integrator.has_finished():
             integrator.single_step(state)
-        #file_name_results = path_to_folder + 'results_flowgo_' + lava_name + "_" + str(effusion_rate_init) + "m3s.csv"
         file_name_results = os.path.join(path_to_folder, f"results_flowgo_{lava_name}_{effusion_rate_init}m3s.csv")
         logger.write_values_to_file(file_name_results)
         print("----------------------------------------- END RUN FLOWGO ---------------------------------------------")
 
     def get_file_name_results(self, path_to_folder, json_file):
+        print("path_to_folder in flowgo before get_file_name_results ",path_to_folder)
         configuration_file = json_file
         with open(configuration_file) as data_file:
             data = json.load(data_file)
@@ -112,4 +113,6 @@ class RunFlowgo:
                 raise ValueError("Missing ['lava_name'] entry in json")
             lava_name = data['lava_name']
         file_name_results = os.path.join(path_to_folder, f"results_flowgo_{lava_name}_{effusion_rate_init}m3s.csv")
+        print("file_name_results in flowgo  ", file_name_results)
+        print("path_to_folder in flowgo after get_file_name_results ", path_to_folder)
         return file_name_results

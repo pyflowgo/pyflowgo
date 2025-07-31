@@ -6,7 +6,6 @@ import os
 
 def get_run_outs(path_to_folder, flowgo_results, slope_file, lava_name):
     # add row to CSV file
-    #csv_file_run_outs = path_to_folder + "run_outs_" + lava_name + ".csv"
     csv_file_run_outs = os.path.join(path_to_folder, f"run_outs_{lava_name}.csv")
 
     with open(csv_file_run_outs, 'w') as csvfile:
@@ -110,6 +109,5 @@ def get_run_outs(path_to_folder, flowgo_results, slope_file, lava_name):
         # plot1_fig1.set_xlim(xmax=500)
         plot.grid(True)
 
-    #plt.savefig(path_to_folder+'effusion_rate_vs_distance.png')
     plt.savefig(os.path.join(path_to_folder, "effusion_rate_vs_distance.png"))
 
