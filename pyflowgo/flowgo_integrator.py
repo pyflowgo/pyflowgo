@@ -56,10 +56,11 @@ class FlowGoIntegrator:
 
                 channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
                 self.effusion_rate = v_mean * channel_width * channel_depth
-                self.flux_rate = self.effusion_rate * self.material_lava.get_bulk_density(current_state)
+
+                self.flux_rate = self.effusion_rate * self.material_lava.get_bulk_density(current_state) #added by Birnbaum for mass conservation
+
                 effusion_rate_init = self.terrain_condition.get_effusion_rate_init(current_state.get_current_position())
                 if self.effusion_rate >= effusion_rate_init:
-
                     print('channel_depth =' + str(channel_depth))
                     break
 
@@ -75,16 +76,15 @@ class FlowGoIntegrator:
 
         if v_mean <= 0.:
             self._has_finished = True
+            print("Terminated:  velocity reached zero")
             return
         print('Vmean (m/s)=', v_mean)
 
         # computes the quantities at this current state from the terrain condition
         channel_depth = self.terrain_condition.get_channel_depth(current_state.get_current_position())
         # Here we set the initial condition (iteration = 0) and calculate the effusion rate
-        #TODO: verifier si c'est bon en enlevant cette iteration
         if self.iteration == 0.:
             channel_width = self.terrain_condition.get_channel_width(current_state.get_current_position())
-        # TODO: verifier si c'est bon en enlevant ce calcul
             self.effusion_rate = v_mean * channel_width * channel_depth
 
         # Here we start the loop
@@ -92,7 +92,7 @@ class FlowGoIntegrator:
         # be calculated at each step :
         print('distance from vent (m) =', current_state.get_current_position())
 
-        # Switch between volume and mass conservation
+        # Switch between volume and mass conservation  #added by Birnbaum for mass conservation
         bulk_density = self.material_lava.get_bulk_density(current_state)
         if self.mass_conservation:
             channel_width = self.flux_rate / (v_mean * channel_depth) / bulk_density
@@ -135,15 +135,16 @@ class FlowGoIntegrator:
         new_phi = phi + (dphi_dx * self.dx)
         print('phi=',new_phi)
         if new_phi <= phi:
+            print("Terminated: new_phi <= phi ")
             self._has_finished = True
             return
 
         # ------------------------------------------ NOW WE JUMP TO THE NEXT STEP --------------------------------------
-        # we calculate the new core temperature in K for the the next line, using Euler as well
+        # we calculate the new core temperature in K for the next line, using Euler as:
 
         temp_core = current_state.get_core_temperature()
         new_temp_core = temp_core + dtemp_dx * self.dx
-        print('Tcore=',new_temp_core)
+        print('Tcore=', new_temp_core)
         # ------------------------------------- LOG ALL THE VALUES INTO THE LOGGER -------------------------------------
         self.logger.add_variable("channel_width", current_state.get_current_position(), channel_width)
         self.logger.add_variable("crystal_fraction", current_state.get_current_position(),
@@ -186,16 +187,30 @@ class FlowGoIntegrator:
         current_state.set_current_position(current_state.get_current_position() + self.dx)
         current_state.set_current_time(current_state.get_current_time() + self.dx / v_mean)
 
-        current_state.set_strain_rate(3*v_mean/channel_depth)
+        current_state.set_strain_rate(3*v_mean/channel_depth)  #added by Birnbaum strain rate for velocity profile of a laminar flow in a channel or pipe,
 
         self.iteration += 1.
 
-        if (new_temp_core <= self.crystallization_rate_model.get_solid_temperature()) \
-                or (self.material_lava.is_notcompatible(current_state)) \
-                or (self.material_lava.yield_strength_notcompatible(current_state, self.terrain_condition)) \
-                or (current_state.get_current_position() >= self.terrain_condition.get_max_channel_length()):
+        if new_temp_core <= self.crystallization_rate_model.get_solid_temperature():
+            print("Terminated: Core temperature reaches solidification threshold.")
             self._has_finished = True
             return
+
+        if self.material_lava.is_notcompatible(current_state):
+            print("Terminated:  relative viscosity max: new phi > phimax")
+            self._has_finished = True
+            return
+
+        if self.material_lava.yield_strength_notcompatible(current_state, self.terrain_condition):
+            print("Terminated: tho_0 >= tho_b")
+            self._has_finished = True
+            return
+
+        if current_state.get_current_position() >= self.terrain_condition.get_max_channel_length():
+            print("Terminated: Reached maximum channel length.")
+            self._has_finished = True
+            return
+
     # ------------------------------------------------ FINISH THE LOOP -------------------------------------------------
 
     def has_finished(self):
@@ -220,4 +235,4 @@ class FlowGoIntegrator:
 
         current_state.set_crystal_fraction(initial_crystal_fraction)
         current_state.set_core_temperature(initial_temperature)
-        current_state.set_strain_rate(3*self._effusion_rate_init/math.pow(self._depth,2)/self._width)
+        current_state.set_strain_rate(3*self._effusion_rate_init/math.pow(self._depth,2)/self._width)  #added by Birnbaum mean shear rate across the cross-section.

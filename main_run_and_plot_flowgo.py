@@ -19,7 +19,7 @@ import pyflowgo.run_flowgo as run_flowgo
 import os.path
 import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import pyflowgo.run_flowgo_effusion_rate_array as run_flowgo_effusion_rate_array
-import os.path
+import os
 import json
 
 
@@ -29,11 +29,9 @@ if __name__ == "__main__":
     json file : e.g 'template.json'
     path to the result folder, e.g './results_flowgo/'
     """
-    # path_to_folder = os.path.abspath('')
-    path_to_folder = "./results_flowgo/"
-    json_file = './resource/template_2.json'
-    #json_file= '/Users/chevrel/Documents/GitHub/pyflowgo/resource/input_parameters_MaunaUlu74_tests.json'
-    #json_file = '/Users/chevrel/Documents/ICELAND/Jonas-holurhaun-2014/flowgo/Holuhraun14.json'
+
+    path_to_folder = os.path.join(os.path.abspath(''), "results_flowgo")
+    json_file = os.path.join(os.path.abspath(''), 'resource', 'template_2.json')
     with open(json_file, "r") as file:
         json_data = json.load(file)
         slope_file = json_data.get('slope_file')
@@ -47,11 +45,11 @@ if __name__ == "__main__":
 
     # ******** PLOT THE RESULTS *********************
     filename_results = flowgo.get_file_name_results(path_to_folder, json_file)
-    filename_array = [filename_results, "./results_flowgo/results_flowgo_template2_10m3s.csv"]
+    file_to_compare = os.path.join(os.path.abspath(''),'results_flowgo', 'results_flowgo_template2_10m3s_valid.csv')
+    filename_array = [filename_results, file_to_compare]
     plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
     plot_flowgo_results.plt.show()
     plot_flowgo_results.plt.close()
-
 
 
     # *************** Instanciate flowgo via run_flowgo_effusion_rate_array for various effusion rate *********************
@@ -65,12 +63,8 @@ if __name__ == "__main__":
         "last_eff_rate": 35,
         "step_eff_rate": 5
     }
-    simulation = run_flowgo_effusion_rate_array.StartFlowgo()
-    simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
+    #simulation = run_flowgo_effusion_rate_array.StartFlowgo()
+    #simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
     # ******** PLOT THE RESULTS *********************
     plot_flowgo_results.plt.show()
     plot_flowgo_results.plt.close()
-
-
-
-

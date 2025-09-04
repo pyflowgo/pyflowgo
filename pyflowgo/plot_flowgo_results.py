@@ -53,10 +53,12 @@ def plot_all_results(path_to_folder, filename_array, json_file):
     lava_properties = plt.figure(figsize=(8, 8))
     plot_core_temperature = lava_properties.add_subplot(321)
     plot_v_mean = lava_properties.add_subplot(322)
+    plot_strain_rate = plot_v_mean.twinx()
     plot_viscosity = lava_properties.add_subplot(323)
     plot_yield_strength = lava_properties.add_subplot(324)
     plot_width = lava_properties.add_subplot(325)
     plot_crystal = lava_properties.add_subplot(326)
+    plot_vesicle = plot_crystal.twinx()
 
     # plot figure 2: here define the positions of the graphs in figure 2
     heat_fluxes = plt.figure(figsize=(8, 8))
@@ -93,6 +95,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         slope_array = []
         temperature_array = []
         v_mean_array = []
+        strain_rate_array = []
         viscosity_array = []
         crystal_fraction_array = []
         vesicle_fraction_array = []
@@ -121,6 +124,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
                 slope_array.append(float(row['slope']))
                 temperature_array.append(float(row['core_temperature']))
                 v_mean_array.append(float(row['mean_velocity']))
+#                strain_rate_array.append(float(row['strain_rate']))
                 viscosity_array.append(float(row['viscosity']))
                 yield_strength_array.append(float(row['tho_0']))
                 shear_stress_array.append(float(row['tho_b']))
@@ -199,6 +203,10 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         # plot_v_mean.set_xlim(xmin=0)
         # plot_v_mean.set_ylim(ymin=0, ymax=100)
 
+      #  plot_strain_rate.plot(distance_array, strain_rate_array, '--', label='Strain rate')
+       # plot_strain_rate.set_ylabel('Strain Rate (s-1)')
+      #  plot_strain_rate.tick_params(axis='y')
+
         plot_viscosity.plot(distance_array, viscosity_array, '-', label=label)
         # plot_viscosity.set_xlabel('Distance (m)')
         plot_viscosity.set_ylabel('Viscosity (Pa s)')
@@ -225,7 +233,6 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         plot_crystal.set_ylabel('Crystal fraction')
         plot_crystal.grid(True)
 
-        plot_vesicle = plot_crystal.twinx()
         plot_vesicle.plot(distance_array, vesicle_fraction_array, '--', label='Vesicle fraction')
         plot_vesicle.set_ylabel('Vesicle fraction')
         plot_vesicle.tick_params(axis='y')

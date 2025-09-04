@@ -29,7 +29,7 @@ class StartFlowgo:
             read_json_data["slope_file"] = slope_file
 
         with open(output_file, 'w') as fp:
-            json.dump(read_json_data, fp)
+            json.dump(read_json_data, fp,indent=4, sort_keys=False)
 
     def run_flowgo_effusion_rate_array(self, json_file: str, path_to_folder, slope_file, effusion_rates):
         """
@@ -37,27 +37,31 @@ class StartFlowgo:
 
         """
         filename_array = []
+        # update and write the effusion rate in configuration file
+        # use a single "working copy"
+
+        # Load template JSON once
+        with open(json_file, "r") as data_file:
+            base_data = json.load(data_file)
+
+        file_directory = os.path.dirname(json_file)
+        file_name = os.path.splitext(os.path.basename(json_file))[0]
+        file_extension = os.path.splitext(os.path.basename(json_file))[1]
+        working_json_file = os.path.join(path_to_folder, f"{file_name}_{file_extension}")
 
         for effusion_rate_init in range(effusion_rates["first_eff_rate"],
                                         effusion_rates["last_eff_rate"] + effusion_rates["step_eff_rate"],
                                         effusion_rates["step_eff_rate"]):
-            # update and write the effusion rate in configuration file
-            file_directory = os.path.dirname(json_file)
-            file_name = os.path.splitext(os.path.basename(json_file))[0]
-            file_extension = os.path.splitext(os.path.basename(json_file))[1]
-
-            updated_json_file = os.path.join(path_to_folder, f"{file_name}_{effusion_rate_init}m3s{file_extension}")
-
-            with open(json_file, "r") as data_file:
-                data = json.load(data_file)
-                data["effusion_rate_init"] = effusion_rate_init
-
-            with open(updated_json_file, 'w') as fp:
-                json.dump(data, fp)
+            # Make a copy for this iteration
+            data = base_data.copy()
+            data["effusion_rate_init"] = effusion_rate_init
+            # overwrite the same JSON file each time
+            with open(working_json_file, 'w') as fp:
+                json.dump(data, fp, indent=4, sort_keys=False)
 
             # instanciate flowgo runner and run it
             flowgo = run_flowgo.RunFlowgo()
-            flowgo.run(updated_json_file, path_to_folder)
+            flowgo.run(working_json_file, path_to_folder)
 
             lava_name = data["lava_name"]
             filename = os.path.join(path_to_folder, f"results_flowgo_{lava_name}_{effusion_rate_init}m3s.csv")

@@ -45,6 +45,9 @@ import pyflowgo.flowgo_relative_viscosity_bubbles_model_defo
 import pyflowgo.flowgo_relative_viscosity_bubbles_model_no
 #import pyflowgo.flowgo_relative_viscosity_bubbles_model_cross
 import pyflowgo.flowgo_relative_viscosity_bubbles_model_mader
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_bd
+import pyflowgo.flowgo_relative_viscosity_bubbles_model_vona
+
 import pyflowgo.flowgo_material_lava
 import pyflowgo.flowgo_material_air
 import pyflowgo.flowgo_crystallization_rate_model_basic
@@ -247,6 +250,12 @@ class FlowgoModelFactory:
         elif self._relative_viscosity_bubbles_model == "no":
             self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_no. \
                 FlowGoRelativeViscosityBubblesModelNo(vesicle_fraction_model=self._vesicle_fraction_model_object)
+       # elif self._relative_viscosity_bubbles_model == "bd":
+       #     self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_bd. \
+       #         FlowGoRelativeViscosityBubblesModelBD(vesicle_fraction_model=self._vesicle_fraction_model_object)
+       # elif self._relative_viscosity_bubbles_model == "vona":
+       #     self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_vona. \
+       #         FlowGoRelativeViscosityBubblesModelVona(vesicle_fraction_model=self._vesicle_fraction_model_object)
        # elif self._relative_viscosity_bubbles_model == "cross":
        #     self._relative_viscosity_bubbles_model_object = pyflowgo.flowgo_relative_viscosity_bubbles_model_cross. \
         #        FlowGoRelativeViscosityBubblesModelCross(vesicle_fraction_model=self._vesicle_fraction_model_object)

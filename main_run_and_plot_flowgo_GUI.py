@@ -68,9 +68,9 @@ def run_flowgo_effusion():
 
     simulation = run_flowgo_effusion_rate_array.StartFlowgo()
 
-    # Changer temporairement de répertoire pour enregistrer les fichiers dans le bon dossier
+    # Change folder temporarly to save in the right folder
     original_dir = os.getcwd()
-    os.chdir(path_to_folder)
+    #os.chdir(path_to_folder)
 
     try:
         simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)

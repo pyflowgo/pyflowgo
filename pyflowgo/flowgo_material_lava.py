@@ -130,6 +130,46 @@ class FlowGoMaterialLava:
 
         return v_mean  # [m/s]
 
+    def compute_mean_velocity(self, state,
+                              terrain_condition):  # modify after request from Birnbaum to include strain rate calculation
+        # Initialize strain rate
+        strain_rate = state.get_strain_rate() or 1e-8  # use a small floor if zero
+        n = 0
+        # Retrieve channel properties and material parameters
+        channel_depth = terrain_condition.get_channel_depth(state.get_current_position())
+        tho_0 = self._yield_strength_model.compute_yield_strength(state, self._eruption_temperature)
+        tho_b = self._yield_strength_model.compute_basal_shear_stress(state, terrain_condition, self)
+
+        # Set convergence tolerances and maximum iterations
+        rel_tol = 1e-2  # relative tolerance (1%)
+        abs_tol = 1e-8  # absolute tolerance
+        max_iter = 50  # cap on iterations to avoid infinite loops
+
+        while True:
+            # Compute bulk viscosity based on current state
+            bulk_viscosity = self.computes_bulk_viscosity(state)
+            v_mean = ((channel_depth * tho_b) / (3. * bulk_viscosity)) * (
+                    1. - (3. / 2.) * (tho_0 / tho_b) + 0.5 * ((tho_0 / tho_b) ** 3.))
+
+            # Update strain rate from the mean velocity
+            new_strain_rate = 3.0 * v_mean / channel_depth
+
+            # Check for convergence (mixed relative/absolute)
+            delta = abs(new_strain_rate - strain_rate)
+            if delta <= max(rel_tol * abs(new_strain_rate), abs_tol):
+                strain_rate = new_strain_rate
+                break
+
+            # Prepare next iteration
+            strain_rate = new_strain_rate
+            n += 1
+            if n >= max_iter:
+                raise RuntimeError(f"compute_mean_velocity failed to converge after {max_iter} iterations")
+        # Update the state object with the converged strain rate
+        state.set_strain_rate(strain_rate)
+
+        return v_mean  # [m/s]
+
     def computes_vesicle_fraction(self, state):
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
         return vesicle_fraction

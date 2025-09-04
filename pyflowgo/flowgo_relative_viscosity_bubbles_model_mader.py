@@ -35,7 +35,7 @@ class FlowGoRelativeViscosityBubblesModelMader(pyflowgo.base.flowgo_base_relativ
     Input data
     -----------
     The vesicle fraction obtained from the vesicle fraction model
-    Strain rate obtained from
+    Strain rate should be obtained from 3*velocity/depth (voir integrator and material_lava) but not yet active
 
     Variables
     -----------

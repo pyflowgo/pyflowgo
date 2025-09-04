@@ -107,7 +107,7 @@ class FlowGoFluxRadiationHeat(pyflowgo.base.flowgo_base_flux.FlowGoBaseFlux):
 
         # crust component
         crust_spectral_radiance =(C1*lamda**(-5))/(math.exp(C2/(lamda*crust_temperature))-1)
-        print("crust_spectral_radiance",crust_spectral_radiance)
+
         # molten component
         molten_spectral_radiance = C1*lamda**(-5)/(math.exp(C2/(lamda*molten_material_temperature))-1)
 

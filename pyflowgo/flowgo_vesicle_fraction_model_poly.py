@@ -68,8 +68,8 @@ class FlowGoVesicleFractionModelPoly(pyflowgo.base.flowgo_base_vesicle_fraction_
 
         """this function permits to calculate the new vesicle fraction"""
         current_position = state.get_current_position()
-        vesicle_fraction = (self._vesicle_fraction + self._vesicle_poly_b * current_position +
-                            self._vesicle_poly_a * math.pow(current_position,2))
+        vesicle_fraction = self._vesicle_fraction + self._vesicle_poly_b * (current_position+1) + \
+                           self._vesicle_poly_a * math.pow(current_position, 2)
 
         if vesicle_fraction <= 0:
             vesicle_fraction = 0

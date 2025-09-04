@@ -60,7 +60,9 @@ class FlowGoRelativeViscosityModelCosta1(pyflowgo.base.flowgo_base_relative_visc
     def compute_relative_viscosity(self, state):
 
         phi = state.get_crystal_fraction()
+        #strain_rate = state.get_strain_rate()
         if self._strain_rate == 1.0:
+        #if strain_rate >= 1.0:
             # for spheres, A particles from Cimarelli et al., 2011
             # self.phi_max = 0.61,
             delta_1 = 11.4
@@ -77,6 +79,7 @@ class FlowGoRelativeViscosityModelCosta1(pyflowgo.base.flowgo_base_relative_visc
             return relative_viscosity
 
         if self._strain_rate == 0.0001:
+        #if strain_rate == 0.0001:
             # spheres A particles from Cimarelli et al., 2011
             # self.phi_max_1 = 0.54,
             delta_1 = 11.48

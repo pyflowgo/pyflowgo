@@ -31,7 +31,7 @@ class FlowGoRelativeViscosityBubblesModelRigid(pyflowgo.base.flowgo_base_relativ
 
     Input data
     -----------
-    The vesicle fraction in the json file containing
+    The vesicle fraction from json file and or following vesicle fraction model
 
     Variables
     -----------

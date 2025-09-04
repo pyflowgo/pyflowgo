@@ -19,6 +19,8 @@ import pyflowgo.run_flowgo as run_flowgo
 import os.path
 import pyflowgo.run_flowgo_effusion_rate_array as run_flowgo_effusion_rate_array
 import pyflowgo.plot_flowgo_results as plot_flowgo_results
+import json
+import os
 
 
 
@@ -31,9 +33,8 @@ if __name__ == "__main__":
     path to the result folder, e.g './results_flowgo/'
     
     """
-    #path_to_folder = os.path.abspath('')
-    path_to_folder = "./results_flowgo/"
-    json_file = './resource/template_2.json'
+    path_to_folder = os.path.join(os.path.abspath(''), "results_flowgo")
+    json_file = os.path.join(os.path.abspath(''), 'resource', 'template_2.json')
     with open(json_file, "r") as file:
         json_data = json.load(file)
         slope_file = json_data.get('slope_file')
@@ -42,7 +43,9 @@ if __name__ == "__main__":
     """Instanciate flowgo via run-flowgo for the given json """
 
     flowgo = run_flowgo.RunFlowgo()
-    #flowgo.run(json_file, path_to_folder)
+    flowgo.run(json_file, path_to_folder)
+    filename = flowgo.get_file_name_results(path_to_folder, json_file)
+    print("filename",filename)
 
     # ******************************
     """Instanciate flowgo and run it for a range of effusion rates using a given slope file 
@@ -55,5 +58,5 @@ if __name__ == "__main__":
         "last_eff_rate": 35,
         "step_eff_rate": 5
     }
-    simulation = run_flowgo_effusion_rate_array.StartFlowgo()
-    simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
+    #simulation = run_flowgo_effusion_rate_array.StartFlowgo()
+    #simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
