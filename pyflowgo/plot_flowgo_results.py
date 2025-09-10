@@ -121,7 +121,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         with open(filename, 'r') as csvfile:
             csvreader = csv.DictReader(csvfile, delimiter=',')
             first_row = next(csvreader)  # get the first row
-            effusion_rate_init = int(float(first_row["effusion_rate"]))
+            effusion_rate_init = round(float(first_row["effusion_rate"]))
             label = f"{lava_name}_{effusion_rate_init}m3s"
             
             for row in csvreader:
