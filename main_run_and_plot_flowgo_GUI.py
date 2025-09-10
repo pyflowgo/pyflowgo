@@ -38,7 +38,7 @@ def run_flowgo_single():
     plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
     plot_flowgo_results.plt.show()
     plot_flowgo_results.plt.close()
-    messagebox.showinfo("Success", "FlowGo simulation completed successfully!")
+    messagebox.showinfo("Success", "FLOWGO simulation completed successfully!")
 
 
 def run_flowgo_effusion():

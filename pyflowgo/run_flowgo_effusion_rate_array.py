@@ -47,7 +47,7 @@ class StartFlowgo:
         file_directory = os.path.dirname(json_file)
         file_name = os.path.splitext(os.path.basename(json_file))[0]
         file_extension = os.path.splitext(os.path.basename(json_file))[1]
-        working_json_file = os.path.join(path_to_folder, f"{file_name}_{file_extension}")
+        working_json_file = os.path.join(path_to_folder, f"{file_name}{file_extension}")
 
         for effusion_rate_init in range(effusion_rates["first_eff_rate"],
                                         effusion_rates["last_eff_rate"] + effusion_rates["step_eff_rate"],
