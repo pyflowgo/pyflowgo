@@ -94,7 +94,7 @@ class FlowGoIntegrator:
 
         # Switch between volume and mass conservation  #added by Birnbaum for mass conservation
         bulk_density = self.material_lava.get_bulk_density(current_state)
-        if self.mass_conservation:
+        if self.mass_conservation == True:
             channel_width = self.flux_rate / (v_mean * channel_depth) / bulk_density
         else: 
             channel_width = self.effusion_rate / (v_mean * channel_depth)

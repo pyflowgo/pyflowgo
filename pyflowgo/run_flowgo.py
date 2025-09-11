@@ -53,14 +53,19 @@ class RunFlowgo:
                 raise ValueError("Missing ['step_size'] entry in json")
             step_size = float(data['step_size'])
 
-            if 'mass_conservation' not in data['terrain_conditions']:
-                print('Volume conservation')
-                mass_conservation = False
+            raw_value = data['terrain_conditions'].get('mass_conservation', False)
+            # Normalize to boolean
+            if isinstance(raw_value, str):
+                mass_conservation = raw_value.strip().lower() == "true"
             else:
-                mass_conservation = data['terrain_conditions']['mass_conservation']
-                print('Mass conservation')
+                mass_conservation = bool(raw_value)
 
-# --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY -----------------------------
+            if mass_conservation:
+                print("Mass conservation")
+            else:
+                print("Volume conservation")
+
+        # --------------------------------- READ INITIAL CONFIGURATION FILE AND MODEL FACTORY -----------------------------
         terrain_condition = pyflowgo.flowgo_terrain_condition.FlowGoTerrainCondition()
         terrain_condition.read_initial_condition_from_json_file(configuration_file)
         terrain_condition.read_slope_from_file(slope_file)
