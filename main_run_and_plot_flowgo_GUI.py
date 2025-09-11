@@ -84,7 +84,7 @@ def run_flowgo_effusion():
 
 # Setup Tkinter window
 root = tk.Tk()
-root.title("FlowGo Simulation GUI")
+root.title("FLOWGO Simulation GUI")
 root.geometry("700x300")
 
 json_path_var = tk.StringVar()
