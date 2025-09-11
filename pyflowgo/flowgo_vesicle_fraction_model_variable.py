@@ -53,7 +53,7 @@ class FlowGoVesicleFractionModelVariable(pyflowgo.base.flowgo_base_vesicle_fract
             data = json.load(data_file)
 
             if 'vesicle_coef' not in data['lava_state']:
-                raise ValueError("Missing ['lava_state']['vesicle_coef pour variation downflow'] entry in json")
+                raise ValueError("Missing ['lava_state']['vesicle_coef'] pour variation downflow entry in json")
 
             self._vesicle_fraction = float(data['lava_state']['vesicle_fraction'])
             self._vesicle_coef = float(data['lava_state']['vesicle_coef'])

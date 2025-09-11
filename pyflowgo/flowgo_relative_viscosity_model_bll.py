@@ -48,8 +48,6 @@ class FlowGoRelativeViscosityModelBLL(pyflowgo.base.flowgo_base_relative_viscosi
         and Ca is the capillary number:
         Ca = self._vesicle_radius*strain_rate*melt_viscosity/self._surfacetension
 
-
-
     Equation alternative given by J. Birnbaum
     relative_viscosity = (1. - (phi / (self._phimax * (1. - vesicle_fraction)))) ** (-self._Bsolid) * \
                             (1. - vesicle_fraction) ** (-self._Bgas) * ((strain_rate) ** (n - 1))
@@ -124,18 +122,26 @@ class FlowGoRelativeViscosityModelBLL(pyflowgo.base.flowgo_base_relative_viscosi
     def compute_relative_viscosity(self, state):
         phi = state.get_crystal_fraction()
         strain_rate = state.get_strain_rate()
-        print("strain_rate", strain_rate )
+        print("strain_rate", strain_rate)
         vesicle_fraction = self._vesicle_fraction_model.computes_vesicle_fraction(state)
         melt_viscosity = self._melt_viscosity_model.compute_melt_viscosity(state)
         relaxation_time = self._vesicle_radius * melt_viscosity / self._surfacetension
         Ca = relaxation_time * strain_rate
 
         phi_effective = phi * (1 - vesicle_fraction) + vesicle_fraction
+        # safeguard checks
+        if vesicle_fraction >= 1.0:
+            print("⚠️ vesicle_fraction == 1.0 → (1 - vesicle_fraction) = 0, viscosity tends to ∞.")
+            return float("inf")
 
+        if strain_rate <= 0.0:
+            print("⚠️ strain_rate == 0.0 → replaced with small epsilon (1e-12) to avoid division by zero.")
+            strain_rate = 1e-12  # very small but > 0
+            
         if phi_effective > self._phicrit:
-            print(f"{phi_effective:.4f} > {self._phicrit:.4f}")
-            if Ca>10:
-                Ca=10
+            print(f"phi_effective {phi_effective:.4f} > phicrit {self._phicrit:.4f}")
+            if Ca > 10:
+                Ca = 10
             n = 1 + (0.7 - 0.55 * Ca) * (self._phicrit - phi*(1. - vesicle_fraction) - vesicle_fraction) # Eq.4.1c
             n = min(1.2, max(0.2, n))  # n between 0.2 and 1.2
             # equation alternative : n = 1 + (0.7 - 0.55 * Ca) * (self._phicrit - phi - vesicle_fraction)
@@ -149,7 +155,7 @@ class FlowGoRelativeViscosityModelBLL(pyflowgo.base.flowgo_base_relative_viscosi
                                  (1. - vesicle_fraction) ** (-self._Bgas) # Eq.4.1a
             print("n = 1 (Newtonian regime)")
 
-        if strain_rate <= 0:
+        if strain_rate <= 0.0:
             raise ValueError("strain_rate <= 0")
 
         #relative_viscosity = (1. - phi / (self._phimax * (1. - vesicle_fraction))) ** (-self._Bsolid) * \
