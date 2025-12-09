@@ -27,7 +27,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
     with open(json_file, "r") as file:
         json_data = json.load(file)
         slope_file = json_data.get('slope_file')
-        lava_name = json_data.get('lava_name')
+        #lava_name = json_data.get('lava_name')
     
     with open(slope_file, "r") as f_slope:
         distance_original = []
@@ -88,10 +88,9 @@ def plot_all_results(path_to_folder, filename_array, json_file):
 
     for filename in filename_array:
 
-       # label = filename.replace(path_to_folder+"results_flowgo_","").strip(".csv")
-        #label = filename.replace(os.path.join(path_to_folder, "results_flowgo_"), "")
-        #if label.endswith(".csv"):
-        #    label = label[:-4]  # Remove last 4 characters (".csv")
+        label = filename.replace(os.path.join(path_to_folder, "results_flowgo_"), "")
+        if label.endswith(".csv"):
+            label = label[:-4]  # Remove last 4 characters (".csv")
 
         distance_array = []
         slope_array = []
@@ -122,7 +121,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
             csvreader = csv.DictReader(csvfile, delimiter=',')
             first_row = next(csvreader)  # get the first row
             effusion_rate_init = round(float(first_row["effusion_rate"]))
-            label = f"{lava_name}_{effusion_rate_init}m3s"
+            #label = f"{lava_name}_{effusion_rate_init}m3s"
             
             for row in csvreader:
                 distance_array.append(float(row['position']))
