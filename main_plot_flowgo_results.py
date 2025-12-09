@@ -32,11 +32,11 @@ if __name__ == "__main__":
 
     path_to_folder = os.path.abspath('')
 
-        #"./results_flowgo/results_flowgo_template_3m3s_valid.csv",
-                     # "./results_flowgo/results_flowgo_template2_10m3s_valid.csv"]
+    filename_array = ["./results_flowgo/results_flowgo_template_3m3s_valid.csv",
+                     "./results_flowgo/results_flowgo_template2_10m3s_valid.csv"]
 
-    json_file = "/Users/chevrel/Documents/GitHub/RHEOL_PYFLOWGO/template.json"
-    #json_file = './resource/template_2.json'
+    #json_file = "/Users/chevrel/Documents/GitHub/RHEOL_PYFLOWGO/template.json"
+    json_file = './resource/template_2.json'
 
     with open(json_file, "r") as file:
         json_data = json.load(file)
