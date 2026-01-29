@@ -109,8 +109,8 @@ class FlowGoTerrainCondition:
         f_slope.close()
 
         # smooth the slope
-
-        if self._slope_smoothing_active == True:
+        self._slope_smoothing_active = (True if self._slope_smoothing_active is True else False)
+        if self._slope_smoothing_active:
             slope = self.running_mean(slope, self._slope_smoothing_number_of_points)
 
         # build the spline to interpolate the distance (k=1 : it is a linear interpolation)
