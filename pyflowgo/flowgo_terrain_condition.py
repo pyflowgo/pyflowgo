@@ -63,9 +63,13 @@ class FlowGoTerrainCondition:
             self._channel_width = float(data['terrain_conditions']['width'])
             self._gravity = float(data['terrain_conditions']['gravity'])
             self._max_channel_length = float(data['terrain_conditions']['max_channel_length'])
-            self._slope_smoothing_active = bool(data['terrain_conditions']['slope_smoothing_active'])
-            self._slope_smoothing_number_of_points = float(data['terrain_conditions']['slope_smoothing_number_of_points'])
-
+            self._slope_smoothing_active = (
+                    data['terrain_conditions']['slope_smoothing_active'] is True
+            )
+            if self._slope_smoothing_active:
+                self._slope_smoothing_number_of_points = float(data['terrain_conditions']['slope_smoothing_number_of_points'])
+            else:
+                self._slope_smoothing_number_of_points = -1
     def read_slope_from_file(self, filename=None):
         if filename == None:
             filename = '../MaunaUlu74/DEM_maunaulu74.txt'
