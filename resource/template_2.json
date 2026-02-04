@@ -28,7 +28,7 @@
   "depth": 0.7,
   "gravity": 9.81,
   "slope_smoothing_active": false,
-  "slope_smoothing_number_of_points": 10,
+  "slope_smoothing_number_of_points": 1,
   "max_channel_length": 4000.0
   },
   "eruption_condition":{
