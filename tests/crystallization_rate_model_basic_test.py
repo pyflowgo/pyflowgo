@@ -14,12 +14,15 @@
 #
 # You should have received copies of the GNU Lesser General Public License
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
-
+import unittest
+import sys
+import os
+# Ajoute le dossier parent du script (main) au sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import unittest
 import pyflowgo.flowgo_material_lava
 import pyflowgo.flowgo_state
 import pyflowgo.flowgo_crystallization_rate_model_basic
-
 
 class MyTestCase(unittest.TestCase):
     def test_read_initial_condition_from_json_file(self):

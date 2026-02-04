@@ -16,6 +16,10 @@
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
 import unittest
+import sys
+import os
+# Ajoute le dossier parent du script (main) au sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pyflowgo.flowgo_terrain_condition
 import pyflowgo.flowgo_state
 import math
@@ -38,9 +42,12 @@ class MyTestCase(unittest.TestCase):
 
         filename_dem = './resources/DEM_pdf2010_lidar.txt'
         terrain_condition.read_slope_from_file(filename_dem)
-        state=pyflowgo.flowgo_state.FlowGoState()
+        state = pyflowgo.flowgo_state.FlowGoState()
         state.set_current_position(0)
         slope = terrain_condition.get_channel_slope(state.get_current_position())
         self.assertAlmostEqual(slope, 0.328342197625647,15)
         self.assertAlmostEqual(terrain_condition.get_channel_slope(1000),(0.197395559779715),15)
         self.assertAlmostEqual(terrain_condition.get_channel_slope(30), (0.325347225021063), 15)
+
+if __name__ == '__main__':
+    unittest.main()

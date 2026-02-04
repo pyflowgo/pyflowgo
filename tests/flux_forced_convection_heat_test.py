@@ -16,6 +16,10 @@
 # along with the PyFLOWGO library.  If not, see https://www.gnu.org/licenses/.
 
 import unittest
+import sys
+import os
+# Ajoute le dossier parent du script (main) au sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import pyflowgo.flowgo_material_lava
 import pyflowgo.flowgo_material_air
 import pyflowgo.flowgo_yield_strength_model_basic

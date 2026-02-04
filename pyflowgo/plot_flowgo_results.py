@@ -63,9 +63,10 @@ def plot_all_results(path_to_folder, filename_array, json_file):
 
     # plot figure 2: here define the positions of the graphs in figure 2
     heat_fluxes = plt.figure(figsize=(8, 8))
-    plot_Q_forced_conv = heat_fluxes.add_subplot(311)
-    plot_Q_cond = heat_fluxes.add_subplot(312)
-    plot_Q_rad = heat_fluxes.add_subplot(313)
+    plot_Q_forced_conv = heat_fluxes.add_subplot(411)
+    plot_Q_cond = heat_fluxes.add_subplot(412)
+    plot_Q_rad = heat_fluxes.add_subplot(413)
+    plot_Q_snyder = heat_fluxes.add_subplot(414)
     # plot_Q_rain = crustal_conditions.add_subplot(514)
     # plot_Q_visc = crustal_conditions.add_subplot(515)
 
@@ -114,6 +115,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         flowgofluxforcedconvectionheat_array = []
         flowgofluxconductionheat_array = []
         flowgofluxradiationheat_array = []
+        flowgofluxsnyderheat_array = []
         flowgofluxheatlossrain_array = []
         flowgofluxviscousheating_array = []
 
@@ -143,10 +145,32 @@ def plot_all_results(path_to_folder, filename_array, json_file):
                 crystallization_rate_array.append(float(row['dphi_dtemp']))
                 crystallization_down_flow_array.append(float(row['dphi_dx']))
                 characteristic_surface_temperature_array.append(float(row['characteristic_surface_temperature']))
-                effective_radiation_temperature_array.append(float(row['effective_radiation_temperature']))
-                flowgofluxforcedconvectionheat_array.append(float(row['flowgofluxforcedconvectionheat']))
-                flowgofluxconductionheat_array.append(float(row['flowgofluxconductionheat']))
-                flowgofluxradiationheat_array.append(float(row['flowgofluxradiationheat']))
+
+                if 'effective_radiation_temperature' in row and row['effective_radiation_temperature'] != '':
+                    effective_radiation_temperature_array.append(float(row['effective_radiation_temperature']))
+                else:
+                    effective_radiation_temperature_array.append(0.0)
+
+                if 'flowgofluxradiationheat' in row and row['flowgofluxradiationheat'] != '':
+                    flowgofluxradiationheat_array.append(float(row['flowgofluxradiationheat']))
+                else:
+                    flowgofluxradiationheat_array.append(0.0)
+                
+                if 'flowgofluxconductionheat' in row and row['flowgofluxconductionheat'] != '':
+                    flowgofluxconductionheat_array.append(float(row['flowgofluxconductionheat']))
+                else:
+                    flowgofluxconductionheat_array.append(0.0)
+
+                if 'flowgofluxforcedconvectionheat' in row and row['flowgofluxforcedconvectionheat'] != '':
+                    flowgofluxforcedconvectionheat_array.append(float(row['flowgofluxforcedconvectionheat']))
+
+                else:
+                    flowgofluxforcedconvectionheat_array.append(0.0)
+
+                # ---- optional Snyder heat ----
+                if 'flowgofluxsnyderheat' in row and row['flowgofluxsnyderheat'] != '':
+                    flowgofluxsnyderheat_array.append(float(row['flowgofluxsnyderheat']))
+                    qsnyder = 'yes'
                 #flowgofluxheatlossrain_array.append(float(row['flowgofluxheatlossrain']))
                 #flowgofluxviscousheating_array.append(float(row['flowgofluxviscousheating']))
 
@@ -245,7 +269,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         # plot_crystal.set_xlim(xmax=500)
 
         # figure 2
-
+    
         plot_Q_forced_conv.plot(distance_array, flowgofluxforcedconvectionheat_array, '-', label=label)
         plot_Q_forced_conv.set_xlabel('Distance (m)')
         plot_Q_forced_conv.set_ylabel('Qconv (W/m)')
@@ -264,7 +288,13 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         plot_Q_rad.set_ylabel('Qrad (W/m)')
         plot_Q_rad.set_yscale('log')
         plot_Q_rad.grid(True)
-
+            
+        if qsnyder == 'yes':
+            plot_Q_snyder.plot(distance_array, flowgofluxsnyderheat_array, '-', label=label)
+            plot_Q_snyder.set_xlabel('Distance (m)')
+            plot_Q_snyder.set_ylabel('Qsnyder (W/m)')
+            plot_Q_snyder.set_yscale('log')
+            plot_Q_snyder.grid(True)
         # plot_Q_rain.plot(distance_array, flowgofluxheatlossrain_array, '-', label=label)
         # plot_Q_rain.set_xlabel('Distance (m)')
         # plot_Q_rain.set_ylabel('Qrain (W/m)')
