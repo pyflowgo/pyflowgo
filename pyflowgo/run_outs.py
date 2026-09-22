@@ -43,8 +43,12 @@ def get_run_outs(path_to_folder, flowgo_results, slope_file, lava_name):
                     yieldstrength_array.append(float(row['tho_0']))
 
             # Initial effusion rate
-            effusion_rate_init = round(effusion_rate[0], 0)   # m3/s
-            print("effusion_rate_init_plot = ", effusion_rate_init)
+            effusion_rate_init_calc = round(effusion_rate[0], 0)   # m3/s
+            print("effusion_rate_init_calculated = ", effusion_rate_init_calculated)
+
+            filename_base = os.path.basename(filename)
+            effusion_rate_init = float(filename_base.rsplit("_", 1)[1].replace("m3s.csv", ""))
+            print("effusion_rate_init=", effusion_rate_init)
 
             run_out_distance = max(distance_array)  # m
             print("run_out_distance_plot = ",run_out_distance)
