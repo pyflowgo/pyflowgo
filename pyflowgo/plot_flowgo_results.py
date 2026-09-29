@@ -51,38 +51,30 @@ def plot_all_results(path_to_folder, filename_array, json_file):
 
 
     # plot figure 1: here define the positions of the graphs in figure 1
-    lava_properties = plt.figure(figsize=(8, 8))
-    plot_core_temperature = lava_properties.add_subplot(321)
-    plot_v_mean = lava_properties.add_subplot(322)
-    plot_strain_rate = plot_v_mean.twinx()
-    plot_viscosity = lava_properties.add_subplot(323)
-    plot_yield_strength = lava_properties.add_subplot(324)
-    plot_width = lava_properties.add_subplot(325)
-    plot_crystal = lava_properties.add_subplot(326)
-    plot_vesicle = plot_crystal.twinx()
+    lava_properties = plt.figure(figsize=(9, 7))
+    plot_core_temperature = lava_properties.add_subplot(331)
+    plot_crystal = lava_properties.add_subplot(332)
+    plot_vesicle = lava_properties.add_subplot(333)
+    plot_viscosity = lava_properties.add_subplot(334)
+    plot_yield_strength = lava_properties.add_subplot(335)
+    plot_v_mean = lava_properties.add_subplot(336)
+    plot_width = lava_properties.add_subplot(337)
+    plot_slope = lava_properties.add_subplot(338)
+    plot_strain_rate = lava_properties.add_subplot(339)
+    # Plot original slope
+    plot_slope.plot(distance_original, slope_original, '-k', label="Original")
 
-    # plot figure 2: here define the positions of the graphs in figure 2
-    heat_fluxes = plt.figure(figsize=(8, 8))
-    plot_Q_forced_conv = heat_fluxes.add_subplot(411)
-    plot_Q_cond = heat_fluxes.add_subplot(412)
-    plot_Q_rad = heat_fluxes.add_subplot(413)
-    plot_Q_snyder = heat_fluxes.add_subplot(414)
-    # plot_Q_rain = crustal_conditions.add_subplot(514)
-    # plot_Q_visc = crustal_conditions.add_subplot(515)
-
+    # plot figure 2: here define the figure for the heat flux
+    heat_fluxes = plt.figure(figsize=(8, 7))
+    heat_flux_axes = None
 
     # plot figure 3: here define the positions of the graphs in figure 3
-    crustal_conditions = plt.figure(figsize=(8, 8))
+    crustal_conditions = plt.figure(figsize=(8, 7))
     plot_eff_cov_frac = crustal_conditions.add_subplot(411)
     plot_T_crust = crustal_conditions.add_subplot(412)
     plot_T_eff_rad = crustal_conditions.add_subplot(413)
     plot_T_surf_conv = crustal_conditions.add_subplot(414)
 
-    # plot figure 4: here define the positions of the graphs in figure 4
-
-    slope = plt.figure()
-    plot_slope = slope.add_subplot(111)
-    plot_slope.plot(distance_original, slope_original, '-k', label="Original")
 
     flow_id = os.path.abspath(path_to_folder)
     title = os.path.basename(flow_id)
@@ -130,7 +122,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
                 slope_array.append(float(row['slope']))
                 temperature_array.append(float(row['core_temperature']))
                 v_mean_array.append(float(row['mean_velocity']))
-#                strain_rate_array.append(float(row['strain_rate']))
+                strain_rate_array.append(float(row['strain_rate']))
                 viscosity_array.append(float(row['viscosity']))
                 yield_strength_array.append(float(row['tho_0']))
                 shear_stress_array.append(float(row['tho_b']))
@@ -149,30 +141,61 @@ def plot_all_results(path_to_folder, filename_array, json_file):
                 if 'effective_radiation_temperature' in row and row['effective_radiation_temperature'] != '':
                     effective_radiation_temperature_array.append(float(row['effective_radiation_temperature']))
                 else:
-                    effective_radiation_temperature_array.append(0.0)
+                    effective_radiation_temperature_array.append(np.nan)
 
                 if 'flowgofluxradiationheat' in row and row['flowgofluxradiationheat'] != '':
                     flowgofluxradiationheat_array.append(float(row['flowgofluxradiationheat']))
                 else:
-                    flowgofluxradiationheat_array.append(0.0)
+                    flowgofluxradiationheat_array.append(np.nan)
                 
                 if 'flowgofluxconductionheat' in row and row['flowgofluxconductionheat'] != '':
                     flowgofluxconductionheat_array.append(float(row['flowgofluxconductionheat']))
                 else:
-                    flowgofluxconductionheat_array.append(0.0)
+                    flowgofluxconductionheat_array.append(np.nan)
 
                 if 'flowgofluxforcedconvectionheat' in row and row['flowgofluxforcedconvectionheat'] != '':
                     flowgofluxforcedconvectionheat_array.append(float(row['flowgofluxforcedconvectionheat']))
-
+                # ---- optional water convection heat ----
+            #    elif 'flowgofluxconvectionheatwater' in row and row['flowgofluxconvectionheatwater'] != '':
+            #        flowgofluxforcedconvectionheat_array.append(float(row['flowgofluxconvectionheatwater']))
                 else:
-                    flowgofluxforcedconvectionheat_array.append(0.0)
+                    flowgofluxforcedconvectionheat_array.append(np.nan)
 
                 # ---- optional Snyder heat ----
                 if 'flowgofluxsnyderheat' in row and row['flowgofluxsnyderheat'] != '':
                     flowgofluxsnyderheat_array.append(float(row['flowgofluxsnyderheat']))
-                    qsnyder = 'yes'
-                #flowgofluxheatlossrain_array.append(float(row['flowgofluxheatlossrain']))
-                #flowgofluxviscousheating_array.append(float(row['flowgofluxviscousheating']))
+                else:
+                    flowgofluxsnyderheat_array.append(np.nan)
+
+                if 'flowgofluxheatlossrain' in row and row['flowgofluxheatlossrain'] != '':
+                    flowgofluxheatlossrain_array.append(float(row['flowgofluxheatlossrain']))
+                else:
+                    flowgofluxheatlossrain_array.append(np.nan)
+
+                if 'flowgofluxviscousheating' in row and row['flowgofluxviscousheating'] != '':
+                    flowgofluxviscousheating_array.append(float(row['flowgofluxviscousheating']))
+                else:
+                    flowgofluxviscousheating_array.append(np.nan)
+
+        active_Q = []
+
+        if np.any(np.asarray(flowgofluxforcedconvectionheat_array) > 0):
+            active_Q.append(("Qconv", flowgofluxforcedconvectionheat_array))
+
+        if np.any(np.asarray(flowgofluxconductionheat_array) > 0):
+            active_Q.append(("Qcond", flowgofluxconductionheat_array))
+
+        if np.any(np.asarray(flowgofluxradiationheat_array) > 0):
+            active_Q.append(("Qrad", flowgofluxradiationheat_array))
+
+        if np.any(np.asarray(flowgofluxsnyderheat_array) > 0):
+            active_Q.append(("Qsnyder", flowgofluxsnyderheat_array))
+
+        if np.any(np.asarray(flowgofluxheatlossrain_array) > 0):
+            active_Q.append(("Qrain", flowgofluxheatlossrain_array))
+
+        if np.any(np.asarray(flowgofluxviscousheating_array) > 0):
+            active_Q.append(("Qvisc", flowgofluxviscousheating_array))
 
         run_out_distance = (max(distance_array) / 1000.0)
         step_size = distance_array[1]
@@ -214,7 +237,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
 
         plot_core_temperature.set_ylabel('Core Temperature (°C)')
         # plot_core_temperature.set_xlim(xmax=500)
-        plot_core_temperature.grid(True)
+        plot_core_temperature.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
         plot_core_temperature.get_yaxis().get_major_formatter().set_useOffset(False)
 
         # text_run_out ="The run out distance is {:3.2f} km in {:3.2f} min".format(float(run_out_distance),float(duration))
@@ -224,16 +247,17 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         # plot_v_mean.set_xlim(xmax=1000)
         # plot_v_mean.legend(loc=3, prop={'size': 8})
         plot_v_mean.set_ylabel('Mean velocity (m/s)')
-        plot_v_mean.grid(True)
-        # title2 = "Solution for a constant effusion rate of {:3.2f} m\u00b3/s and \n at-source channel width of
+        plot_v_mean.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
+        #title2 = "Effusion rate of {:3.2f} m\u00b3/s and \n at-source channel width of
         # {:3.1f} m and {:3.2f} deep".format(float(effusion_rate[0]), width_array[0], 0.)
         # plot_v_mean.set_title(title2, ha='center')
         # plot_v_mean.set_xlim(xmin=0)
         # plot_v_mean.set_ylim(ymin=0, ymax=100)
+        # plot_v_mean.set_ylim(ymin=0, ymax=100)
 
-      #  plot_strain_rate.plot(distance_array, strain_rate_array, '--', label='Strain rate')
-       # plot_strain_rate.set_ylabel('Strain Rate (s-1)')
-      #  plot_strain_rate.tick_params(axis='y')
+        plot_strain_rate.plot(distance_array, strain_rate_array, '-', label='Strain rate')
+        plot_strain_rate.set_ylabel('Strain Rate (s$^{-1}$)')
+        plot_strain_rate.grid(True, color="lightgray", linewidth=0.5, alpha=0.7)
 
         plot_viscosity.plot(distance_array, viscosity_array, '-', label=label)
         # plot_viscosity.set_xlabel('Distance (m)')
@@ -241,73 +265,53 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         plot_viscosity.set_ylim(ymin=1, ymax=1000000)
         # plot_viscosity.set_xlim(xmax=4000)
         plot_viscosity.set_yscale('log')
-        plot_viscosity.grid(True)
+        plot_viscosity.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
         plot_yield_strength.plot(distance_array, yield_strength_array, '-',  label= label)
         # plot_yield_strength.set_xlabel('Distance (m)')
         plot_yield_strength.set_ylabel('Yield strength (Pa)')
         plot_yield_strength.set_yscale('log')
-        plot_yield_strength.grid(True)
+        plot_yield_strength.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
         plot_width.plot(distance_array, width_array, '-',  label=label)
         plot_width.set_xlabel('Distance (m)')
         plot_width.set_ylabel('Width (m)')
-        plot_width.grid(True)
+        plot_width.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
         plot_width.set_ylim(ymin=0, ymax=200)
 
         plot_crystal.plot(distance_array, crystal_fraction_array, '-', label=label)
         #plot_crystal.legend(loc=2, prop={'size': 8})
         plot_crystal.set_xlabel('Distance (m)')
         plot_crystal.set_ylabel('Crystal fraction')
-        plot_crystal.grid(True)
+        plot_crystal.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
-        plot_vesicle.plot(distance_array, vesicle_fraction_array, '--', label='Vesicle fraction')
+        plot_vesicle.plot(distance_array, vesicle_fraction_array, '-', label='Vesicle fraction')
         plot_vesicle.set_ylabel('Vesicle fraction')
         plot_vesicle.tick_params(axis='y')
+        plot_vesicle.grid(True, color="lightgray", linewidth=0.5, alpha=0.7)
 
         # plot_crystal.set_ylim(ymin=0, ymax=0.6)
         # plot_crystal.set_xlim(xmax=500)
 
         # figure 2
-    
-        plot_Q_forced_conv.plot(distance_array, flowgofluxforcedconvectionheat_array, '-', label=label)
-        plot_Q_forced_conv.set_xlabel('Distance (m)')
-        plot_Q_forced_conv.set_ylabel('Qconv (W/m)')
-        plot_Q_forced_conv.set_yscale('log')
-        plot_Q_forced_conv.legend()
-        plot_Q_forced_conv.grid(True)
+        if heat_flux_axes is None:
+            n_Q = len(active_Q)
+            heat_flux_axes = {}
+            for i, (Q_name, Q_array) in enumerate(active_Q):
+                ax = heat_fluxes.add_subplot(n_Q, 1, i + 1)
+                heat_flux_axes[Q_name] = ax
+                ax.set_xlabel('Distance (m)')
+                ax.set_ylabel(f'{Q_name} (W/m)')
+                ax.set_yscale('log')
+                ax.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
-        plot_Q_cond.plot(distance_array, flowgofluxconductionheat_array, '-', label=label)
-        plot_Q_cond.set_xlabel('Distance (m)')
-        plot_Q_cond.set_ylabel('Qcond (W/m)')
-        plot_Q_cond.set_yscale('log')
-        plot_Q_cond.grid(True)
-
-        plot_Q_rad.plot(distance_array, flowgofluxradiationheat_array, '-', label=label)
-        plot_Q_rad.set_xlabel('Distance (m)')
-        plot_Q_rad.set_ylabel('Qrad (W/m)')
-        plot_Q_rad.set_yscale('log')
-        plot_Q_rad.grid(True)
-            
-        if qsnyder == 'yes':
-            plot_Q_snyder.plot(distance_array, flowgofluxsnyderheat_array, '-', label=label)
-            plot_Q_snyder.set_xlabel('Distance (m)')
-            plot_Q_snyder.set_ylabel('Qsnyder (W/m)')
-            plot_Q_snyder.set_yscale('log')
-            plot_Q_snyder.grid(True)
-        # plot_Q_rain.plot(distance_array, flowgofluxheatlossrain_array, '-', label=label)
-        # plot_Q_rain.set_xlabel('Distance (m)')
-        # plot_Q_rain.set_ylabel('Qrain (W/m)')
-        # plot_Q_rain.set_yscale('log')
-        # plot_Q_rain.set_ylim(ymin=0, ymax=100000000)
-        # plot_Q_rain.grid(True)
-        #
-        # plot_Q_visc.plot(distance_array, flowgofluxviscousheating_array, '-', label=label)
-        # plot_Q_visc.set_xlabel('Distance (m)')
-        # plot_Q_visc.set_ylabel('Qvisc (W/m)')
-        # plot_Q_visc.set_yscale('log')
-        # plot_Q_visc.set_ylim(ymin=0, ymax=100000000)
-        # plot_Q_visc.grid(True)
+                if i == 0:
+                    ax.set_title("Heat fluxes for " + str(title))
+        # Add current effusion-rate curves to existing axes
+        for Q_name, Q_array in active_Q:
+            ax = heat_flux_axes[Q_name]
+            ax.plot(distance_array,Q_array,'-',label=label)
+            ax.legend(loc=0, prop={'size': 8})
 
         plot_eff_cov_frac.plot(distance_array, effective_cover_fraction_array, '-', label=label)
         plot_eff_cov_frac.set_xlabel('Distance (m)')
@@ -332,18 +336,20 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         plot_slope.plot(distance_array, slope_degrees, '-', label=label)
         plot_slope.set_ylabel('slope (°)')
         #plot_slope.set_xlim(xmin=0, xmax=max(distance_array)+1000)
-        plot_slope.grid(True)
+        plot_slope.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
     plot_core_temperature.set_title(str(title))
     plot_v_mean.legend(loc=1, prop={'size': 8})
-    plot_Q_forced_conv.legend(loc=0, prop={'size': 8})
-    plot_Q_forced_conv.set_title("Heat fluxes for " + str(title))
     plot_eff_cov_frac.legend(loc=0, prop={'size': 8})
     plot_eff_cov_frac.set_title("Crustal and surface conditions for " + str(title))
     plot_slope.legend(loc=0, prop={'size': 8})
 
 
     lava_properties.tight_layout()
+    title = ("Effusion rate of {:3.2f} m³/s and {:3.2f} m deep").format(
+        float(effusion_rate[0]),depth_array[0],0.)
+    lava_properties.suptitle(title, fontsize=7)
+
     lava_properties.savefig(path_to_folder+"/lava_properties.png")
 
     heat_fluxes.tight_layout()
@@ -352,5 +358,8 @@ def plot_all_results(path_to_folder, filename_array, json_file):
     crustal_conditions.tight_layout()
     crustal_conditions.savefig(path_to_folder+"/crustal_conditions.png")
 
-    slope.savefig(path_to_folder+"/slope.png")
-
+    return (
+        lava_properties,
+        heat_fluxes,
+        crustal_conditions
+    )

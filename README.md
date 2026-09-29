@@ -4,7 +4,8 @@
 
 Lava flow advance may be modeled through tracking the evolution of the lava's thermo-rheological properties, which are defined by viscosity and yield strength. These rheological properties evolve, in turn, with cooling and crystallization. Such model was conceived by Harris and Rowland (2001) who developed a 1-D model, FLOWGO, in which velocity of a control volume flowing down a channel depends on rheological properties computed following the lava cooling and crystallization path estimated via a heat balance box model. 
 
-PyFLOWGO is an updated version of FLOWGO written in Python 3, that is open-source and compatible with any operating system.
+PyFLOWGO is an updated version of  [FLOWGO](https://link.springer.com/article/10.1007/s004450000120)
+written in Python 3, that is open-source and compatible with any operating system.
 
 **If you use PyFLOWGO please cite the following reference **:
 
@@ -33,8 +34,18 @@ You can then run the software using:
 ```sh
 $ python3 main_flowgo.py ./resource/template.json
 ```
+or 
+```sh
+$ python3 main_run_and_plot_flowgo.py ./resource/template.json
+```
 
-You can now run the software using:
+or with the web app:
+
+```sh
+$ streamlit run pyflowgo_app.py
+```
+
+You can also run the software using a GUI:
 ```sh
 $ python main_run_and_plot_flowgo_GUI.py   
 ```
@@ -45,8 +56,14 @@ For further information, please read the PyFLOWGO_for_dummies.pdf file.
 # Authors / developers
 
 The PyFLOWGO main developers are:
-   - Dr. Magdalena Oryaëlle Chevrel (oryaelle.chevrel@gmail.com) - Université Clermont Auvergne, CNRS, IRD, OPGC, Laboratoire Magmas et Volcans
+   - Dr. Magdalena Oryaëlle Chevrel (oryaelle.chevrel@ird.fr) - Université Clermont Auvergne, CNRS, IRD, OPGC, Laboratoire Magmas et Volcans
    - Dr. Jérémie Labroquère (jeremie.labroquere@gmail.com) - https://www.linkedin.com/in/jlabroquere/
+
+An AI language model (ChatGPT, OpenAI) was used to support code formulation and text refinement; 
+all scientific decisions and responsibility remain with the authors. 
+
+Please do not hesitate the contact me for any further information or assistance (oryaelle.chevrel@ird.fr)
+
 
 # License
 The current license of the software is LGPL v3.0.

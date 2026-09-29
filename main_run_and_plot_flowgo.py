@@ -21,6 +21,7 @@ import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import pyflowgo.run_flowgo_effusion_rate_array as run_flowgo_effusion_rate_array
 import os
 import json
+import sys
 
 
 if __name__ == "__main__":
@@ -31,40 +32,49 @@ if __name__ == "__main__":
     """
 
     path_to_folder = os.path.join(os.path.abspath(''), "results_flowgo")
-    json_file = os.path.join(os.path.abspath(''), 'resource', 'template_2.json')
+
+    if len(sys.argv) < 2:
+        print("Usage: python main_run_and_plot_flowgo.py <json_file>")
+        sys.exit(1)
+
+    json_file = os.path.abspath(sys.argv[1])
+
     with open(json_file, "r") as file:
         json_data = json.load(file)
         slope_file = json_data.get('slope_file')
+        effusion_rate = json_data["effusion_rate_init"]
 
+    # ----- SINGLE EFFUSION RATE -----
 
+    if isinstance(effusion_rate, (int, float)):
+        flowgo = run_flowgo.RunFlowgo()
+        flowgo.run(json_file, path_to_folder)
+        filename_results = flowgo.get_file_name_results(path_to_folder, json_file)
+        file_to_compare = os.path.join(os.path.abspath(''),'results_flowgo', 'results_flowgo_template2_10m3s_valid.csv')
+        #file_to_compare2 = os.path.join(os.path.abspath(''), 'results_flowgo','results_flowgo_template2-water-1bar_10m3s.csv')
+        #filename_array = [filename_results, file_to_compare]#,file_to_compare2]
+        filename_array = [filename_results]  # ,file_to_compare2]
+        figures = plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
 
-    # ******** Instanciate flowgo via run flowgo for the given json *********************
+    # ----- RANGE OF EFFUSION RATES -----
+    elif isinstance(effusion_rate, list) and len(effusion_rate) == 3:
+        # *************** Instanciate flowgo via run_flowgo_effusion_rate_array for various effusion rate *********************
+        """Instanciate flowgo and run it for a range of effusion rates using a given slope file
+        For that you must define
+        -> the range of effusion rates
+        -> the slope file """
 
-    flowgo = run_flowgo.RunFlowgo()
-    flowgo.run(json_file, path_to_folder)
+        effusion_rates = {
+            "first_eff_rate": effusion_rate[0],
+            "last_eff_rate": effusion_rate[1],
+            "step_eff_rate": effusion_rate[2]
+        }
+        simulation = run_flowgo_effusion_rate_array.StartFlowgo()
+        simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
+    else:
+        raise ValueError(
+            "effusion_rate must be either a number or "
+            "a list [first_eff_rate, last_eff_rate, step_eff_rate]" )
 
-    # ******** PLOT THE RESULTS *********************
-    filename_results = flowgo.get_file_name_results(path_to_folder, json_file)
-    file_to_compare = os.path.join(os.path.abspath(''),'results_flowgo', 'results_flowgo_template2_10m3s_valid.csv')
-    filename_array = [filename_results, file_to_compare]
-    plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
-    plot_flowgo_results.plt.show()
-    plot_flowgo_results.plt.close()
-
-
-    # *************** Instanciate flowgo via run_flowgo_effusion_rate_array for various effusion rate *********************
-    """Instanciate flowgo and run it for a range of effusion rates using a given slope file
-    For that you must define
-    -> the range of effusion rates
-    -> the slope file """
-
-    effusion_rates = {
-        "first_eff_rate": 5,
-        "last_eff_rate": 35,
-        "step_eff_rate": 5
-    }
-    #simulation = run_flowgo_effusion_rate_array.StartFlowgo()
-    #simulation.run_flowgo_effusion_rate_array(json_file, path_to_folder, slope_file, effusion_rates)
-    # ******** PLOT THE RESULTS *********************
     plot_flowgo_results.plt.show()
     plot_flowgo_results.plt.close()
