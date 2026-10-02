@@ -3,7 +3,7 @@ import json
 import os
 
 import pyflowgo.run_flowgo as run_flowgo
-import pyflowgo.plot_flowgo_results as plot_flowgo_results
+#import pyflowgo.plot_flowgo_results as plot_flowgo_results
 import pyflowgo.run_outs as run_outs
 
 
@@ -70,7 +70,7 @@ class StartFlowgo:
             print('^^^^^^^^^^^^^^^^^^^^^^ End  for ' + str(effusion_rate_init) + "_m3s ^^^^^^^^^^^^^^^^^^^^^^^^")
             filename_array.append(filename)
 
-        plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
+        #plot_flowgo_results.plot_all_results(path_to_folder, filename_array, json_file)
 
         with open(json_file, "r") as data_file:
             data = json.load(data_file)
@@ -79,3 +79,4 @@ class StartFlowgo:
         run_outs.get_run_outs(path_to_folder, filename_array, slope_file, lava_name)
 
         print("******************************  End of the eruption rates loop ******************************")
+        return filename_array

@@ -51,7 +51,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
 
 
     # plot figure 1: here define the positions of the graphs in figure 1
-    lava_properties = plt.figure(figsize=(9, 7))
+    lava_properties = plt.figure(figsize=(12, 7))
     plot_core_temperature = lava_properties.add_subplot(331)
     plot_crystal = lava_properties.add_subplot(332)
     plot_vesicle = lava_properties.add_subplot(333)
@@ -311,7 +311,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         for Q_name, Q_array in active_Q:
             ax = heat_flux_axes[Q_name]
             ax.plot(distance_array,Q_array,'-',label=label)
-            ax.legend(loc=0, prop={'size': 8})
+        #    ax.legend(loc=0, prop={'size': 8})
 
         plot_eff_cov_frac.plot(distance_array, effective_cover_fraction_array, '-', label=label)
         plot_eff_cov_frac.set_xlabel('Distance (m)')
@@ -339,10 +339,9 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         plot_slope.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
     plot_core_temperature.set_title(str(title))
-    plot_v_mean.legend(loc=1, prop={'size': 8})
-    plot_eff_cov_frac.legend(loc=0, prop={'size': 8})
+    #plot_eff_cov_frac.legend(loc=0, prop={'size': 5})
     plot_eff_cov_frac.set_title("Crustal and surface conditions for " + str(title))
-    plot_slope.legend(loc=0, prop={'size': 8})
+    #plot_slope.legend(loc=0, prop={'size': 5})
 
 
     lava_properties.tight_layout()
