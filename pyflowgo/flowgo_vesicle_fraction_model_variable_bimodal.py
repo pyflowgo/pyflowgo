@@ -26,18 +26,18 @@ class FlowGoVesicleFractionModelVariableBimodal(pyflowgo.base.flowgo_base_vesicl
     """ This method "variable_bimodal" considers the volume fraction of vesicle (bubbles) to vary linearly with distnace
      from the vent until a critical distance and then it is constant
 
-        %vesicles_fraction_1 = vesicles_fraction init - x * distance
-        %vesicles_fraction_2  is constant
+        %vesicles_fraction_init = vesicles_fraction init - x * distance
+        %vesicles_fraction_final  is constant
 
         Input data
         -----------
-        json file containing the initial vesicle fraction, the decreasing coeficient and the constant vesicle fractio
+        json file containing the initial vesicle fraction, the decreasing coeficient and the constant vesicle fraction
 
         variables
         -----------
          distance = 0 in the json file and then is calculated down flow
             if distance < critic distance : new_vesicle = initial vesicle - (coeficient * distance)
-           if distance > critic distance : constant
+           if distance > critic distance : constant = final vesicle
         Returns
         ------------
         new_vesicle fraction
@@ -47,8 +47,8 @@ class FlowGoVesicleFractionModelVariableBimodal(pyflowgo.base.flowgo_base_vesicl
         super().__init__()
         # this is the Volume fraction considered constant along the flow
         self._critical_distance = 10000.
-        self._vesicle_fraction = 0.4
-        self._vesicle_coef = 0.01
+        self._vesicle_fraction_init = 0.4
+        self._vesicle_coef = 0.00005
 
     def read_initial_condition_from_json_file(self, filename):
         # read json parameters file
@@ -61,8 +61,11 @@ class FlowGoVesicleFractionModelVariableBimodal(pyflowgo.base.flowgo_base_vesicl
             if 'critical_distance' not in data['lava_state']:
                 raise ValueError("Missing ['lava_state']['critical_distance'] entry in json")
 
+            if 'vesicle_fraction_init' not in data['lava_state']:
+                raise ValueError("Missing ['lava_state']['vesicle_fraction_init'] entry in json")
+
             self._critical_distance = float(data['lava_state']['critical_distance'])
-            self._vesicle_fraction = float(data['lava_state']['vesicle_fraction'])
+            self._vesicle_fraction_init = float(data['lava_state']['vesicle_fraction_init'])
             self._vesicle_coef = float(data['lava_state']['vesicle_coef'])
 
     def get_vesicle_fraction(self):
@@ -76,11 +79,10 @@ class FlowGoVesicleFractionModelVariableBimodal(pyflowgo.base.flowgo_base_vesicl
         current_position = state.get_current_position()
 
         if current_position <= self._critical_distance:
-            vesicle_fraction = self._vesicle_fraction - self._vesicle_coef * current_position
-            return vesicle_fraction
+            vesicle_fraction = self._vesicle_fraction_init - self._vesicle_coef * current_position
         else:
-            vesicle_fraction = self._vesicle_fraction - self._vesicle_coef * self._critical_distance
-            return vesicle_fraction
+            vesicle_fraction = self._vesicle_fraction_init - self._vesicle_coef * self._critical_distance
+        return max(0.0, vesicle_fraction)
 
 
 

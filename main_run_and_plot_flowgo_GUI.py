@@ -27,81 +27,127 @@ def select_field_data_file():
         field_data_var.set(file_path)
 
 
-def add_field_data(lava_properties, field_file, width_file):
+def add_field_data(lava_properties, field_file):
 
-    # Same plotting logic as the working Streamlit webapp
+    flow_length = None
+
     if field_file and os.path.exists(field_file):
-        field_distance = []
+
+        field_distance_temp = []
         field_temp = []
+
+        field_distance_crystals = []
         field_crystals = []
+
+        field_distance_bubbles = []
         field_bubbles = []
-        field_visco_IDE = []
-        field_visco_CDE = []
 
-        with open(field_file) as csvf:
-            csvreader = csv.DictReader(csvf, delimiter=",")
-            for row in csvreader:
-                field_distance.append(float(row["Distance(m)"]))
-                field_temp.append(float(row["glass_temp"]))
-                field_crystals.append(float(row["Xstal_fraction"]))
-                field_bubbles.append(float(row["Bubble_fraction"]))
-                field_visco_IDE.append(10 ** float(row["Viscosity_IDE(Pas)"]))
-                field_visco_CDE.append(10 ** float(row["Viscosity_CDE(Pas)"]))
+        field_distance_visco = []
+        field_visco = []
 
-        lava_properties.axes[0].plot(
-            field_distance, field_temp, "ro", label="Field data"
-        )
-        lava_properties.axes[1].plot(
-            field_distance, field_crystals, "ro", label="Field data"
-        )
-        lava_properties.axes[2].plot(
-            field_distance, field_bubbles, "ro", label="Field data"
-        )
-        lava_properties.axes[4].plot(
-            field_distance, field_visco_IDE, "ro", label="Field data IDE"
-        )
-        lava_properties.axes[4].plot(
-            field_distance, field_visco_CDE, "r.", label="Field data CDE"
-        )
-
-    if width_file and os.path.exists(width_file):
         field_distance_width = []
         field_width = []
 
-        with open(width_file) as csvf:
-            csvreader = csv.DictReader(csvf, delimiter=",")
+        with open(field_file) as csvf:
+            csvreader = csv.DictReader(csvf, delimiter=";")
+
             for row in csvreader:
-                field_distance_width.append(float(row["Distance_(m)"]))
-                field_width.append(float(row["Measured_Width_(m)"]))
 
-        lava_properties.axes[6].plot(
-            field_distance_width,
-            field_width,
-            "ro",
-            label="Field data"
-        )
+                distance = row.get("Distance(m)", "").strip()
 
-    # Same legend layout as the webapp
-    for ax in lava_properties.axes:
-        legend = ax.get_legend()
-        if legend:
-            legend.remove()
+                if not distance:
+                    continue
 
-    handles, labels = lava_properties.axes[0].get_legend_handles_labels()
+                distance = float(distance)
 
-    if handles:
-        lava_properties.legend(
-            handles,
-            labels,
-            loc="lower center",
-            ncol=len(labels),
-            frameon=False
-        )
+                # Last valid distance = observed runout
+                flow_length = distance
 
-        lava_properties.subplots_adjust(bottom=0.12)
+                # Temperature
+                value = row.get("glass_temp", "").strip()
+                if value:
+                    field_distance_temp.append(distance)
+                    field_temp.append(float(value))
 
-    lava_properties.canvas.draw_idle()
+                # Crystal fraction
+                value = row.get("crystal_fraction", "").strip()
+                if value:
+                    field_distance_crystals.append(distance)
+                    field_crystals.append(float(value))
 
+                # Bubble fraction
+                value = row.get("bubble_fraction", "").strip()
+                if value:
+                    field_distance_bubbles.append(distance)
+                    field_bubbles.append(float(value))
+
+                # Viscosity
+                value = row.get("Viscosity(Pas)", "").strip()
+                if value:
+                    field_distance_visco.append(distance)
+                    field_visco.append(float(value))
+
+                # Width
+                value = row.get("width(m)", "").strip()
+                if value:
+                    field_distance_width.append(distance)
+                    field_width.append(float(value))
+
+        if field_temp:
+            lava_properties.axes[0].plot(
+                field_distance_temp, field_temp, "ro", label="Field data"
+            )
+
+        if field_crystals:
+            lava_properties.axes[1].plot(
+                field_distance_crystals, field_crystals, "ro", label="Field data"
+            )
+
+        if field_bubbles:
+            lava_properties.axes[2].plot(
+                field_distance_bubbles, field_bubbles, "ro", label="Field data"
+            )
+
+        if field_visco:
+            lava_properties.axes[3].plot(
+                field_distance_visco, field_visco, "ro", label="Field data"
+            )
+
+        if field_width:
+            lava_properties.axes[6].plot(
+                field_distance_width, field_width, "ro", label="Field data"
+            )
+
+    return flow_length
+
+def add_runout_line(figures, flow_length):
+
+    for fig in figures:
+        for ax in fig.axes:
+            ax.axvline(x=flow_length,color="red",linestyle="--",label="Runout")
+
+            # Remove any existing axis legend
+            legend = ax.get_legend()
+            if legend is not None:
+                legend.remove()
+
+        # ------------------------------------------------------------
+        # ONE legend only for the Lava Properties figure
+        # ------------------------------------------------------------
+        lava_properties = figures[0]
+
+        handles = []
+        labels = []
+
+        for ax in lava_properties.axes:
+            h, l = ax.get_legend_handles_labels()
+
+            for handle, label in zip(h, l):
+                if label not in labels and not label.startswith("_"):
+                    handles.append(handle)
+                    labels.append(label)
+        lava_properties.subplots_adjust(right=0.84)
+        lava_properties.legend( handles,labels,loc="center left",bbox_to_anchor=(0.85, 0.5),fontsize=8,frameon=True)
 
 def select_width_field_file():
     file_path = filedialog.askopenfilename(
@@ -165,13 +211,17 @@ def run_flowgo_single():
 
         lava_properties = figures[0]
 
-        add_field_data(
+        # Add field data and get observed runout
+        flow_length = add_field_data(
             lava_properties,
-            field_data_var.get(),
-            width_field_var.get()
+            field_data_var.get()
         )
 
-        if field_data_var.get() or width_field_var.get():
+        # Add observed runout to ALL plots
+        if flow_length is not None:
+            add_runout_line(figures, flow_length)
+
+        if field_data_var.get():
             lava_properties.savefig(
                 os.path.join(path_to_folder, "lava_properties_with_field_data.png"),
                 dpi=300,
@@ -215,13 +265,14 @@ def run_flowgo_effusion():
     with open(json_file, "r") as file:
         json_data = json.load(file)
         slope_file = json_data.get("slope_file")
+        lava_name = json_data.get("lava_name")
 
     simulation = run_flowgo_effusion_rate_array.StartFlowgo()
 
     original_dir = os.getcwd()
 
     try:
-        simulation.run_flowgo_effusion_rate_array(
+        filename_results = simulation.run_flowgo_effusion_rate_array(
             json_file,
             path_to_folder,
             slope_file,
@@ -230,54 +281,15 @@ def run_flowgo_effusion():
     finally:
         os.chdir(original_dir)
 
-    # ------------------------------------------------------------
-    # Same logic as the working webapp:
-    # find all result CSVs corresponding to requested effusion rates
-    # ------------------------------------------------------------
-    expected_rates = list(
-        range(
-            effusion_rates["first_eff_rate"],
-            effusion_rates["last_eff_rate"] + 1,
-            effusion_rates["step_eff_rate"]
-        )
-    )
-
-    filename_results = []
-
-    for filename in sorted(os.listdir(path_to_folder)):
-        if not filename.startswith("results_flowgo_") or not filename.endswith(".csv"):
-            continue
-
-        csv_file = os.path.join(path_to_folder, filename)
-
-        try:
-            with open(csv_file, "r") as csvf:
-                reader = csv.DictReader(csvf, delimiter=",")
-                first_row = next(reader)
-
-            if "effusion_rate" not in first_row:
-                continue
-
-            rate = round(float(first_row["effusion_rate"]))
-
-            if rate in expected_rates:
-                filename_results.append(csv_file)
-
-        except Exception:
-            continue
-
     if not filename_results:
-        messagebox.showwarning(
-            "Warning",
-            "No PyFLOWGO result CSV found for the requested effusion rates."
-        )
+        messagebox.showwarning("Warning","No PyFLOWGO result CSV was generated.")
         return
 
     print("\nResult files:")
     for filename in filename_results:
         print("  -", os.path.basename(filename))
 
-    # Re-create the same plots as the webapp using all effusion rates
+    # Plot ONLY the files generated by this run
     figures = plot_flowgo_results.plot_all_results(
         path_to_folder,
         filename_results,
@@ -289,16 +301,22 @@ def run_flowgo_effusion():
     # Add field observations exactly as in the webapp
     add_field_data(
         lava_properties,
-        field_data_var.get(),
-        width_field_var.get()
+        field_data_var.get()
     )
 
-    if field_data_var.get() or width_field_var.get():
+    # Add field data and get observed runout
+    flow_length = add_field_data(
+        lava_properties,
+        field_data_var.get()
+    )
+
+    # Add observed runout to ALL plots
+    if flow_length is not None:
+        add_runout_line(figures, flow_length)
+
+    if field_data_var.get():
         lava_properties.savefig(
-            os.path.join(
-                path_to_folder,
-                "lava_properties_with_field_data.png"
-            ),
+            os.path.join(path_to_folder, "lava_properties_with_field_data.png"),
             dpi=300,
             bbox_inches="tight"
         )
@@ -346,11 +364,6 @@ tk.Button(frame, text="Browse", command=select_results_folder).grid(row=1, colum
 tk.Label(frame, text="Field Data:").grid(row=2, column=0, sticky="w")
 tk.Entry(frame, textvariable=field_data_var, width=40).grid(row=2, column=1, padx=5)
 tk.Button(frame, text="Browse", command=select_field_data_file).grid(row=2, column=2)
-
-# Field width data
-tk.Label(frame, text="Width Field Data:").grid(row=3, column=0, sticky="w")
-tk.Entry(frame, textvariable=width_field_var, width=40).grid(row=3, column=1, padx=5)
-tk.Button(frame, text="Browse", command=select_width_field_file).grid(row=3, column=2)
 
 
 # Effusion rate input fields

@@ -19,7 +19,7 @@ def open_editor(root, json_path_var):
 
     editor_win = tk.Toplevel(root)
     editor_win.title("Edit JSON")
-    editor_win.geometry("700x700")
+    editor_win.geometry("1200x750")
 
     canvas = tk.Canvas(editor_win)
     scrollbar = tk.Scrollbar(editor_win, orient="vertical", command=canvas.yview)
@@ -28,8 +28,6 @@ def open_editor(root, json_path_var):
     scroll_frame = tk.Frame(canvas)
     canvas.create_window((0, 0), window=scroll_frame, anchor="nw")
 
-    canvas.pack(side="left", fill="both", expand=True)
-    scrollbar.pack(side="right", fill="y")
 
     labels = {}
     sections = {}
@@ -57,9 +55,33 @@ def open_editor(root, json_path_var):
                 key_label = tk.Label(scroll_frame, text=key)
                 key_label.grid(row=row, column=0, sticky="w", padx=20, pady=2)
 
+                # Make slope_file easier to read/edit and allow file browsing
+                # Keep all value fields the same width
                 entry = tk.Entry(scroll_frame, width=60)
                 entry.insert(0, str(value))
-                entry.grid(row=row, column=1, padx=5, pady=2)
+                entry.grid(row=row, column=1, padx=5, pady=2, sticky="w")
+
+                if key == "slope_file":
+                    def browse_slope_file(target_entry=entry):
+                        selected_file = filedialog.askopenfilename(
+                            parent=editor_win,
+                            title="Select slope file",
+                            initialdir=os.path.dirname(target_entry.get())
+                            if os.path.isdir(os.path.dirname(target_entry.get()))
+                            else os.path.dirname(file_path),
+                            filetypes=[
+                                ("Text files", "*.txt"),
+                                ("CSV files", "*.csv"),
+                                ("All files", "*.*"),
+                            ],
+                        )
+                        if selected_file:
+                            target_entry.delete(0, tk.END)
+                            target_entry.insert(0, selected_file)
+
+                    tk.Button(
+                        scroll_frame, text="Browse...", width=10, command=browse_slope_file
+                    ).grid(row=row, column=2, padx=(5, 15), pady=2, sticky="w")
 
                 labels[display_key] = entry
 
@@ -71,14 +93,28 @@ def open_editor(root, json_path_var):
     render_json(data)
 
     # --- Dropdown to select section ---
-    button_frame = tk.Frame(editor_win)
-    button_frame.pack(pady=10)
+    # Right control panel: intentionally narrow so the JSON fields and
+    # the slope_file Browse button remain visible when the window opens.
+    button_frame = tk.Frame(editor_win, width=175)
+    button_frame.pack(side="right", fill="y", padx=(5, 8), pady=(45, 15))
+    button_frame.pack_propagate(False)
+
+    # JSON area uses all the remaining space on the left.
+    scrollbar.pack(side="right", fill="y")
+    canvas.pack(side="left", fill="both", expand=True)
+
+    tk.Label(
+        button_frame,
+        text="Choose parameter to add",
+        font=("Helvetica", 10, "bold"),
+    ).pack(pady=(0, 5))
 
     section_var = tk.StringVar()
     section_keys = list(sections.keys())
     if section_keys:
         section_var.set(section_keys[0])
     section_menu = tk.OptionMenu(button_frame, section_var, *section_keys)
+    section_menu.config(width=18)
     section_menu.pack(pady=2)
 
     # --- Function to add a new entry to a section ---

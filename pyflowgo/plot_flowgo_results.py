@@ -255,7 +255,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         # plot_v_mean.set_ylim(ymin=0, ymax=100)
         # plot_v_mean.set_ylim(ymin=0, ymax=100)
 
-        plot_strain_rate.plot(distance_array, strain_rate_array, '-', label='Strain rate')
+        plot_strain_rate.plot(distance_array, strain_rate_array, '-', label=label)
         plot_strain_rate.set_ylabel('Strain Rate (s$^{-1}$)')
         plot_strain_rate.grid(True, color="lightgray", linewidth=0.5, alpha=0.7)
 
@@ -285,7 +285,7 @@ def plot_all_results(path_to_folder, filename_array, json_file):
         plot_crystal.set_ylabel('Crystal fraction')
         plot_crystal.grid(True,color="lightgray",linewidth=0.5,alpha=0.7)
 
-        plot_vesicle.plot(distance_array, vesicle_fraction_array, '-', label='Vesicle fraction')
+        plot_vesicle.plot(distance_array, vesicle_fraction_array, '-', label=label)
         plot_vesicle.set_ylabel('Vesicle fraction')
         plot_vesicle.tick_params(axis='y')
         plot_vesicle.grid(True, color="lightgray", linewidth=0.5, alpha=0.7)
